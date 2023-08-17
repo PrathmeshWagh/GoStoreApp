@@ -19,16 +19,16 @@
 		17473F902A8A1EA300EDB01A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		17473F942A8A1EA300EDB01A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		17473F952A8A1EA300EDB01A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		68D8E2DA2B4F4A8F85A22AEB /* Gilroy-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7552C91251534BDEA3634701 /* Gilroy-Light.ttf */; };
 		79F0B95AC0F46F296C1D0218 /* libPods-gostornativeappservice-gostornativeappservice-beta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC957D1323FA773D56EE685 /* libPods-gostornativeappservice-gostornativeappservice-beta.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		93E7791ABD6843C3AA0B7D8E /* Gilroy-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B1F1DF9CE3A42188F6E3413 /* Gilroy-Medium.ttf */; };
+		9A0468C42948430C97205884 /* Gilroy-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F36C1BA2B934552BAA25834 /* Gilroy-SemiBold.ttf */; };
+		9C6CA45E89E041CE95A6FB3C /* Gilroy-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FDA319389C034181B4EF9A68 /* Gilroy-Thin.ttf */; };
 		A747CD95A6F24F7D1717E3B9 /* libPods-gostornativeappservice-gostornativeappservice-development.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91C91250F3AF284741994EF5 /* libPods-gostornativeappservice-gostornativeappservice-development.a */; };
 		C709847B8AC1CC939B54DC92 /* libPods-gostornativeappservice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AD8C332981FC61018DA254F /* libPods-gostornativeappservice.a */; };
 		EC4D690604244BAE9D6F435B /* Gilroy-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7ED6A3BEC359424C85CFB714 /* Gilroy-Bold.ttf */; };
-		68D8E2DA2B4F4A8F85A22AEB /* Gilroy-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7552C91251534BDEA3634701 /* Gilroy-Light.ttf */; };
-		93E7791ABD6843C3AA0B7D8E /* Gilroy-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B1F1DF9CE3A42188F6E3413 /* Gilroy-Medium.ttf */; };
 		FA0BF8138D6340F4B5225AD3 /* Gilroy-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E851C5CFE6E747A380E09C96 /* Gilroy-Regular.ttf */; };
-		9A0468C42948430C97205884 /* Gilroy-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F36C1BA2B934552BAA25834 /* Gilroy-SemiBold.ttf */; };
-		9C6CA45E89E041CE95A6FB3C /* Gilroy-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FDA319389C034181B4EF9A68 /* Gilroy-Thin.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,21 +49,21 @@
 		1AC957D1323FA773D56EE685 /* libPods-gostornativeappservice-gostornativeappservice-beta.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gostornativeappservice-gostornativeappservice-beta.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AD8C332981FC61018DA254F /* libPods-gostornativeappservice.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gostornativeappservice.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4392A12AC88292D35C810B /* Pods-gostornativeappservice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gostornativeappservice.debug.xcconfig"; path = "Target Support Files/Pods-gostornativeappservice/Pods-gostornativeappservice.debug.xcconfig"; sourceTree = "<group>"; };
+		3F36C1BA2B934552BAA25834 /* Gilroy-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Gilroy-SemiBold.ttf"; path = "../assets/fonts/Gilroy-SemiBold.ttf"; sourceTree = "<group>"; };
 		4C3725D394763FC00AD653E1 /* Pods-gostornativeappservice-gostornativeappservice-beta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gostornativeappservice-gostornativeappservice-beta.debug.xcconfig"; path = "Target Support Files/Pods-gostornativeappservice-gostornativeappservice-beta/Pods-gostornativeappservice-gostornativeappservice-beta.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-gostornativeappservice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gostornativeappservice.release.xcconfig"; path = "Target Support Files/Pods-gostornativeappservice/Pods-gostornativeappservice.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-gostornativeappservice-gostornativeappserviceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gostornativeappservice-gostornativeappserviceTests.debug.xcconfig"; path = "Target Support Files/Pods-gostornativeappservice-gostornativeappserviceTests/Pods-gostornativeappservice-gostornativeappserviceTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7552C91251534BDEA3634701 /* Gilroy-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Gilroy-Light.ttf"; path = "../assets/fonts/Gilroy-Light.ttf"; sourceTree = "<group>"; };
+		7ED6A3BEC359424C85CFB714 /* Gilroy-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Gilroy-Bold.ttf"; path = "../assets/fonts/Gilroy-Bold.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = gostornativeappservice/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-gostornativeappservice-gostornativeappserviceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gostornativeappservice-gostornativeappserviceTests.release.xcconfig"; path = "Target Support Files/Pods-gostornativeappservice-gostornativeappserviceTests/Pods-gostornativeappservice-gostornativeappserviceTests.release.xcconfig"; sourceTree = "<group>"; };
+		8B1F1DF9CE3A42188F6E3413 /* Gilroy-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Gilroy-Medium.ttf"; path = "../assets/fonts/Gilroy-Medium.ttf"; sourceTree = "<group>"; };
 		91C91250F3AF284741994EF5 /* libPods-gostornativeappservice-gostornativeappservice-development.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gostornativeappservice-gostornativeappservice-development.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BAA59DBD8C633B0A9BB22A8 /* Pods-gostornativeappservice-gostornativeappservice-beta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gostornativeappservice-gostornativeappservice-beta.release.xcconfig"; path = "Target Support Files/Pods-gostornativeappservice-gostornativeappservice-beta/Pods-gostornativeappservice-gostornativeappservice-beta.release.xcconfig"; sourceTree = "<group>"; };
+		E851C5CFE6E747A380E09C96 /* Gilroy-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Gilroy-Regular.ttf"; path = "../assets/fonts/Gilroy-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F9F42BCBBBB27DDD732AAAF3 /* Pods-gostornativeappservice-gostornativeappservice-development.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gostornativeappservice-gostornativeappservice-development.debug.xcconfig"; path = "Target Support Files/Pods-gostornativeappservice-gostornativeappservice-development/Pods-gostornativeappservice-gostornativeappservice-development.debug.xcconfig"; sourceTree = "<group>"; };
-		7ED6A3BEC359424C85CFB714 /* Gilroy-Bold.ttf */ = {isa = PBXFileReference; name = "Gilroy-Bold.ttf"; path = "../assets/fonts/Gilroy-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		7552C91251534BDEA3634701 /* Gilroy-Light.ttf */ = {isa = PBXFileReference; name = "Gilroy-Light.ttf"; path = "../assets/fonts/Gilroy-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		8B1F1DF9CE3A42188F6E3413 /* Gilroy-Medium.ttf */ = {isa = PBXFileReference; name = "Gilroy-Medium.ttf"; path = "../assets/fonts/Gilroy-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		E851C5CFE6E747A380E09C96 /* Gilroy-Regular.ttf */ = {isa = PBXFileReference; name = "Gilroy-Regular.ttf"; path = "../assets/fonts/Gilroy-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		3F36C1BA2B934552BAA25834 /* Gilroy-SemiBold.ttf */ = {isa = PBXFileReference; name = "Gilroy-SemiBold.ttf"; path = "../assets/fonts/Gilroy-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		FDA319389C034181B4EF9A68 /* Gilroy-Thin.ttf */ = {isa = PBXFileReference; name = "Gilroy-Thin.ttf"; path = "../assets/fonts/Gilroy-Thin.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FDA319389C034181B4EF9A68 /* Gilroy-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Gilroy-Thin.ttf"; path = "../assets/fonts/Gilroy-Thin.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,7 +188,7 @@
 			sourceTree = "<group>";
 		};
 		E151CBA0B8EB4044BF8C4D1B /* Resources */ = {
-			isa = "PBXGroup";
+			isa = PBXGroup;
 			children = (
 				7ED6A3BEC359424C85CFB714 /* Gilroy-Bold.ttf */,
 				7552C91251534BDEA3634701 /* Gilroy-Light.ttf */,
@@ -198,8 +198,8 @@
 				FDA319389C034181B4EF9A68 /* Gilroy-Thin.ttf */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
 			path = "";
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
