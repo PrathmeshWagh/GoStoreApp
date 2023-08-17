@@ -4,9 +4,8 @@ import { Provider as ReduxProvider } from 'react-redux';
 import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
 import { Text, View } from 'react-native';
 import { PaperProvider, MD3LightTheme as DefaultTheme } from 'react-native-paper';
-
-import store from './src/context/store';
-import { FontGilroy } from '@/primitives/index';
+import store from '@context/store';
+import { FontGilroy } from '@primitives/index';
 
 const queryClient = new QueryClient();
 
