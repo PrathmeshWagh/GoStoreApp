@@ -1,0 +1,21 @@
+{
+    "extends": "@tsconfig/react-native/tsconfig.json",
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "*": ["src/*"],
+            "@/atoms/*": ["src/components/atoms/*"],
+            "@/molecules/*": ["src/components/molecules/*"],
+            "@/organisms/*": ["src/components/organisms/*"],
+            "@/screens/*": ["src/screens/*"],
+            "@/api/*": ["src/api/*"],
+            "@/helpers/*": ["src/helpers/*"],
+            "@/hooks/*": ["src/hooks/*"],
+            "@/services/*": ["src/services/*"],
+            "@/context/*": ["src/context/*"],
+            "@/assets/*": ["src/assets/*"],
+            "@/routes/*": ["src/routes/*"],
+            "@/primitives/*": ["src/primitives/*"],
+        },
+    },
+}
