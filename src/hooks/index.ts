@@ -1,3 +1,4 @@
-export { default as useTheme } from './theme.hooks';
-export { default as useDimensions } from './dimensions.hooks';
-export { default as useNavigation } from './navigation.hooks';
+export { default as useTheme } from './theme.hook';
+export { default as useDimensions } from './dimensions.hook';
+export { default as useNavigation } from './navigation.hook';
+export { default as useIntialNavigation } from './intial-navigation';

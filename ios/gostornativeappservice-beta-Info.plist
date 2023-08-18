@@ -63,5 +63,7 @@
 	<string>Allow Gostor to access your photo library</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>Allow Gostor to access sppech recognition</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+  	<string>Allow Gostor to access your location</string>
 </dict>
 </plist>
