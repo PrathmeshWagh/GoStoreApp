@@ -17,6 +17,7 @@
             "@assets/*": ["src/assets/*"],
             "@routes/*": ["src/routes/*"],
             "@primitives/*": ["src/primitives/*"],
+            "@types/*": ["src/types/*"],
         },
     },
 }

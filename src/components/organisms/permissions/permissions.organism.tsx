@@ -2,8 +2,10 @@ import React, { useRef } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 
 import Header from '@molecules/permissions/header.molecule';
+import Footer from '@molecules/permissions/footer.molecule';
+import { useDimensions, usePermissionHandlers } from '@hooks/index';
 
-const sliderData = [
+const sliderData: SliderItem[] = [
     {
         id: 1,
         header: {
@@ -18,7 +20,7 @@ const sliderData = [
         },
     },
     {
-        id: 1,
+        id: 2,
         header: {
             title: 'Notifications',
         },
@@ -34,14 +36,20 @@ const sliderData = [
 
 const Permissions = () => {
     const sliderRef = useRef(null);
+    const { width } = useDimensions();
+    const itemWidth = width;
+    let currentItemIndex = 0;
+    const { permissionHandler } = usePermissionHandlers(currentItemIndex, itemWidth, sliderRef, sliderData);
 
-    const permissionRenderItem = (item) => {
-        console.log(item);
-        return(
-            <View>
+    const permissionRenderItem = (item: SliderItem) => {
+        const { header, id } = item;
 
+        return (
+            <View style={[ styles.item, { width: itemWidth } ]}>
+                <Header title={header.title}/>
+                <Footer onPress={() => permissionHandler(id)}/>
             </View>
-        )
+        );
     };
 
     return (
@@ -61,6 +69,9 @@ const Permissions = () => {
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
+    },
+    item: {
         flex: 1,
     },
 });

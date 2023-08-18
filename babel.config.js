@@ -18,6 +18,7 @@ module.exports = {
 					'@primitives': './src/primitives',
 					'@services': './src/services',
 					'@routes': './src/routes',
+					'@types': './src/types',
 				},
 			},
 		],
