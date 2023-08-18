@@ -1,9 +1,19 @@
 import { PERMISSIONS, request, requestNotifications } from 'react-native-permissions';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { RouteConstants } from '@routes/constants.routes';
 import useNavigation from './navigation.hook';
+import { AppTypes } from 'primitives/index';
 
 const usePermissionHandlers = (currentItemIndex: number, itemWidth: number, sliderRef: any, sliderData: SliderItem[]) => {
     const { replace } = useNavigation();
+
+    const updateUserOnLastSlider = async () => {
+        try {
+            await AsyncStorage.setItem(AppTypes.UserHasSeenPermissions, 'true');
+        } catch (e) {
+        }
+    };
 
     const nextSlider = () => {
         if (sliderRef.current && currentItemIndex < sliderData.length - 1) {
@@ -23,6 +33,7 @@ const usePermissionHandlers = (currentItemIndex: number, itemWidth: number, slid
 
     const notificationPermissionHandler = () => {
         requestNotifications(['alert', 'sound']).then(() => {
+            updateUserOnLastSlider();
             replace(RouteConstants.HomeScreenRoute);
         });
     };

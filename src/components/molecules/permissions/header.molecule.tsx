@@ -2,7 +2,13 @@ import React from 'react';
 import { View } from 'react-native';
 import { Text } from 'react-native-paper';
 
-const Header = ({ title }) => {
+interface HeaderProps {
+    title: string;
+}
+
+const Header = (props: HeaderProps) => {
+    const { title } = props;
+
     return (
         <View>
             <Text>

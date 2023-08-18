@@ -6,3 +6,7 @@ export const enum FontGilroy {
     SemiBold = 'Gilroy-SemiBold',
     Bold = 'Gilroy-Bold'
 }
+
+export const enum AppTypes {
+    UserHasSeenPermissions = 'user_has_seen_permissions'
+}
