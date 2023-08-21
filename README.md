@@ -1,4 +1,4 @@
-============ START COMMANDS ============
+# All the commands listed in package.json
 
 Have listed all the available commands in the package.json, will be breifing each command here
 
@@ -13,7 +13,7 @@ yarn start ---> does a normal start of metro
 yarn reset ---> clears cache and the starts it
 node:clean ---> for reinstalling node modules
 
-============ START IOS ============
+## IOS Commands
 
 ```bash
 
@@ -30,29 +30,22 @@ ios:prod-release --> starting ios in production release mode with available simu
 
 ```
 
-============ END IOS ============
+# Folder structure breif
 
-============ END COMMANDS ============
-
-============ FOLDER STRUCTURE ============
-
-Always separate business logic and views. Views will be components.
-Components should just be plain react native elemnets.
-and move all the business logic to hooks folder with their named hook by that 
-code will be easy to read.
+1. Always separate business logic and views. Views will be components.
+2. Components should just be plain react native elemnets.
+3. Move all the business logic to hooks folder with their named hook by that code will be easy to read.
 
 ```bash
 
 {name_of_module}/${file_name}.api.ts  ex: product/get_product.api.ts
 
-```
 this will be the default folder sturucture for all the folders
 
+```
 
-api  ---> all the http calls will be going through this folder
+1. api  ---> all the http calls will be going through this folder
 
-context  ---> all state management goes inside this folder
+2. context  ---> all state management goes inside this folder
 
-hooks  ---> all the business logic will be going inside the hooks
-
-============ END  FOLDER STRUCTURE ============
+3. hooks  ---> all the business logic will be going inside the hooks
