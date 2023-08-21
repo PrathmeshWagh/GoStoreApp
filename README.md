@@ -13,7 +13,7 @@ yarn start ---> does a normal start of metro
 yarn reset ---> clears cache and the starts it
 node:clean ---> for reinstalling node modules
 
-## IOS Commands
+### IOS Commands
 
 ```bash
 
