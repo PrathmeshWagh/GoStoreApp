@@ -10,3 +10,7 @@ export const enum FontGilroy {
 export const enum AppTypes {
     UserHasSeenPermissions = 'user_has_seen_permissions'
 }
+
+export const enum DefaultStyles {
+    DefaultPadding = 16
+}

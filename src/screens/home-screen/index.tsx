@@ -1,16 +1,25 @@
 import React from 'react';
+
+import Layout from '@molecules/layout/layout.molecule';
 import { Text } from 'react-native';
 
-import { Safearea } from '@atoms/index';
+const layout = {
+    menu: true,
+    search: true,
+    back: false,
+    logo: 'https://gostor.com/icons/header/logo-invert.svg',
+    cart: true,
+    pincode: true,
+};
 
 const HomeScreen = () => {
 
     return (
-        <Safearea>
+        <Layout layout={layout}>
             <Text>
                 hello
             </Text>
-        </Safearea>
+        </Layout>
     );
 };
 
