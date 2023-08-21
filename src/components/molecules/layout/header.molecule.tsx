@@ -22,7 +22,7 @@ const Header = (props: HeaderProps) => {
         <View style={[ styles.container, { backgroundColor: colors.primary, height: DefaultStyles.DefaultPadding * 3, paddingHorizontal: DefaultStyles.DefaultPadding }]}>
             <View style={[ styles.item ]}>
                 <TouchableOpacity
-                    onPress={() => console.log('Pressed)}
+                    onPress={() => console.log('Pressed')}
                     style={[ styles.icon, { marginHorizontal: DefaultStyles.DefaultPadding * 0.38 } ]}
                 >
                     {
