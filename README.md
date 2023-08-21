@@ -1,4 +1,4 @@
-============================================ START COMMANDS ==================================================
+============ START COMMANDS ============
 
 Have listed all the available commands in the package.json, will be breifing each command here
 
@@ -13,7 +13,9 @@ yarn start ---> does a normal start of metro
 yarn reset ---> clears cache and the starts it
 node:clean ---> for reinstalling node modules
 
-============================================ START IOS ==================================================
+============ START IOS ============
+
+```bash
 
 ios:pod:reset ---> pod reset, bascially deleting and installing pods
 ios:clean ---> clean build folder, deleting cache and derived folder
@@ -26,13 +28,13 @@ ios:dev-release --> starting ios in development release mode with available simu
 ios:beta-release --> starting ios in beta release mode with available simulators
 ios:prod-release --> starting ios in production release mode with available simulators
 
-============================================ END IOS ====================================================
+```
 
-============================================ END COMMANDS ==================================================
+============ END IOS ============
 
-==========================================================================================================
-                              Start  Folder Structure                               
-==========================================================================================================
+============ END COMMANDS ============
+
+============ FOLDER STRUCTURE ============
 
 Always separate business logic and views. Views will be components.
 Components should just be plain react native elemnets.
@@ -53,6 +55,4 @@ context  ---> all state management goes inside this folder
 
 hooks  ---> all the business logic will be going inside the hooks
 
-==========================================================================================================
-                              END  Folder Structure                               
-==========================================================================================================
+============ END  FOLDER STRUCTURE ============
