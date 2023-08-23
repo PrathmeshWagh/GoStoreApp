@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Layout from '@molecules/layout/layout.molecule';
-import { Text } from 'react-native';
+import Home from '@organisms/home/home.organism';
 
 const layout = {
     menu: true,
@@ -16,9 +16,7 @@ const HomeScreen = () => {
 
     return (
         <Layout layout={layout}>
-            <Text>
-                hello
-            </Text>
+            <Home/>
         </Layout>
     );
 };

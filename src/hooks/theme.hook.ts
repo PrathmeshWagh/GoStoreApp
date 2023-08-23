@@ -1,4 +1,4 @@
-import { useTheme as theme } from '@react-navigation/native';
+import { useTheme as theme } from 'react-native-paper';
 
 const useTheme = () => {
     const { colors } = theme();

@@ -1,13 +1,23 @@
 import React from 'react';
+import { FlatList } from 'react-native';
 
-import { LayoutWrapper } from '@atoms/index';
+import Categories from '@molecules/home/categories.molecule';
 
-const HomeScreen = () => {
+const componentList = [
+    { id: '1', component: Categories },
+];
+
+const Home = () => {
     return (
-        <LayoutWrapper>
-
-        </LayoutWrapper>
+        <FlatList
+            data={componentList}
+            renderItem={({ item }) => {
+                const Component = item.component;
+                return <Component />;
+            }}
+            keyExtractor={ item => item.id }
+        />
     );
 };
 
-export default HomeScreen;
+export default Home;

@@ -12,5 +12,8 @@ export const enum AppTypes {
 }
 
 export const enum DefaultStyles {
-    DefaultPadding = 16
+    DefaultPadding = 16,
+    DefaultRadius = 6,
+    DefaultFontSize = 14,
+    DefaultButtonHeight = 52
 }
