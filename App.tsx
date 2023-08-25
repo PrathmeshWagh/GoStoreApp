@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider as ReduxProvider } from 'react-redux';
 import { PaperProvider, MD3LightTheme as DefaultTheme, configureFonts } from 'react-native-paper';
 
-import store from '@context/store';
+import store from '@slices/store';
 import { Router } from '@routes/router.routes';
 import { BaseFont, CustomColors, CustomFontVariants } from 'primitives/constants.primitives';
 

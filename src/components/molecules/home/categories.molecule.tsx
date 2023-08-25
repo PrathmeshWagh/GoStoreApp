@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, StyleSheet, FlatList, Image } from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
 import { Text } from 'react-native-paper';
 
 import { useCategories } from '@api/categories/use-categories.api';
-import { ComponentWrapper } from '@atoms/index';
+import { ComponentWrapper, FastImages } from '@atoms/index';
 
 const Categories = () => {
     const { data, isLoading, isError, refetch } = useCategories();
@@ -12,9 +12,9 @@ const Categories = () => {
     const renderItem = ({ item }: { item: Category }) => {
         return (
             <View style={[ styles.container ]}>
-                <Image
-                    source={{ uri: item.image }}
-                    style={ styles.image }
+                <FastImages
+                    url={item.image}
+                    style={styles.image}
                 />
                 <Text
                     variant="titleSmall"

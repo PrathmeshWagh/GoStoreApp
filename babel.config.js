@@ -19,6 +19,8 @@ module.exports = {
 					'@services': './src/services',
 					'@routes': './src/routes',
 					'@types': './src/types',
+					'@slices': './src/slices',
+					'@helpers': './src/helpers',
 				},
 			},
 		],

@@ -18,6 +18,7 @@
             "@routes/*": ["src/routes/*"],
             "@primitives/*": ["src/primitives/*"],
             "@types/*": ["src/types/*"],
+            "@slices/*": ["src/slices/*"],
         },
     },
 }
