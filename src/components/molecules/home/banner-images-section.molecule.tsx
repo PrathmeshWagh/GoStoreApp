@@ -1,26 +1,28 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
 import Config from 'react-native-config';
 
 import { useChildBanner } from '@api/banners/use-child-banner.api';
-import { useDimensions } from '@hooks/index';
 import { DefaultStyles } from '@primitives/index';
 import { Carousel, FastImages } from '@atoms/index';
+import { Text } from 'react-native-paper';
 
-interface HomeSectionProps {
-    banner: ParentBannerData
+interface BannerImagesSectionProps {
+    banner: ParentBannerData;
+    itemWidth: number;
+    imgHeight: number;
+    containerStyles?: ViewStyle;
+    textStyles?: any;
 }
 
-const HomeSection = (props: HomeSectionProps) => {
-    const { banner } = props;
+const BannerImagesSection = (props: BannerImagesSectionProps) => {
+    const { banner, itemWidth, imgHeight, containerStyles, textStyles } = props;
     const { data } = useChildBanner(banner.bannerType, banner.parentBannerId);
-    const { width } = useDimensions();
-    const itemWidth = Math.round(width * 0.92) + 5;
 
     const renderItem = ({ item }: { item: BannerData }) => {
         return (
             <TouchableOpacity
-                style={[{ width: itemWidth, height: itemWidth * 0.4 }]}
+                style={[{ width: itemWidth, height: itemWidth * imgHeight }]}
             >
                 {
                     item.imgs.map((bannerImage: BannerImage) => {
@@ -42,7 +44,16 @@ const HomeSection = (props: HomeSectionProps) => {
     };
 
     return (
-        <>
+        <View style={containerStyles}>
+            {
+                banner.bannerName !== 'HOMEPAGE_PRIMARY_BANNER' &&
+                    <Text
+                        variant="labelLarge"
+                        style={textStyles}
+                    >
+                        { banner.title }
+                    </Text>
+            }
             <Carousel
                 data={data?.data || []}
                 renderItem={renderItem}
@@ -50,7 +61,7 @@ const HomeSection = (props: HomeSectionProps) => {
                 loop
                 pagination
             />
-        </>
+        </View>
     );
 };
 
@@ -65,4 +76,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default HomeSection;
+export default BannerImagesSection;

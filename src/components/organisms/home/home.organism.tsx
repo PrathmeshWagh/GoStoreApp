@@ -4,7 +4,9 @@ import { FlatList } from 'react-native';
 import Categories from '@molecules/home/categories.molecule';
 import { useParentBanner } from '@api/banners/use-parent-banner-struture.api';
 import { ErrorStatus, Indicator } from '@atoms/index';
-import HomeSection from '@molecules/home/home-section.molecule';
+import BannerImagesSection from '@molecules/home/banner-images-section.molecule';
+import { useDimensions } from '@hooks/index';
+import { DefaultStyles } from '@primitives/index';
 
 type ComponentListItem = {
     id: string;
@@ -18,6 +20,35 @@ const Home = () => {
     // console.log(dispatch, location);
     const { data, isLoading, isError, refetch } = useParentBanner();
     const bannerData = data?.data || [];
+    const { width } = useDimensions();
+
+    //create a banner mapping of different banners and pass the props
+    const bannerComponentMapping: Record<string, (banner: typeof bannerData[0]) => { component: React.ComponentType<any>, props: any }> = {
+        'HOMEPAGE_PRIMARY_BANNER': (banner) => ({
+            component: BannerImagesSection,
+            props: { banner, itemWidth: Math.round(width * 0.92) + 5, imgHeight: 0.4 },
+        }),
+        'STRIP_BANNER_1': (banner) => ({
+            component: BannerImagesSection,
+            props: { banner, itemWidth: Math.round(width * 0.92) + 5, imgHeight: 0.16, textStyles: { paddingHorizontal: DefaultStyles.DefaultPadding, marginTop: DefaultStyles.DefaultPadding + 10, marginBottom: DefaultStyles.DefaultPadding - 10 } },
+        }),
+        'OFFER_BANNER_1_2': (banner) => ({
+            component: BannerImagesSection,
+            props: { banner, itemWidth: Math.round(width * 0.92) + 5, imgHeight: 1, textStyles: { paddingHorizontal: DefaultStyles.DefaultPadding, marginTop: DefaultStyles.DefaultPadding + 10, marginBottom: DefaultStyles.DefaultPadding - 10 } },
+        }),
+    };
+
+    //return the data from banner
+    const getComponentInfoForBanner = (banner: typeof bannerData[0]) => {
+        const mapFunction = bannerComponentMapping[banner?.bannerName];
+        if (mapFunction) {
+            return {
+                id: banner.parentBannerId.toString(),
+                ...mapFunction(banner),
+            };
+        }
+        return null;
+    };
 
     const bannersComponentList = (): ComponentListItem[] => {
         const results: ComponentListItem[] = [];
@@ -37,15 +68,12 @@ const Home = () => {
                 },
             });
         } else {
-            bannerData.forEach((banner) => {
-                if (banner?.bannerName === 'HOMEPAGE_PRIMARY_BANNER') {
-                    results.push({
-                        id: banner.parentBannerId.toString(),
-                        component: HomeSection,
-                        props: { banner },
-                    });
+            for (const banner of bannerData) {
+                const componentInfo = getComponentInfoForBanner(banner);
+                if (componentInfo) {
+                    results.push(componentInfo);
                 }
-            });
+            }
         }
         return results;
     };
