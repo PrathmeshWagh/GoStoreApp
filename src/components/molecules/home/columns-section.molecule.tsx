@@ -4,7 +4,7 @@ import { Text } from 'react-native-paper';
 import Config from 'react-native-config';
 
 import { useChildBanner } from '@api/banners/use-child-banner.api';
-import { FastImages } from '@atoms/index';
+import { ComponentWrapper, FastImages } from '@atoms/index';
 import { DefaultStyles } from '@primitives/index';
 
 interface ColumnsSectionProps {
@@ -17,7 +17,7 @@ interface ColumnsSectionProps {
 
 const ColumnsSection = (props: ColumnsSectionProps) => {
     const { banner, columns, textStyles, containerStyles, imgHeight } = props;
-    const { data } = useChildBanner(banner.bannerType, banner.parentBannerId);
+    const { data, isLoading, isError, refetch } = useChildBanner(banner.bannerType, banner.parentBannerId);
 
     const renderItem = ({ item }: { item: BannerData }) => {
         return (
@@ -44,23 +44,30 @@ const ColumnsSection = (props: ColumnsSectionProps) => {
     };
 
     return (
-        <View style={containerStyles}>
-             {
-                banner.bannerName !== 'HOMEPAGE_PRIMARY_BANNER' &&
-                    <Text
-                        variant="labelLarge"
-                        style={textStyles}
-                    >
-                        { banner.title }
-                    </Text>
-            }
-            <FlatList
-                data={data?.data || []}
-                renderItem={renderItem}
-                keyExtractor={(_, index) => `${index}`}
-                numColumns={columns}
-            />
-        </View>
+        <ComponentWrapper
+            loading={isLoading}
+            error={isError}
+            errText="Failed to fetch"
+            refetch={refetch}
+        >
+            <View style={containerStyles}>
+                {
+                    banner.bannerName !== 'HOMEPAGE_PRIMARY_BANNER' &&
+                        <Text
+                            variant="labelLarge"
+                            style={textStyles}
+                        >
+                            { banner.title }
+                        </Text>
+                }
+                <FlatList
+                    data={data?.data || []}
+                    renderItem={renderItem}
+                    keyExtractor={(_, index) => `${index}`}
+                    numColumns={columns}
+                />
+            </View>
+        </ComponentWrapper>
     );
 };
 

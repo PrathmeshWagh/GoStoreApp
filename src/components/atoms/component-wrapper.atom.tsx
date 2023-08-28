@@ -3,10 +3,11 @@
 
 import React, { ReactNode } from 'react';
 import { View, StyleSheet, ViewStyle } from 'react-native';
-import { ActivityIndicator, Button, Text } from 'react-native-paper';
+import { ActivityIndicator, Text } from 'react-native-paper';
 
-import { useTheme } from 'hooks';
-import { DefaultStyles, FontGilroy } from 'primitives';
+import { useTheme } from '@hooks/index';
+import { DefaultStyles, FontGilroy } from '@primitives/index';
+import CustomButtom from './button.atom';
 
 interface ComponentWrapperProps {
     loading: boolean;
@@ -50,16 +51,16 @@ const ComponentWrapper = (props: ComponentWrapperProps) => {
                 </Text>
                 {
                     refetch &&
-                        <Button
-                            mode="outlined"
-                            uppercase
-                            textColor={colors.secondary}
-                            labelStyle={{ fontSize: DefaultStyles.DefaultFontSize - 2 }}
-                            style={[styles.btnStyles, { borderColor: colors.secondary }]}
+                        <CustomButtom
                             onPress={refetch}
-                        >
-                            retry
-                        </Button>
+                            loading={false}
+                            disabled={false}
+                            mode="outlined"
+                            text="Retry"
+                            styles={[styles.btnStyles]}
+                            textStyles={[{ color: colors.secondary }, styles.textStyle]}
+                            varaint="titleSmall"
+                        />
                 }
             </View>
         );
@@ -83,7 +84,8 @@ const styles = StyleSheet.create({
     },
     btnStyles: {
         height: DefaultStyles.DefaultButtonHeight - 10,
-        marginTop: 8,
+        borderRadius: DefaultStyles.DefaultButtonHeight,
+        marginTop: 4,
     },
 });
 

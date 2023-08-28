@@ -1,18 +1,33 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { ActivityIndicator } from 'react-native-paper';
+import { ActivityIndicator, Text } from 'react-native-paper';
 
-import { useTheme } from 'hooks/index';
-import { DefaultStyles } from 'primitives';
+import { useTheme } from '@hooks/index';
+import { DefaultStyles } from '@primitives/index';
 
-const Indicator = () => {
+interface IndicatorProps {
+    text?: string;
+    textStyles?: any;
+}
+
+const Indicator = (props: IndicatorProps) => {
     const { colors } = useTheme();
+    const { text, textStyles } = props;
 
     return (
         <View style={[styles.container]}>
             <ActivityIndicator
                 color={colors.primary}
             />
+            {
+                text !== '' &&
+                    <Text
+                        style={textStyles}
+                        variant="titleMedium"
+                    >
+                        { text }
+                    </Text>
+            }
         </View>
     );
 };
@@ -20,6 +35,7 @@ const Indicator = () => {
 const styles = StyleSheet.create({
     container: {
         paddingTop: DefaultStyles.DefaultPadding * 2,
+        alignItems: 'center',
     },
 });
 

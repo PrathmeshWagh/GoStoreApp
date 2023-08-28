@@ -1,10 +1,10 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { StyleSheet, TouchableOpacity, ViewStyle, View } from 'react-native';
 import Config from 'react-native-config';
 
 import { useChildBanner } from '@api/banners/use-child-banner.api';
 import { DefaultStyles } from '@primitives/index';
-import { Carousel, FastImages } from '@atoms/index';
+import { Carousel, ComponentWrapper, FastImages } from '@atoms/index';
 import { Text } from 'react-native-paper';
 
 interface BannerImagesSectionProps {
@@ -17,7 +17,7 @@ interface BannerImagesSectionProps {
 
 const BannerImagesSection = (props: BannerImagesSectionProps) => {
     const { banner, itemWidth, imgHeight, containerStyles, textStyles } = props;
-    const { data } = useChildBanner(banner.bannerType, banner.parentBannerId);
+    const { data, isLoading, isError, refetch } = useChildBanner(banner.bannerType, banner.parentBannerId);
 
     const renderItem = ({ item }: { item: BannerData }) => {
         return (
@@ -44,24 +44,31 @@ const BannerImagesSection = (props: BannerImagesSectionProps) => {
     };
 
     return (
-        <View style={containerStyles}>
-            {
-                banner.bannerName !== 'HOMEPAGE_PRIMARY_BANNER' &&
-                    <Text
-                        variant="labelLarge"
-                        style={textStyles}
-                    >
-                        { banner.title }
-                    </Text>
-            }
-            <Carousel
-                data={data?.data || []}
-                renderItem={renderItem}
-                itemWidth={itemWidth}
-                loop
-                pagination
-            />
-        </View>
+        <ComponentWrapper
+            loading={isLoading}
+            error={isError}
+            errText="Failed to fetch"
+            refetch={refetch}
+        >
+            <View style={containerStyles}>
+                {
+                    banner.bannerName !== 'HOMEPAGE_PRIMARY_BANNER' &&
+                        <Text
+                            variant="labelLarge"
+                            style={textStyles}
+                        >
+                            { banner.title }
+                        </Text>
+                }
+                <Carousel
+                    data={data?.data || []}
+                    renderItem={renderItem}
+                    itemWidth={itemWidth}
+                    loop
+                    pagination
+                />
+            </View>
+        </ComponentWrapper>
     );
 };
 

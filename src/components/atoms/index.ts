@@ -6,3 +6,4 @@ export { default as Indicator } from './indicator.atom';
 export { default as ErrorStatus } from './error-status.atom';
 export { default as Carousel } from './carousel.atom';
 export { default as FastImages } from './image.atom';
+export { default as CustomButtom } from './button.atom';
