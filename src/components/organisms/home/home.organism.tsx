@@ -7,6 +7,7 @@ import { ErrorStatus, Indicator } from '@atoms/index';
 import BannerImagesSection from '@molecules/home/banner-images-section.molecule';
 import { useDimensions } from '@hooks/index';
 import { DefaultStyles } from '@primitives/index';
+import ColumnsSection from '@molecules/home/columns-section.molecule';
 
 type ComponentListItem = {
     id: string;
@@ -35,6 +36,14 @@ const Home = () => {
         'OFFER_BANNER_1_2': (banner) => ({
             component: BannerImagesSection,
             props: { banner, itemWidth: Math.round(width * 0.92) + 5, imgHeight: 1, textStyles: { paddingHorizontal: DefaultStyles.DefaultPadding, marginTop: DefaultStyles.DefaultPadding + 10, marginBottom: DefaultStyles.DefaultPadding - 10 } },
+        }),
+        'RECTANGLE_2_3': (banner) => ({
+            component: ColumnsSection,
+            props: { banner, imgHeight: Math.round(width * 0.4), columns: 3, containerStyles: { paddingHorizontal: DefaultStyles.DefaultPadding, marginTop: DefaultStyles.DefaultPadding + 10 }, textStyles: { marginBottom: DefaultStyles.DefaultPadding - 10 } },
+        }),
+        'STANDARD_CARD_BANNER_2_2': (banner) => ({
+            component: ColumnsSection,
+            props: { banner, imgHeight: Math.round(width * 0.5), columns: 2, containerStyles: { paddingHorizontal: DefaultStyles.DefaultPadding, marginTop: DefaultStyles.DefaultPadding + 10 }, textStyles: { marginBottom: DefaultStyles.DefaultPadding - 10 } },
         }),
     };
 

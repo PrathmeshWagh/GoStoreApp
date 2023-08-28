@@ -31,6 +31,7 @@ const CarouselSlider = (props: CarouselProps) => {
                 inactiveSlideScale={inactiveSlideScale ? inactiveSlideScale : 0.97}
                 loop={loop ? loop : false}
                 onSnapToItem={(index) => setCurrentItem(index)}
+                keyExtractor={(_, index) => `${index}`}
             />
             {
                 pagination &&
