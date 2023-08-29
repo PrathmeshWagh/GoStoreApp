@@ -3,3 +3,14 @@ export const objectToQueryString = (obj: Record<string, string | number | boolea
         .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(obj[key])}`)
         .join('&');
 };
+
+export function getDiscount(price: number, mrp: number) {
+    if (price && mrp) {
+        const discount = Number((1 - price / mrp).toFixed(3)) * 100;
+        if (discount > 0 && discount < 1) {
+            return 1;
+        }
+        return Math.floor(discount);
+    }
+    return '';
+}

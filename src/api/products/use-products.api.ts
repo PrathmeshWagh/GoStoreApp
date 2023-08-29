@@ -8,7 +8,7 @@ import { RootState } from '@slices/store';
 
 export const products = async ({ queryKey }: QueryFunctionContext<[string, { clusterId: number, productIds: string[], state: string }, boolean]>) => {
 	const [_key, type, isKiosk] = queryKey;
-    const { data } = await axios.get(
+    const { data } = await axios.get<ProductResponseData>(
 		`${Config.BASE_PATH_INVENTORY}${_key}?queryStr=${encodeURIComponent(JSON.stringify(type))}&isKiosk=${isKiosk}`,
 	);
 	return data;

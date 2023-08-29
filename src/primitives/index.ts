@@ -15,5 +15,6 @@ export const enum DefaultStyles {
     DefaultPadding = 16,
     DefaultRadius = 6,
     DefaultFontSize = 14,
-    DefaultButtonHeight = 52
+    DefaultButtonHeight = 52,
+    DefaultHeight = 54
 }

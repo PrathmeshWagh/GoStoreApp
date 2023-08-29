@@ -45,7 +45,7 @@ const Home = () => {
         }),
         'PRODUCT_LISTING_BANNER': (banner) => ({
             component: ProductListSection,
-            props: { banner, imgHeight: Math.round(width * 0.5), columns: 2, containerStyles: { paddingHorizontal: DefaultStyles.DefaultPadding, marginTop: DefaultStyles.DefaultPadding + 10 }, textStyles: { marginBottom: DefaultStyles.DefaultPadding - 10 } },
+            props: { banner, itemWidth: width - 60, imgHeight: Math.round(width * 0.5), containerStyles: { paddingHorizontal: DefaultStyles.DefaultPadding, marginTop: DefaultStyles.DefaultPadding + 10 }, textStyles: { marginBottom: DefaultStyles.DefaultPadding - 10 } },
         }),
     };
 

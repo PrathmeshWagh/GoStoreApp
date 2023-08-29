@@ -61,7 +61,7 @@ const ColumnsSection = (props: ColumnsSectionProps) => {
                         </Text>
                 }
                 <FlatList
-                    data={data?.data || []}
+                    data={data?.data as BannerData[]}
                     renderItem={renderItem}
                     keyExtractor={(_, index) => `${index}`}
                     numColumns={columns}

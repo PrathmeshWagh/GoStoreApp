@@ -13,10 +13,11 @@ interface CarouselProps {
     inactiveSlideScale?: number;
     loop?: boolean;
     pagination?: boolean;
+    enableSnap?: boolean;
 }
 
 const CarouselSlider = (props: CarouselProps) => {
-    const { data, renderItem, sliderWidth, itemWidth, inactiveSlideScale, loop, pagination } = props;
+    const { data, renderItem, sliderWidth, itemWidth, inactiveSlideScale, loop, pagination, enableSnap = true } = props;
     const { width } = useDimensions();
     const [currentItem, setCurrentItem] = useState(0);
     const { colors } = useTheme();
@@ -30,6 +31,7 @@ const CarouselSlider = (props: CarouselProps) => {
                 itemWidth={itemWidth}
                 inactiveSlideScale={inactiveSlideScale ? inactiveSlideScale : 0.97}
                 loop={loop ? loop : false}
+                enableSnap={enableSnap}
                 onSnapToItem={(index) => setCurrentItem(index)}
                 keyExtractor={(_, index) => `${index}`}
             />

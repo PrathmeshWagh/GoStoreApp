@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-interface Product {
+interface ProductType {
     id: number;
     productId: string;
     model: string;
@@ -22,7 +22,7 @@ interface Product {
 
 interface ProductResponseData {
     status: 'success' | 'error';
-    data: Product[];
+    data: ProductType[];
     totalProducts: number;
     isSpellCorrected: boolean;
 }

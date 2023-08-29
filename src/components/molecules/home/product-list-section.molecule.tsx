@@ -3,19 +3,19 @@ import { View, ViewStyle } from 'react-native';
 import { Text } from 'react-native-paper';
 
 import { useChildBanner } from '@api/banners/use-child-banner.api';
-import { ComponentWrapper } from '@atoms/index';
+import { ComponentWrapper, ProductSlider } from '@atoms/index';
 import { useProducts } from 'api/products/use-products.api';
 
 interface ProductListSectionProps {
     banner: ParentBannerData;
-    columns: number;
+    itemWidth: number;
     textStyles?: any;
     containerStyles?: ViewStyle;
     imgHeight: number;
 }
 
 const ProductListSection = (props: ProductListSectionProps) => {
-    const { banner, columns, textStyles, containerStyles, imgHeight } = props;
+    const { banner, textStyles, containerStyles } = props;
     const { data, isLoading } = useChildBanner(banner.bannerType, banner.parentBannerId, String(banner.tagType));
     const productsData = data?.data?.map((product) => {
         if ('productId' in product) {
@@ -41,8 +41,11 @@ const ProductListSection = (props: ProductListSectionProps) => {
                     </Text>
                 }
             </View>
+            <ProductSlider
+                data={productData?.data as ProductType[]}
+            />
         </ComponentWrapper>
-    )
+    );
 };
 
 export default ProductListSection;
