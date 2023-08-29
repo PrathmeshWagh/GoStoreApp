@@ -42,3 +42,10 @@ interface BannerApiResponse {
     status: 'success' | 'error';
     data: BannerData[];
 }
+
+interface ProductApiResponse {
+    data: Array<{
+        productId: number;
+    }>;
+    status: 'success' | 'error';
+}

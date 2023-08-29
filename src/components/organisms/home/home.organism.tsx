@@ -8,6 +8,7 @@ import BannerImagesSection from '@molecules/home/banner-images-section.molecule'
 import { useDimensions } from '@hooks/index';
 import { DefaultStyles } from '@primitives/index';
 import ColumnsSection from '@molecules/home/columns-section.molecule';
+import ProductListSection from '@molecules/home/product-list-section.molecule';
 
 type ComponentListItem = {
     id: string;
@@ -16,9 +17,6 @@ type ComponentListItem = {
 };
 
 const Home = () => {
-    // const location = useSelector((state: RootState) => state.location);
-    // const dispatch = useDispatch();
-    // console.log(dispatch, location);
     const { data, isLoading, isError, refetch } = useParentBanner();
     const bannerData = data?.data || [];
     const { width } = useDimensions();
@@ -45,6 +43,10 @@ const Home = () => {
             component: ColumnsSection,
             props: { banner, imgHeight: Math.round(width * 0.5), columns: 2, containerStyles: { paddingHorizontal: DefaultStyles.DefaultPadding, marginTop: DefaultStyles.DefaultPadding + 10 }, textStyles: { marginBottom: DefaultStyles.DefaultPadding - 10 } },
         }),
+        'PRODUCT_LISTING_BANNER': (banner) => ({
+            component: ProductListSection,
+            props: { banner, imgHeight: Math.round(width * 0.5), columns: 2, containerStyles: { paddingHorizontal: DefaultStyles.DefaultPadding, marginTop: DefaultStyles.DefaultPadding + 10 }, textStyles: { marginBottom: DefaultStyles.DefaultPadding - 10 } },
+        }),
     };
 
     //return the data from banner
@@ -59,6 +61,7 @@ const Home = () => {
         return null;
     };
 
+    //Creating ui layer
     const bannersComponentList = (): ComponentListItem[] => {
         const results: ComponentListItem[] = [];
         if (isLoading && !bannerData.length) {
