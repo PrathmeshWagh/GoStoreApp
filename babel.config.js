@@ -21,6 +21,7 @@ module.exports = {
 					'@types': './src/types',
 					'@slices': './src/slices',
 					'@helpers': './src/helpers',
+					'@icons': './src/icons',
 				},
 			},
 		],

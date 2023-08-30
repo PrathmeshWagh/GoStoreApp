@@ -19,6 +19,7 @@
             "@primitives/*": ["src/primitives/*"],
             "@types/*": ["src/types/*"],
             "@slices/*": ["src/slices/*"],
+            "@icons/*": ["src/icons/*"],
         },
     },
 }

@@ -16,11 +16,11 @@ const useIntialNavigation = () => {
                 if (statuses[PERMISSIONS.IOS.LOCATION_ALWAYS] !== RESULTS.GRANTED || statuses[PERMISSIONS.IOS.LOCATION_WHEN_IN_USE] !== RESULTS.GRANTED) {
                     replace(RouteConstants.PermissionsScreenRoute);
                 } else {
-                    replace(RouteConstants.HomeScreenRoute);
+                    replace(RouteConstants.TabsScreenRoute);
                 }
             });
         } else {
-            replace(RouteConstants.HomeScreenRoute);
+            replace(RouteConstants.TabsScreenRoute);
         }
     };
 

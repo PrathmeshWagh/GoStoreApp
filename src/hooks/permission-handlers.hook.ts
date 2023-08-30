@@ -34,7 +34,7 @@ const usePermissionHandlers = (currentItemIndex: number, itemWidth: number, slid
     const notificationPermissionHandler = () => {
         requestNotifications(['alert', 'sound']).then(() => {
             updateUserOnLastSlider();
-            replace(RouteConstants.HomeScreenRoute);
+            replace(RouteConstants.TabsScreenRoute);
         });
     };
 

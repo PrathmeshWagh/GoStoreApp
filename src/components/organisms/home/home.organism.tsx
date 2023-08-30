@@ -9,6 +9,7 @@ import { useDimensions } from '@hooks/index';
 import { DefaultStyles } from '@primitives/index';
 import ColumnsSection from '@molecules/home/columns-section.molecule';
 import ProductListSection from '@molecules/home/product-list-section.molecule';
+import VideoPlayer from '@molecules/home/video.molecule';
 
 type ComponentListItem = {
     id: string;
@@ -92,6 +93,7 @@ const Home = () => {
 
     const componentList: ComponentListItem[] = [
         { id: '1', component: Categories },
+        { id: '2', component: VideoPlayer },
         ...bannersComponentList(),
     ];
 

@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { ViewStyle, StyleSheet } from 'react-native';
+import { ViewStyle } from 'react-native';
 
 import LayoutWrapper from '../../atoms/layout-wrapper.atom';
 import Header from './header.molecule';
@@ -11,7 +11,7 @@ interface LayoutProps {
 }
 
 const Layout = (props: LayoutProps) => {
-    const { children, layout, styles } = props;
+    const { children, layout } = props;
 
     return (
         <LayoutWrapper>
