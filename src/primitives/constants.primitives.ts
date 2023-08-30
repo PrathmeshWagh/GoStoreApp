@@ -55,5 +55,5 @@ export const CustomColors = {
 	onSecondary: '#FFFFFF',
 	error: '#B03A2E',
 	onError: '#FFFFFF',
-	tertiary: '#ECF0F1',
+	tertiary: '#D7DBDD',
 };
