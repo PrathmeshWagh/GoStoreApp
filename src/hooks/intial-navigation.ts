@@ -1,11 +1,11 @@
 import { checkMultiple, PERMISSIONS, RESULTS } from 'react-native-permissions';
 
-import useNavigation from './navigation.hook';
+import useEnhancedNavigation from './navigation.hook';
 import { RouteConstants } from 'routes/constants.routes';
 import useLocalstorage from './local-storage.hook';
 
 const useIntialNavigation = () => {
-    const { replace } = useNavigation();
+    const { replace } = useEnhancedNavigation();
     const { checkWeatherUserHasSeenPermissions } = useLocalstorage();
 
     const redirectToWhichScreen = async () => {

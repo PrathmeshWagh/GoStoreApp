@@ -1,19 +1,24 @@
-import { useNavigation as navigation } from '@react-navigation/native';
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { StackActions } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
-const useNavigation = () => {
-    const nav = navigation();
+import { RootStackParamList } from '@routes/rootstack-param-list.routes';
 
-    const replace = (route: string, params?: any) => {
+const useEnhancedNavigation = <RouteName extends keyof RootStackParamList = keyof RootStackParamList>() => {
+    const nav = useNavigation<StackNavigationProp<RootStackParamList, RouteName>>();
+    const router = useRoute<RouteProp<RootStackParamList, RouteName>>();
+
+    const replace = (route: keyof RootStackParamList, params?: any) => {
         nav.dispatch(
             StackActions.replace(route, { ...params })
         );
     };
 
     return {
-        navigation: nav,
+        ...nav,
+        router,
         replace,
     };
 };
 
-export default useNavigation;
+export default useEnhancedNavigation;

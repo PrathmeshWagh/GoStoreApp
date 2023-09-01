@@ -2,11 +2,11 @@ import { PERMISSIONS, request, requestNotifications } from 'react-native-permiss
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { RouteConstants } from '@routes/constants.routes';
-import useNavigation from './navigation.hook';
+import useEnhancedNavigation from './navigation.hook';
 import { AppTypes } from 'primitives/index';
 
 const usePermissionHandlers = (currentItemIndex: number, itemWidth: number, sliderRef: any, sliderData: SliderItem[]) => {
-    const { replace } = useNavigation();
+    const { replace } = useEnhancedNavigation();
 
     const updateUserOnLastSlider = async () => {
         try {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { HomeScreen, PermissionsScreen, SplashScreen } from './export.routes';
+import { HomeScreen, PermissionsScreen, SplashScreen, MainWebviewScreen } from './export.routes';
 import { RouteConstants } from './constants.routes';
 import { HomeIcon } from '@icons/index';
 
@@ -15,7 +15,8 @@ const BottomTabList = [
 
 const RoutesList = [
     { id: 1, name: RouteConstants.SplashScreenRoute, component: SplashScreen, options: { headerShown: false } },
-    { id: 3, name: RouteConstants.PermissionsScreenRoute, component: PermissionsScreen, options: { headerShown: false } },
+    { id: 2, name: RouteConstants.PermissionsScreenRoute, component: PermissionsScreen, options: { headerShown: false } },
+    { id: 3, name: RouteConstants.MainWebviewScreenRoute, component: MainWebviewScreen, options: { headerShown: false } },
 ];
 
 export {

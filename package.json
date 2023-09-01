@@ -86,6 +86,7 @@
 		"react-native-snap-carousel": "^3.9.1",
 		"react-native-svg": "^13.11.0",
 		"react-native-video": "^5.2.1",
+		"react-native-webview": "^13.5.1",
 		"react-query": "^3.39.3",
 		"react-redux": "^8.1.2"
 	},
