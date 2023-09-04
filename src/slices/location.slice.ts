@@ -18,9 +18,6 @@ const locationSlice = createSlice({
     name: 'location',
     initialState,
     reducers: {
-        // setLocation: (state) => {
-        //     state.message = "hi";
-        // },
         updateLocation: (state, action: PayloadAction<Partial<LocationState>>) => {
             return { ...state, ...action.payload };
         },

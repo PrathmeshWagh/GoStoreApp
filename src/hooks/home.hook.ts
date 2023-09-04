@@ -111,6 +111,7 @@ const useHome = () => {
         return results;
     };
 
+    //making the component
     const componentList: ComponentListItem[] = [
         { id: '1', component: Categories },
         { id: '2', component: VideoPlayer, props: { isPaused: !isFocused || !isVideoVisible } },

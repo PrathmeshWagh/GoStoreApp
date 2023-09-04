@@ -1,11 +1,12 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, ViewStyle, View } from 'react-native';
 import Config from 'react-native-config';
+import { Text } from 'react-native-paper';
 
 import { useChildBanner } from '@api/banners/use-child-banner.api';
 import { DefaultStyles } from '@primitives/index';
 import { Carousel, ComponentWrapper, FastImages } from '@atoms/index';
-import { Text } from 'react-native-paper';
+import { useBannerClick } from '@hooks/index';
 
 interface BannerImagesSectionProps {
     banner: ParentBannerData;
@@ -18,11 +19,13 @@ interface BannerImagesSectionProps {
 const BannerImagesSection = (props: BannerImagesSectionProps) => {
     const { banner, itemWidth, imgHeight, containerStyles, textStyles } = props;
     const { data, isLoading, isError, refetch } = useChildBanner(banner.bannerType, banner.parentBannerId);
+    const { bannerClick } = useBannerClick();
 
     const renderItem = ({ item }: { item: BannerData }) => {
         return (
             <TouchableOpacity
                 style={[{ width: itemWidth, height: itemWidth * imgHeight }]}
+                onPress={() => bannerClick(item)}
             >
                 {
                     item.imgs.map((bannerImage: BannerImage) => {

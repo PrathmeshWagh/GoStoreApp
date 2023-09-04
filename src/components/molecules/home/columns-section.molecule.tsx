@@ -19,10 +19,17 @@ const ColumnsSection = (props: ColumnsSectionProps) => {
     const { banner, columns, textStyles, containerStyles, imgHeight } = props;
     const { data, isLoading, isError, refetch } = useChildBanner(banner.bannerType, banner.parentBannerId);
 
+    // const onPress = (item: Category) => {
+    //     const url = `/category/${item.slug}?categoryId=${item.id}&sort_by=recommendation_asc`;
+    //     dispatch(updateUrl({ url: `${Config.BASE_WEBVIEW_URL}${url}` }));
+    //     navigate(RouteConstants.MainWebviewScreenRoute);
+    // };
+
     const renderItem = ({ item }: { item: BannerData }) => {
         return (
             <TouchableOpacity
                 style={[styles.itemContainer, { height: imgHeight }]}
+                // onPress={() => bannerClick(item)}
             >
                 {
                     item.imgs.map((bannerImage: BannerImage) => {

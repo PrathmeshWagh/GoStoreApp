@@ -9,6 +9,7 @@ import { useEnhancedNavigation } from '@hooks/index';
 import { RouteConstants } from '@routes/constants.routes';
 import { AppDispatch } from '@slices/store';
 import { updateUrl } from '@slices/webview-url.slice';
+import Config from 'react-native-config';
 
 const Categories = () => {
     const { data, isLoading, isError, refetch } = useCategories();
@@ -18,7 +19,7 @@ const Categories = () => {
 
     const onPress = (item: Category) => {
         const url = `/category/${item.slug}?categoryId=${item.id}&sort_by=recommendation_asc`;
-        dispatch(updateUrl({ url: `https://gostor.com${url}` }));
+        dispatch(updateUrl({ url: `${Config.BASE_WEBVIEW_URL}${url}` }));
         navigate(RouteConstants.MainWebviewScreenRoute);
     };
 

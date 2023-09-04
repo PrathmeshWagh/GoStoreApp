@@ -7,6 +7,7 @@ import { PaperProvider, MD3LightTheme as DefaultTheme, configureFonts } from 're
 import store from '@slices/store';
 import { Router } from '@routes/router.routes';
 import { BaseFont, CustomColors, CustomFontVariants } from '@constants/index';
+import { CustomModal } from '@atoms/index';
 
 const queryClient = new QueryClient();
 
@@ -46,6 +47,7 @@ function App() {
 				<QueryClientProvider client={queryClient}>
 					<NavigationContainer theme={navTheme}>
 						<Router/>
+						<CustomModal/>
 					</NavigationContainer>
 				</QueryClientProvider>
 			</PaperProvider>
