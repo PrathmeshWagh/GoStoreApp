@@ -3,9 +3,9 @@ import { useQuery, QueryFunctionContext } from 'react-query';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 
-import { ApiEndpoints } from '@primitives/api-endpoints.primitives';
+import { ApiEndpoints } from '@api/utils/api-endpoints.api';
 import { RootState } from '@slices/store';
-import { objectToQueryString } from '@helpers/utils.helpers';
+import { objectToQueryString } from '@helpers/index';
 
 interface BannerType {
     bannerType: string;

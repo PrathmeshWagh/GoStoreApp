@@ -2,7 +2,7 @@ import Config from 'react-native-config';
 import { useQuery, QueryFunctionContext } from 'react-query';
 import axios from 'axios';
 
-import { ApiEndpoints } from '@primitives/api-endpoints.primitives';
+import { ApiEndpoints } from '@api/utils/api-endpoints.api';
 
 export const categories = async ({ queryKey }: QueryFunctionContext<[string]>) => {
 	const [_key] = queryKey;

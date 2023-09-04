@@ -22,6 +22,7 @@ module.exports = {
 					'@slices': './src/slices',
 					'@helpers': './src/helpers',
 					'@icons': './src/icons',
+					'@constants': './src/constants',
 				},
 			},
 		],

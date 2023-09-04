@@ -3,7 +3,7 @@ import { View, StyleSheet, ViewStyle } from 'react-native';
 import { Text } from 'react-native-paper';
 
 import { DefaultStyles } from '@primitives/index';
-import { getDiscount } from '@helpers/utils.helpers';
+import { getDiscount } from '@helpers/index';
 import FastImages from './image.atom';
 import Rupee from './rupee.atom';
 import { useTheme } from '@hooks/index';

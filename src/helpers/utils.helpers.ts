@@ -4,7 +4,7 @@ export const objectToQueryString = (obj: Record<string, string | number | boolea
         .join('&');
 };
 
-export function getDiscount(price: number, mrp: number) {
+export const getDiscount = (price: number, mrp: number) => {
     if (price && mrp) {
         const discount = Number((1 - price / mrp).toFixed(3)) * 100;
         if (discount > 0 && discount < 1) {
@@ -13,4 +13,4 @@ export function getDiscount(price: number, mrp: number) {
         return Math.floor(discount);
     }
     return '';
-}
+};
