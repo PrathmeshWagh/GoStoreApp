@@ -67,12 +67,21 @@
 	],
 	"dependencies": {
 		"@react-native-async-storage/async-storage": "^1.19.2",
+		"@react-native-firebase/analytics": "^18.3.1",
+		"@react-native-firebase/app": "^18.3.1",
+		"@react-native-firebase/app-distribution": "^18.3.1",
+		"@react-native-firebase/crashlytics": "^18.3.1",
+		"@react-native-firebase/dynamic-links": "^18.3.1",
+		"@react-native-firebase/firestore": "^18.3.1",
+		"@react-native-firebase/perf": "^18.3.1",
+		"@react-native-firebase/remote-config": "^18.3.1",
 		"@react-navigation/bottom-tabs": "^6.5.8",
 		"@react-navigation/drawer": "^6.6.3",
 		"@react-navigation/native": "^6.1.7",
 		"@react-navigation/native-stack": "^6.9.13",
 		"@react-navigation/stack": "^6.3.17",
 		"@reduxjs/toolkit": "^1.9.5",
+		"add": "^2.0.6",
 		"axios": "^1.4.0",
 		"lottie-react-native": "^6.2.0",
 		"react": "18.2.0",
@@ -88,7 +97,8 @@
 		"react-native-video": "^5.2.1",
 		"react-native-webview": "^13.5.1",
 		"react-query": "^3.39.3",
-		"react-redux": "^8.1.2"
+		"react-redux": "^8.1.2",
+		"yarn": "^1.22.19"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.20.0",

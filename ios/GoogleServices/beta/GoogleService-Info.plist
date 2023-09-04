@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>536735851652-ejsn47p5igl47vbur9u0918l6e6onr0i.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.536735851652-ejsn47p5igl47vbur9u0918l6e6onr0i</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD5AlzP87hrtYnbD1BKsTZkZQXJBV6SD3o</string>
+	<key>GCM_SENDER_ID</key>
+	<string>536735851652</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.gostor.ios.beta</string>
+	<key>PROJECT_ID</key>
+	<string>gostor-beta</string>
+	<key>STORAGE_BUCKET</key>
+	<string>gostor-beta.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:536735851652:ios:7c4c2e58d77d770e0a4ed1</string>
+</dict>
+</plist>
