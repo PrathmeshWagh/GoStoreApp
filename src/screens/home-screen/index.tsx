@@ -5,11 +5,11 @@ import Home from '@organisms/home/home.organism';
 
 const layout = {
     menu: true,
-    search: true,
+    search: false,
     back: false,
     logo: 'https://gostor.com/icons/header/logo-invert.svg',
-    cart: true,
-    pincode: true,
+    cart: false,
+    pincode: false,
 };
 
 const HomeScreen = () => {

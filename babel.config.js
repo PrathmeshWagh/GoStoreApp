@@ -23,6 +23,7 @@ module.exports = {
 					'@helpers': './src/helpers',
 					'@icons': './src/icons',
 					'@constants': './src/constants',
+					'@hoc': './src/hoc',
 				},
 			},
 		],

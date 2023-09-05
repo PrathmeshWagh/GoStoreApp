@@ -2,7 +2,8 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { RoutesList, BottomTabList } from './list.routes';
+import { RoutesList } from './list.routes';
+import { BottomTabList } from './bottom-tabs.routes';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();

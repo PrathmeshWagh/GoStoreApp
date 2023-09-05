@@ -23,14 +23,15 @@ const Header = (props: HeaderProps) => {
             <View style={[ styles.item ]}>
                 <TouchableOpacity
                     onPress={() => console.log('Pressed')}
-                    style={[ styles.icon, { marginHorizontal: DefaultStyles.DefaultPadding * 0.38 } ]}
+                    // style={[ styles.icon, { marginHorizontal: DefaultStyles.DefaultPadding * 0.38 } ]}
                 >
                     {
                         layout.menu ?
-                            <MenuIcon
-                                width={32}
-                                height={32}
-                            />
+                            null
+                            // <MenuIcon
+                            //     width={32}
+                            //     height={32}
+                            // />
                             :
                             <BackIcon
                                 width={24}

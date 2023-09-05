@@ -21,6 +21,7 @@
             "@slices/*": ["src/slices/*"],
             "@icons/*": ["src/icons/*"],
             "@constants/*": ["src/constants/*"],
+            "@hoc/*": ["src/hoc/*"],
         },
     },
 }
