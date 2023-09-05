@@ -14,3 +14,19 @@ export const getDiscount = (price: number, mrp: number) => {
     }
     return '';
 };
+
+export function formatUrl(title: string) {
+    if (!title) { return title; }
+    for (let i = 0; i < 2; i++) {
+      // str.replace(/\//g, "-")
+      title = title.replace(/|/g, '');
+      title = title.replace('|', '');
+    }
+    title = title.replaceAll('&', '');
+    title = title.replace(/\//g, '-');
+    title = title.replace(/\(/g, '');
+    title = title.replace(/\)/g, '');
+    title = title.replace(/ /g, '-');
+    title = title.replace(/([+])/g, '-');
+    return title;
+};

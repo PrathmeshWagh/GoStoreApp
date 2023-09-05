@@ -1,39 +1,39 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, ViewStyle, View } from 'react-native';
-import Config from 'react-native-config';
+import { TouchableOpacity, View, ViewStyle, StyleSheet } from 'react-native';
 import { Text } from 'react-native-paper';
+import Config from 'react-native-config';
 
 import { useChildBanner } from '@api/banners/use-child-banner.api';
-import { DefaultStyles } from '@primitives/index';
-import { Carousel, ComponentWrapper, FastImages } from '@atoms/index';
+import { ComponentWrapper, FastImages, FlatlistCarousel } from '@atoms/index';
 import { useBannerClick } from '@hooks/index';
+import { DefaultStyles } from '@primitives/index';
 
-interface BannerImagesSectionProps {
+interface ProductListSectionProps {
     banner: ParentBannerData;
     itemWidth: number;
-    imgHeight: number;
-    containerStyles?: ViewStyle;
     textStyles?: any;
-    loop?: boolean;
+    containerStyles?: ViewStyle;
+    imgHeight: number;
+    itemsToShow: number;
 }
 
-const BannerImagesSection = (props: BannerImagesSectionProps) => {
-    const { banner, itemWidth, imgHeight, containerStyles, textStyles, loop = true } = props;
+const BannerImagesFlatlistSection = (props: ProductListSectionProps) => {
+    const { banner, itemWidth, imgHeight, containerStyles, textStyles, itemsToShow } = props;
     const { data, isLoading, isError, refetch } = useChildBanner(banner.bannerType, banner.parentBannerId);
     const { bannerClick } = useBannerClick();
 
     const renderItem = ({ item }: { item: BannerData }) => {
         return (
             <TouchableOpacity
-                style={[{ width: itemWidth, height: itemWidth * imgHeight }]}
+                style={[{ width: itemWidth, height: itemWidth * imgHeight, marginRight: 6 }]}
                 onPress={() => bannerClick(item, banner.bannerType)}
             >
                 {
-                    item.imgs.map((bannerImage: BannerImage) => {
+                    item.imgs.map((bannerImage: BannerImage, index: number) => {
                         if (bannerImage.imgPosition === 'CENTER') {
                             return (
                                 <FastImages
-                                    key={bannerImage.imgPath}
+                                    key={index}
                                     url={`${Config.BASE_IMAGE}/${bannerImage.imgPath}`}
                                     style={[styles.image]}
                                     mode="cover"
@@ -56,7 +56,7 @@ const BannerImagesSection = (props: BannerImagesSectionProps) => {
         >
             <View style={containerStyles}>
                 {
-                    banner.bannerName !== 'HOMEPAGE_PRIMARY_BANNER' && banner.title && banner.title !== '' &&
+                    banner.bannerName !== 'HOMEPAGE_PRIMARY_BANNER' &&
                         <Text
                             variant="labelLarge"
                             style={textStyles}
@@ -64,12 +64,11 @@ const BannerImagesSection = (props: BannerImagesSectionProps) => {
                             { banner.title }
                         </Text>
                 }
-                <Carousel
+                <FlatlistCarousel
                     data={data?.data || []}
                     renderItem={renderItem}
-                    itemWidth={itemWidth}
-                    loop={loop}
-                    pagination
+                    ITEMS_TO_SHOW={itemsToShow}
+                    showPagination={false}
                 />
             </View>
         </ComponentWrapper>
@@ -87,4 +86,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default BannerImagesSection;
+export default BannerImagesFlatlistSection;

@@ -5,7 +5,7 @@ import { useEnhancedNavigation } from '@hooks/index';
 import { AppDispatch, RootState } from '@slices/store';
 import { updateUrl } from '@slices/webview-url.slice';
 import { RouteConstants } from '@routes/constants.routes';
-import { fetchTaggedBannerProducts } from '@api/banners/use-banner-tagged-products.api';
+import { fetchTaggedBannerProducts, fetchTaggedBannerData } from '@api/banners/use-banner-tagged-products.api';
 import { closeModal, openModal } from '@slices/modal.slice';
 
 const useBannerClick = () => {
@@ -32,6 +32,7 @@ const useBannerClick = () => {
                 const url = `/banner-products?productIds=${productIds.join(',')}&sort_by=price_desc`;
                 dispatch(updateUrl({ url: `${Config.BASE_WEBVIEW_URL}${url}` }));
                 navigate(RouteConstants.MainWebviewScreenRoute);
+                dispatch(closeModal());
             } else {
                 dispatch(closeModal());
             }
@@ -40,13 +41,57 @@ const useBannerClick = () => {
         }
     };
 
-    const bannerClick = (banner: BannerData) => {
+    const typeDefault = async (banner: BannerData, bannerType: BannerType) => {
+        dispatch(openModal({
+            view: 'loading',
+            title: 'Redirecting...',
+        }));
+        try {
+            const { data } = await fetchTaggedBannerData({
+                bannerType: bannerType,
+                tagType: banner.tagType,
+                bannerId: banner.childBannerId,
+                clusterId: location.cluster_id,
+                state: location.state,
+            });
+            if (data?.status === 'success') {
+                if (data.data[0].tagType === 'BRAND') {
+                    const url = `/brand/${data?.data[0]?.brand}?sort_by=recommendation_asc`;
+                    dispatch(updateUrl({ url: `${Config.BASE_WEBVIEW_URL}${url}` }));
+                    navigate(RouteConstants.MainWebviewScreenRoute);
+                    dispatch(closeModal());
+                }
+            } else {
+                dispatch(closeModal());
+            }
+        } catch (err) {
+            dispatch(closeModal());
+        }
+    };
+
+    const typeLink = (banner: BannerData) => {
+        dispatch(openModal({
+            view: 'loading',
+            title: 'Redirecting...',
+        }));
+        dispatch(updateUrl({ url: `${banner?.bannerLink}` }));
+        navigate(RouteConstants.MainWebviewScreenRoute);
+        dispatch(closeModal());
+    };
+
+    const bannerClick = (banner: BannerData, bannerType: BannerType) => {
+        console.log(banner);
+
         switch (banner.tagType) {
             case 'PRODUCT':
                 typeProduct(banner);
                 break;
+            case 'LINK':
+                typeLink(banner);
+                break;
             default :
-                return null;
+                typeDefault(banner, bannerType);
+                break;
         }
     };
 

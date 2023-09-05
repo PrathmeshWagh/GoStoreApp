@@ -1,12 +1,18 @@
 import React from 'react';
 import { View, StyleSheet, ViewStyle } from 'react-native';
-import { Text } from 'react-native-paper';
+import { Text, TouchableRipple } from 'react-native-paper';
+import { useDispatch } from 'react-redux';
+import Config from 'react-native-config';
 
 import { DefaultStyles } from '@primitives/index';
-import { getDiscount } from '@helpers/index';
+import { formatUrl, getDiscount } from '@helpers/index';
 import FastImages from './image.atom';
 import Rupee from './rupee.atom';
-import { useTheme } from '@hooks/index';
+import { useEnhancedNavigation, useTheme } from '@hooks/index';
+import { AppDispatch } from '@slices/store';
+import { closeModal, openModal } from 'slices/modal.slice';
+import { RouteConstants } from '@routes/constants.routes';
+import { updateUrl } from '@slices/webview-url.slice';
 
 interface CategoryItemProps {
     price: number;
@@ -14,47 +20,65 @@ interface CategoryItemProps {
     image: string;
     title: string;
     containerStyles: ViewStyle;
+    parentCategory: string;
+    productId: string;
+    supplierId: number;
 }
 
 const CategoryItem = (props: CategoryItemProps) => {
-    const { price, mrp, image, title, containerStyles } = props;
+    const { navigate } = useEnhancedNavigation();
+    const dispatch = useDispatch<AppDispatch>();
+    const { price, mrp, image, title, containerStyles, parentCategory, productId, supplierId } = props;
     const discount = getDiscount(price, mrp);
     const { colors } = useTheme();
 
+    const handlePress = () => {
+        let url = `/category/${parentCategory}/${formatUrl(title)}?id=${productId}&supplierId=${supplierId}`;
+        dispatch(openModal({
+            view: 'loading',
+            title: 'Redirecting...',
+        }));
+        dispatch(updateUrl({ url: `${Config.BASE_WEBVIEW_URL}${url}` }));
+        navigate(RouteConstants.MainWebviewScreenRoute);
+        dispatch(closeModal());
+    };
+
     return (
-        <View style={[styles.item, containerStyles]}>
-            <View style={[styles.imageContainer]}>
-                <FastImages
-                    url={image}
-                    style={[styles.image]}
-                    mode="contain"
-                />
-            </View>
-            <Text
-                numberOfLines={2}
-                variant="titleMedium"
-                style={[styles.title]}
-            >
-                {title}
-            </Text>
-            <Rupee
-                money={price}
-                styles={[styles.price]}
-            />
-            <View style={[styles.mrpWrapper]}>
-                <Rupee
-                    money={mrp}
-                    styles={[styles.mrp]}
-                />
+        <TouchableRipple onPress={handlePress}>
+            <View style={[styles.item, containerStyles]}>
+                <View style={[styles.imageContainer]}>
+                    <FastImages
+                        url={image}
+                        style={[styles.image]}
+                        mode="contain"
+                    />
+                </View>
                 <Text
                     numberOfLines={2}
                     variant="titleMedium"
-                    style={[styles.discount, { color: colors.primary }]}
+                    style={[styles.title]}
                 >
-                    {discount}%off
+                    {title}
                 </Text>
+                <Rupee
+                    money={price}
+                    styles={[styles.price]}
+                />
+                <View style={[styles.mrpWrapper]}>
+                    <Rupee
+                        money={mrp}
+                        styles={[styles.mrp]}
+                    />
+                    <Text
+                        numberOfLines={2}
+                        variant="titleMedium"
+                        style={[styles.discount, { color: colors.primary }]}
+                    >
+                        {discount}%off
+                    </Text>
+                </View>
             </View>
-        </View>
+        </TouchableRipple>
     );
 };
 

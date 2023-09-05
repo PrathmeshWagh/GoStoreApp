@@ -11,3 +11,4 @@ export { default as ProductSlider } from './product-carousel.atom';
 export { default as Rupee } from './rupee.atom';
 export { default as CategoryItem } from './category-item.atom';
 export { default as CustomModal } from './modal.atom';
+export { default as FlatlistCarousel } from './flatlist-carousel.atom';

@@ -6,6 +6,7 @@ import Config from 'react-native-config';
 import { useChildBanner } from '@api/banners/use-child-banner.api';
 import { ComponentWrapper, FastImages } from '@atoms/index';
 import { DefaultStyles } from '@primitives/index';
+import { useBannerClick } from '@hooks/index';
 
 interface ColumnsSectionProps {
     banner: ParentBannerData;
@@ -18,18 +19,13 @@ interface ColumnsSectionProps {
 const ColumnsSection = (props: ColumnsSectionProps) => {
     const { banner, columns, textStyles, containerStyles, imgHeight } = props;
     const { data, isLoading, isError, refetch } = useChildBanner(banner.bannerType, banner.parentBannerId);
-
-    // const onPress = (item: Category) => {
-    //     const url = `/category/${item.slug}?categoryId=${item.id}&sort_by=recommendation_asc`;
-    //     dispatch(updateUrl({ url: `${Config.BASE_WEBVIEW_URL}${url}` }));
-    //     navigate(RouteConstants.MainWebviewScreenRoute);
-    // };
+    const { bannerClick } = useBannerClick();
 
     const renderItem = ({ item }: { item: BannerData }) => {
         return (
             <TouchableOpacity
                 style={[styles.itemContainer, { height: imgHeight }]}
-                // onPress={() => bannerClick(item)}
+                onPress={() => bannerClick(item, banner?.bannerType)}
             >
                 {
                     item.imgs.map((bannerImage: BannerImage) => {
@@ -59,7 +55,7 @@ const ColumnsSection = (props: ColumnsSectionProps) => {
         >
             <View style={containerStyles}>
                 {
-                    banner.bannerName !== 'HOMEPAGE_PRIMARY_BANNER' &&
+                    banner.bannerName && banner.bannerName !== '' &&
                         <Text
                             variant="labelLarge"
                             style={textStyles}

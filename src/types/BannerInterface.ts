@@ -4,13 +4,16 @@ interface ParentBannerData {
     sequence: number;
     bannerName: string;
     colourCode: string;
-    bannerType: string;
+    bannerType: BannerType;
     tagType: string | null;
     title: string;
     timer: number;
     startTime: string;
     endTime: string;
 }
+
+type BannerType = 'BANNER' | 'WITHOUT_BANNER';
+type TagType = 'BRAND' | 'PRODUCT' | 'STORE' | 'CATEGORY' | 'LINK';
 
 interface ParentBannerApiResponse {
     status: string;
@@ -27,7 +30,7 @@ interface BannerImage {
 interface BannerData {
     childBannerId: number;
     imgSequence: number;
-    tagType: string;
+    tagType: TagType;
     parentBannerId: number;
     clickable: number;
     timer: number;

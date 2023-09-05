@@ -3,18 +3,19 @@ import { FlatList, View, StyleSheet, Animated } from 'react-native';
 
 import { useDimensions, useTheme } from '@hooks/index';
 import { DefaultStyles } from '@primitives/index';
-import CategoryItem from './category-item.atom';
 
-interface ProductSliderProps {
-    data: ProductType[]
+interface FlatListSliderProps {
+    data: any[];
+    renderItem: (info: { item: any, index: number }) => JSX.Element;
+    ITEMS_TO_SHOW: number;
+    showPagination?: boolean;
 }
 
-const ProductSlider = (props: ProductSliderProps) => {
-    const { data } = props;
+const FlatlistSlider = (props: FlatListSliderProps) => {
+    const { data, renderItem, ITEMS_TO_SHOW, showPagination = true } = props;
     const scrollX = useRef(new Animated.Value(0)).current;
     const { viewportWidth } = useDimensions();
     const SLIDER_WIDTH = 100;
-    const ITEMS_TO_SHOW = 2.4;
     const ITEM_WIDTH = viewportWidth / ITEMS_TO_SHOW;
     const { colors } = useTheme();
     const blueWidth = SLIDER_WIDTH * (ITEMS_TO_SHOW / data.length);
@@ -25,21 +26,6 @@ const ProductSlider = (props: ProductSliderProps) => {
         extrapolate: 'clamp',
     });
 
-    const renderItem = ({ item }: { item: ProductType }) => {
-        return (
-            <CategoryItem
-                price={item?.storePrice}
-                mrp={item?.mrp}
-                image={item.primaryImgPath}
-                title={item.title}
-                containerStyles={{ width: ITEM_WIDTH, backgroundColor: colors.onSecondary }}
-                parentCategory={item?.parentCategory}
-                productId={item?.productId}
-                supplierId={item?.supplierId}
-            />
-        );
-    };
-
     return (
         <View style={[styles.container]}>
             <FlatList
@@ -48,7 +34,6 @@ const ProductSlider = (props: ProductSliderProps) => {
                 horizontal
                 pagingEnabled
                 showsHorizontalScrollIndicator={false}
-                contentContainerStyle={{ paddingLeft: 16 }}
                 onScroll={Animated.event(
                     [{ nativeEvent: { contentOffset: { x: scrollX } } }],
                     { useNativeDriver: false }
@@ -56,9 +41,12 @@ const ProductSlider = (props: ProductSliderProps) => {
                 scrollEventThrottle={16}
                 snapToInterval={ITEM_WIDTH}
             />
-            <View style={[{ height: DefaultStyles.DefaultHeight - 48, width: SLIDER_WIDTH, backgroundColor: colors.tertiary }, styles.sliderContainer]}>
-                <Animated.View style={[{ width: blueWidth, backgroundColor: colors.primary, transform: [{ translateX }] }, styles.slider]} />
-            </View>
+            {
+                showPagination &&
+                    <View style={[{ height: DefaultStyles.DefaultHeight - 48, width: SLIDER_WIDTH, backgroundColor: colors.tertiary }, styles.sliderContainer]}>
+                        <Animated.View style={[{ width: blueWidth, backgroundColor: colors.primary, transform: [{ translateX }] }, styles.slider]} />
+                    </View>
+            }
         </View>
     );
 };
@@ -82,4 +70,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ProductSlider;
+export default FlatlistSlider;

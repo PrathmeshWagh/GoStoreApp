@@ -10,6 +10,7 @@ import ProductListSection from '@molecules/home/product-list-section.molecule';
 import VideoPlayer from '@molecules/home/video.molecule';
 import useDimensions from './dimensions.hook';
 import { useParentBanner } from '@api/banners/use-parent-banner-struture.api';
+import BannerImagesFlatlistSection from '@molecules/home/banner-images-flatlist.molecule';
 
 type ComponentListItem = {
     id: string;
@@ -18,13 +19,14 @@ type ComponentListItem = {
 };
 
 const useHome = () => {
-    const { width } = useDimensions();
+    const { width, viewportWidth } = useDimensions();
     const { data, isLoading, isError, refetch } = useParentBanner();
     const bannerData = data?.data || [];
     const navigation = useNavigation();
     const [isFocused, setIsFocused] = useState(true);
     const [isVideoVisible, setIsVideoVisible] = useState(true); // state to determine if the video is visible in the FlatList
     const viewabilityConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }); // change the threshold based on your needs
+    const trendingDeals = viewportWidth / 2.4;
 
     useEffect(() => {
         const unsubscribeFocus = navigation.addListener('focus', () => setIsFocused(true));
@@ -46,27 +48,96 @@ const useHome = () => {
     const bannerComponentMapping: Record<string, (banner: typeof bannerData[0]) => { component: React.ComponentType<any>, props: any }> = {
         'HOMEPAGE_PRIMARY_BANNER': (banner) => ({
             component: BannerImagesSection,
-            props: { banner, itemWidth: Math.round(width * 0.92) + 5, imgHeight: 0.4 },
+            props: {
+                banner,
+                itemWidth: Math.round(width * 0.92) + 5,
+                imgHeight: 0.4,
+            },
         }),
         'STRIP_BANNER_1': (banner) => ({
             component: BannerImagesSection,
-            props: { banner, itemWidth: Math.round(width * 0.92) + 5, imgHeight: 0.16, textStyles: { paddingHorizontal: DefaultStyles.DefaultPadding, marginTop: DefaultStyles.DefaultPadding + 10, marginBottom: DefaultStyles.DefaultPadding - 10 } },
+            props: {
+                banner,
+                itemWidth: Math.round(width * 0.92) + 5,
+                imgHeight: 0.16,
+                textStyles: { paddingHorizontal: DefaultStyles.DefaultPadding, marginTop: DefaultStyles.DefaultPadding + 10, marginBottom: DefaultStyles.DefaultPadding - 10 },
+            },
         }),
         'OFFER_BANNER_1_2': (banner) => ({
             component: BannerImagesSection,
-            props: { banner, itemWidth: Math.round(width * 0.92) + 5, imgHeight: 1, textStyles: { paddingHorizontal: DefaultStyles.DefaultPadding, marginTop: DefaultStyles.DefaultPadding + 10, marginBottom: DefaultStyles.DefaultPadding - 10 } },
+            props: {
+                banner,
+                itemWidth: Math.round(width * 0.92) + 5,
+                imgHeight: 1,
+                textStyles: { paddingHorizontal: DefaultStyles.DefaultPadding, marginTop: DefaultStyles.DefaultPadding + 10, marginBottom: DefaultStyles.DefaultPadding - 10 },
+            },
+        }),
+        'TRENDING_DEALS': (banner) => ({
+            component: BannerImagesFlatlistSection,
+            props: {
+                banner,
+                itemWidth: trendingDeals,
+                loop: false,
+                imgHeight: 1.4,
+                itemsToShow: 2.8,
+                textStyles: {
+                    marginTop: DefaultStyles.DefaultPadding + 10,
+                },
+                containerStyles: {
+                    paddingHorizontal: DefaultStyles.DefaultPadding,
+                    marginTop: DefaultStyles.DefaultPadding,
+                },
+            },
         }),
         'RECTANGLE_2_3': (banner) => ({
             component: ColumnsSection,
-            props: { banner, imgHeight: Math.round(width * 0.4), columns: 3, containerStyles: { paddingHorizontal: DefaultStyles.DefaultPadding, marginTop: DefaultStyles.DefaultPadding + 10 }, textStyles: { marginBottom: DefaultStyles.DefaultPadding - 10 } },
+            props: {
+                banner,
+                imgHeight: Math.round(width * 0.4),
+                columns: 3,
+                containerStyles: { paddingHorizontal: DefaultStyles.DefaultPadding, marginTop: DefaultStyles.DefaultPadding },
+                textStyles: { marginBottom: DefaultStyles.DefaultPadding - 10 },
+            },
+        }),
+        'RECTANGLE_1_3': (banner) => ({
+            component: ColumnsSection,
+            props: {
+                banner,
+                imgHeight: Math.round(width * 0.4),
+                columns: 3,
+                containerStyles: { paddingHorizontal: DefaultStyles.DefaultPadding, marginTop: DefaultStyles.DefaultPadding },
+                textStyles: { marginBottom: DefaultStyles.DefaultPadding - 10 },
+            },
         }),
         'STANDARD_CARD_BANNER_2_2': (banner) => ({
             component: ColumnsSection,
-            props: { banner, imgHeight: Math.round(width * 0.5), columns: 2, containerStyles: { paddingHorizontal: DefaultStyles.DefaultPadding, marginTop: DefaultStyles.DefaultPadding + 10 }, textStyles: { marginBottom: DefaultStyles.DefaultPadding - 10 } },
+            props: {
+                banner,
+                imgHeight: Math.round(width * 0.5),
+                columns: 2,
+                containerStyles: { paddingHorizontal: DefaultStyles.DefaultPadding, marginTop: DefaultStyles.DefaultPadding },
+                textStyles: { marginBottom: DefaultStyles.DefaultPadding - 10 },
+            },
+        }),
+        'CATEGORY_BANNER_1_2': (banner) => ({
+            component: ColumnsSection,
+            props: {
+                banner,
+                imgHeight: Math.round(width * 0.58),
+                columns: 1,
+                containerStyles: { paddingHorizontal: DefaultStyles.DefaultPadding, marginTop: DefaultStyles.DefaultPadding },
+                textStyles: { marginBottom: DefaultStyles.DefaultPadding - 10 },
+            },
         }),
         'PRODUCT_LISTING_BANNER': (banner) => ({
             component: ProductListSection,
-            props: { banner, itemWidth: width - 60, imgHeight: Math.round(width * 0.5), containerStyles: { paddingHorizontal: DefaultStyles.DefaultPadding, marginTop: DefaultStyles.DefaultPadding + 10 }, textStyles: { marginBottom: DefaultStyles.DefaultPadding - 10 } },
+            props: {
+                banner,
+                itemWidth: width - 60,
+                imgHeight: Math.round(width * 0.5),
+                containerStyles: { paddingHorizontal: DefaultStyles.DefaultPadding, marginTop: DefaultStyles.DefaultPadding },
+                textStyles: { marginBottom: DefaultStyles.DefaultPadding - 10 },
+            },
         }),
     };
 
