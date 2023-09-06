@@ -5,7 +5,7 @@ interface SliderHeader {
 
 interface SliderBody {
     title: string;
-    image: string;
+    image: any;
 }
 
 interface SliderFooter {

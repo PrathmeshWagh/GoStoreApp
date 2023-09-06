@@ -4,19 +4,21 @@ import { View, StyleSheet, FlatList } from 'react-native';
 import Header from '@molecules/permissions/header.molecule';
 import Footer from '@molecules/permissions/footer.molecule';
 import { useDimensions, usePermissionHandlers } from '@hooks/index';
+import NotificationIcon from '@assets/icons/notification.svg';
+import LocationIcon from '@assets/icons/location-icon.svg';
 
 const sliderData: SliderItem[] = [
     {
         id: 1,
         header: {
-            title: 'Location',
+            title: 'Allow your Location',
         },
         body: {
-            title: 'Location body',
-            image: '',
+            title: 'We will need your location to give you better experience',
+            image: <LocationIcon width={120} height={120}/>,
         },
         footer: {
-            btnText: 'Next',
+            btnText: "Sure, I'd Like that",
         },
     },
     {
@@ -25,11 +27,11 @@ const sliderData: SliderItem[] = [
             title: 'Notifications',
         },
         body: {
-            title: 'Notifications body',
-            image: '',
+            title: 'Enable your Notification to get regular update',
+            image: <NotificationIcon width={120} height={120}/>,
         },
         footer: {
-            btnText: 'Next',
+            btnText: 'Turn On',
         },
     },
 ];
@@ -42,12 +44,12 @@ const Permissions = () => {
     const { permissionHandler } = usePermissionHandlers(currentItemIndex, itemWidth, sliderRef, sliderData);
 
     const permissionRenderItem = (item: SliderItem) => {
-        const { header, id } = item;
+        const { header, id, body, footer } = item;
 
         return (
             <View style={[ styles.item, { width: itemWidth } ]}>
-                <Header title={header.title}/>
-                <Footer onPress={() => permissionHandler(id)}/>
+                <Header title={header.title} body={body}/>
+                <Footer footer={footer} onPress={() => permissionHandler(id)}/>
             </View>
         );
     };
@@ -73,6 +75,8 @@ const styles = StyleSheet.create({
     },
     item: {
         flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });
 

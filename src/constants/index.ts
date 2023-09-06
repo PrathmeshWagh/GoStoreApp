@@ -10,42 +10,36 @@ export const CustomFontVariants = {
 		fontWeight: '600',
 		fontSize: 12,
 		letterSpacing: 0,
-		lineHeight: 28,
 	},
     labelMedium: {
 		fontFamily: FontGilroy.SemiBold,
 		fontWeight: '600',
 		fontSize: 14,
 		letterSpacing: 0,
-		lineHeight: 28,
 	},
 	labelLarge: {
 		fontFamily: FontGilroy.SemiBold,
 		fontWeight: '600',
 		fontSize: 16,
 		letterSpacing: 0,
-		lineHeight: 28,
 	},
 	titleSmall: {
 		fontFamily: FontGilroy.Regular,
 		fontWeight: '300',
 		fontSize: 12,
 		letterSpacing: 0,
-		lineHeight: 28,
 	},
     titleMedium: {
 		fontFamily: FontGilroy.Regular,
 		fontWeight: '400',
 		fontSize: 14,
 		letterSpacing: 0,
-		lineHeight: 28,
 	},
 	titleLarge: {
 		fontFamily: FontGilroy.Regular,
 		fontWeight: '500',
 		fontSize: 16,
 		letterSpacing: 0,
-		lineHeight: 28,
 	},
 } as const;
 

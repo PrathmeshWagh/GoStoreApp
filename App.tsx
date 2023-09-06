@@ -3,11 +3,14 @@ import { NavigationContainer, DefaultTheme as NavigationTheme } from '@react-nav
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider as ReduxProvider } from 'react-redux';
 import { PaperProvider, MD3LightTheme as DefaultTheme, configureFonts } from 'react-native-paper';
+import { LogBox } from 'react-native';
 
 import store from '@slices/store';
 import { Router } from '@routes/router.routes';
 import { BaseFont, CustomColors, CustomFontVariants } from '@constants/index';
 import { CustomModal } from '@atoms/index';
+
+LogBox.ignoreLogs([]);
 
 const queryClient = new QueryClient();
 

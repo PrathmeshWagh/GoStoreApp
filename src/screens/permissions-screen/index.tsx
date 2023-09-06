@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Safearea } from '@atoms/index';
-import Permissions from 'components/organisms/permissions/permissions.organism';
+import Permissions from '@organisms/permissions/permissions.organism';
 
 const PermissionsScreen = () => {
 
