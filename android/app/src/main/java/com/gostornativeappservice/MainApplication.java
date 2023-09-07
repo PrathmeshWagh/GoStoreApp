@@ -1,4 +1,4 @@
-package com.gostornativeappservice;
+package com.gostor;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

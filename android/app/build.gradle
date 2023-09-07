@@ -1,6 +1,14 @@
 apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
 
+project.ext.envConfigFiles = [
+    development: ".env.development",
+    beta: ".env.beta",
+    production: ".env.production",
+]
+
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+
 /**
  * This is the configuration block to customize your React Native Android app.
  * By default you don't need to apply any configuration, just uncomment the lines you need.
@@ -73,14 +81,28 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.gostornativeappservice"
+    namespace "com.gostor"
     defaultConfig {
-        applicationId "com.gostornativeappservice"
+        applicationId "com.gostor"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
     }
+
+    flavorDimensions "default"
+    productFlavors {
+        development {
+            applicationId "com.gostor.dev"
+        }
+        beta {
+            applicationId "com.gostor.beta"
+        }
+        production {
+            applicationId "com.gostor"
+        }
+    }
+
     signingConfigs {
         debug {
             storeFile file('debug.keystore')

@@ -1,4 +1,4 @@
-package com.gostornativeappservice;
+package com.gostor;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
