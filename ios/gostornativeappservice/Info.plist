@@ -49,6 +49,8 @@
 	<string>Allow Gostor to access speech recognition</string>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>Allow Gostor to access your photo library</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+  	<string>Allow Gostor to access your location</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Gilroy-Bold.ttf</string>

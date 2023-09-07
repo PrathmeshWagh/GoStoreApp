@@ -28,7 +28,7 @@ const usePermissionHandlers = (currentItemIndex: number, itemWidth: number, slid
 
     const locationPermissionHandler = () => {
         if (Platform.OS === 'ios') {
-            request(PERMISSIONS.IOS.LOCATION_ALWAYS).then(() => {
+            request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE).then(() => {
                 nextSlider();
             });
         } else {
