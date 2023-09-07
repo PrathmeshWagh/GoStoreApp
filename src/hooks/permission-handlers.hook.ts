@@ -1,5 +1,6 @@
 import { PERMISSIONS, request, requestNotifications } from 'react-native-permissions';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Platform } from 'react-native';
 
 import { RouteConstants } from '@routes/constants.routes';
 import useEnhancedNavigation from './navigation.hook';
@@ -26,9 +27,15 @@ const usePermissionHandlers = (currentItemIndex: number, itemWidth: number, slid
     };
 
     const locationPermissionHandler = () => {
-        request(PERMISSIONS.IOS.LOCATION_ALWAYS).then(() => {
-            nextSlider();
-        });
+        if (Platform.OS === 'ios') {
+            request(PERMISSIONS.IOS.LOCATION_ALWAYS).then(() => {
+                nextSlider();
+            });
+        } else {
+            request(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION).then(() => {
+                nextSlider();
+            });
+        }
     };
 
     const notificationPermissionHandler = () => {

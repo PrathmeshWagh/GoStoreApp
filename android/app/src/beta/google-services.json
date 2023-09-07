@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "536735851652",
+    "project_id": "gostor-beta",
+    "storage_bucket": "gostor-beta.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536735851652:android:907b8dd2b2ca289d0a4ed1",
+        "android_client_info": {
+          "package_name": "com.gostor.beta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "536735851652-srk562bjrskd7n5kbq9sjn9siqorfotd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVwyZ73WrcWXh4t1wxIWSf8QzFTGjpthI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "536735851652-srk562bjrskd7n5kbq9sjn9siqorfotd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "536735851652-ejsn47p5igl47vbur9u0918l6e6onr0i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gostor.ios.beta"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

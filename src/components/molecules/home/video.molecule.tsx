@@ -19,7 +19,7 @@ const VideoPlayer = (props: VideoPlayerProps) => {
 				source={{ uri: 'https://static.gostor.com/videos/homepage/gostor-intro.mp4' }}
 				style={styles.backgroundVideo}
 				resizeMode="cover"
-				controls={true}
+				controls={false}
 				paused={isPaused}
 				repeat={true}
 				muted={true}
