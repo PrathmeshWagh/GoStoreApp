@@ -37,8 +37,6 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Allow Gostor to access your camera</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Allow Gostor to access your location</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Allow Gostor to access your location when in the background.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
@@ -48,7 +46,9 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Allow Gostor to access your photo library</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>Allow Gostor to access sppech recognition</string>
+	<string>Allow Gostor to access speech recognition</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Allow Gostor to access your photo library</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Gilroy-Bold.ttf</string>
@@ -67,8 +67,12 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>

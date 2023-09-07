@@ -37,8 +37,6 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Allow Gostor to access your camera</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Allow Gostor to access your location</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Allow Gostor to access your location when in the background.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
