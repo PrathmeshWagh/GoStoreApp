@@ -18,6 +18,8 @@ const MainWebview = () => {
     const url = useSelector((state: RootState) => state.urlWebview.url);
 
     const eventHandlers = async (event: any) => {
+        console.log(event, '=======');
+        
         try {
             const eventData = JSON.parse(event);
             switch (eventData.action) {

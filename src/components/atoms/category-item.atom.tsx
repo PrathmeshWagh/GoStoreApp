@@ -12,7 +12,7 @@ import { useEnhancedNavigation, useTheme } from '@hooks/index';
 import { AppDispatch } from '@slices/store';
 import { closeModal, openModal } from 'slices/modal.slice';
 import { RouteConstants } from '@routes/constants.routes';
-import { updateUrl } from '@slices/webview-url.slice';
+import { updateUrl } from 'slices/webview.slice';
 
 interface CategoryItemProps {
     price: number;
