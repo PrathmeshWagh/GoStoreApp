@@ -7,45 +7,51 @@ import { ComponentWrapper, ProductSlider } from '@atoms/index';
 import { useProducts } from 'api/products/use-products.api';
 
 interface ProductListSectionProps {
-    banner: ParentBannerData;
-    itemWidth: number;
-    textStyles?: any;
-    containerStyles?: ViewStyle;
-    imgHeight: number;
+	banner: ParentBannerData;
+	itemWidth: number;
+	textStyles?: any;
+	containerStyles?: ViewStyle;
+	imgHeight: number;
 }
 
 const ProductListSection = (props: ProductListSectionProps) => {
-    const { banner, textStyles, containerStyles } = props;
-    const { data, isLoading } = useChildBanner(banner.bannerType, banner.parentBannerId, String(banner.tagType));
-    const productsData = data?.data?.map((product) => {
-        if ('productId' in product) {
-            return product.productId;
-        }
-    }).join(',');
-    const { data: productData, isLoading: loading, isError: error, refetch } = useProducts(String(productsData));
+	const { banner, textStyles, containerStyles } = props;
+	const { data, isLoading } = useChildBanner(
+		banner.bannerType,
+		banner.parentBannerId,
+		String(banner.tagType)
+	);
+	const productsData = data?.data
+		?.map((product) => {
+			if ('productId' in product) {
+				return product.productId;
+			}
+		})
+		.join(',');
+	const {
+		data: productData,
+		isLoading: loading,
+		isError: error,
+		refetch
+	} = useProducts(String(productsData));
 
-    return (
-        <ComponentWrapper
-            loading={isLoading || loading}
-            error={error}
-            errText="Failed to fetch"
-            refetch={refetch}
-        >
-            <View style={containerStyles}>
-                {
-                    <Text
-                        variant="labelLarge"
-                        style={textStyles}
-                    >
-                        { banner.title }
-                    </Text>
-                }
-            </View>
-            <ProductSlider
-                data={productData?.data as ProductType[]}
-            />
-        </ComponentWrapper>
-    );
+	return (
+		<ComponentWrapper
+			loading={isLoading || loading}
+			error={error}
+			errText="Failed to fetch"
+			refetch={refetch}
+		>
+			<View style={containerStyles}>
+				{
+					<Text variant="labelLarge" style={textStyles}>
+						{banner.title}
+					</Text>
+				}
+			</View>
+			<ProductSlider data={productData?.data as ProductType[]} />
+		</ComponentWrapper>
+	);
 };
 
 export default ProductListSection;
