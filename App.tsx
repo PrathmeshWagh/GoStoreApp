@@ -23,15 +23,15 @@ const theme = {
 	...DefaultTheme,
 	colors: {
 		...DefaultTheme.colors,
-		...CustomColors,
-	},
+		...CustomColors
+	}
 };
 
 const fonts = configureFonts({
-    config: {
+	config: {
 		...baseVariants,
-		...CustomFontVariants,
-    },
+		...CustomFontVariants
+	}
 });
 
 /** React Navigation Theme */
@@ -39,8 +39,8 @@ const navTheme = {
 	...NavigationTheme,
 	colors: {
 		...NavigationTheme.colors,
-		...CustomColors,
-	},
+		...CustomColors
+	}
 };
 
 function App() {
@@ -49,8 +49,8 @@ function App() {
 			<PaperProvider theme={{ ...theme, fonts }}>
 				<QueryClientProvider client={queryClient}>
 					<NavigationContainer theme={navTheme}>
-						<Router/>
-						<CustomModal/>
+						<Router />
+						<CustomModal />
 					</NavigationContainer>
 				</QueryClientProvider>
 			</PaperProvider>
