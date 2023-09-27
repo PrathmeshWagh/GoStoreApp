@@ -8,7 +8,7 @@ import { ComponentWrapper, FastImages } from '@atoms/index';
 import { useEnhancedNavigation } from '@hooks/index';
 import { RouteConstants } from '@routes/constants.routes';
 import { AppDispatch } from '@slices/store';
-import { updateUrl } from '@slices/webview-url.slice';
+import { updateUrl } from 'slices/webview.slice';
 import Config from 'react-native-config';
 
 const Categories = () => {

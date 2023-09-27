@@ -3,7 +3,7 @@ import Config from 'react-native-config';
 
 import { useEnhancedNavigation } from '@hooks/index';
 import { AppDispatch, RootState } from '@slices/store';
-import { updateUrl } from '@slices/webview-url.slice';
+import { updateUrl } from 'slices/webview.slice';
 import { RouteConstants } from '@routes/constants.routes';
 import { fetchTaggedBannerProducts, fetchTaggedBannerData } from '@api/banners/use-banner-tagged-products.api';
 import { closeModal, openModal } from '@slices/modal.slice';

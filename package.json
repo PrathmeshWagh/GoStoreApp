@@ -26,6 +26,7 @@
 		"ios:beta-release": "yarn ios:clean && yarn setBeta  react-native run-ios --mode=Release --scheme \"gostornativeappservice-beta\"",
 		"ios:prod": "yarn setProduction  react-native run-ios --mode=Debug --scheme \"gostornativeappservice\"",
 		"ios:prod-release": " yarn ios:clean && yarn ios:bundle:assets && yarn setProduction  react-native run-ios --mode=Release --scheme \"gostornativeappservice\"",
+		"aos:clean-neat": "yarn cache clean && cd android && ./gradlew clean",
 		"aos:clean": "yarn node:clean && cd android && ./gradlew clean",
 		"aos:bundle:assets": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
 		"aos:remove:assets": "rm -rf android/app/src/main/res/drawable-hdpi &&  rm -rf android/app/src/main/res/drawable-mdpi &&  rm -rf android/app/src/main/res/drawable-xhdpi && rm -rf android/app/src/main/res/drawable-xxhdpi && rm -rf android/app/src/main/res/drawable-xxxhdpi && rm -rf android/app/src/main/res/raw",
