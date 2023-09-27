@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import Config from 'react-native-config';
 
-import { updateUrl } from '@slices/webview-url.slice';
+import { updateUrl } from 'slices/webview.slice';
 
 interface WrappedComponentProps {
   navigation: any; // You might want to replace 'any' with the actual type
@@ -14,11 +14,11 @@ function withReduxUpdate(WrappedComponent: React.ComponentType<WrappedComponentP
         const dispatch = useDispatch();
 
         React.useEffect(() => {
-        const unsubscribe = props.navigation.addListener('focus', () => {
-            dispatch(updateUrl({ url: `${Config.BASE_WEBVIEW_URL}/${newValue}` }));
-        });
+            const unsubscribe = props.navigation.addListener('focus', () => {
+                dispatch(updateUrl({ url: `${Config.BASE_WEBVIEW_URL}/${newValue}` }));
+            });
 
-        return unsubscribe;
+            return unsubscribe;
         }, [props.navigation, dispatch]);
 
         return <WrappedComponent {...props} />;
