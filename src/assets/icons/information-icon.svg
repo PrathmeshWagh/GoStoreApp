@@ -1,0 +1,8 @@
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <rect id="Rectangle_409" data-name="Rectangle 409" width="24" height="24" fill="none"/>
+  <g id="_01_align_center" data-name="01 align center" transform="translate(3 3)">
+    <path id="Path_82083" data-name="Path 82083" d="M9,18a9,9,0,1,1,9-9,9,9,0,0,1-9,9ZM9,1.5A7.5,7.5,0,1,0,16.5,9,7.5,7.5,0,0,0,9,1.5Z" fill="#3c9645"/>
+    <path id="Path_82084" data-name="Path 82084" d="M13.024,16.8H11.513V11.511H10V10h1.513a1.513,1.513,0,0,1,1.513,1.513Z" transform="translate(-2.513 -2.536)" fill="#3c9645"/>
+    <circle id="Ellipse_1418" data-name="Ellipse 1418" cx="1.134" cy="1.134" r="1.134" transform="translate(7.866 3.745)" fill="#3c9645"/>
+  </g>
+</svg>

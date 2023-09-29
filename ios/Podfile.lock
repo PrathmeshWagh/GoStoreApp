@@ -1313,7 +1313,7 @@ PODS:
     - React-perflogger (= 0.72.3)
   - RNCAsyncStorage (1.19.3):
     - React-Core
-  - RNCClipboard (1.11.2):
+  - RNCClipboard (1.12.1):
     - React-Core
   - RNFastImage (8.6.3):
     - React-Core
@@ -1389,7 +1389,7 @@ PODS:
   - RNScreens (3.25.0):
     - React-Core
     - React-RCTImage
-  - RNSVG (13.13.0):
+  - RNSVG (13.14.0):
     - React-Core
   - RNVectorIcons (10.0.0):
     - React-Core
@@ -1702,7 +1702,7 @@ SPEC CHECKSUMS:
   React-utils: 94936585077b34459122e1c109c38cefc674837f
   ReactCommon: 01173cdd8273a03a5363113f81c86480caf34806
   RNCAsyncStorage: c913ede1fa163a71cea118ed4670bbaaa4b511bb
-  RNCClipboard: 3f0451a8100393908bea5c5c5b16f96d45f30bfc
+  RNCClipboard: d77213bfa269013bf4b857b7a9ca37ee062d8ef1
   RNFastImage: 5c9c9fed9c076e521b3f509fe79e790418a544e8
   RNFBAnalytics: 603cfb43a7dd52053f1682cd9454927f526111da
   RNFBApp: af276a038f2e1488d59920697bba97b43f83164c
@@ -1716,7 +1716,7 @@ SPEC CHECKSUMS:
   RNPermissions: 5046d0997fe01fb163e2445456e187e4e168cb72
   RNReanimated: 99aa8c96151abbc2d7e737a56ec62aca709f0c92
   RNScreens: 85d3880b52d34db7b8eeebe2f1a0e807c05e69fa
-  RNSVG: ed492aaf3af9ca01bc945f7a149d76d62e73ec82
+  RNSVG: d00c8f91c3cbf6d476451313a18f04d220d4f396
   RNVectorIcons: 8b5bb0fa61d54cd2020af4f24a51841ce365c7e9
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d

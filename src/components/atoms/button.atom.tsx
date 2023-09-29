@@ -17,6 +17,7 @@ interface CustomButtomProps {
 	varaint?: any;
 	children?: React.ReactNode;
 	buttonColor?: string;
+	icon?: React.ReactNode;
 }
 
 const CustomButtom = (props: CustomButtomProps) => {
@@ -32,7 +33,8 @@ const CustomButtom = (props: CustomButtomProps) => {
 		textStyles,
 		varaint = 'titleLarge',
 		children,
-		buttonColor
+		buttonColor,
+		icon = <></>
 	} = props;
 
 	return (
@@ -47,7 +49,7 @@ const CustomButtom = (props: CustomButtomProps) => {
 			disabled={disabled}
 			labelStyle={{ marginVertical: 0 }}
 		>
-			{children}
+			{icon}
 			<Text
 				variant={varaint}
 				style={[

@@ -5,5 +5,6 @@ export const enum ApiEndpoints {
 	Products = '/products/v2/getProducts',
 	LOGIN = '/user/seller/login',
 	GENERATE_OTP = '/user/seller/generateOtp',
-	GET_PRODUCTS = '/products/v2/getProducts'
+	GET_PRODUCTS = '/products/v2/getProducts',
+	PRODUCT = '/products/v2/productDetail'
 }
