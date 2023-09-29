@@ -3,7 +3,7 @@ import { StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 
-import { useCategories } from 'api/categories-carousel/use-categories.api';
+import { useCategories } from 'api/categories/use-categories.api';
 import { ComponentWrapper, FastImages } from '@atoms/index';
 import { useEnhancedNavigation } from '@hooks/index';
 import { RouteConstants } from '@routes/constants.routes';

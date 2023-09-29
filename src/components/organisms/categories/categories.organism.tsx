@@ -1,21 +1,46 @@
-import { FlatList, Text, StyleSheet, View, Image, Pressable } from 'react-native';
+import {
+	FlatList,
+	Text,
+	StyleSheet,
+	View,
+	Image,
+	Pressable,
+	RefreshControl,
+	ActivityIndicator
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Rupee from '../../atoms/rupee.atom';
 import { FontGilroy, DefaultStyles } from '@primitives/index';
 import { CustomColors } from '../../../constants/colors.constants';
 import { useGetProducts } from 'api/products/get-product-list';
-import { useSelector } from 'react-redux';
-import { RootState } from '@slices/store';
+// import { useSelector } from 'react-redux';
+// import { RootState } from '@slices/store';
 import StarIcon from '@assets/icons/star.svg';
 
 const Categories = () => {
-	const [productData, setProductData] = useState<any[]>([]);
+	// const location = useSelector((state: RootState) => state.location);
 
-	const location = useSelector((state: RootState) => state.location);
+	const { mutate: getProducts, isLoading, data } = useGetProducts();
 
-	const { isLoading, mutate: getProducts, response, error } = useGetProducts();
+	const categories = data?.data || [];
 
-	const fetchData = async () => {
+	const [categoriesData, setCategoriesData] = useState([]);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [refreshing, setRefreshing] = useState(false);
+
+	useEffect(() => {
+		if (categories) {
+			setCategoriesData((prevData): any => [...prevData, ...categories.data]);
+		}
+	}, [categories]);
+
+	const onRefresh = React.useCallback(() => {
+		setRefreshing(true);
+		// fetchData(currentPage);
+		setRefreshing(false);
+	}, [refreshing]);
+
+	const fetchData = async (page: number) => {
 		const params = {
 			category: 'TELEVISIONS',
 			categoryId: '6360eb1464cb95ecdd4ad8c8',
@@ -25,21 +50,15 @@ const Categories = () => {
 			state: 'Karnataka',
 			sort: 'recommendation_asc',
 			pageSize: 24,
-			page: 1
+			page
 		};
-		// getProducts({ params });
-		useGetProducts({ params });
+
+		getProducts({ params });
 	};
 
 	useEffect(() => {
-		fetchData();
-	}, []);
-
-	useEffect(() => {
-		if (response) {
-			setProductData(response.data);
-		}
-	}, [response]);
+		fetchData(currentPage);
+	}, [currentPage]);
 
 	const btnPressed = () => {
 		console.log('pressed');
@@ -90,16 +109,24 @@ const Categories = () => {
 		);
 	};
 
+	const handleEndReached = ({ distanceFromEnd }: any) => {
+		if (distanceFromEnd < 0) return;
+		setCurrentPage(currentPage + 1);
+	};
+
 	return (
 		<View style={styles.container}>
 			{isLoading ? (
-				<Text>Loading...</Text>
+				<ActivityIndicator size="large" color="#0000ff" />
 			) : (
 				<FlatList
-					data={productData}
-					keyExtractor={(item): any => item.id}
+					data={categoriesData}
+					keyExtractor={(item) => item.id}
 					renderItem={categoriesItem}
 					numColumns={2}
+					onEndReached={handleEndReached}
+					onEndReachedThreshold={0.1}
+					refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
 				/>
 			)}
 		</View>
@@ -156,7 +183,8 @@ const styles = StyleSheet.create({
 	imageContainer: {
 		marginHorizontal: 10,
 		marginTop: 30,
-		marginBottom: 20
+		marginBottom: 20,
+		height: 120
 	},
 	image: {
 		height: 120,
@@ -177,7 +205,7 @@ const styles = StyleSheet.create({
 	},
 	price: {
 		lineHeight: 20,
-		fontSize: 14
+		fontSize: 16
 	},
 	mrpWrapper: {
 		flexDirection: 'row',
@@ -188,12 +216,12 @@ const styles = StyleSheet.create({
 		fontSize: 14,
 		fontWeight: '400',
 		textDecorationLine: 'line-through',
-		lineHeight: 20
+		lineHeight: 20,
+		marginRight: DefaultStyles.DefaultPadding - 8
 	},
 	discount: {
 		lineHeight: 20,
-		fontWeight: '600',
-		marginLeft: DefaultStyles.DefaultPadding - 8
+		fontWeight: '600'
 	}
 });
 
