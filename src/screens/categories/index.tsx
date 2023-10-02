@@ -15,11 +15,8 @@ import Config from 'react-native-config';
 import Images from 'assets/Images';
 import { useDimensions, usePermissionHandlers } from '@hooks/index';
 import { DefaultStyles, FontGilroy } from '@primitives/index';
-import CustomFontVariants from 'constants';
-import { CustomButtom, Rupee } from 'components/atoms';
+import { CustomButtom, ProductSlider, Rupee } from 'components/atoms';
 import { useTheme } from '@hooks/index';
-import CarryIcon from '@assets/icons/productDetails/carry_bag.svg';
-import StarIcon from '@assets/icons/productDetails/star.svg';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FeatureSection from 'components/molecules/product/feature-section';
 import assuredBBFeatures from 'helpers/constants/product-abb/assuredBBFeatures';
@@ -29,10 +26,15 @@ import Highlight from 'components/molecules/product/highlights';
 import SpecsAndInstaltion from 'components/molecules/product/specs';
 import BuyBackIcon from '@assets/icons/productDetails/assuredBB/buyback-guarantee.svg';
 import AvailablePlanIcon from '@assets/icons/productDetails/assuredBB/available-plans.svg';
+import StarIcon from '@assets/icons/productDetails/star.svg';
 import ViewMore from '@assets/icons/view-icon.svg';
 import InformationIcon from '@assets/icons/information-icon.svg';
 import DeliverIcon from '@assets/icons/productDetails/delievery_green.svg';
-import CircularProgress from 'react-native-circular-progress-indicator';
+import CarryIcon from '@assets/icons/productDetails/carry_bag.svg';
+import ReviewsRatings from 'components/organisms/product/review/review-rating';
+import Brochure from 'components/organisms/brochure';
+import ProductdetailsSlider from 'components/atoms/product-details-carousel.atom';
+import SimilarProducts from 'components/molecules/Banner/SimilarProducts';
 
 export default function CategoriesScreen({ route }) {
 	const { name } = route.params;
@@ -65,10 +67,7 @@ export default function CategoriesScreen({ route }) {
 	return (
 		<View style={styles.container}>
 			<ScrollView>
-				<Image
-					source={Images.LOGIN_BANNER}
-					style={{ width: width, height: height * 0.4, resizeMode: 'cover' }}
-				/>
+				<ProductdetailsSlider />
 				<View style={styles.productInfoContainer}>
 					<View>
 						<Text style={styles.productName}>
@@ -153,7 +152,13 @@ export default function CategoriesScreen({ route }) {
 								</View>
 								<View>
 									<TouchableOpacity>
-										<Text style={{ color: colors.primary, textDecorationLine: 'underline' }}>
+										<Text
+											style={{
+												color: colors.primary,
+												textDecorationLine: 'underline',
+												fontFamily: FontGilroy.Medium
+											}}
+										>
 											EMI OPTION
 										</Text>
 									</TouchableOpacity>
@@ -416,44 +421,64 @@ export default function CategoriesScreen({ route }) {
 					<View style={{ paddingBottom: 10, marginBottom: 15 }}>
 						<SpecsAndInstaltion />
 					</View>
-					<View>
-						<Text style={{ fontFamily: FontGilroy.Bold, fontSize: 18 }}>Reviews & Ratings</Text>
-						{/* <CircularProgress
-							value={0}
-							radius={120}
-							maxValue={10}
-							initialValue={10}
-							progressValueColor={'#fff'}
-							activeStrokeWidth={15}
-							inActiveStrokeWidth={15}
-							duration={10000}
-							onAnimationComplete={() => alert('time out')}
-						/> */}
-					</View>
+					<ReviewsRatings />
+					<Brochure />
+					<SimilarProducts title="You may also like" filter={'sdfa'} link={'af'} />
+					<SimilarProducts title="More for NU" filter={'sdfa'} link={'af'} />
 				</View>
 			</ScrollView>
-			<View style={styles.buttonsContainer}>
-				<CustomButtom
-					loading={false}
-					onPress={() => {}}
-					mode="text"
-					text="Add To Cart"
-					disabled
-					styles={[styles.button]}
-					textStyles={[styles.buttonText]}
-					icon={<CarryIcon width={24} height={24} />}
-				/>
+			<View
+				style={[
+					styles.productInfoContainer,
+					{ backgroundColor: colors.onSecondary, marginTop: 10 }
+				]}
+			>
+				<View style={styles.offerContainer}>
+					<View
+						style={{
+							backgroundColor: colors.tertiary,
+							width: '80%',
+							padding: 10,
+							borderRadius: 10
+						}}
+					>
+						<Text>10% off in HDFC Card</Text>
+					</View>
+					<View style={{ alignItems: 'center' }}>
+						<Text>Offer </Text>
+						<Text>Details</Text>
+					</View>
+				</View>
+				<View style={styles.buttonsContainer}>
+					<CustomButtom
+						loading={false}
+						onPress={() => {}}
+						mode="text"
+						text="Add To Cart"
+						disabled
+						styles={[
+							styles.button,
+							{
+								backgroundColor: colors.onSecondary,
+								borderWidth: 1,
+								borderColor: colors.primary
+							}
+						]}
+						textStyles={[styles.buttonText, { color: colors.primary }]}
+						icon={<CarryIcon width={24} height={24} />}
+					/>
 
-				<CustomButtom
-					loading={false}
-					mode="text"
-					text="Buy Now"
-					onPress={() => {}}
-					disabled
-					styles={[styles.button, { marginLeft: 10 }]}
-					textStyles={[styles.buttonText, { color: colors.onSecondary }]}
-					icon={<CarryIcon width={24} height={24} />}
-				/>
+					<CustomButtom
+						loading={false}
+						mode="text"
+						text="Buy Now"
+						onPress={() => {}}
+						disabled
+						styles={[styles.button, { marginLeft: 10, backgroundColor: colors.primary }]}
+						textStyles={[styles.buttonText, { color: colors.onSecondary }]}
+						icon={<CarryIcon width={24} height={24} />}
+					/>
+				</View>
 			</View>
 		</View>
 	);
@@ -489,18 +514,16 @@ const styles = StyleSheet.create({
 	},
 	buttonsContainer: {
 		flexDirection: 'row',
-		padding: 16,
-		backgroundColor: '#FFF'
+		paddingBottom: 16
 	},
 	button: {
 		height: DefaultStyles.DefaultButtonHeight,
 		borderRadius: DefaultStyles.DefaultButtonHeight - 40,
 		marginTop: 20,
-		backgroundColor: 'gray',
 		flex: 1
 	},
 	buttonText: {
-		fontFamily: FontGilroy.Bold,
+		fontFamily: FontGilroy.SemiBold,
 		marginTop: 8
 	},
 	mrp: {
@@ -535,5 +558,10 @@ const styles = StyleSheet.create({
 		borderColor: '#e5e7eb',
 		marginVertical: 10,
 		fontFamily: FontGilroy.Medium
+	},
+	offerContainer: {
+		borderRadius: 8,
+		flexDirection: 'row',
+		alignItems: 'center'
 	}
 });

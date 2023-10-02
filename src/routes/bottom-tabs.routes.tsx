@@ -11,7 +11,7 @@ import {
 	StoreActiveIcon,
 	StoreInActiveIcon
 } from '@icons/index';
-import { HomeScreen, MainWebviewScreen } from './export.routes';
+import { HomeScreen, MainWebviewScreen, StoreScreen } from './export.routes';
 import { withActiveTab } from '@hoc/index';
 import { Platform } from 'react-native';
 
@@ -40,8 +40,8 @@ const BottomTabList = [
 	},
 	{
 		id: 2,
-		name: RouteConstants.MainWebviewScreenRoute + 'store',
-		component: withActiveTab(MainWebviewScreen, 'store'),
+		name: RouteConstants.StoreScreenRoute,
+		component: StoreScreen,
 		options: {
 			headerShown: false,
 			tabBarLabel: ({ focused }: any) => (

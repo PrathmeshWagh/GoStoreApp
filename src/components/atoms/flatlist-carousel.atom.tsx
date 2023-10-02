@@ -55,12 +55,12 @@ const FlatlistSlider = (props: FlatListSliderProps) => {
 						styles.sliderContainer
 					]}
 				>
-					{/* <Animated.View
+					<Animated.View
 						style={[
 							{ width: blueWidth, backgroundColor: colors.primary, transform: [{ translateX }] },
 							styles.slider
 						]}
-					/> */}
+					/>
 				</View>
 			)}
 		</View>

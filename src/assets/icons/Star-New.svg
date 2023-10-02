@@ -1,0 +1,14 @@
+<svg id="Cart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_14324" data-name="Rectangle 14324" width="16" height="16" fill="none" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ffc43d"/>
+      <stop offset="1" stop-color="#ffaa24"/>
+    </linearGradient>
+  </defs>
+  <g id="Mask_Group_31" data-name="Mask Group 31" clip-path="url(#clip-path)">
+    <path id="star" d="M9.651,11.659,5.937,8.929l-3.714,2.73L3.649,7.25-.063,4.538H4.52L5.937.122,7.354,4.538h4.583L8.225,7.25Z" transform="translate(2.063 2.109)" fill="url(#linear-gradient)"/>
+  </g>
+</svg>

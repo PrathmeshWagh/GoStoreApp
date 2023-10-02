@@ -3,6 +3,7 @@ import { RouteConstants } from './constants.routes';
 export type RootStackParamList = {
 	[RouteConstants.SplashScreenRoute]: undefined;
 	[RouteConstants.HomeScreenRoute]: undefined;
+	[RouteConstants.StoreScreenRoute]: undefined;
 	[RouteConstants.PermissionsScreenRoute]: undefined;
 	[RouteConstants.TabsScreenRoute]: undefined;
 	[RouteConstants.MainWebviewScreenRoute]: undefined;

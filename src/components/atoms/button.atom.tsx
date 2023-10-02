@@ -1,9 +1,11 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 
 import { useTheme } from '@hooks/index';
 import { DefaultStyles } from '@primitives/index';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import CarryIcon from '@assets/icons/productDetails/carry_bag.svg';
 
 interface CustomButtomProps {
 	onPress: () => void;
@@ -34,7 +36,7 @@ const CustomButtom = (props: CustomButtomProps) => {
 		varaint = 'titleLarge',
 		children,
 		buttonColor,
-		icon = <></>
+		icon = null
 	} = props;
 
 	return (
@@ -50,6 +52,8 @@ const CustomButtom = (props: CustomButtomProps) => {
 			labelStyle={{ marginVertical: 0 }}
 		>
 			{icon}
+			{/* <Icon name={'cart-outline'} size={20} color={'red'} /> */}
+
 			<Text
 				variant={varaint}
 				style={[
