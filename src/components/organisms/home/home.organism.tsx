@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 
 import { useHome } from '@hooks/index';
 
@@ -14,8 +14,8 @@ const Home = () => {
 				return <Component {...item.props} />;
 			}}
 			keyExtractor={(item) => item.id}
-			// onViewableItemsChanged={handleViewableItemsChanged}
-			// viewabilityConfig={viewabilityConfig.current}
+			onViewableItemsChanged={handleViewableItemsChanged}
+			viewabilityConfig={viewabilityConfig.current}
 		/>
 	);
 };

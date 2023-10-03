@@ -6,6 +6,6 @@ export type RootStackParamList = {
 	[RouteConstants.PermissionsScreenRoute]: undefined;
 	[RouteConstants.TabsScreenRoute]: undefined;
 	[RouteConstants.MainWebviewScreenRoute]: undefined;
-	[RouteConstants.CategoriesScreenRoute]: { url: string };
+	[RouteConstants.CategoriesScreenRoute]: any;
 	// [RouteConstants.OtpVerificationScreenRoute]: { mobileNumber: string, name?: string, role?: string, type: 'signup' | 'login' };
 };

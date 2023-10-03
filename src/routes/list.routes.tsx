@@ -2,7 +2,8 @@ import {
 	PermissionsScreen,
 	SplashScreen,
 	MainWebviewScreen,
-	CategoriesScreen
+	CategoriesScreen,
+	ViewMoreScreen
 } from './export.routes';
 import { RouteConstants } from './constants.routes';
 
@@ -29,6 +30,12 @@ const RoutesList = [
 		id: 4,
 		name: RouteConstants.CategoriesScreenRoute,
 		component: CategoriesScreen,
+		options: { headerShown: false }
+	},
+	{
+		id: 5,
+		name: RouteConstants.ViewMoreScreenRoute,
+		component: ViewMoreScreen,
 		options: { headerShown: false }
 	}
 ];

@@ -3,3 +3,4 @@ export { default as HomeScreen } from '@screens/home-screen';
 export { default as PermissionsScreen } from '@screens/permissions-screen';
 export { default as MainWebviewScreen } from '@screens/web-view-screen';
 export { default as CategoriesScreen } from '@screens/categories-screen';
+export { default as ViewMoreScreen } from '@screens/view-more-screen';
