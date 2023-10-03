@@ -1,14 +1,16 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { SvgUri } from 'react-native-svg';
+import { TouchableRipple } from 'react-native-paper';
 
-import { useTheme } from 'hooks';
+import { useEnhancedNavigation, useTheme } from 'hooks';
 import { DefaultStyles } from 'primitives';
 import MenuIcon from '@assets/icons/menu.svg';
 import BackIcon from '@assets/icons/back.svg';
 import SearchIcon from '@assets/icons/search.svg';
 import CartIcon from '@assets/icons/cart.svg';
 import LocationIcon from '@assets/icons/location.svg';
+import { RouteConstants } from '@routes/constants.routes';
 
 interface HeaderProps {
     layout: LayoutType;
@@ -17,12 +19,21 @@ interface HeaderProps {
 const Header = (props: HeaderProps) => {
     const { colors } = useTheme();
     const { layout } = props;
+    const { navigate, pop } = useEnhancedNavigation();
+
+    const handleMain = () => {
+        if (layout.menu) {
+            console.log("open menu");
+        } else {
+            pop();
+        }
+    };
 
     return (
         <View style={[ styles.container, { backgroundColor: colors.primary, height: DefaultStyles.DefaultPadding * 3, paddingHorizontal: DefaultStyles.DefaultPadding }]}>
             <View style={[ styles.item ]}>
                 <TouchableOpacity
-                    onPress={() => console.log('Pressed')}
+                    onPress={handleMain}
                     // style={[ styles.icon, { marginHorizontal: DefaultStyles.DefaultPadding * 0.38 } ]}
                 >
                     {
@@ -39,8 +50,8 @@ const Header = (props: HeaderProps) => {
                             />
                     }
                 </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => console.log('Pressed')}
+                <TouchableRipple
+                    onPress={() => navigate(RouteConstants.TabsScreenRoute)}
                     style={[ styles.logo, { marginHorizontal: DefaultStyles.DefaultPadding * 0.38 } ]}
                 >
                     <SvgUri
@@ -48,12 +59,12 @@ const Header = (props: HeaderProps) => {
                         height="100%"
                         uri={layout.logo}
                     />
-                </TouchableOpacity>
+                </TouchableRipple>
             </View>
             <View style={[ styles.item ]}>
                 {
                     layout.search &&
-                        <TouchableOpacity
+                        <TouchableRipple
                             onPress={() => console.log('Pressed')}
                             style={[ { marginHorizontal: DefaultStyles.DefaultPadding * 0.38 } ]}
                         >
@@ -61,23 +72,23 @@ const Header = (props: HeaderProps) => {
                                 width={24}
                                 height={24}
                             />
-                        </TouchableOpacity>
+                        </TouchableRipple>
                 }
                 {
                     layout.pincode &&
-                        <TouchableOpacity
-                            onPress={() => console.log('Pressed')}
+                        <TouchableRipple
+                            onPress={() => navigate(RouteConstants.LocationScreenRoute)}
                             style={[ { marginHorizontal: DefaultStyles.DefaultPadding * 0.38 } ]}
                         >
                             <LocationIcon
                                 width={24}
                                 height={24}
                             />
-                        </TouchableOpacity>
+                        </TouchableRipple>
                 }
                 {
                     layout.cart &&
-                        <TouchableOpacity
+                        <TouchableRipple
                             onPress={() => console.log('Pressed')}
                             style={[ { marginHorizontal: DefaultStyles.DefaultPadding * 0.38 } ]}
                         >
@@ -85,7 +96,7 @@ const Header = (props: HeaderProps) => {
                                 width={24}
                                 height={24}
                             />
-                        </TouchableOpacity>
+                        </TouchableRipple>
                 }
             </View>
         </View>

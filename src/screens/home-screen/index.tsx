@@ -9,7 +9,7 @@ const layout = {
     back: false,
     logo: 'https://gostor.com/icons/header/logo-invert.svg',
     cart: false,
-    pincode: false,
+    pincode: true,
 };
 
 const HomeScreen = () => {
