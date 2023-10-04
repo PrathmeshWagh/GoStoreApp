@@ -7,7 +7,7 @@ import Config from 'react-native-config';
 import { DefaultStyles } from '@primitives/index';
 import { formatUrl, getDiscount } from '@helpers/index';
 import FastImages from './image.atom';
-import Rupee from './rupee.atom';
+import { Rupee } from '.';
 import { useEnhancedNavigation, useTheme } from '@hooks/index';
 import { AppDispatch } from '@slices/store';
 import { closeModal, openModal } from 'slices/modal.slice';
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
 		padding: DefaultStyles.DefaultPadding - 10
 	},
 	imageContainer: {
-		// width: '100%',
+		width: '100%',
 		height: 120,
 		marginBottom: 8
 	},

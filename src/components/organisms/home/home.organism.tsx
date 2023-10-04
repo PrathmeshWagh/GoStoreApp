@@ -1,6 +1,6 @@
 import React from 'react';
-import { FlatList } from 'react-native';
-import { View } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
+
 import { useHome } from '@hooks/index';
 
 const Home = () => {

@@ -8,5 +8,7 @@ export const enum RouteConstants {
 	SignUpRoute = 'SIGN_UP_SCREEN',
 	OtpRoute = 'OTP_SCREEN',
 	CategoriesRoute = 'CATEGORIES_SCREEN',
-	StoreScreenRoute = 'STORE_SCREEN'
+	StoreScreenRoute = 'STORE_SCREEN',
+	CategoriesScreenRoute = 'CATEGORIES_SCREEN_ROUTE',
+	ViewMoreScreenRoute = 'VIEWMORE_SCREEN_ROUTE'
 }

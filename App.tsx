@@ -75,11 +75,9 @@ function App() {
 			<PaperProvider theme={{ ...theme, fonts }}>
 				<QueryClientProvider client={queryClient}>
 					<NavigationContainer theme={navTheme}>
-						{/* <UIProvider> */}
 						<Router />
 						<Toast config={toastConfig} visibilityTime={2000} />
 						<CustomModal />
-						{/* </UIProvider> */}
 					</NavigationContainer>
 				</QueryClientProvider>
 			</PaperProvider>

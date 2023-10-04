@@ -20,10 +20,6 @@ const FlatlistSlider = (props: FlatListSliderProps) => {
 	const { colors } = useTheme();
 	const blueWidth = SLIDER_WIDTH * (ITEMS_TO_SHOW / data.length);
 
-	// console.log('blueWidth', blueWidth);
-	// console.log('data length', data.length);
-	// console.log('ITEMS_TO_SHOW', ITEMS_TO_SHOW);
-
 	const translateX = scrollX.interpolate({
 		inputRange: [0, ITEM_WIDTH * 10 - viewportWidth],
 		outputRange: [0, SLIDER_WIDTH - blueWidth],
@@ -55,12 +51,12 @@ const FlatlistSlider = (props: FlatListSliderProps) => {
 						styles.sliderContainer
 					]}
 				>
-					<Animated.View
+					{/* <Animated.View
 						style={[
 							{ width: blueWidth, backgroundColor: colors.primary, transform: [{ translateX }] },
 							styles.slider
 						]}
-					/>
+					/> */}
 				</View>
 			)}
 		</View>

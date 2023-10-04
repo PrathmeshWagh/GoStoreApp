@@ -7,3 +7,4 @@ export { default as SignUpScreen } from '@screens/signUp-screen';
 export { default as OtpScreen } from '@screens/otp-screen';
 export { default as CategoriesScreen } from '@screens/categories';
 export { default as StoreScreen } from '@screens/store-screen';
+export { default as ViewMoreScreen } from '@screens/view-more-screen';

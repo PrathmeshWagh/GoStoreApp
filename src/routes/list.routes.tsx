@@ -5,7 +5,8 @@ import {
 	LoginScreen,
 	SignUpScreen,
 	OtpScreen,
-	CategoriesScreen
+	CategoriesScreen,
+	ViewMoreScreen
 } from './export.routes';
 import { RouteConstants } from './constants.routes';
 
@@ -47,10 +48,20 @@ const RoutesList = [
 		options: { headerShown: false }
 	},
 	{
-		id: 6,
+		id: 7,
 		name: RouteConstants.CategoriesRoute,
 		component: CategoriesScreen,
 		options: { headerShown: false }
+	},
+	{
+		id: 8,
+		name: RouteConstants.ViewMoreScreenRoute,
+		component: ViewMoreScreen
+	},
+	{
+		id: 9,
+		name: RouteConstants.CategoriesScreenRoute,
+		component: CategoriesScreen
 	}
 ];
 

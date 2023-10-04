@@ -10,7 +10,7 @@ const Rupee = (props: RupeeProps) => {
 	const { money, styles } = props;
 
 	return (
-		<Text style={styles}>
+		<Text variant="labelLarge" style={styles}>
 			{money.toLocaleString('en-IN', {
 				style: 'currency',
 				currency: 'INR',
