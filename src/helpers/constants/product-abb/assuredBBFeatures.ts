@@ -1,14 +1,14 @@
 const assuredBBFeatures = [
 	{
-		image: require('../../../assets/icons/productDetails/assuredBB/pre-determined-bb.svg'),
+		icon: 'buyBackPrice',
 		desc: 'Pre-determined Assured Buyback Price'
 	},
 	{
-		image: 'seamless-bb.svg',
+		icon: 'seamless',
 		desc: 'Seamless Buyback Process'
 	},
 	{
-		image: 'great-savings.svg',
+		icon: 'greatSaving',
 		desc: 'Great Savings to Upgrade to New Device'
 	}
 ];

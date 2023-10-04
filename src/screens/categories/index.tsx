@@ -26,6 +26,8 @@ import { useProductMutation } from 'api/products/get-product.api';
 import Highlight from 'components/molecules/product/highlights';
 import SpecsAndInstaltion from 'components/molecules/product/specs';
 import BuyBackIcon from '@assets/icons/productDetails/assuredBB/buyback-guarantee.svg';
+import SeamlessIcon from '@assets/icons/productDetails/assuredBB/seamless-bb.svg';
+import GreatSavingIcon from '@assets/icons/productDetails/assuredBB/great-savings.svg';
 import AvailablePlanIcon from '@assets/icons/productDetails/assuredBB/available-plans.svg';
 import StarIcon from '@assets/icons/productDetails/star.svg';
 import ViewMore from '@assets/icons/view-icon.svg';
@@ -41,6 +43,9 @@ import PincodeServicality from 'components/organisms/product/review/pincode-serv
 import { useCheckAssuredBuyBack } from 'api/products/check-assured-buyback';
 import ExchangeProduct from 'components/organisms/product/exchange-product/exchange-product';
 import EXchangeDetails from 'components/organisms/product/exchange-product/exchange-details';
+import OffersModal2 from 'components/organisms/BankOffers/AllBankOffers/OffersModal2';
+import { useBankOffers } from 'api/BankOffers';
+import ModalComponent from 'components/molecules/modal/Modal';
 
 export default function CategoriesScreen({ route }) {
 	const { name } = route.params;
@@ -59,12 +64,30 @@ export default function CategoriesScreen({ route }) {
 		clusterId: 7
 	});
 
+	const { data: bankOffers, isLoading: isOffersLoading, isError } = useBankOffers(2, 1000000);
+
 	const [expanded, setExpanded] = useState(false);
 	const [modalVisible, setModalVisible] = useState(false);
 	const [isExchangeVisible, setIsExchangeVisible] = useState(false);
+	const [isOfferVisible, setIsOfferVisible] = useState(false);
+	const [bankOffersData, setBankOffersData] = useState([]);
+	const [noCostEmiOffers, setNoCostEmiOffers] = useState([]);
 
 	const toggleExpanded = () => {
 		setExpanded(!expanded);
+	};
+
+	const renderAssuredBBIcon = (iconName: 'buyBackPrice' | 'seamless' | 'greatSaving') => {
+		switch (iconName) {
+			case 'buyBackPrice':
+				return <BuyBackIcon width={28} height={28} />;
+			case 'seamless':
+				return <SeamlessIcon width={28} height={28} />;
+			case 'greatSaving':
+				return <GreatSavingIcon width={28} height={28} />;
+			default:
+				return <></>;
+		}
 	};
 
 	useEffect(() => {
@@ -72,6 +95,13 @@ export default function CategoriesScreen({ route }) {
 			checkAssuredBuyBack();
 		}
 	}, [priceDetails]);
+
+	useEffect(() => {
+		const bankOffersData = bankOffers?.data?.filter((offer: any) => offer?.kind === 'INSTANT');
+		const noCostEmiOffers = bankOffers?.data?.filter((offer: any) => offer?.kind === 'NO_COST_EMI');
+		setBankOffersData(bankOffersData);
+		setNoCostEmiOffers(noCostEmiOffers);
+	}, [bankOffers]);
 
 	useEffect(() => {
 		const payload = {
@@ -186,7 +216,6 @@ export default function CategoriesScreen({ route }) {
 						</View>
 					</View>
 					<FeatureSection />
-
 					<View
 						style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
 					>
@@ -216,6 +245,7 @@ export default function CategoriesScreen({ route }) {
 							<Pressable
 								onPress={() => {
 									console.log('press');
+									setIsOfferVisible(true);
 								}}
 							>
 								<ViewMore />
@@ -272,6 +302,33 @@ export default function CategoriesScreen({ route }) {
 								</View>
 							</View>
 						</View>
+						{/* <Modal
+							visible={isOfferVisible}
+							animationType="fade"
+							transparent={true}
+							onRequestClose={() => setModalVisible(false)}
+						>
+							<View style={styles.modalContainer}>
+								<View
+									style={{ backgroundColor: '#fff', borderRadius: 15, elevation: 5, width: '100%' }}
+								>
+									<OffersModal bankOffersData={bankOffersData} noCostEmiOffers={noCostEmiOffers} />
+								</View>
+							</View>
+						</Modal> */}
+						<ModalComponent
+							open={isOfferVisible}
+							onClose={() => {
+								setIsOfferVisible(false);
+							}}
+							variant="center"
+							useBlurBackdrop={true}
+							hideCloseButton={false}
+						>
+							<View>
+								<OffersModal2 bankOffersData={bankOffersData} noCostEmiOffers={noCostEmiOffers} />
+							</View>
+						</ModalComponent>
 					</View>
 					<View>
 						<View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 8 }}>
@@ -324,11 +381,8 @@ export default function CategoriesScreen({ route }) {
 								</View> */}
 								<View style={styles.services}>
 									{assuredBBFeatures.map((feature) => (
-										<View
-											key={feature.image}
-											style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
-										>
-											<CustomSvgImage source={feature.image} width={42} height={42} />
+										<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+											{renderAssuredBBIcon(feature.icon)}
 											<Text style={styles.text}>{feature.desc}</Text>
 										</View>
 									))}
@@ -454,20 +508,31 @@ export default function CategoriesScreen({ route }) {
 					{ backgroundColor: colors.onSecondary, marginTop: 10 }
 				]}
 			>
-				<View style={styles.offerContainer}>
+				<View style={[styles.offerContainer]}>
 					<View
 						style={{
+							flexDirection: 'row',
+							alignItems: 'center',
 							backgroundColor: colors.tertiary,
-							width: '80%',
-							padding: 10,
-							borderRadius: 10
+							width: '80%'
 						}}
 					>
-						<Text>10% off in HDFC Card</Text>
+						<View style={[styles.greenBox, { backgroundColor: colors.primary }]}></View>
+						<View style={{ marginHorizontal: 8 }}>
+							<Text>Icon</Text>
+						</View>
+						<View>
+							<Text>10% off in HDFC Card</Text>
+						</View>
 					</View>
-					<View style={{ alignItems: 'center' }}>
-						<Text>Offer </Text>
-						<Text>Details</Text>
+					<View>
+						<Text
+							style={{
+								fontFamily: FontGilroy.SemiBold
+							}}
+						>
+							Offer{'\n'}Details
+						</Text>
 					</View>
 				</View>
 				<View style={styles.buttonsContainer}>
@@ -583,12 +648,19 @@ const styles = StyleSheet.create({
 	offerContainer: {
 		borderRadius: 8,
 		flexDirection: 'row',
-		alignItems: 'center'
+		alignItems: 'center',
+		justifyContent: 'space-between'
 	},
 	modalContainer: {
 		flex: 1,
 		backgroundColor: 'rgba(0, 0, 0, 0.5)',
 		justifyContent: 'center',
 		alignItems: 'center'
+	},
+	greenBox: {
+		width: '8%',
+		paddingVertical: 20,
+		borderTopLeftRadius: 8,
+		borderBottomLeftRadius: 8
 	}
 });

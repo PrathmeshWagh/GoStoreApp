@@ -11,5 +11,6 @@ export const enum ApiEndpoints {
 	STORES = '/gostor/stores',
 	ASSURED_BUYBACK_PLAN_DETAILS = '/abb/plan-details',
 	EXCHANGE_PINCODE = '/exchange/serviceability/',
-	COUPONS = '/coupon/v1'
+	COUPONS = '/coupon/v1',
+	BANK_OFFERS = 'transactions/v2/offers'
 }

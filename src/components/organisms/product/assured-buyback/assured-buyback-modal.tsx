@@ -4,8 +4,8 @@ import Icon from 'react-native-vector-icons/Feather';
 import { useTheme } from '@hooks/index';
 import { DefaultStyles, FontGilroy } from '@primitives/index';
 import { CustomButtom } from 'components/atoms';
-import PincodeServicality from 'components/organisms/product/review/pincode-servicability';
 import { useCheckPincodeServiceabilityMutation } from 'api/checkout/check-pincode-serviceability';
+import { Table, TableWrapper, Row, Rows, Col } from 'react-native-table-component';
 
 export default function AssuredBuyBackModal({ onPress }: any) {
 	const [tnc, setTnc] = useState<boolean>(false);
@@ -13,6 +13,15 @@ export default function AssuredBuyBackModal({ onPress }: any) {
 
 	const [pincode, setPincode] = useState<string>('');
 	const [isPincodeMsgVisible, setIsPicodeMsgVisible] = useState(false);
+
+	const tableHead = ['Buy Back Period', 'Guaranteed Assured Buyback Price'];
+	const tableData = [
+		['6-12 Months', 'Get 60% of Appliance Invoice price.'],
+		['13-24 Months', 'Get 50% of Appliance Invoice price.'],
+		['25-36 Months', 'Get 40% of Appliance Invoice price.'],
+		['37-48 Months', 'Get 30% of Appliance Invoice price.'],
+		['49-60 Months', 'Get 20% of Appliance Invoice price.']
+	];
 
 	const {
 		mutate: checkPincodeServiceability,
@@ -53,36 +62,18 @@ export default function AssuredBuyBackModal({ onPress }: any) {
 
 	return (
 		<View style={styles.container}>
-			<Text style={styles.header}>What is Buy Back Guarantee?</Text>
-			<Text>
+			<Text style={[styles.header, styles.text]}>What is Buy Back Guarantee?</Text>
+			<Text style={[styles.text, { marginBottom: 10 }]}>
 				Buyback Plan is facilitated by Gostor which assures you a fixed buyback price up to 5 years
 				for your used products purchased from Gostor.
 			</Text>
 
-			<View style={styles.row}>
-				<Text style={styles.header}>Buy Back Period</Text>
-				<Text style={styles.header}>Guaranteed Assured Buyback Price</Text>
-			</View>
-			<View style={styles.row}>
-				<Text>6-12 Months</Text>
-				<Text>Get 60% of Appliance Invoice price.</Text>
-			</View>
-			<View style={styles.row}>
-				<Text>13-24 Months</Text>
-				<Text>Get 50% of Appliance Invoice price.</Text>
-			</View>
-			<View style={styles.row}>
-				<Text>25-36 Months</Text>
-				<Text>Get 40% of Appliance Invoice price.</Text>
-			</View>
-			<View style={styles.row}>
-				<Text>37-48 Months</Text>
-				<Text>Get 30% of Appliance Invoice price.</Text>
-			</View>
-			<View style={styles.row}>
-				<Text>49-60 Months</Text>
-				<Text>Get 20% of Appliance Invoice price.</Text>
-			</View>
+			<Table borderStyle={{ borderWidth: 1 }}>
+				<Row data={tableHead} style={styles.head} flexArr={[2, 3]} textStyle={styles.text} />
+				<TableWrapper style={styles.wrapper}>
+					<Rows data={tableData} flexArr={[2, 3]} style={styles.row} textStyle={styles.text} />
+				</TableWrapper>
+			</Table>
 
 			<Text style={styles.header}>Check Serviciability:</Text>
 			<View
@@ -92,7 +83,7 @@ export default function AssuredBuyBackModal({ onPress }: any) {
 					alignItems: 'center',
 					borderColor: colors.primary,
 					borderRadius: 10,
-					marginVertical: 15,
+
 					borderBottomWidth: 1
 				}}
 			>
@@ -181,13 +172,8 @@ const styles = StyleSheet.create({
 		borderRadius: 8,
 		marginBottom: 16
 	},
-	row: {
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		marginBottom: 8
-	},
 	header: {
-		fontWeight: 'bold'
+		fontFamily: FontGilroy.Bold
 	},
 	flexing: {
 		marginTop: 10,
@@ -214,5 +200,22 @@ const styles = StyleSheet.create({
 		fontFamily: FontGilroy.Medium,
 		fontSize: 12,
 		marginBottom: 10
+	},
+	head: {
+		height: 40,
+		backgroundColor: '#f6f8fa'
+	},
+	wrapper: {
+		flexDirection: 'row'
+	},
+	title: {
+		flex: 1,
+		backgroundColor: '#f6f8fa'
+	},
+	row: {
+		height: 40
+	},
+	text: {
+		textAlign: 'center'
 	}
 });
