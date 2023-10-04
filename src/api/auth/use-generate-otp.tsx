@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useMutation } from 'react-query';
-import { ApiEndpoints } from '../utils/api-endpoints.api';
 import { RegisterInputType } from '../utils/types';
+import { ApiEndpoints } from '../utils/api-endpoints.api';
 import Config from 'react-native-config';
 import Toast from 'react-native-toast-message';
 import { useUI } from 'context/ui.context';

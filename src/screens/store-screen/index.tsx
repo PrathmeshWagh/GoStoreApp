@@ -3,6 +3,7 @@ import React from 'react';
 import { DefaultStyles, FontGilroy } from '@primitives/index';
 import { useTheme } from '@hooks/index';
 import { useDimensions, usePermissionHandlers } from '@hooks/index';
+import useStoresHook from 'hooks/useStores.hook';
 
 const buyingGuideFeatures = [
 	{
@@ -25,6 +26,15 @@ const buyingGuideFeatures = [
 export default function StoreScreen() {
 	const { colors } = useTheme();
 	const { width, height } = useDimensions();
+
+	const { stores, isLoading } = useStoresHook();
+	console.log('store', stores);
+
+	if (stores?.length === 0) {
+		console.log('No store data');
+		return null;
+	}
+
 	return (
 		<ScrollView>
 			<View style={styles.container}>

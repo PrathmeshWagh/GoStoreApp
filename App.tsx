@@ -77,11 +77,7 @@ function App() {
 					<NavigationContainer theme={navTheme}>
 						{/* <UIProvider> */}
 						<Router />
-						<Toast
-							config={toastConfig}
-							// ref={(ref: any) => Toast.setRef(ref)}
-							visibilityTime={2000}
-						/>
+						<Toast config={toastConfig} visibilityTime={2000} />
 						<CustomModal />
 						{/* </UIProvider> */}
 					</NavigationContainer>

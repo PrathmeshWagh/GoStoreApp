@@ -107,7 +107,7 @@ export default function SimilarProducts({ title, link, response, event }: any) {
 							style={[styles.carouselButton, styles.leftChevron]}
 							onPress={() => {}}
 						>
-							<Icon name={'chevron-left'} size={25} color="#000" />
+							<Icon name={'chevron-left'} size={25} color={colors.primary} />
 						</TouchableOpacity>
 
 						<FlatList
@@ -120,7 +120,7 @@ export default function SimilarProducts({ title, link, response, event }: any) {
 							style={[styles.carouselButton, styles.rightChevron]}
 							onPress={() => {}}
 						>
-							<Icon name={'chevron-right'} size={25} color="#000" />
+							<Icon name={'chevron-right'} size={25} color={colors.primary} />
 						</TouchableOpacity>
 					</View>
 				</Pressable>
@@ -224,7 +224,9 @@ const styles = StyleSheet.create({
 		width: 40,
 		height: 40,
 		borderRadius: 20,
-		backgroundColor: 'lightgray',
+		borderColor: 'green',
+		borderWidth: 1,
+		backgroundColor: 'white',
 		justifyContent: 'center',
 		alignItems: 'center',
 		position: 'absolute',

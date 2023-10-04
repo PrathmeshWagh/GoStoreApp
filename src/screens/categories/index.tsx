@@ -6,7 +6,8 @@ import {
 	ScrollView,
 	TouchableOpacity,
 	Pressable,
-	TextInput
+	TextInput,
+	Modal
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -35,6 +36,11 @@ import ReviewsRatings from 'components/organisms/product/review/review-rating';
 import Brochure from 'components/organisms/brochure';
 import ProductdetailsSlider from 'components/atoms/product-details-carousel.atom';
 import SimilarProducts from 'components/molecules/Banner/SimilarProducts';
+import AssuredBuyBackModal from 'components/organisms/product/assured-buyback/assured-buyback-modal';
+import PincodeServicality from 'components/organisms/product/review/pincode-servicability';
+import { useCheckAssuredBuyBack } from 'api/products/check-assured-buyback';
+import ExchangeProduct from 'components/organisms/product/exchange-product/exchange-product';
+import EXchangeDetails from 'components/organisms/product/exchange-product/exchange-details';
 
 export default function CategoriesScreen({ route }) {
 	const { name } = route.params;
@@ -48,11 +54,24 @@ export default function CategoriesScreen({ route }) {
 		error
 	} = useProductMutation();
 
+	const { data: assuredBuyBackData, refetch: checkAssuredBuyBack } = useCheckAssuredBuyBack({
+		productId: '6360eec564cb95ecdd4b7a99',
+		clusterId: 7
+	});
+
 	const [expanded, setExpanded] = useState(false);
+	const [modalVisible, setModalVisible] = useState(false);
+	const [isExchangeVisible, setIsExchangeVisible] = useState(false);
 
 	const toggleExpanded = () => {
 		setExpanded(!expanded);
 	};
+
+	useEffect(() => {
+		if (priceDetails) {
+			checkAssuredBuyBack();
+		}
+	}, [priceDetails]);
 
 	useEffect(() => {
 		const payload = {
@@ -325,10 +344,13 @@ export default function CategoriesScreen({ route }) {
 									<Rupee money={1} styles={{ fontSize: 25 }} />
 									<CustomButtom
 										loading={false}
-										onPress={() => {}}
+										onPress={() => {
+											console.log('press');
+											setModalVisible(true);
+										}}
 										mode="text"
 										text="Add Plan"
-										disabled
+										disabled={false}
 										styles={{
 											height: DefaultStyles.DefaultButtonHeight,
 											borderRadius: DefaultStyles.DefaultButtonHeight - 40,
@@ -339,25 +361,27 @@ export default function CategoriesScreen({ route }) {
 								</View>
 							</View>
 						</View>
+						<Modal
+							visible={modalVisible}
+							animationType="fade"
+							transparent={true}
+							onRequestClose={() => setModalVisible(false)}
+						>
+							<View style={styles.modalContainer}>
+								<View style={{ backgroundColor: '#fff', borderRadius: 15, elevation: 5 }}>
+									<AssuredBuyBackModal
+										onPress={() => {
+											setModalVisible(false);
+										}}
+									/>
+								</View>
+							</View>
+						</Modal>
 					</View>
 					<View>
 						<Text style={{ fontFamily: FontGilroy.SemiBold, fontSize: 17 }}>Exchange</Text>
 						<Text>Exchange any product and get benefits up to ₹14,000*</Text>
-						<View
-							style={{
-								flexDirection: 'row',
-								justifyContent: 'space-between',
-								borderWidth: 1,
-								borderColor: colors.primary,
-								padding: 12,
-								borderRadius: 10
-							}}
-						>
-							<Text>Buy with Exchange</Text>
-							<Text>
-								save upto <Rupee money={14000} />
-							</Text>
-						</View>
+						<ExchangeProduct setIsExchangeVisible={setIsExchangeVisible} />
 						<View
 							style={{
 								flexDirection: 'row',
@@ -371,36 +395,33 @@ export default function CategoriesScreen({ route }) {
 						>
 							<Text>Buy without Exchange</Text>
 						</View>
-					</View>
-					<View>
-						<Text style={{ fontFamily: FontGilroy.SemiBold, fontSize: 17 }}>Deliver To</Text>
-						<View
-							style={{
-								flexDirection: 'row',
-								justifyContent: 'space-between',
-								alignItems: 'center',
-								borderWidth: 1,
-								borderColor: colors.primary,
-								borderRadius: 10,
-								marginVertical: 15
-							}}
+						<Modal
+							visible={isExchangeVisible}
+							animationType="fade"
+							transparent={true}
+							onRequestClose={() => setModalVisible(false)}
 						>
-							<TextInput placeholder="Enter PIN code" keyboardType="numeric" style={{ flex: 1 }} />
-							<CustomButtom
-								loading={false}
-								onPress={() => {}}
-								mode="text"
-								text="Check"
-								disabled
-								styles={{
-									height: DefaultStyles.DefaultButtonHeight,
-									borderRadius: DefaultStyles.DefaultButtonHeight - 40,
-									backgroundColor: colors.primary
+							<View
+								style={{
+									flex: 1,
+									backgroundColor: 'rgba(0, 0, 0, 0.5)',
+									justifyContent: 'center'
 								}}
-								textStyles={[styles.buttonText]}
-							/>
-						</View>
+							>
+								<View
+									style={{
+										backgroundColor: '#fff',
+										borderRadius: 15,
+										elevation: 5,
+										height: height / 2
+									}}
+								>
+									<EXchangeDetails setIsExchangeVisible={setIsExchangeVisible} />
+								</View>
+							</View>
+						</Modal>
 					</View>
+					<PincodeServicality />
 					<View style={{ flexDirection: 'row', alignItems: 'center' }}>
 						<DeliverIcon width={28} height={28} />
 						<Text style={{ fontFamily: FontGilroy.Medium }}>
@@ -562,6 +583,12 @@ const styles = StyleSheet.create({
 	offerContainer: {
 		borderRadius: 8,
 		flexDirection: 'row',
+		alignItems: 'center'
+	},
+	modalContainer: {
+		flex: 1,
+		backgroundColor: 'rgba(0, 0, 0, 0.5)',
+		justifyContent: 'center',
 		alignItems: 'center'
 	}
 });
