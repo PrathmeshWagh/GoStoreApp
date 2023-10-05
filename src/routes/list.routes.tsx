@@ -6,7 +6,7 @@ import {
 	SignUpScreen,
 	OtpScreen,
 	CategoriesScreen,
-	ViewMoreScreen,
+	ViewMoreSimilarProductScreen,
 	ProductDetailsScreen
 } from './export.routes';
 import { RouteConstants } from './constants.routes';
@@ -56,8 +56,8 @@ const RoutesList = [
 	},
 	{
 		id: 8,
-		name: RouteConstants.ViewMoreScreenRoute,
-		component: ViewMoreScreen,
+		name: RouteConstants.ViewMoreSimilarProductScreenRoute,
+		component: ViewMoreSimilarProductScreen,
 		options: { headerShown: false }
 	},
 	{

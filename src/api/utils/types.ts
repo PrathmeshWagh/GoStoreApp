@@ -192,9 +192,3 @@ export interface PartnerWithUsType {
 export interface Subscription {
 	email: string;
 }
-
-export interface GetProduct {
-	params?: any;
-	productData?: CustomTypes.ProductQueryParams;
-	rootKey?: any;
-}

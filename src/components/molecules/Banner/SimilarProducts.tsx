@@ -52,7 +52,7 @@ const data = [
 	}
 ];
 
-export default function SimilarProducts({ title, link, response, event }: any) {
+export default function SimilarProducts({ title, link, response, event, onPress }: any) {
 	const { colors } = useTheme();
 
 	const renderItem = ({ item }: any) => {
@@ -94,7 +94,7 @@ export default function SimilarProducts({ title, link, response, event }: any) {
 			<View style={styles.header}>
 				{title && <Text style={styles.title}>{title}</Text>}
 				{link && (
-					<TouchableOpacity style={styles.link} onPress={() => {}}>
+					<TouchableOpacity style={styles.link} onPress={onPress}>
 						<ViewMore />
 						<Text style={styles.linkText}>View more</Text>
 					</TouchableOpacity>

@@ -47,11 +47,11 @@ const CategoryItemWithRatingText = ({ item, onPress }: any) => {
 
 const styles = StyleSheet.create({
 	item: {
-		flex: 1,
-		margin: 8,
+		margin: 4,
 		borderColor: '#ccc',
 		borderWidth: 1,
-		height: 280,
+		height: DefaultStyles.DefaultHeight * 5,
+		width: '48%',
 		borderRadius: 20
 	},
 	bestsellerBox: {

@@ -16,14 +16,35 @@ import CategoryItemWithRatingText from '../../atoms/category-item-with-ratingtex
 import { useEnhancedNavigation } from '@hooks/index';
 import { RouteConstants } from 'routes/constants.routes';
 
+interface Category {
+	id?: number;
+	productId?: string;
+	model?: string;
+	gostorAsn?: string;
+	title?: string;
+	description?: string;
+	mrp?: number;
+	priority?: number;
+	brand?: string;
+	parentCategory?: string;
+	category?: string;
+	primaryImgPath?: string;
+	rating?: number;
+	ratingCount?: number;
+	storePrice?: number;
+	quantity?: number;
+	supplierId?: number;
+	discount?: number;
+}
+
 const Categories = ({ categoryData }: any) => {
 	// const location = useSelector((state: RootState) => state.location);
 	const { navigate } = useEnhancedNavigation();
 
 	const { mutate: getProducts, isLoading, data: categories } = useGetProducts();
 
-	const [categoriesData, setCategoriesData] = useState([]);
-	const [currentPage, setCurrentPage] = useState(1);
+	const [categoriesData, setCategoriesData] = useState<Category[]>([]);
+	const [currentPage, setCurrentPage] = useState<number>(1);
 	// const [refreshing, setRefreshing] = useState(false);
 
 	useEffect(() => {
@@ -40,8 +61,10 @@ const Categories = ({ categoryData }: any) => {
 
 	const fetchData = async (page: number) => {
 		const params = {
-			category: categoryData.categoryData.slug,
-			categoryId: categoryData.categoryData.id,
+			// category: categoryData.categoryData.slug,
+			// categoryId: categoryData.categoryData.id,
+			category: categoryData.slug,
+			categoryId: categoryData.id,
 			priceFilter: {},
 			filterObj: {},
 			clusterId: 1,
@@ -89,7 +112,7 @@ const Categories = ({ categoryData }: any) => {
 
 			<FlatList
 				data={categoriesData}
-				keyExtractor={(item) => item.id}
+				keyExtractor={(item): any => item.id}
 				renderItem={categoriesItem}
 				numColumns={2}
 				onEndReached={handleEndReached}
@@ -105,7 +128,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		paddingBottom: DefaultStyles.DefaultPadding + 16,
 		paddingTop: DefaultStyles.DefaultPadding,
-		paddingHorizontal: 5
+		paddingHorizontal: DefaultStyles.DefaultPadding - 8
 	}
 });
 

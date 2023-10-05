@@ -10,5 +10,5 @@ export const enum RouteConstants {
 	ProductdeatilsScreenRoute = 'PRODUCT_DETAILS_ROUTE',
 	StoreScreenRoute = 'STORE_SCREEN',
 	CategoriesScreenRoute = 'CATEGORIES_SCREEN_ROUTE',
-	ViewMoreScreenRoute = 'VIEWMORE_SCREEN_ROUTE'
+	ViewMoreSimilarProductScreenRoute = 'VIEW_MORE_SIMILAR_PRODUCT_SCREEN_ROUTE'
 }

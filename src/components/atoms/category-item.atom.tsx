@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
 		padding: DefaultStyles.DefaultPadding - 10
 	},
 	imageContainer: {
-		width: '100%',
+		// width: '100%',
 		height: 120,
 		marginBottom: 8
 	},
