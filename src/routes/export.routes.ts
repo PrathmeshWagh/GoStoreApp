@@ -5,6 +5,7 @@ export { default as MainWebviewScreen } from '@screens/web-view-screen';
 export { default as LoginScreen } from '@screens/login-screen';
 export { default as SignUpScreen } from '@screens/signUp-screen';
 export { default as OtpScreen } from '@screens/otp-screen';
-export { default as CategoriesScreen } from '@screens/categories';
+export { default as ProductDetailsScreen } from 'screens/product-details-screen';
 export { default as StoreScreen } from '@screens/store-screen';
 export { default as ViewMoreScreen } from '@screens/view-more-screen';
+export { default as CategoriesScreen } from '@screens/categories-screen';

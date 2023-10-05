@@ -13,9 +13,12 @@ import { useGetProducts } from 'api/products/get-product-list';
 // import { useSelector } from 'react-redux';
 // import { RootState } from '@slices/store';
 import CategoryItemWithRatingText from '../../atoms/category-item-with-ratingtext-atom';
+import { useEnhancedNavigation } from '@hooks/index';
+import { RouteConstants } from 'routes/constants.routes';
 
 const Categories = ({ categoryData }: any) => {
 	// const location = useSelector((state: RootState) => state.location);
+	const { navigate } = useEnhancedNavigation();
 
 	const { mutate: getProducts, isLoading, data: categories } = useGetProducts();
 
@@ -56,7 +59,7 @@ const Categories = ({ categoryData }: any) => {
 	}, [currentPage]);
 
 	const btnPressedHandler = () => {
-		console.log('pressed');
+		navigate(RouteConstants.ProductdeatilsScreenRoute);
 	};
 
 	const categoriesItem = ({ item }: any) => {

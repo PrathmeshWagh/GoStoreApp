@@ -9,11 +9,7 @@ import {
 	TextInput,
 	Modal
 } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { ApiEndpoints } from 'api/utils/api-endpoints.api';
-import Config from 'react-native-config';
-import Images from 'assets/Images';
+import React, { useEffect, useState, useRef } from 'react';
 import { useDimensions, usePermissionHandlers } from '@hooks/index';
 import { DefaultStyles, FontGilroy } from '@primitives/index';
 import { CustomButtom, ProductSlider, Rupee } from 'components/atoms';
@@ -21,7 +17,6 @@ import { useTheme } from '@hooks/index';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FeatureSection from 'components/molecules/product/feature-section';
 import assuredBBFeatures from 'helpers/constants/product-abb/assuredBBFeatures';
-import { CustomSvgImage } from 'components/atoms/svg.atom';
 import { useProductMutation } from 'api/products/get-product.api';
 import Highlight from 'components/molecules/product/highlights';
 import SpecsAndInstaltion from 'components/molecules/product/specs';
@@ -43,14 +38,15 @@ import PincodeServicality from 'components/organisms/product/review/pincode-serv
 import { useCheckAssuredBuyBack } from 'api/products/check-assured-buyback';
 import ExchangeProduct from 'components/organisms/product/exchange-product/exchange-product';
 import EXchangeDetails from 'components/organisms/product/exchange-product/exchange-details';
-import OffersModal2 from 'components/organisms/BankOffers/AllBankOffers/OffersModal2';
+import OffersModal from 'components/organisms/BankOffers/AllBankOffers/OffersModal';
 import { useBankOffers } from 'api/BankOffers';
-import ModalComponent from 'components/molecules/modal/Modal';
+import RBSheet from 'react-native-raw-bottom-sheet';
+import OfferItem from 'components/molecules/product/offerItem';
 
-export default function CategoriesScreen({ route }) {
-	const { name } = route.params;
+export default function ProductDetailsScreen() {
 	const { width, height } = useDimensions();
 	const { colors } = useTheme();
+	const refRBSheet = useRef();
 	const {
 		mutate: getProductPriceDetails,
 		data: priceDetails,
@@ -245,7 +241,7 @@ export default function CategoriesScreen({ route }) {
 							<Pressable
 								onPress={() => {
 									console.log('press');
-									setIsOfferVisible(true);
+									refRBSheet.current.open();
 								}}
 							>
 								<ViewMore />
@@ -253,82 +249,38 @@ export default function CategoriesScreen({ route }) {
 							</Pressable>
 						</View>
 						<View style={styles.services}>
-							<View style={styles.offer}>
-								<View
-									style={{
-										flexDirection: 'row',
-										backgroundColor: '#EFF5F8',
-										borderRadius: 5,
-										paddingHorizontal: 5
-									}}
-								>
-									<Icon name="brightness-percent" size={20} color={colors.primary} />
-									<Text style={styles.text}>Bank offer</Text>
-								</View>
-								<View
-									style={{
-										flex: 1,
-										justifyContent: 'space-between',
-										paddingHorizontal: 6,
-										paddingVertical: 3
-									}}
-								>
-									<Text>10 % off on Yes bank Creadit Card EMI</Text>
-									<Text style={{ textDecorationLine: 'underline' }}>9 offer</Text>
-								</View>
-							</View>
-							<View style={styles.offer}>
-								<View
-									style={{
-										flexDirection: 'row',
-										backgroundColor: '#EFF5F8',
-										borderRadius: 5,
-										paddingHorizontal: 5
-									}}
-								>
-									<Icon name="brightness-percent" size={20} color={colors.primary} />
-									<Text style={styles.text}>Coupons</Text>
-								</View>
-								<View
-									style={{
-										flex: 1,
-										justifyContent: 'space-between',
-										paddingHorizontal: 6,
-										paddingVertical: 3
-									}}
-								>
-									<Text>Use coupon code IPHONE15 and get upto maximum</Text>
-									<Text style={{ textDecorationLine: 'underline' }}>9 offer</Text>
-								</View>
-							</View>
+							<OfferItem
+								title="Bank offer"
+								description="10% off on Yes bank Credit Card EMI"
+								onPress={() => {
+									refRBSheet.current.open();
+								}}
+							/>
+							<OfferItem
+								title="Coupons"
+								description="Use coupon code IPHONE15 and get up to the maximum"
+								onPress={() => {
+									// Handle the press event for this offer item
+								}}
+							/>
 						</View>
-						{/* <Modal
-							visible={isOfferVisible}
-							animationType="fade"
-							transparent={true}
-							onRequestClose={() => setModalVisible(false)}
-						>
-							<View style={styles.modalContainer}>
-								<View
-									style={{ backgroundColor: '#fff', borderRadius: 15, elevation: 5, width: '100%' }}
-								>
-									<OffersModal bankOffersData={bankOffersData} noCostEmiOffers={noCostEmiOffers} />
-								</View>
-							</View>
-						</Modal> */}
-						<ModalComponent
-							open={isOfferVisible}
-							onClose={() => {
-								setIsOfferVisible(false);
+
+						<RBSheet
+							ref={refRBSheet}
+							closeOnDragDown={true}
+							closeOnPressMask={false}
+							height={height / (3 / 2)}
+							customStyles={{
+								wrapper: {
+									backgroundColor: 'rgba(0, 0, 0, 0.5)'
+								},
+								draggableIcon: {
+									backgroundColor: '#000'
+								}
 							}}
-							variant="center"
-							useBlurBackdrop={true}
-							hideCloseButton={false}
 						>
-							<View>
-								<OffersModal2 bankOffersData={bankOffersData} noCostEmiOffers={noCostEmiOffers} />
-							</View>
-						</ModalComponent>
+							<OffersModal bankOffersData={bankOffersData} noCostEmiOffers={noCostEmiOffers} />
+						</RBSheet>
 					</View>
 					<View>
 						<View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 8 }}>
@@ -365,20 +317,6 @@ export default function CategoriesScreen({ route }) {
 									paddingVertical: 3
 								}}
 							>
-								{/* <View style={styles.services}>
-									<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-										<Icon name="brightness-percent" size={20} color={colors.primary} />
-										<Text style={styles.text}>Pre-determined Assured Buyback Price</Text>
-									</View>
-									<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-										<Icon name="brightness-percent" size={20} color={colors.primary} />
-										<Text style={styles.text}>Seamless Buyback Process</Text>
-									</View>
-									<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-										<Icon name="brightness-percent" size={20} color={colors.primary} />
-										<Text style={styles.text}>Great Savings to Upgrade to New Device</Text>
-									</View>
-								</View> */}
 								<View style={styles.services}>
 									{assuredBBFeatures.map((feature) => (
 										<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>

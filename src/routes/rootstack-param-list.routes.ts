@@ -11,10 +11,9 @@ export type RootStackParamList = {
 	[RouteConstants.LoginRoute]: undefined;
 	[RouteConstants.SignUpRoute]: undefined;
 	[RouteConstants.OtpRoute]: { mobileNumber: String };
-	[RouteConstants.CategoriesRoute]: undefined;
+	[RouteConstants.ProductdeatilsScreenRoute]: undefined;
 	[RouteConstants.PermissionsScreenRoute]: undefined;
 	[RouteConstants.TabsScreenRoute]: undefined;
 	[RouteConstants.MainWebviewScreenRoute]: undefined;
 	[RouteConstants.CategoriesScreenRoute]: any;
-	// [RouteConstants.OtpVerificationScreenRoute]: { mobileNumber: string, name?: string, role?: string, type: 'signup' | 'login' };
 };
