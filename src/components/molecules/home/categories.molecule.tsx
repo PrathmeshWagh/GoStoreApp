@@ -22,7 +22,8 @@ const Categories = () => {
 		dispatch(updateUrl({ url: `${Config.BASE_WEBVIEW_URL}${url}` }));
 		// console.log('cat', {item.slug , item.id});
 
-		navigate(RouteConstants.CategoriesRoute, { name: item.slug, id: item.id });
+		// navigate(RouteConstants.CategoriesRoute, { name: item.slug, id: item.id });
+		navigate(RouteConstants.CategoriesScreenRoute, { categoryData: item });
 	};
 
 	const renderItem = ({ item }: { item: Category }) => {

@@ -23,23 +23,19 @@ export default function OffersModal({ bankOffersData, noCostEmiOffers }: any) {
 					<View
 						style={[styles.offerContainer, { backgroundColor: colors.tertiary, marginTop: 10 }]}
 					>
-						<View key={index} style={{ flexDirection: 'row', alignItems: 'center' }}>
-							<View style={[styles.greenBox, { backgroundColor: colors.primary }]}></View>
-							<View style={{ marginHorizontal: 8, flex: 1 }}>
-								<Text numberOfLines={2}>{offer.offerTitle}</Text>
-							</View>
+						<View style={[styles.greenBox, { backgroundColor: colors.primary }]}></View>
+						<View style={{ marginHorizontal: 8, flex: 1 }}>
+							<Text numberOfLines={2}>{offer.offerTitle}</Text>
 						</View>
-						<View>
-							<Text
-								style={{
-									textDecorationLine: 'underline',
-									color: colors.primary,
-									fontFamily: FontGilroy.SemiBold
-								}}
-							>
-								T&C
-							</Text>
-						</View>
+						<Text
+							style={{
+								textDecorationLine: 'underline',
+								color: colors.primary,
+								fontFamily: FontGilroy.SemiBold
+							}}
+						>
+							T&C
+						</Text>
 					</View>
 				))}
 			</ScrollView>
@@ -62,10 +58,12 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-between',
-		marginHorizontal: 10
+		width: '95%',
+		alignSelf: 'center',
+		paddingRight: 10
 	},
 	greenBox: {
-		width: '5%',
+		width: 20,
 		paddingVertical: 20,
 		borderTopLeftRadius: 8,
 		borderBottomLeftRadius: 8

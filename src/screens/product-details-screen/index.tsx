@@ -42,9 +42,12 @@ import OffersModal from 'components/organisms/BankOffers/AllBankOffers/OffersMod
 import { useBankOffers } from 'api/BankOffers';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import OfferItem from 'components/molecules/product/offerItem';
+import { useEnhancedNavigation } from '@hooks/index';
+import { RouteConstants } from '@routes/constants.routes';
 
 export default function ProductDetailsScreen() {
 	const { width, height } = useDimensions();
+	const { navigate } = useEnhancedNavigation();
 	const { colors } = useTheme();
 	const refRBSheet = useRef();
 	const {
@@ -65,12 +68,22 @@ export default function ProductDetailsScreen() {
 	const [expanded, setExpanded] = useState(false);
 	const [modalVisible, setModalVisible] = useState(false);
 	const [isExchangeVisible, setIsExchangeVisible] = useState(false);
-	const [isOfferVisible, setIsOfferVisible] = useState(false);
 	const [bankOffersData, setBankOffersData] = useState([]);
 	const [noCostEmiOffers, setNoCostEmiOffers] = useState([]);
 
 	const toggleExpanded = () => {
 		setExpanded(!expanded);
+	};
+
+	const handleViewMoreSimilarProduct = () => {
+		navigate(RouteConstants.ViewMoreSimilarProductScreenRoute);
+	};
+
+	const handleViewMore = () => {
+		const slug = 'TELEVISIONS';
+		const id = '6360eb1464cb95ecdd4ad8c8';
+
+		navigate(RouteConstants.CategoriesScreenRoute, { name: slug, id: id });
 	};
 
 	const renderAssuredBBIcon = (iconName: 'buyBackPrice' | 'seamless' | 'greatSaving') => {
@@ -273,9 +286,6 @@ export default function ProductDetailsScreen() {
 							customStyles={{
 								wrapper: {
 									backgroundColor: 'rgba(0, 0, 0, 0.5)'
-								},
-								draggableIcon: {
-									backgroundColor: '#000'
 								}
 							}}
 						>
@@ -436,8 +446,18 @@ export default function ProductDetailsScreen() {
 					</View>
 					<ReviewsRatings />
 					<Brochure />
-					<SimilarProducts title="You may also like" filter={'sdfa'} link={'af'} />
-					<SimilarProducts title="More for NU" filter={'sdfa'} link={'af'} />
+					<SimilarProducts
+						title="You may also like"
+						filter={'sdfa'}
+						link={'af'}
+						onPress={handleViewMore}
+					/>
+					<SimilarProducts
+						title="More for NU"
+						filter={'sdfa'}
+						link={'af'}
+						onPress={handleViewMoreSimilarProduct}
+					/>
 				</View>
 			</ScrollView>
 			<View
