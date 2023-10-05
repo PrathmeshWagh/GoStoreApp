@@ -21,6 +21,7 @@ import { useProductMutation } from 'api/products/get-product.api';
 import Highlight from 'components/molecules/product/highlights';
 import SpecsAndInstaltion from 'components/molecules/product/specs';
 import BuyBackIcon from '@assets/icons/productDetails/assuredBB/buyback-guarantee.svg';
+import PreDetermineIcon from '@assets/icons/productDetails/assuredBB/pre-determined-bb.svg';
 import SeamlessIcon from '@assets/icons/productDetails/assuredBB/seamless-bb.svg';
 import GreatSavingIcon from '@assets/icons/productDetails/assuredBB/great-savings.svg';
 import AvailablePlanIcon from '@assets/icons/productDetails/assuredBB/available-plans.svg';
@@ -44,8 +45,12 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import OfferItem from 'components/molecules/product/offerItem';
 import { useEnhancedNavigation } from '@hooks/index';
 import { RouteConstants } from '@routes/constants.routes';
+import LottieView from 'lottie-react-native';
+import { useCouponsQuery } from 'api/coupons/get-coupons';
 
-export default function ProductDetailsScreen() {
+export default function ProductDetailsScreen({ route }: any) {
+	const Productitem = route.params;
+
 	const { width, height } = useDimensions();
 	const { navigate } = useEnhancedNavigation();
 	const { colors } = useTheme();
@@ -59,11 +64,13 @@ export default function ProductDetailsScreen() {
 	} = useProductMutation();
 
 	const { data: assuredBuyBackData, refetch: checkAssuredBuyBack } = useCheckAssuredBuyBack({
-		productId: '6360eec564cb95ecdd4b7a99',
+		productId: Productitem.productId,
 		clusterId: 7
 	});
 
 	const { data: bankOffers, isLoading: isOffersLoading, isError } = useBankOffers(2, 1000000);
+
+	const { data: platformOffersData } = useCouponsQuery();
 
 	const [expanded, setExpanded] = useState(false);
 	const [modalVisible, setModalVisible] = useState(false);
@@ -81,7 +88,7 @@ export default function ProductDetailsScreen() {
 
 	const handleViewMore = () => {
 		const slug = 'TELEVISIONS';
-		const id = '6360eb1464cb95ecdd4ad8c8';
+		const id = Productitem.productId;
 
 		navigate(RouteConstants.CategoriesScreenRoute, { name: slug, id: id });
 	};
@@ -89,11 +96,11 @@ export default function ProductDetailsScreen() {
 	const renderAssuredBBIcon = (iconName: 'buyBackPrice' | 'seamless' | 'greatSaving') => {
 		switch (iconName) {
 			case 'buyBackPrice':
-				return <BuyBackIcon width={28} height={28} />;
+				return <PreDetermineIcon width={30} height={30} />;
 			case 'seamless':
-				return <SeamlessIcon width={28} height={28} />;
+				return <SeamlessIcon width={30} height={30} />;
 			case 'greatSaving':
-				return <GreatSavingIcon width={28} height={28} />;
+				return <GreatSavingIcon width={30} height={30} />;
 			default:
 				return <></>;
 		}
@@ -114,9 +121,9 @@ export default function ProductDetailsScreen() {
 
 	useEffect(() => {
 		const payload = {
-			productId: '6360eec564cb95ecdd4b7a99',
+			productId: Productitem.productId,
 			clusterId: 7,
-			supplierId: 24075
+			supplierId: Productitem.supplierId
 		};
 
 		getProductPriceDetails(payload);
@@ -248,7 +255,7 @@ export default function ProductDetailsScreen() {
 							}}
 						>
 							<View style={{ flexDirection: 'row' }}>
-								<Text>Icon</Text>
+								{/* <LottieView source={require('../path/to/animation.json')} autoPlay loop /> */}
 								<Text>Available Offers</Text>
 							</View>
 							<Pressable
@@ -477,7 +484,7 @@ export default function ProductDetailsScreen() {
 					>
 						<View style={[styles.greenBox, { backgroundColor: colors.primary }]}></View>
 						<View style={{ marginHorizontal: 8 }}>
-							<Text>Icon</Text>
+							<LottieView source={require('@assets/bank-offers.json')} autoPlay loop />
 						</View>
 						<View>
 							<Text>10% off in HDFC Card</Text>
