@@ -1,14 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { View, StyleSheet } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import axios from 'axios';
+import { Text, TouchableRipple } from 'react-native-paper';
 
 import { GetLocationIcon, LocationIcon } from '@icons/index';
-import { TouchableRipple } from 'react-native-paper';
 import { useTheme } from '@hooks/index';
-import { border1, centerBoth } from '@helpers/index';
-import { DefaultStyles } from 'primitives';
+import { border1, centerBoth, itemsBetween } from '@helpers/index';
+import { DefaultStyles } from '@primitives/index';
+import { CustomButtom, TextLoader } from '@atoms/index';
+import { useCoordinates } from '@api/location/update-coordinates.api';
 
 interface Region {
     latitude: number;
@@ -19,10 +22,10 @@ interface Region {
 
 const Location = () => {
     const [region, setRegion] = useState<Region>({
-        latitude: 37.78825, // Initial latitude
-        longitude: -122.4324, // Initial longitude
-        latitudeDelta: 0.0222, // Zoom level (adjust as needed)
-        longitudeDelta: 0.0221, // Zoom level (adjust as needed)
+        latitude: 37.78825,
+        longitude: -122.4324,
+        latitudeDelta: 0.005, // Zoom level (adjust as needed)
+        longitudeDelta: 0.005, // Zoom level (adjust as needed)
 	});
 	const { colors } = useTheme();
 	const mapRef = useRef<MapView | null>(null);
@@ -30,10 +33,13 @@ const Location = () => {
         latitude: 37.78825,
         longitude: -122.4324,
     });
+	const [address, setAddress] = useState('');
+	const [isLoading, setIsLoading] = useState(false);
+	const { isLoading: loading, refetch } = useCoordinates(region.latitude, region.longitude);
 
 	useEffect(() => {
         Geolocation.getCurrentPosition(
-            (position) => {
+            async (position) => {
                 const { latitude, longitude } = position.coords;
                 setRegion({
                     ...region,
@@ -41,6 +47,12 @@ const Location = () => {
                     longitude: longitude,
                 });
 				zoomToLocation(latitude, longitude);
+				setMarkerCoordinate({
+					latitude: latitude,
+					longitude: longitude,
+				});
+				const currentAddress = await getAdressFromCoordinates(latitude, longitude); // Fetch address immediately after getting initial location
+				setAddress(currentAddress);
             },
             (error) => {
                 console.log(error);
@@ -49,41 +61,59 @@ const Location = () => {
         );
     }, []);
 
-	const handleRegionChange = async (newRegion: Region) => {
-        setRegion(newRegion);
-		const address = await getAdressFromCoordinates(newRegion.latitude, newRegion.longitude);
-		console.log(address);
-	};
-
-	const handleChange = (newRegion: Region) => {
-		setMarkerCoordinate({
+	const handleChange = useCallback((newRegion: Region) => {
+        setMarkerCoordinate({
             latitude: newRegion.latitude,
             longitude: newRegion.longitude,
         });
-	};
+    }, []);
 
-	const getAdressFromCoordinates = async (latitude: number, longitude: number) => {
+	const getAdressFromCoordinates = useCallback(async (latitude: number, longitude: number) => {
+		setIsLoading(true);
 		try {
 			const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyDf3OfiD1eSn4Wm3BVNNf6AhoNxl59aYUY`);
 			if (response.data.status === 'OK') {
-				const address = response.data.results[0];
-				return address;
+				const currentAddress = response.data?.results[0]?.formatted_address;
+				setIsLoading(false);
+				return currentAddress;
 			} else {
 				console.error('Error in Geocoding API:', response.data.status);
+				setIsLoading(false);
 				return null;
 			}
+		// eslint-disable-next-line no-catch-shadow
 		} catch (error) {
 			console.error('Error fetching address:', error);
+			setIsLoading(false);
 			return null;
 		}
-	};
+	}, []);
 
-	const getCurrentLocation = () => {
+	const handleRegionChange = useCallback(async (newRegion: Region) => {
+        setRegion(newRegion);
+        const currentAddress = await getAdressFromCoordinates(newRegion.latitude, newRegion.longitude);
+        setAddress(currentAddress);
+    }, [getAdressFromCoordinates]);
+
+	const zoomToLocation = useCallback((latitude: number, longitude: number) => {
+        mapRef.current?.animateToRegion({
+            latitude,
+            longitude,
+            latitudeDelta: 0.005,
+            longitudeDelta: 0.005,
+        }, 1000);
+    }, []);
+
+	const getCurrentLocation = useCallback(() => {
 		Geolocation.getCurrentPosition(
 			(position) => {
 				const { latitude, longitude } = position.coords;
 				setRegion({
 					...region,
+					latitude: latitude,
+					longitude: longitude,
+				});
+				setMarkerCoordinate({
 					latitude: latitude,
 					longitude: longitude,
 				});
@@ -94,16 +124,11 @@ const Location = () => {
 			},
 			{ enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
 		);
-	};
+	}, [setRegion, setMarkerCoordinate, zoomToLocation]);
 
-	const zoomToLocation = (latitude: number, longitude: number) => {
-        mapRef.current?.animateToRegion({
-            latitude,
-            longitude,
-            latitudeDelta: 0.0222,
-            longitudeDelta: 0.0222,
-        }, 1000);
-    };
+	const handleLocation = async () => {
+		refetch();
+	};
 
     return (
         <View style={styles.container}>
@@ -115,28 +140,61 @@ const Location = () => {
 				onRegionChangeComplete={handleRegionChange}
 			>
 				<Marker
-                    coordinate={markerCoordinate}
-                    title="My Location"
-                    description="Current location"
-                >
+					coordinate={markerCoordinate}
+					title="My Location"
+					description="Current location"
+				>
 					<LocationIcon size={32}/>
 				</Marker>
 				<TouchableRipple
-					style={[ styles.location, { backgroundColor: colors.tertiary } ]}
+					style={[ styles.location, { backgroundColor: colors.white } ]}
 					onPress={getCurrentLocation}
 				>
-					<>
+					<View style={{ zIndex: 9 }}>
 						<GetLocationIcon size={24}/>
-						<Text></Text>
-					</>
+					</View>
 				</TouchableRipple>
 			</MapView>
-			<View style={styles.addressDetails}>
-            {/* Display your address details here */}
-				<Text>Address Line 1</Text>
-				<Text>Address Line 2</Text>
-				<Text>City, State, Zip</Text>
-				{/* <Button title="Get Current Location" onPress={getCurrentLocation} /> */}
+			<View style={[styles.addressDetails, { backgroundColor: colors.white, shadowColor: colors.black }]}>
+				<View style={[{ ...itemsBetween(), marginBottom: DefaultStyles.DefaultPadding + 10 }]}>
+					<Text
+						variant="titleMedium"
+						style={[{ color: colors.textGrey1 }]}
+					>
+						{'select your location'.toUpperCase()}
+					</Text>
+					<TouchableRipple
+						style={[{ ...border1({ radius: 4, color: colors.grey }) }, styles.changeBtn]}
+					>
+						<Text
+							variant="titleSmall"
+							style={{ color: colors.textGrey1 }}
+						>
+							{'change'.toUpperCase()}
+						</Text>
+					</TouchableRipple>
+				</View>
+				{
+					isLoading ?
+						<TextLoader times={2}/>
+						:
+						<>
+							<Text
+								variant="titleMedium"
+								style={[{ marginBottom: DefaultStyles.DefaultPadding - 4, lineHeight: DefaultStyles.DefaultPadding + 4 }]}
+							>
+								{ address }
+							</Text>
+							<CustomButtom
+								styles={{ marginTop: DefaultStyles.DefaultPadding }}
+								text="confirm location"
+								uppercase
+								onPress={handleLocation}
+								loading={loading}
+								disabled={loading}
+							/>
+						</>
+				}
 			</View>
       </View>
     );
@@ -147,12 +205,19 @@ const styles = StyleSheet.create({
 		flex: 1,
     },
     map: {
-        flex: 0.7,
+		flex: 1,
     },
     addressDetails: {
-        flex: 0.3,
-        padding: 10,
-        backgroundColor: '#f5f5f5',
+		paddingVertical: DefaultStyles.DefaultPadding,
+		paddingHorizontal: DefaultStyles.DefaultPadding,
+		borderTopLeftRadius: DefaultStyles.DefaultRadius,
+		borderTopRightRadius: DefaultStyles.DefaultRadius,
+        elevation: 5,
+        shadowOpacity: 0.3,
+        shadowRadius: 5,
+        shadowOffset: { width: 0, height: 0 },
+		paddingBottom: DefaultStyles.DefaultPadding + 32,
+		height: 250,
     },
 	location: {
 		...border1({ radius: 100 }),
@@ -164,6 +229,10 @@ const styles = StyleSheet.create({
 		bottom: 10,
 		zIndex: 9,
 	},
-  });
+	changeBtn: {
+		paddingHorizontal: DefaultStyles.DefaultPadding - 10,
+		paddingVertical: DefaultStyles.DefaultPadding - 14,
+	},
+});
 
-export default Location;
+export default React.memo(Location);

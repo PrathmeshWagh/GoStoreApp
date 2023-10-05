@@ -39,3 +39,7 @@ export const itemsBetween = (): ViewStyle => ({
     justifyContent: 'space-between',
     alignItems: 'center',
 });
+
+export const radiusFull = (): ViewStyle => ({
+    borderRadius: 199,
+});

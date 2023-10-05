@@ -6,3 +6,4 @@ export { default as GocareInActiveIcon } from './gocare-inactive.icons';
 export { default as OfferIcon } from './offer.icons';
 export { default as GetLocationIcon } from './get-location.icons';
 export { default as LocationIcon } from './location.icon';
+export { default as BackIcon } from './back.icon';

@@ -2,8 +2,9 @@ import React from 'react';
 import { NavigationContainer, DefaultTheme as NavigationTheme } from '@react-navigation/native';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider as ReduxProvider } from 'react-redux';
-import { PaperProvider, MD3LightTheme as DefaultTheme, configureFonts } from 'react-native-paper';
-import { LogBox } from 'react-native';
+import { PaperProvider, MD3LightTheme as DefaultTheme, configureFonts, Text } from 'react-native-paper';
+import { LogBox, View, StyleSheet } from 'react-native';
+import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
 
 import store from '@slices/store';
 import { Router } from '@routes/router.routes';
@@ -43,6 +44,20 @@ const navTheme = {
 	},
 };
 
+const toastConfig = {
+    success: (props: any) => <BaseToast {...props} />,
+
+    error: (props: any) => <ErrorToast {...props} />,
+
+    gostor_type: ({ props }: any) => {
+		return (
+			<View style={styles.arzoooToastContainer}>
+				<Text style={styles.arzoooToastMessage}>{props.msg}</Text>
+			</View>
+		);
+	},
+};
+
 function App() {
 	return (
 		<ReduxProvider store={store}>
@@ -50,6 +65,7 @@ function App() {
 				<QueryClientProvider client={queryClient}>
 					<NavigationContainer theme={navTheme}>
 						<Router/>
+						<Toast config={toastConfig} />
 						<CustomModal/>
 					</NavigationContainer>
 				</QueryClientProvider>
@@ -57,5 +73,18 @@ function App() {
 		</ReduxProvider>
 	);
 }
+
+const styles = StyleSheet.create({
+    arzoooToastContainer: {
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        paddingHorizontal: 15,
+        paddingVertical: 10,
+        borderRadius: 20,
+        marginHorizontal: 10,
+    },
+    arzoooToastMessage: {
+        color: 'white',  // Assuming white color for text on the dark background
+    },
+});
 
 export default App;

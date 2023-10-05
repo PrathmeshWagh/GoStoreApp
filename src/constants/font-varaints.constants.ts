@@ -33,7 +33,6 @@ export const CustomFontVariants = {
 		fontFamily: FontGilroy.Regular,
 		fontWeight: '400',
 		fontSize: 14,
-		letterSpacing: 0,
 	},
 	titleLarge: {
 		fontFamily: FontGilroy.Regular,

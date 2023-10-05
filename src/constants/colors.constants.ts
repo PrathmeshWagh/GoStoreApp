@@ -5,4 +5,8 @@ export const CustomColors = {
 	error: '#B03A2E',
 	onError: '#FFFFFF',
 	tertiary: '#D7DBDD',
+	grey: '#D7DBDD',
+	textGrey1: '#909497',
+	white: '#FFFFFF',
+	black: '#000000',
 };

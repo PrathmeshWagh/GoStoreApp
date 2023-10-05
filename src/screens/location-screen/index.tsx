@@ -1,26 +1,44 @@
 import React from 'react';
-import Geocoder from 'react-native-geocoding';
+import { StyleSheet } from 'react-native';
 
-import Layout from '@molecules/layout/layout.molecule';
 import Location from '@organisms/location/location.organism';
-
-const layout = {
-    menu: false,
-    search: false,
-    back: true,
-    logo: 'https://gostor.com/icons/header/logo-invert.svg',
-    cart: false,
-    pincode: false,
-};
+import { TouchableRipple } from 'react-native-paper';
+import { BackIcon } from '@icons/index';
+import { DefaultStyles } from '@primitives/index';
+import { useEnhancedNavigation, useTheme } from '@hooks/index';
+import { centerBoth, radiusFull } from '@helpers/index';
 
 const LocationScreen = () => {
-    Geocoder.init('AIzaSyDf3OfiD1eSn4Wm3BVNNf6AhoNxl59aYUY');
+    const { colors } = useTheme();
+    const { pop } = useEnhancedNavigation();
 
     return (
-        <Layout layout={layout}>
+        <>
+            <TouchableRipple
+                style={[ styles.backButton, { backgroundColor: colors.white } ]}
+                onPress={() => pop()}
+            >
+                <BackIcon
+                    size={26}
+                    color="#000"
+                />
+            </TouchableRipple>
             <Location/>
-        </Layout>
+        </>
     );
 };
+
+const styles = StyleSheet.create({
+    backButton: {
+        position: 'absolute',
+        top: 52,
+        left: 24,
+        zIndex: 1,
+        width: DefaultStyles.DefaultPadding + 16,
+        height: DefaultStyles.DefaultPadding + 16,
+        ...centerBoth(),
+        ...radiusFull(),
+    },
+});
 
 export default LocationScreen;

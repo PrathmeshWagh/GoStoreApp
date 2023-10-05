@@ -1,10 +1,15 @@
-import { useTheme as theme } from 'react-native-paper';
+import { useTheme as paperTheme } from 'react-native-paper';
+
+import { CustomColors } from '@constants/index';
 
 const useTheme = () => {
-    const { colors } = theme();
+    const { colors: paperColors } = paperTheme();
 
     return {
-        colors,
+        colors: {
+            ...paperColors,
+            ...CustomColors,
+        },
     };
 
 };
