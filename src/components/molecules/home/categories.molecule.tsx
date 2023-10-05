@@ -13,21 +13,19 @@ import Config from 'react-native-config';
 
 const Categories = () => {
 	const { data, isLoading, isError, refetch } = useCategories();
-
 	const categoryData = data?.data || [];
-
 	const { navigate } = useEnhancedNavigation();
 	const dispatch = useDispatch<AppDispatch>();
 
 	const onPress = (item: Category) => {
 		const url = `/category/${item.slug}?categoryId=${item.id}&sort_by=recommendation_asc`;
-
 		dispatch(updateUrl({ url: `${Config.BASE_WEBVIEW_URL}${url}` }));
-		navigate(RouteConstants.CategoriesScreenRoute, { categoryData: item });
+		// console.log('cat', {item.slug , item.id});
+
+		navigate(RouteConstants.CategoriesRoute, { name: item.slug, id: item.id });
 	};
 
 	const renderItem = ({ item }: { item: Category }) => {
-		// console.log(item.displayName);
 		return (
 			<TouchableOpacity style={[styles.container]} onPress={() => onPress(item)}>
 				<FastImages url={item.image} style={styles.image} />

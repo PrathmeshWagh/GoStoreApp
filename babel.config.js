@@ -1,6 +1,7 @@
 module.exports = {
-    presets: ['module:metro-react-native-babel-preset'],
+	presets: ['module:metro-react-native-babel-preset'],
 	plugins: [
+		'react-native-reanimated/plugin',
 		[
 			'module-resolver',
 			{
@@ -28,9 +29,9 @@ module.exports = {
 			},
 		],
 	],
-    env: {
+	env: {
 		production: {
 			plugins: ['react-native-paper/babel'],
 		},
-    },
+	},
 };

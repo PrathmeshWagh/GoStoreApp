@@ -5,4 +5,6 @@ export const CustomColors = {
 	error: '#B03A2E',
 	onError: '#FFFFFF',
 	tertiary: '#D7DBDD',
+	inActive: '#9CA3B0',
+	border: '#e5e7eb'
 };

@@ -3,7 +3,13 @@ import axios from 'axios';
 import useKiosk from 'components/atoms/Kiosk/useKiosk.hook';
 import { useMutation } from 'react-query';
 import { ApiEndpoints } from 'api/utils/api-endpoints.api';
-import { GetProduct } from '../utils/types';
+// import { GetProduct } from '../utils/types';
+
+interface GetProduct {
+	params?: object;
+	productData?: any;
+	rootKey?: any;
+}
 
 const getProducts = async ({ params, productData, rootKey }: GetProduct) => {
 	const { isKiosk } = useKiosk();

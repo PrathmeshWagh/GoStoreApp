@@ -4,6 +4,11 @@ export const enum RouteConstants {
 	PermissionsScreenRoute = 'PERMISSIONS_SCREEN',
 	TabsScreenRoute = 'TABS_SCREEN',
 	MainWebviewScreenRoute = 'MAIN_WEBVIEW_SCREEN_ROUTE',
+	LoginRoute = 'LOGIN_SCREEN',
+	SignUpRoute = 'SIGN_UP_SCREEN',
+	OtpRoute = 'OTP_SCREEN',
+	CategoriesRoute = 'CATEGORIES_SCREEN',
 	CategoriesScreenRoute = 'CATEGORIES_SCREEN_ROUTE',
-	ViewMoreScreenRoute = 'VIEWMORE_SCREEN_ROUTE'
+	StoreScreenRoute = 'STORE_SCREEN',
+	ViewMoreSimilarProductScreenRoute = 'VIEW_MORE_SIMILAR_PRODUCT_SCREEN_ROUTE'
 }

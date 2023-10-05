@@ -2,5 +2,10 @@ export { default as SplashScreen } from '@screens/splash-screen';
 export { default as HomeScreen } from '@screens/home-screen';
 export { default as PermissionsScreen } from '@screens/permissions-screen';
 export { default as MainWebviewScreen } from '@screens/web-view-screen';
-export { default as CategoriesScreen } from '@screens/categories-screen';
-export { default as ViewMoreScreen } from '@screens/view-more-screen';
+export { default as LoginScreen } from '@screens/login-screen';
+export { default as SignUpScreen } from '@screens/signUp-screen';
+export { default as OtpScreen } from '@screens/otp-screen';
+export { default as CategoriesScreenP } from '@screens/categories-screen';
+export { default as CategoriesScreen } from '@screens/categories';
+export { default as StoreScreen } from '@screens/store-screen';
+export { default as ViewMoreSimilarProductScreen } from '@screens/view-more-similar-product'

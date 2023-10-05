@@ -29,7 +29,7 @@ const MainWebview = () => {
 					return null;
 			}
 		} catch (err) {
-			console.log(err);
+			console.log('Webview: Failed to parse JSON', err);
 		}
 	};
 

@@ -14,7 +14,7 @@ export interface LoginMutationType {
 
 export interface RegisterInputType {
 	mobile: string;
-	otp: string;
+	otp?: string;
 	name?: string;
 	email?: string;
 	referralCode?: string;
@@ -191,10 +191,4 @@ export interface PartnerWithUsType {
 }
 export interface Subscription {
 	email: string;
-}
-
-export interface GetProduct {
-	params?: any;
-	productData?: CustomTypes.ProductQueryParams;
-	rootKey?: any;
 }
