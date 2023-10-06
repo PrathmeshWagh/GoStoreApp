@@ -57,7 +57,7 @@ export default function SimilarProducts({ title, link, response, event, onPress 
 
 	const renderItem = ({ item }: any) => {
 		return (
-			<View style={{ borderWidth: 1, borderColor: 'gray', borderRadius: 20, marginHorizontal: 20 }}>
+			<View style={[styles.renderContainer, { borderColor: 'gray' }]}>
 				<View style={[styles.ratingBox, { backgroundColor: colors.primary }]}>
 					<Text style={styles.ratingText}>4</Text>
 					<StarIcon width={12} height={12} />
@@ -249,5 +249,10 @@ const styles = StyleSheet.create({
 	},
 	rightChevron: {
 		right: 0
+	},
+	renderContainer: {
+		borderWidth: 1,
+		borderRadius: 20,
+		marginHorizontal: 20
 	}
 });

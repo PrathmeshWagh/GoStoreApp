@@ -18,18 +18,3 @@ export const useBankOffers = (retailerId: any, totalAmount: any) => {
 		return response;
 	});
 };
-
-// interface paramsProps {
-// 	retailer_id: any;
-// 	total_amount: any;
-// }
-
-// export const fetchBrandList = async (params: paramsProps) => {
-// 	const { data } = await axios.get(`${Config.BASE_PATH}${ApiEndpoints.PRODUCT}?${params}`);
-
-// 	return data;
-// };
-
-// export const useBankOffersMutation = () => {
-// 	return useMutation(fetchBrandList);
-// };

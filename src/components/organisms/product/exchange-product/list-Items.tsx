@@ -8,7 +8,7 @@ const ListItems = ({ category, event, active, defaultWidth = 158, index = 0 }: a
 				styles.container,
 				{
 					width: defaultWidth,
-					borderColor: active === (category?.Id || index) ? 'grey' : 'transparent'
+					borderColor: active === (category?.Id || index) ? 'grey' : '#000'
 				}
 			]}
 			onPress={() =>
@@ -31,11 +31,11 @@ const ListItems = ({ category, event, active, defaultWidth = 158, index = 0 }: a
 const styles = StyleSheet.create({
 	container: {
 		borderWidth: 1,
-		borderRadius: 8,
-		padding: 10,
-		marginHorizontal: 5,
-		marginBottom: 10,
-		alignItems: 'center'
+		paddingVertical: 12,
+		paddingHorizontal: 15,
+		width: '48%',
+		borderRadius: 12,
+		marginBottom: 10
 	},
 	text: {
 		fontSize: 12,

@@ -13,17 +13,8 @@ export default function ExchangeProduct({ setIsExchangeVisible }: any) {
 	return (
 		<View>
 			<TouchableOpacity
-				style={{
-					flexDirection: 'row',
-					justifyContent: 'space-between',
-					borderWidth: 1,
-					borderColor: colors.primary,
-					padding: 12,
-					borderRadius: 10
-				}}
-				onPress={() => {
-					openExchangePage();
-				}}
+				style={[styles.exchangeContainer, { borderColor: colors.primary }]}
+				onPress={openExchangePage}
 			>
 				<Text>Buy with Exchange</Text>
 				<Text>
@@ -34,4 +25,12 @@ export default function ExchangeProduct({ setIsExchangeVisible }: any) {
 	);
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+	exchangeContainer: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		borderWidth: 1,
+		padding: 12,
+		borderRadius: 10
+	}
+});

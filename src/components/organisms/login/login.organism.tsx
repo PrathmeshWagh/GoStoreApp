@@ -39,28 +39,26 @@ export default function Login() {
 					resizeMode="cover"
 				/>
 			</View>
-			<View style={{ width: '85%', alignSelf: 'center' }}>
-				<View>
-					<Text style={{ textAlign: 'center', margin: 10, fontFamily: FontGilroy.SemiBold }}>
-						Enter Your mobile number
-					</Text>
+			<View style={styles.contentContainer}>
+				<View style={styles.section}>
+					<Text style={styles.headerText}>Enter Your mobile number</Text>
 				</View>
-				<View>
-					<AnimatedInputField
-						placeholder="Phone number"
-						label="Phone Number"
-						keyboardType="phone-pad"
-						maxLength={10}
-						value={mobileNumber}
-						onChangeText={(text) => {
-							setmobileNumber(text);
-						}}
-						showAnimatedLabel={true}
-						// error={'Mobile Number is required'}
-					/>
-				</View>
-				<View style={{ marginTop: 10 }}>
-					<Text style={[{ fontSize: 12 }, styles.labelFont]}>
+
+				<AnimatedInputField
+					placeholder="Phone number"
+					label="Phone Number"
+					keyboardType="phone-pad"
+					maxLength={10}
+					value={mobileNumber}
+					onChangeText={(text) => {
+						setmobileNumber(text);
+					}}
+					showAnimatedLabel={true}
+					// error={'Mobile Number is required'}
+				/>
+
+				<View style={styles.section}>
+					<Text style={styles.tncText}>
 						By continuing, you agree to GoStor's{' '}
 						<Text style={styles.underline}>Term & Conditions</Text> and{' '}
 						<Text style={styles.underline}>Privacy Policy</Text>
@@ -81,17 +79,17 @@ export default function Login() {
 					textStyles={[{ color: colors.onSecondary }, styles.textStyle]}
 					varaint="titleLarge"
 				/>
-				<View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: 35 }}>
-					<Text style={styles.labelFont}>Don't have an account ?</Text>
-					<TouchableOpacity
-						onPress={() => {
-							navigate(RouteConstants.SignUpRoute);
-						}}
-					>
-						<Text style={[{ color: colors.primary, marginLeft: 5 }, styles.labelFont]}>
-							Sign up
-						</Text>
-					</TouchableOpacity>
+				<View style={styles.section}>
+					<View style={styles.signupLink}>
+						<Text style={styles.labelText}>Don't have an account ?</Text>
+						<TouchableOpacity
+							onPress={() => {
+								navigate(RouteConstants.SignUpRoute);
+							}}
+						>
+							<Text style={[styles.linkText, { color: colors.primary }]}>Sign up</Text>
+						</TouchableOpacity>
+					</View>
 				</View>
 			</View>
 		</KeyboardAwareScrollView>
@@ -99,6 +97,23 @@ export default function Login() {
 }
 
 const styles = StyleSheet.create({
+	contentContainer: {
+		width: '85%',
+		alignSelf: 'center'
+	},
+	section: {
+		marginVertical: 8
+	},
+	headerText: {
+		textAlign: 'center',
+		margin: 10,
+		fontFamily: FontGilroy.SemiBold,
+		fontSize: 17
+	},
+	tncText: {
+		fontSize: 12,
+		fontFamily: FontGilroy.Medium
+	},
 	underline: {
 		textDecorationLine: 'underline',
 		fontFamily: FontGilroy.Bold
@@ -108,18 +123,20 @@ const styles = StyleSheet.create({
 		borderRadius: DefaultStyles.DefaultButtonHeight - 40,
 		marginTop: 20
 	},
+	labelText: {
+		fontFamily: FontGilroy.Medium
+	},
+	signupLink: {
+		flexDirection: 'row',
+		alignSelf: 'center',
+		marginTop: 35
+	},
+	linkText: {
+		marginLeft: 5,
+		fontFamily: FontGilroy.Medium
+	},
 	textStyle: {
 		marginTop: 8,
 		fontFamily: FontGilroy.Bold
-	},
-	labelFont: {
-		fontFamily: FontGilroy.Medium
-	},
-	tnc: {
-		marginRight: 8
-	},
-	checkbox: {
-		backgroundColor: '#cccc',
-		borderRadius: 2
 	}
 });

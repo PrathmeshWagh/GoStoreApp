@@ -35,7 +35,7 @@ export function useProducts(productIds: string) {
 	// console.log(clusterId);
 	// console.log(state);
 
-	return useQuery([ApiEndpoints.Products, type, isKiosk], products, {
+	return useQuery([ApiEndpoints.PRODUCTS, type, isKiosk], products, {
 		enabled: productIds ? true : false
 	});
 }

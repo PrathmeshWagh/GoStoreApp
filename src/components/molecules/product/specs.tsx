@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { DefaultStyles, FontGilroy } from '@primitives/index';
 
 export default function SpecsAndInstaltion() {
-	const [expanded, setExpanded] = useState(false);
-	const [warraty, setWarraty] = useState(false);
-	const [installation, setinstalltion] = useState(false);
+	const [expanded, setExpanded] = useState<boolean>(false);
+	const [warranty, setWarraty] = useState<boolean>(false);
+	const [installation, setinstalltion] = useState<boolean>(false);
 
 	const toggleDetails = () => {
 		setExpanded(!expanded);
 	};
 
 	const toggleWarranty = () => {
-		setWarraty(!warraty);
+		setWarraty(!warranty);
 	};
 
 	const toggleInstalltion = () => {
@@ -21,17 +21,17 @@ export default function SpecsAndInstaltion() {
 	};
 
 	return (
-		<View>
-			<View style={{ borderBottomWidth: 1, paddingBottom: 10, marginBottom: 15 }}>
+		<View style={styles.container}>
+			<View style={styles.section}>
 				<TouchableOpacity onPress={toggleDetails}>
-					<View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-						<Text style={{ fontSize: 18, fontFamily: FontGilroy.Bold }}>Specifications</Text>
+					<View style={styles.header}>
+						<Text style={styles.headerText}>Specifications</Text>
 						<Icon name={expanded ? 'chevron-up' : 'chevron-down'} size={25} color="#000" />
 					</View>
 				</TouchableOpacity>
 
 				{expanded && (
-					<View>
+					<View style={styles.content}>
 						<Text>Supported Apps: Netflix, Disney+Hotstar</Text>
 						<Text>Operating System: WebOS</Text>
 						<Text>Sound Output: 20 W</Text>
@@ -42,40 +42,80 @@ export default function SpecsAndInstaltion() {
 				)}
 			</View>
 
-			<View style={{ borderBottomWidth: 1, paddingBottom: 10, marginBottom: 15 }}>
+			<View style={styles.section}>
 				<TouchableOpacity onPress={toggleWarranty}>
-					<View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-						<Text style={{ fontSize: 18, fontFamily: FontGilroy.Bold }}>Warranty</Text>
-						<Icon name={expanded ? 'chevron-up' : 'chevron-down'} size={25} color="#000" />
+					<View style={styles.header}>
+						<Text style={styles.headerText}>Warranty</Text>
+						<Icon name={warranty ? 'chevron-up' : 'chevron-down'} size={25} color="#000" />
 					</View>
 				</TouchableOpacity>
 
-				{warraty && (
-					<View>
-						<Text style={{ fontFamily: FontGilroy.SemiBold, fontSize: 16 }}>Warranty summary</Text>
-						<Text style={{ fontFamily: FontGilroy.Medium }}> 2 years Warranty</Text>
+				{warranty && (
+					<View style={styles.content}>
+						<Text style={styles.warrantySummary}>Warranty summary</Text>
+						<Text style={styles.warrantyText}>2 years Warranty</Text>
 					</View>
 				)}
 			</View>
 
 			<TouchableOpacity onPress={toggleInstalltion}>
-				<View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-					<Text style={{ fontSize: 18, fontFamily: FontGilroy.Bold }}>Free installtion</Text>
-					<Icon name={expanded ? 'chevron-up' : 'chevron-down'} size={25} color="#000" />
+				<View style={styles.freeInstall}>
+					<Text style={styles.headerText}>Free installation</Text>
+					<Icon name={installation ? 'chevron-up' : 'chevron-down'} size={25} color="#000" />
 				</View>
 			</TouchableOpacity>
 
 			{installation && (
-				<View>
-					<Text style={{ fontFamily: FontGilroy.SemiBold, fontSize: 16 }}>
+				<View style={styles.content}>
+					<Text style={styles.installationTitle}>
 						Free installation is available for this product
 					</Text>
-					<Text style={{ fontFamily: FontGilroy.Medium }}>
-						The installation will be scheduled as soon as the product is delivered. Upon delivery
-						our service team will arrange a visit as per your convenience
+					<Text style={styles.installationText}>
+						The installation will be scheduled as soon as the product is delivered. Upon delivery,
+						our service team will arrange a visit as per your convenience.
 					</Text>
 				</View>
 			)}
 		</View>
 	);
 }
+
+const styles = StyleSheet.create({
+	container: {
+		paddingBottom: 10
+	},
+	section: {
+		borderBottomWidth: 1,
+		paddingBottom: 10,
+		marginBottom: 15
+	},
+	header: {
+		flexDirection: 'row',
+		justifyContent: 'space-between'
+	},
+	headerText: {
+		fontSize: 18,
+		fontFamily: FontGilroy.Bold
+	},
+	content: {},
+	warrantySummary: {
+		fontFamily: FontGilroy.SemiBold,
+		fontSize: 16
+	},
+	warrantyText: {
+		fontFamily: FontGilroy.Medium
+	},
+	freeInstall: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		paddingBottom: 10,
+		marginBottom: 15
+	},
+	installationTitle: {
+		fontFamily: FontGilroy.SemiBold,
+		fontSize: 16
+	},
+	installationText: {
+		fontFamily: FontGilroy.Medium
+	}
+});

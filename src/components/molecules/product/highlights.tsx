@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { DefaultStyles, FontGilroy } from '@primitives/index';
 
@@ -11,10 +11,10 @@ const Highlight = () => {
 	};
 
 	return (
-		<View>
+		<View style={styles.hightlight}>
 			<TouchableOpacity onPress={toggleDetails}>
-				<View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-					<Text style={{ fontSize: 18, fontFamily: FontGilroy.Bold }}>Highlights</Text>
+				<View style={styles.direction}>
+					<Text style={styles.highlightText}>Highlights</Text>
 					<Icon name={expanded ? 'chevron-up' : 'chevron-down'} size={25} color="#000" />
 				</View>
 			</TouchableOpacity>
@@ -34,3 +34,19 @@ const Highlight = () => {
 };
 
 export default Highlight;
+
+const styles = StyleSheet.create({
+	hightlight: {
+		borderBottomWidth: 1,
+		paddingBottom: 10,
+		marginVertical: 15
+	},
+	highlightText: {
+		fontSize: 18,
+		fontFamily: FontGilroy.Bold
+	},
+	direction: {
+		flexDirection: 'row',
+		justifyContent: 'space-between'
+	}
+});

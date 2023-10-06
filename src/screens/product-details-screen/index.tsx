@@ -30,6 +30,7 @@ import ViewMore from '@assets/icons/view-icon.svg';
 import InformationIcon from '@assets/icons/information-icon.svg';
 import DeliverIcon from '@assets/icons/productDetails/delievery_green.svg';
 import CarryIcon from '@assets/icons/productDetails/carry_bag.svg';
+import CartIcon from '@assets/icons/productDetails/cart.svg';
 import ReviewsRatings from 'components/organisms/product/review/review-rating';
 import Brochure from 'components/organisms/brochure';
 import ProductdetailsSlider from 'components/atoms/product-details-carousel.atom';
@@ -50,9 +51,10 @@ import { useCouponsQuery } from 'api/coupons/get-coupons';
 
 export default function ProductDetailsScreen({ route }: any) {
 	const Productitem = route.params;
+	console.log('product', Productitem);
 
-	const { width, height } = useDimensions();
 	const { navigate } = useEnhancedNavigation();
+	const { width, height } = useDimensions();
 	const { colors } = useTheme();
 	const refRBSheet = useRef();
 	const {
@@ -72,9 +74,9 @@ export default function ProductDetailsScreen({ route }: any) {
 
 	const { data: platformOffersData } = useCouponsQuery();
 
-	const [expanded, setExpanded] = useState(false);
-	const [modalVisible, setModalVisible] = useState(false);
-	const [isExchangeVisible, setIsExchangeVisible] = useState(false);
+	const [expanded, setExpanded] = useState<boolean>(false);
+	const [modalVisible, setModalVisible] = useState<boolean>(false);
+	const [isExchangeVisible, setIsExchangeVisible] = useState<boolean>(false);
 	const [bankOffersData, setBankOffersData] = useState([]);
 	const [noCostEmiOffers, setNoCostEmiOffers] = useState([]);
 
@@ -139,15 +141,12 @@ export default function ProductDetailsScreen({ route }: any) {
 							Samsung 32 inch ( 80 cm ) LED HD Smart TV ( UA32T4340BKXXL )
 						</Text>
 
-						<View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 10 }}>
+						<View style={[styles.direction, { marginVertical: 10 }]}>
 							<View
-								style={{
-									flexDirection: 'row',
-									alignItems: 'center',
-									backgroundColor: colors.primary,
-									padding: 1,
-									borderRadius: 5
-								}}
+								style={[
+									styles.direction,
+									{ backgroundColor: colors.primary, padding: 1, borderRadius: 5 }
+								]}
 							>
 								<Text style={styles.ratingText}>4</Text>
 								<StarIcon width={12} height={12} style={{ marginRight: 5 }} />
@@ -156,15 +155,9 @@ export default function ProductDetailsScreen({ route }: any) {
 								Rated Across Ecommerce Platforms
 							</Text>
 						</View>
-						<View
-							style={{
-								flexDirection: 'row',
-								alignItems: 'center',
-								justifyContent: 'space-between'
-							}}
-						>
+						<View style={styles.space}>
 							<View>
-								<View style={{ flexDirection: 'row', alignItems: 'center' }}>
+								<View style={styles.direction}>
 									<Rupee money={12212} styles={{ fontSize: 28 }} />
 									<Text
 										style={{
@@ -186,23 +179,12 @@ export default function ProductDetailsScreen({ route }: any) {
 								</View>
 							</View>
 
-							<Text
-								style={{
-									fontFamily: FontGilroy.SemiBold,
-									fontSize: 16,
-									marginLeft: 5,
-									borderWidth: 1,
-									padding: 5,
-									borderRadius: 5,
-									color: colors.primary,
-									borderColor: colors.primary
-								}}
-							>
+							<Text style={[styles.orText, { color: colors.primary, borderColor: colors.primary }]}>
 								OR
 							</Text>
 
 							<View>
-								<View style={{ flexDirection: 'row', alignItems: 'center' }}>
+								<View style={styles.direction}>
 									<Rupee money={654} styles={{ fontSize: 28 }} />
 									<Text
 										style={{
@@ -232,9 +214,7 @@ export default function ProductDetailsScreen({ route }: any) {
 						</View>
 					</View>
 					<FeatureSection />
-					<View
-						style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
-					>
+					<View style={styles.space}>
 						<View>
 							<Text style={{ fontFamily: FontGilroy.SemiBold }}>
 								Buy this for as low as <Rupee money={12200} styles={{ fontSize: 20 }} />
@@ -247,13 +227,7 @@ export default function ProductDetailsScreen({ route }: any) {
 					</View>
 					{expanded && <Text style={styles.expandedtext}>10% Off on HDFC Credit Cards </Text>}
 					<View>
-						<View
-							style={{
-								flexDirection: 'row',
-								justifyContent: 'space-between',
-								alignItems: 'center'
-							}}
-						>
+						<View style={styles.space}>
 							<View style={{ flexDirection: 'row' }}>
 								{/* <LottieView source={require('../path/to/animation.json')} autoPlay loop /> */}
 								<Text>Available Offers</Text>
@@ -300,7 +274,7 @@ export default function ProductDetailsScreen({ route }: any) {
 						</RBSheet>
 					</View>
 					<View>
-						<View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 8 }}>
+						<View style={[styles.direction, { marginVertical: 8 }]}>
 							<AvailablePlanIcon width={28} height={28} />
 							<Text style={{ fontFamily: FontGilroy.Bold }}>Available Plans</Text>
 						</View>
@@ -308,7 +282,7 @@ export default function ProductDetailsScreen({ route }: any) {
 							<View
 								style={{
 									flexDirection: 'row',
-									backgroundColor: '#EFF5F8',
+									backgroundColor: colors.offerbg,
 									borderRadius: 5,
 									paddingHorizontal: 5,
 									alignItems: 'center'
@@ -316,40 +290,18 @@ export default function ProductDetailsScreen({ route }: any) {
 							>
 								<BuyBackIcon width={24} height={24} />
 								<Text style={styles.text}>Buy Back Guarantee</Text>
-								<Text
-									style={{
-										marginLeft: 8,
-										textDecorationLine: 'underline',
-										fontFamily: FontGilroy.Medium
-									}}
-								>
-									Details
-								</Text>
+								<Text style={styles.detailsText}>Details</Text>
 							</View>
-							<View
-								style={{
-									flex: 1,
-									justifyContent: 'space-between',
-									paddingHorizontal: 6,
-									paddingVertical: 3
-								}}
-							>
+							<View style={styles.assueredFeature}>
 								<View style={styles.services}>
 									{assuredBBFeatures.map((feature) => (
-										<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+										<View style={styles.description}>
 											{renderAssuredBBIcon(feature.icon)}
 											<Text style={styles.text}>{feature.desc}</Text>
 										</View>
 									))}
 								</View>
-								<View
-									style={{
-										flexDirection: 'row',
-										justifyContent: 'space-between',
-										alignItems: 'center',
-										marginTop: 10
-									}}
-								>
+								<View style={[styles.space, { marginTop: 10 }]}>
 									<Rupee money={1} styles={{ fontSize: 25 }} />
 									<CustomButtom
 										loading={false}
@@ -391,17 +343,7 @@ export default function ProductDetailsScreen({ route }: any) {
 						<Text style={{ fontFamily: FontGilroy.SemiBold, fontSize: 17 }}>Exchange</Text>
 						<Text>Exchange any product and get benefits up to ₹14,000*</Text>
 						<ExchangeProduct setIsExchangeVisible={setIsExchangeVisible} />
-						<View
-							style={{
-								flexDirection: 'row',
-								justifyContent: 'space-between',
-								borderWidth: 1,
-								borderColor: colors.primary,
-								padding: 12,
-								borderRadius: 10,
-								marginVertical: 15
-							}}
-						>
+						<View style={[styles.withBuyback, { borderColor: colors.primary }]}>
 							<Text>Buy without Exchange</Text>
 						</View>
 						<Modal
@@ -417,21 +359,14 @@ export default function ProductDetailsScreen({ route }: any) {
 									justifyContent: 'center'
 								}}
 							>
-								<View
-									style={{
-										backgroundColor: '#fff',
-										borderRadius: 15,
-										elevation: 5,
-										height: height / 2
-									}}
-								>
+								<View style={[styles.exchangeDetails, { height: height / 2 }]}>
 									<EXchangeDetails setIsExchangeVisible={setIsExchangeVisible} />
 								</View>
 							</View>
 						</Modal>
 					</View>
 					<PincodeServicality />
-					<View style={{ flexDirection: 'row', alignItems: 'center' }}>
+					<View style={styles.direction}>
 						<DeliverIcon width={28} height={28} />
 						<Text style={{ fontFamily: FontGilroy.Medium }}>
 							Get it by <Text style={{ color: colors.primary }}>4 Oct - 6 Oct</Text> If ordered
@@ -439,18 +374,13 @@ export default function ProductDetailsScreen({ route }: any) {
 							<Text style={{ color: colors.primary }}>09</Text> hours
 						</Text>
 					</View>
-					<View style={{ marginVertical: 20 }}>
-						<Text style={{ fontFamily: FontGilroy.Bold, fontSize: 17 }}>
-							Sold By :
-							<Text style={{ fontFamily: FontGilroy.Medium }}> BLUEZOO PRIVATE LIMITED</Text>
-						</Text>
-					</View>
-					<View style={{ borderBottomWidth: 1, paddingBottom: 10, marginVertical: 15 }}>
-						<Highlight />
-					</View>
-					<View style={{ paddingBottom: 10, marginBottom: 15 }}>
-						<SpecsAndInstaltion />
-					</View>
+
+					<Text style={styles.dealerText}>
+						Sold By :<Text style={{ fontFamily: FontGilroy.Medium }}> BLUEZOO PRIVATE LIMITED</Text>
+					</Text>
+
+					<Highlight />
+					<SpecsAndInstaltion />
 					<ReviewsRatings />
 					<Brochure />
 					<SimilarProducts
@@ -473,15 +403,8 @@ export default function ProductDetailsScreen({ route }: any) {
 					{ backgroundColor: colors.onSecondary, marginTop: 10 }
 				]}
 			>
-				<View style={[styles.offerContainer]}>
-					<View
-						style={{
-							flexDirection: 'row',
-							alignItems: 'center',
-							backgroundColor: colors.tertiary,
-							width: '80%'
-						}}
-					>
+				<View style={styles.offerContainer}>
+					<View style={[styles.offerDetails, { backgroundColor: colors.tertiary }]}>
 						<View style={[styles.greenBox, { backgroundColor: colors.primary }]}></View>
 						<View style={{ marginHorizontal: 8 }}>
 							<LottieView source={require('@assets/bank-offers.json')} autoPlay loop />
@@ -627,5 +550,61 @@ const styles = StyleSheet.create({
 		paddingVertical: 20,
 		borderTopLeftRadius: 8,
 		borderBottomLeftRadius: 8
+	},
+	direction: {
+		flexDirection: 'row',
+		alignItems: 'center'
+	},
+	exchangeDetails: {
+		backgroundColor: '#fff',
+		borderRadius: 15,
+		elevation: 5
+	},
+	orText: {
+		fontFamily: FontGilroy.SemiBold,
+		fontSize: 16,
+		marginLeft: 5,
+		borderWidth: 1,
+		padding: 5,
+		borderRadius: 5
+	},
+	assueredFeature: {
+		flex: 1,
+		justifyContent: 'space-between',
+		paddingHorizontal: 6,
+		paddingVertical: 3
+	},
+	withBuyback: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		borderWidth: 1,
+		padding: 12,
+		borderRadius: 10,
+		marginVertical: 15
+	},
+	detailsText: {
+		marginLeft: 8,
+		textDecorationLine: 'underline',
+		fontFamily: FontGilroy.Medium
+	},
+	description: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	offerDetails: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		width: '80%'
+	},
+	dealerText: {
+		fontFamily: FontGilroy.Bold,
+		fontSize: 17,
+		marginVertical: 20
+	},
+	space: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center'
 	}
 });

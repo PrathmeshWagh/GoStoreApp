@@ -49,23 +49,13 @@ export default function PincodeServicality() {
 
 	return (
 		<View>
-			<Text style={{ fontFamily: FontGilroy.SemiBold, fontSize: 17 }}>Deliver To</Text>
-			<View
-				style={{
-					flexDirection: 'row',
-					justifyContent: 'space-between',
-					alignItems: 'center',
-					borderWidth: 1,
-					borderColor: colors.primary,
-					borderRadius: 10,
-					marginVertical: 15
-				}}
-			>
+			<Text style={styles.text}>Deliver To</Text>
+			<View style={[styles.inputContainer, { borderColor: colors.primary }]}>
 				<TextInput
 					maxLength={6}
 					placeholder="Enter PIN code"
 					keyboardType="numeric"
-					style={{ flex: 1 }}
+					style={styles.input}
 					onChangeText={(text) => {
 						setIsPicodeMsgVisible(false);
 						setPincode(text);
@@ -79,16 +69,16 @@ export default function PincodeServicality() {
 					mode="text"
 					text="Check"
 					disabled={pincode.length !== 6}
-					styles={{
-						height: DefaultStyles.DefaultButtonHeight,
-						borderRadius: DefaultStyles.DefaultButtonHeight - 40,
-						backgroundColor: pincode.length !== 6 ? 'white' : colors.primary,
-						borderColor: colors.tertiary,
-						borderWidth: 1
-					}}
+					styles={[
+						styles.checkButton,
+						{
+							backgroundColor: pincode.length !== 6 ? 'white' : colors.primary,
+							borderColor: colors.tertiary
+						}
+					]}
 					textStyles={[
 						styles.buttonText,
-						{ color: pincode.length !== 6 ? colors.tertiary : colors.onSecondary } // Conditionally set text color
+						{ color: pincode.length !== 6 ? colors.tertiary : colors.onSecondary }
 					]}
 				/>
 			</View>
@@ -98,6 +88,27 @@ export default function PincodeServicality() {
 }
 
 const styles = StyleSheet.create({
+	text: {
+		fontFamily: FontGilroy.SemiBold,
+		fontSize: 17
+	},
+	inputContainer: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		borderWidth: 1,
+
+		borderRadius: 10,
+		marginVertical: 15
+	},
+	input: {
+		flex: 1
+	},
+	checkButton: {
+		height: DefaultStyles.DefaultButtonHeight,
+		borderRadius: DefaultStyles.DefaultButtonHeight - 40,
+		borderWidth: 1
+	},
 	buttonText: {
 		fontFamily: FontGilroy.SemiBold,
 		marginTop: 8

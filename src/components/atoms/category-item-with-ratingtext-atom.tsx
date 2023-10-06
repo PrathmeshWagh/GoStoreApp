@@ -4,7 +4,13 @@ import { FontGilroy, DefaultStyles } from '@primitives/index';
 import { CustomColors } from '../../constants/colors.constants';
 import StarIcon from '@assets/icons/star.svg';
 
-const CategoryItemWithRatingText = ({ item, onBtnPress }: any) => {
+interface CategoryItemProps {
+	item: any;
+	onBtnPress: (item: any) => void;
+}
+
+const CategoryItemWithRatingText = (props: CategoryItemProps) => {
+	const { item, onBtnPress } = props;
 	return (
 		<Pressable
 			style={styles.item}

@@ -1,0 +1,17 @@
+<svg id="Cart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_14324" data-name="Rectangle 14324" width="24" height="24" transform="translate(262 123)" fill="none" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <rect id="Rectangle_19956" data-name="Rectangle 19956" width="18" height="18" transform="translate(1 1)" fill="#3c9645"/>
+    </clipPath>
+  </defs>
+  <g id="Mask_Group_31" data-name="Mask Group 31" transform="translate(-262 -123)" clip-path="url(#clip-path)">
+    <g id="Shopping_Cart" data-name="Shopping Cart" transform="translate(264 125)" clip-path="url(#clip-path-2)">
+      <path id="Path_83630" data-name="Path 83630" d="M18.035,4.058a2.245,2.245,0,0,0-1.727-.808H4.181L4.15,2.987A2.25,2.25,0,0,0,1.917,1H1.75a.75.75,0,1,0,0,1.5h.167a.75.75,0,0,1,.745.662l1.032,8.775A3.75,3.75,0,0,0,7.418,15.25H15.25a.75.75,0,0,0,0-1.5H7.418A2.25,2.25,0,0,1,5.3,12.25h8.94a3.75,3.75,0,0,0,3.691-3.085L18.522,5.9a2.246,2.246,0,0,0-.487-1.842Z" fill="#3c9645"/>
+      <path id="Path_83631" data-name="Path 83631" d="M7.083,22.333a1.5,1.5,0,1,0-1.5-1.5A1.5,1.5,0,0,0,7.083,22.333Z" transform="translate(-0.833 -3.333)" fill="#3c9645"/>
+      <path id="Path_83632" data-name="Path 83632" d="M16.25,22.333a1.5,1.5,0,1,0-1.5-1.5A1.5,1.5,0,0,0,16.25,22.333Z" transform="translate(-2.5 -3.333)" fill="#3c9645"/>
+    </g>
+  </g>
+</svg>

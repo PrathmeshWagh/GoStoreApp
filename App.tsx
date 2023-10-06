@@ -3,7 +3,7 @@ import { NavigationContainer, DefaultTheme as NavigationTheme } from '@react-nav
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider as ReduxProvider } from 'react-redux';
 import { PaperProvider, MD3LightTheme as DefaultTheme, configureFonts } from 'react-native-paper';
-import { LogBox } from 'react-native';
+import { LogBox, StyleSheet } from 'react-native';
 
 import store from '@slices/store';
 import { Router } from '@routes/router.routes';
@@ -21,16 +21,7 @@ const toastConfig = {
 	error: (props: any) => <ErrorToast {...props} />,
 
 	gostor_type: ({ props }: any) => (
-		<View
-			style={{
-				backgroundColor: 'rgba(0, 0, 0, 0.8)',
-				paddingHorizontal: 15,
-				paddingVertical: 10,
-				borderRadius: 20,
-				marginHorizontal: 10
-			}}
-		>
-			{/* <TextFile style={{color: '#FFF'}}>{props.msg}</TextFile> */}
+		<View style={styles.toastMsg}>
 			<Text style={{ color: '#FFF' }}>{props.msg}</Text>
 		</View>
 	)
@@ -88,3 +79,13 @@ function App() {
 }
 
 export default App;
+
+const styles = StyleSheet.create({
+	toastMsg: {
+		backgroundColor: 'rgba(0, 0, 0, 0.8)',
+		paddingHorizontal: 15,
+		paddingVertical: 10,
+		borderRadius: 20,
+		marginHorizontal: 10
+	}
+});

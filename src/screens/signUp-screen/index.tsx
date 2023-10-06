@@ -83,11 +83,9 @@ const SignUpScreen = () => {
 					resizeMode="cover"
 				/>
 			</View>
-			<View style={{ width: '85%', alignSelf: 'center' }}>
+			<View style={styles.container}>
 				<View>
-					<Text style={{ textAlign: 'center', margin: 10, fontFamily: FontGilroy.SemiBold }}>
-						Enter Your mobile number
-					</Text>
+					<Text style={styles.headerText}>Enter Your mobile number</Text>
 				</View>
 				<View>
 					<AnimatedInputField
@@ -136,13 +134,13 @@ const SignUpScreen = () => {
 						showAnimatedLabel={true}
 						onBlur={() => {
 							if (validateEmail(email)) {
-								setEmailError('Please enter valid email');
+								setEmailError('Please enter a valid email');
 							}
 						}}
 						error={emailError}
 					/>
 					<AnimatedInputField
-						placeholder="Referral Code(Optional)"
+						placeholder="Referral Code (Optional)"
 						label="Referral Code"
 						value={referralCode}
 						onChangeText={(text) => {
@@ -151,30 +149,27 @@ const SignUpScreen = () => {
 						showAnimatedLabel={true}
 					/>
 				</View>
-				<View style={styles.flexing}>
+				<View style={styles.checkboxContainer}>
 					<TouchableOpacity
-						style={styles.tnc}
+						style={styles.checkbox}
 						onPress={() => {
 							setTnc(!tnc);
 						}}
 					>
-						{!tnc ? (
-							<Icon name={'square'} color={'#A2A2A2'} size={22} />
-						) : (
+						{tnc ? (
 							<Icon
-								name={'check'}
+								name="check"
 								color={colors.onSecondary}
 								size={18}
-								style={{
-									backgroundColor: colors.primary,
-									borderRadius: 5
-								}}
+								style={[styles.checkedIcon, { backgroundColor: colors.primary }]}
 							/>
+						) : (
+							<Icon name="square" color="#A2A2A2" size={22} />
 						)}
 					</TouchableOpacity>
-					<Text style={[{ fontSize: 12 }, styles.labelFont]}>
-						By registering you agree to GoStor's{' '}
-						<Text style={styles.underline}>Term & Conditions</Text> and{' '}
+					<Text style={styles.tncText}>
+						By registering, you agree to GoStor's{' '}
+						<Text style={styles.underline}>Terms & Conditions</Text> and{' '}
 						<Text style={styles.underline}>Privacy Policy</Text>
 					</Text>
 				</View>
@@ -187,17 +182,17 @@ const SignUpScreen = () => {
 					mode="text"
 					text="Sign Up"
 					styles={[styles.btnStyles, { backgroundColor: colors.primary }]}
-					textStyles={[{ color: tnc ? 'white' : '#9CA3B0' }, styles.textStyle]}
+					textStyles={[{ color: tnc ? colors.onSecondary : '#9CA3B0' }, styles.textStyle]}
 					varaint="titleLarge"
 				/>
-				<View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: 35 }}>
-					<Text style={styles.labelFont}>Already have an account, </Text>
+				<View style={styles.loginContainer}>
+					<Text style={styles.labelFont}>Already have an account?</Text>
 					<TouchableOpacity
 						onPress={() => {
 							navigate(RouteConstants.LoginRoute);
 						}}
 					>
-						<Text style={[{ color: colors.primary, marginLeft: 5 }, styles.labelFont]}>Login</Text>
+						<Text style={[styles.loginLink, { color: colors.primary }]}>Login</Text>
 					</TouchableOpacity>
 				</View>
 			</View>
@@ -208,6 +203,32 @@ const SignUpScreen = () => {
 export default SignUpScreen;
 
 const styles = StyleSheet.create({
+	container: {
+		width: '85%',
+		alignSelf: 'center'
+	},
+	headerText: {
+		textAlign: 'center',
+		margin: 10,
+		fontFamily: FontGilroy.SemiBold
+	},
+	checkboxContainer: {
+		marginTop: 10,
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'flex-start'
+	},
+	checkbox: {
+		marginRight: 8,
+		marginTop: 1
+	},
+	checkedIcon: {
+		borderRadius: 5
+	},
+	tncText: {
+		fontSize: 12,
+		fontFamily: FontGilroy.Medium
+	},
 	underline: {
 		textDecorationLine: 'underline',
 		fontFamily: FontGilroy.Bold
@@ -221,21 +242,16 @@ const styles = StyleSheet.create({
 		marginTop: 8,
 		fontFamily: FontGilroy.Bold
 	},
+	loginContainer: {
+		flexDirection: 'row',
+		alignSelf: 'center',
+		marginTop: 35
+	},
 	labelFont: {
 		fontFamily: FontGilroy.Medium
 	},
-	flexing: {
-		marginTop: 10,
-		flexDirection: 'row',
-		alignItems: 'center',
-		justifyContent: 'flex-start'
-	},
-	tnc: {
-		marginRight: 8,
-		marginTop: 1
+	loginLink: {
+		marginLeft: 5,
+		fontFamily: FontGilroy.Medium
 	}
-	// checkbox: {
-	// 	backgroundColor: colors.onSecondary,
-	// 	borderRadius: 2
-	// }
 });

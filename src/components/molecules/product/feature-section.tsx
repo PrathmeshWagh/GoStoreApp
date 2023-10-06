@@ -1,26 +1,9 @@
 import { StyleSheet, Text, View, Image } from 'react-native';
 import React from 'react';
 import { DefaultStyles, FontGilroy } from '@primitives/index';
+import { features } from 'helpers/constants/product/product-feature';
 
 export default function FeatureSection() {
-	const features = [
-		{
-			icon: require('../../../assets/images/free-delivery.png'),
-			label: 'Free Delivery',
-			link: '/faqs?heading=order-delivery-related'
-		},
-		{
-			icon: require('../../../assets/images/free-return.png'),
-			label: '7 Days Easy Return',
-			link: '/faqs?heading=return-related'
-		},
-		{
-			icon: require('../../../assets/images/free-installation.png'),
-			label: 'Free Installation',
-			link: '/faqs?heading=installation-related'
-		}
-	];
-
 	return (
 		<View style={[styles.services, { marginVertical: 15 }]}>
 			{features.map((feature, index) => (

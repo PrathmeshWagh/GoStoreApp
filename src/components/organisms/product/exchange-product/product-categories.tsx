@@ -25,36 +25,7 @@ export default function ProductCategories() {
 	return (
 		<View>
 			<View>
-				<Text style={{ fontFamily: FontGilroy.Medium, fontSize: 18, marginVertical: 10 }}>
-					Selected Product
-				</Text>
-				<View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-					<Text
-						style={{
-							borderWidth: 1,
-							paddingVertical: 12,
-							paddingHorizontal: 15,
-							width: '48%',
-							borderRadius: 12,
-							textAlign: 'center'
-						}}
-					>
-						Television
-					</Text>
-					<Text
-						style={{
-							borderWidth: 1,
-							paddingVertical: 12,
-							paddingHorizontal: 15,
-							width: '48%',
-							borderRadius: 12,
-							textAlign: 'center'
-						}}
-					>
-						Television
-					</Text>
-				</View>
-				{/* <CategoryList title="seleceted Product" data={sampleData1} step={1} /> */}
+				<CategoryList title="seleceted Product" data={sampleData1} step={1} />
 			</View>
 		</View>
 	);

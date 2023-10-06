@@ -3,15 +3,19 @@ import React from 'react';
 import { useTheme } from '@hooks/index';
 import { FontGilroy } from 'primitives';
 
-export default function OffersModal({ bankOffersData, noCostEmiOffers }: any) {
+interface OfferModalProps {
+	bankOffersData: any;
+	noCostEmiOffers: any;
+}
+
+export default function OffersModal(props: OfferModalProps) {
+	const { bankOffersData, noCostEmiOffers } = props;
 	const { colors } = useTheme();
 	console.log('offer data in offer modal', bankOffersData);
 
 	return (
 		<View style={styles.container}>
-			<View
-				style={[styles.offerHeader, { backgroundColor: colors.tertiary, alignItems: 'center' }]}
-			>
+			<View style={[styles.offerHeader, { backgroundColor: colors.tertiary }]}>
 				<Text style={{ fontFamily: FontGilroy.Bold, fontSize: 18 }}>Availble Offer</Text>
 				<Text>(Applicable on Checkout)</Text>
 			</View>
@@ -20,9 +24,7 @@ export default function OffersModal({ bankOffersData, noCostEmiOffers }: any) {
 			</View>
 			<ScrollView>
 				{bankOffersData.map((offer, index) => (
-					<View
-						style={[styles.offerContainer, { backgroundColor: colors.tertiary, marginTop: 10 }]}
-					>
+					<View style={[styles.offerContainer, { backgroundColor: colors.tertiary }]}>
 						<View style={[styles.greenBox, { backgroundColor: colors.primary }]}></View>
 						<View style={{ marginHorizontal: 8, flex: 1 }}>
 							<Text numberOfLines={2}>{offer.offerTitle}</Text>
@@ -51,7 +53,8 @@ const styles = StyleSheet.create({
 	offerHeader: {
 		flexDirection: 'row',
 		padding: 16,
-		borderRadius: 5
+		borderRadius: 5,
+		alignItems: 'center'
 	},
 	offerContainer: {
 		borderRadius: 8,
@@ -60,7 +63,8 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 		width: '95%',
 		alignSelf: 'center',
-		paddingRight: 10
+		paddingRight: 10,
+		marginTop: 10
 	},
 	greenBox: {
 		width: 20,

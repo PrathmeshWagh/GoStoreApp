@@ -12,5 +12,5 @@ export const categories = async ({ queryKey }: QueryFunctionContext<[string]>) =
 };
 
 export function useCategories() {
-	return useQuery([ApiEndpoints.Categories], categories);
+	return useQuery([ApiEndpoints.CATEGORIES_CAROUSEL], categories);
 }

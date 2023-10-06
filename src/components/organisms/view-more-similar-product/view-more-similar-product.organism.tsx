@@ -6,6 +6,8 @@ import { DefaultStyles } from 'primitives';
 import { useSelector } from 'react-redux';
 import { RootState } from '@slices/store';
 import { useGetProducts } from 'api/products/get-product-list';
+import { useEnhancedNavigation } from '@hooks/index';
+import { RouteConstants } from 'routes/constants.routes';
 
 const ViewMoreSimilarProduct = () => {
 	interface Category {
@@ -15,6 +17,9 @@ const ViewMoreSimilarProduct = () => {
 	interface ProductData {
 		data: ProductType[];
 	}
+
+	const { navigate } = useEnhancedNavigation();
+
 	const [categoriesData, setCategoriesData] = useState<ProductData[]>([]);
 	const [selectedCategory, setSelectedCategory] = useState<number>(0);
 	const [currentPage, setCurrentPage] = useState<number>(1);
@@ -73,15 +78,15 @@ const ViewMoreSimilarProduct = () => {
 		);
 	};
 
-	const btnPressedHandler = () => {
-		console.log('ggg');
+	const btnPressedHandler = (item: any) => {
+		navigate(RouteConstants.ProductdeatilsScreenRoute, { item: item });
 	};
 
 	const renderProduct = ({ item }: any) => {
-		return <CategoryItemWithRatingText item={item} onPress={btnPressedHandler} />;
+		return <CategoryItemWithRatingText item={item} onBtnPress={btnPressedHandler} />;
 	};
 	const handleEndReached = ({ distanceFromEnd }: any) => {
-		if (distanceFromEnd < 0) return;
+		if (distanceFromEnd <= 0) return;
 		setCurrentPage(currentPage + 1);
 	};
 
@@ -101,20 +106,6 @@ const ViewMoreSimilarProduct = () => {
 
 	return (
 		<View style={styles.container}>
-			{/* {isProductLoading ? (
-				<Text>Loading...</Text>
-			) : (
-				<FlatList
-					data={categoriesData}
-					keyExtractor={(item) => item.id.toString()}
-					renderItem={renderProduct}
-					numColumns={2}
-					ListHeaderComponent={Header}
-					showsHorizontalScrollIndicator={false}
-					onEndReached={handleEndReached}
-					onEndReachedThreshold={0.1}
-				/>
-			)} */}
 			<FlatList
 				data={categoriesData}
 				keyExtractor={(item) => item.id.toString()}

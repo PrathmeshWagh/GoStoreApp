@@ -7,12 +7,18 @@ import { CustomButtom } from 'components/atoms';
 import { useCheckPincodeServiceabilityMutation } from 'api/checkout/check-pincode-serviceability';
 import { Table, TableWrapper, Row, Rows, Col } from 'react-native-table-component';
 
-export default function AssuredBuyBackModal({ onPress }: any) {
+interface AssuredProps {
+	onPress: () => {};
+}
+
+export default function AssuredBuyBackModal(props: AssuredProps) {
+	const { onPress } = props;
+
 	const [tnc, setTnc] = useState<boolean>(false);
 	const { colors } = useTheme();
 
 	const [pincode, setPincode] = useState<string>('');
-	const [isPincodeMsgVisible, setIsPicodeMsgVisible] = useState(false);
+	const [isPincodeMsgVisible, setIsPicodeMsgVisible] = useState<boolean>(false);
 
 	const tableHead = ['Buy Back Period', 'Guaranteed Assured Buyback Price'];
 	const tableData = [
@@ -83,7 +89,6 @@ export default function AssuredBuyBackModal({ onPress }: any) {
 					alignItems: 'center',
 					borderColor: colors.primary,
 					borderRadius: 10,
-
 					borderBottomWidth: 1
 				}}
 			>
@@ -99,16 +104,14 @@ export default function AssuredBuyBackModal({ onPress }: any) {
 				/>
 				<CustomButtom
 					loading={false}
-					onPress={() => {
-						onCheckPincodeServiceabilityPress();
-					}}
+					onPress={onCheckPincodeServiceabilityPress}
 					mode="text"
 					text="Apply"
 					disabled={pincode.length !== 6}
 					styles={{
 						height: DefaultStyles.DefaultButtonHeight,
 						borderRadius: DefaultStyles.DefaultButtonHeight - 40,
-						backgroundColor: pincode.length !== 6 ? 'white' : colors.primary,
+						backgroundColor: pincode.length !== 6 ? colors.onSecondary : colors.primary,
 						borderColor: colors.tertiary,
 						borderWidth: 1
 					}}
@@ -127,7 +130,7 @@ export default function AssuredBuyBackModal({ onPress }: any) {
 					}}
 				>
 					{!tnc ? (
-						<Icon name={'square'} color={'#A2A2A2'} size={22} />
+						<Icon name={'square'} color={colors.gray} size={22} />
 					) : (
 						<Icon
 							name={'check'}

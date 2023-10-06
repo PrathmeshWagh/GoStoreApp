@@ -49,37 +49,16 @@ export default function EXchangeDetails({ setIsExchangeVisible }: any) {
 			<View style={styles.container}>
 				{isPicodeVisible && (
 					<>
-						<View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-							<Text style={{ fontSize: 18, fontWeight: 'bold' }}>Exchange your Product</Text>
-							<TouchableOpacity
-								onPress={() => {
-									closeExchangePage();
-								}}
-							>
+						<View style={styles.header}>
+							<Text style={styles.headerText}>Exchange your Product</Text>
+							<TouchableOpacity onPress={closeExchangePage}>
 								<Text>Close</Text>
 							</TouchableOpacity>
 						</View>
-						<Text style={{ fontSize: 16, fontWeight: 'bold', marginTop: 14 }}>
-							Check availability for exchange
-						</Text>
-						<View
-							style={{
-								borderRadius: 8,
-								overflow: 'hidden',
-								marginTop: 12,
-								flexDirection: 'row',
-								alignItems: 'center'
-							}}
-						>
+						<Text style={styles.subHeaderText}>Check availability for exchange</Text>
+						<View style={styles.inputContainer}>
 							<TextInput
-								style={{
-									fontSize: 16,
-									borderBottomWidth: 1.5,
-									borderColor: 'gray',
-									flex: 1,
-									marginRight: 12,
-									padding: 10
-								}}
+								style={styles.input}
 								placeholder="Enter Pincode"
 								keyboardType="numeric"
 								value={pincode}
@@ -92,30 +71,27 @@ export default function EXchangeDetails({ setIsExchangeVisible }: any) {
 							/>
 							<CustomButtom
 								loading={false}
-								onPress={() => {
-									onCheckPincodeServiceabilityPress();
-								}}
+								onPress={() => onCheckPincodeServiceabilityPress()}
 								mode="text"
 								text="Apply"
 								disabled={pincode.length !== 6}
-								styles={{
-									height: DefaultStyles.DefaultButtonHeight,
-									borderRadius: DefaultStyles.DefaultButtonHeight - 40,
-									backgroundColor: pincode.length !== 6 ? colors.onSecondary : colors.primary,
-									borderColor: colors.tertiary,
-									borderWidth: 1
-								}}
+								styles={[
+									styles.buttonStyles,
+									{
+										backgroundColor: pincode.length !== 6 ? colors.onSecondary : colors.primary
+									}
+								]}
 								textStyles={[
 									styles.buttonText,
-									{ color: pincode.length !== 6 ? colors.tertiary : colors.onSecondary }
+									{
+										color: pincode.length !== 6 ? colors.tertiary : colors.onSecondary
+									}
 								]}
 							/>
 						</View>
-						<Text style={{ fontSize: 10, color: 'gray' }}>Exchange available in your area</Text>
+						<Text style={styles.infoText}>Exchange available in your area</Text>
 						{servicableErrorMsg && (
-							<Text style={{ color: '#DB2777', fontSize: 12 }}>
-								Not serviceable in this location.
-							</Text>
+							<Text style={styles.errorText}>Not serviceable in this location.</Text>
 						)}
 					</>
 				)}
@@ -132,20 +108,54 @@ export default function EXchangeDetails({ setIsExchangeVisible }: any) {
 		</ScrollView>
 	);
 }
-
 const styles = StyleSheet.create({
 	container: {
 		padding: 16,
 		borderRadius: 8,
 		marginBottom: 16
 	},
+	header: {
+		flexDirection: 'row',
+		justifyContent: 'space-between'
+	},
+	headerText: {
+		fontSize: 18,
+		fontWeight: 'bold'
+	},
+	subHeaderText: {
+		fontSize: 16,
+		fontWeight: 'bold',
+		marginTop: 14
+	},
+	inputContainer: {
+		borderRadius: 8,
+		overflow: 'hidden',
+		flexDirection: 'row',
+		alignItems: 'center'
+	},
+	input: {
+		fontSize: 16,
+		borderBottomWidth: 1.5,
+		borderColor: 'gray',
+		flex: 1,
+		marginRight: 12,
+		padding: 10
+	},
+	buttonStyles: {
+		height: DefaultStyles.DefaultButtonHeight,
+		borderRadius: DefaultStyles.DefaultButtonHeight - 40,
+		marginTop: 20
+	},
 	buttonText: {
 		fontFamily: FontGilroy.SemiBold,
 		marginTop: 8
 	},
-	feedbackText: {
-		fontFamily: FontGilroy.Medium,
-		fontSize: 12,
-		marginBottom: 10
+	infoText: {
+		fontSize: 10,
+		color: 'gray'
+	},
+	errorText: {
+		color: '#DB2777',
+		fontSize: 12
 	}
 });

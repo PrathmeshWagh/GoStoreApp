@@ -70,9 +70,9 @@ export default function OtpScreen({ route }: RouteProps) {
 					resizeMode="cover"
 				/>
 			</View>
-			<View style={{ width: '85%', alignSelf: 'center' }}>
+			<View style={styles.container}>
 				<View>
-					<Text style={[styles.codeText, { marginTop: 10 }]}>Just One Step Away!</Text>
+					<Text style={styles.codeText}>Just One Step Away!</Text>
 					<Text style={[styles.codeText, { fontSize: 17 }]}>Verification Code</Text>
 				</View>
 				<View>
@@ -86,13 +86,7 @@ export default function OtpScreen({ route }: RouteProps) {
 					pinCount={6}
 					onCodeChanged={(code) => setOtp(code)}
 					autoFocusOnLoad
-					codeInputFieldStyle={{
-						borderColor: 'gray',
-						color: '#000',
-						marginHorizontal: 3,
-						borderWidth: 2,
-						borderRadius: 5
-					}}
+					codeInputFieldStyle={styles.codeInputField}
 					codeInputHighlightStyle={{
 						borderColor: colors.primary,
 						marginHorizontal: 3,
@@ -101,20 +95,19 @@ export default function OtpScreen({ route }: RouteProps) {
 					}}
 				/>
 
-				<View style={{ marginTop: 10, flexDirection: 'row', justifyContent: 'center' }}>
+				<View style={styles.resendContainer}>
 					<Text style={styles.labelFont}>
-						{isResendDisabled ? `Didn't recieve OTP Code` : 'I did not get a Code!'}{' '}
+						{isResendDisabled ? `Didn't receive OTP Code` : 'I did not get a Code!'}{' '}
 					</Text>
 					<TouchableOpacity onPress={handleResendClick} disabled={isResendDisabled}>
-						<Text style={[styles.labelFont, { color: colors.primary }]}>
+						<Text style={[styles.labelFont, { color: colors.primary, marginLeft: 5 }]}>
 							{isResendDisabled ? `Retry in ${resendTimer} seconds` : 'Resend'}
 						</Text>
 					</TouchableOpacity>
 				</View>
+
 				<CustomButtom
-					onPress={() => {
-						VerifyOtp();
-					}}
+					onPress={() => VerifyOtp()}
 					loading={false}
 					disabled={otp.length !== 6}
 					mode="text"
@@ -124,7 +117,7 @@ export default function OtpScreen({ route }: RouteProps) {
 					varaint="titleLarge"
 				/>
 
-				<View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: 35 }}>
+				<View style={styles.signupContainer}>
 					<Text style={styles.labelFont}>Don't have an account ?</Text>
 					<TouchableOpacity
 						onPress={() => {
@@ -142,9 +135,28 @@ export default function OtpScreen({ route }: RouteProps) {
 }
 
 const styles = StyleSheet.create({
-	underline: {
-		textDecorationLine: 'underline',
-		fontFamily: FontGilroy.Bold
+	container: {
+		width: '85%',
+		alignSelf: 'center'
+	},
+	codeText: {
+		textAlign: 'center',
+		fontFamily: FontGilroy.SemiBold
+	},
+	codeInputField: {
+		borderColor: 'gray',
+		color: '#000',
+		marginHorizontal: 3,
+		borderWidth: 2,
+		borderRadius: 5
+	},
+	resendContainer: {
+		marginTop: 10,
+		flexDirection: 'row',
+		justifyContent: 'center'
+	},
+	labelFont: {
+		fontFamily: FontGilroy.Medium
 	},
 	btnStyles: {
 		height: DefaultStyles.DefaultButtonHeight,
@@ -155,23 +167,9 @@ const styles = StyleSheet.create({
 		marginTop: 8,
 		fontFamily: FontGilroy.Bold
 	},
-	labelFont: {
-		fontFamily: FontGilroy.Medium
-	},
-	tnc: {
-		marginRight: 8,
-		marginTop: 1
-	},
-	checkbox: {
-		backgroundColor: '#cccc',
-		borderRadius: 2
-	},
-	roundedTextInput: {
-		borderRadius: 10,
-		borderWidth: 4
-	},
-	codeText: {
-		textAlign: 'center',
-		fontFamily: FontGilroy.SemiBold
+	signupContainer: {
+		flexDirection: 'row',
+		alignSelf: 'center',
+		marginTop: 35
 	}
 });
