@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-paper';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useCategories } from '@api/categories/use-categories.api';
 import { ComponentWrapper, FastImages } from '@atoms/index';
 import { useEnhancedNavigation } from '@hooks/index';
 import { RouteConstants } from '@routes/constants.routes';
-import { AppDispatch } from '@slices/store';
+import { AppDispatch, RootState } from '@slices/store';
 import { updateUrl } from 'slices/webview.slice';
 import Config from 'react-native-config';
 
@@ -16,6 +16,9 @@ const Categories = () => {
     const categoryData = data?.data || [];
     const { navigate } = useEnhancedNavigation();
     const dispatch = useDispatch<AppDispatch>();
+    const location = useSelector((state: RootState) => state.location);
+    console.log(location);
+    
 
     const onPress = (item: Category) => {
         const url = `/category/${item.slug}?categoryId=${item.id}&sort_by=recommendation_asc`;

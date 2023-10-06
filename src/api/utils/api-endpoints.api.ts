@@ -3,5 +3,6 @@ export const enum ApiEndpoints {
     ParentBannerStruture = '/banners/v2/getParentBannersForConsumer',
     BannerDetails = '/banners/v1/getBannersForConsumer',
     Products = '/products/v2/getProducts',
-    Coordinates = '/locations/latlng'
+    Coordinates = '/locations/latlng',
+    Pincode = '/locations/pincode'
 }

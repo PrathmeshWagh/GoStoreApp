@@ -4,5 +4,6 @@ export const enum RouteConstants {
     PermissionsScreenRoute = 'PERMISSIONS_SCREEN',
     TabsScreenRoute = 'TABS_SCREEN',
     MainWebviewScreenRoute = 'MAIN_WEBVIEW_SCREEN_ROUTE',
-    LocationScreenRoute = 'LOCATION_SCREEN_ROUTE'
+    LocationScreenRoute = 'LOCATION_SCREEN_ROUTE',
+    PincodeScreenRoute = 'PINCODE_SCREEN_ROUTE',
 }

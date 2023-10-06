@@ -14,3 +14,5 @@ export { default as CustomModal } from './modal.atom';
 export { default as FlatlistCarousel } from './flatlist-carousel.atom';
 export { default as CustomStatusBar } from './status-bar.atom';
 export { default as TextLoader } from './text-loader.atom';
+export { default as BackdropBottomsheet } from './backdrop-bottomsheet.atom';
+export { default as KeyboardWrapper } from './keyboard-wrapper.atom';

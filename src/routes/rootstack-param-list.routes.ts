@@ -7,5 +7,6 @@ export type RootStackParamList = {
     [RouteConstants.TabsScreenRoute]: undefined;
     [RouteConstants.MainWebviewScreenRoute]: undefined;
     [RouteConstants.LocationScreenRoute]: undefined;
+    [RouteConstants.PincodeScreenRoute]: undefined;
     // [RouteConstants.OtpVerificationScreenRoute]: { mobileNumber: string, name?: string, role?: string, type: 'signup' | 'login' };
 };

@@ -40,7 +40,6 @@ const CustomModal = () => {
 
 const styles = StyleSheet.create({
     modalContent: {
-        backgroundColor: '',
         padding: DefaultStyles.DefaultPadding,
         borderRadius: DefaultStyles.DefaultRadius,
         marginHorizontal: DefaultStyles.DefaultPadding - 4,

@@ -5,6 +5,24 @@ export const BaseFont = {
 } as const;
 
 export const CustomFontVariants = {
+	headlineSmall: {
+		fontFamily: FontGilroy.SemiBold,
+		fontWeight: '600',
+		fontSize: 16,
+		letterSpacing: 0,
+	},
+    headlineMedium: {
+		fontFamily: FontGilroy.SemiBold,
+		fontWeight: '600',
+		fontSize: 24,
+		letterSpacing: 0,
+	},
+	headlineLarge: {
+		fontFamily: FontGilroy.SemiBold,
+		fontWeight: '600',
+		fontSize: 32,
+		letterSpacing: 0,
+	},
 	labelSmall: {
 		fontFamily: FontGilroy.SemiBold,
 		fontWeight: '600',

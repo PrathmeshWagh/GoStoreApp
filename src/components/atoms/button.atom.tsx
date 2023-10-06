@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Button, Text } from 'react-native-paper';
+import { Button } from 'react-native-paper';
 
 import { useTheme } from '@hooks/index';
 import { DefaultStyles } from '@primitives/index';
@@ -19,7 +19,7 @@ interface CustomButtomProps {
 
 const CustomButtom = (props: CustomButtomProps) => {
     const { colors } = useTheme();
-    const { onPress, loading, uppercase, styles, mode = 'elevated', disabled, text, textStyles, varaint = 'titleLarge' } = props;
+    const { onPress, loading, uppercase, styles, mode = 'elevated', disabled, text, textStyles } = props;
 
     return (
         <Button
@@ -31,14 +31,9 @@ const CustomButtom = (props: CustomButtomProps) => {
             uppercase={uppercase ? uppercase : false}
             loading={loading}
             disabled={disabled}
-            labelStyle={{ marginVertical: 0 }}
+            labelStyle={[{ color: loading ? colors.secondary : colors.onSecondary }, btnStyles.text, textStyles]}
         >
-            <Text
-                variant={varaint}
-                style={[{ color: loading ? colors.secondary : colors.onSecondary }, btnStyles.text, textStyles]}
-            >
-                { text }
-            </Text>
+            { text }
         </Button>
     );
 };
