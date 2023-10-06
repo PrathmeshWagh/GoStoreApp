@@ -1,39 +1,62 @@
-import { FlatList, StyleSheet, View, Text, Pressable, ScrollView } from 'react-native';
-import { useState, useEffect } from 'react';
+import { FlatList, StyleSheet, View, Text, Pressable, RefreshControl } from 'react-native';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import CategoryHooks from 'hooks/CategoryHooks';
 import CategoryItemWithRatingText from 'components/atoms/category-item-with-ratingtext-atom';
 import { DefaultStyles } from 'primitives';
-import { useSelector } from 'react-redux';
-import { RootState } from '@slices/store';
+// import { useSelector } from 'react-redux';
+// import { RootState } from '@slices/store';
 import { useGetProducts } from 'api/products/get-product-list';
 
+interface Category {
+	id: string;
+	name: string;
+}
+interface ProductData {
+	data: ProductType[];
+}
+
 const ViewMoreSimilarProduct = () => {
-	interface Category {
-		id: number;
-		name: string;
-	}
-	interface ProductData {
-		data: ProductType[];
-	}
-	const [categoriesData, setCategoriesData] = useState<ProductData[]>([]);
-	const [selectedCategory, setSelectedCategory] = useState<number>(0);
+	const ref = useRef<FlatList>(null);
+	const [productsData, setProductsData] = useState<ProductData[]>([]);
+	const [selectedCategoryId, setSelectedCategoryId] = useState<string>('0');
+	const [selectedCategoryName, setSelectedCategoryName] = useState<string>('');
 	const [currentPage, setCurrentPage] = useState<number>(1);
+	const [refreshing, setRefreshing] = useState(false);
 	// const location = useSelector((state: RootState) => state.location);
 
-	const brand = 'OnePlus';
-	const { data: getCategoriesApiResponse, isLoading: isCategoryLoading } =
+	const brand = 'Samsung';
+	const { data: getCategoriesApiResponse, isLoading: isCategoryBoxLoading } =
 		CategoryHooks.useGetCategoriesFromQueryString({ brand });
 
 	const { mutate: getProducts, isLoading: isProductLoading, data: productData } = useGetProducts();
 
 	useEffect(() => {
 		if (productData) {
-			setCategoriesData((prevData): any => [...prevData, ...productData.data]);
+			setProductsData((prevData): any => [...prevData, ...productData.data]);
 		}
 	}, [productData]);
 
-	const fetchData = async (page: number) => {
-		const params = {
+	const onRefresh = React.useCallback(() => {
+		setRefreshing(true);
+
+		const categoryIdToRefresh = selectedCategoryId;
+		const categoryNameToRefresh = selectedCategoryName;
+
+		setProductsData([]);
+
+		if (currentPage === 1) {
+			fetchData(currentPage, categoryIdToRefresh, categoryNameToRefresh);
+		} else {
+			setCurrentPage(1);
+		}
+
+		setRefreshing(false);
+	}, [refreshing, selectedCategoryId, selectedCategoryName]);
+
+	const fetchData = async (page: number, categoryId?: string, name?: string) => {
+		let params = {
+			...(categoryId && { categoryId }),
+			...(name && { category: name }),
 			brandArr: ['Samsung'],
 			priceFilter: {},
 			filterObj: {},
@@ -43,35 +66,60 @@ const ViewMoreSimilarProduct = () => {
 			pageSize: 24,
 			page
 		};
+		if (categoryId === '0') {
+			params = {
+				brandArr: ['Samsung'],
+				priceFilter: {},
+				filterObj: {},
+				clusterId: 1,
+				state: 'Karnataka',
+				sort: 'recommendation_asc',
+				pageSize: 24,
+				page
+			};
+		}
 
 		getProducts({ params });
 	};
 	useEffect(() => {
-		fetchData(currentPage);
-	}, [currentPage]);
+		fetchData(currentPage, selectedCategoryId, selectedCategoryName);
+	}, [currentPage, selectedCategoryId, selectedCategoryName]);
+
+	// useEffect(() => {
+	// 	console.log('scroll to index');
+	// 	ref.current?.scrollToIndex({
+	// 		index: 0,
+	// 		viewPosition: 0.5
+	// 	});
+	// }, []);
 
 	const allCategory: Category = {
-		id: 0,
+		id: '0',
 		name: 'All'
 	};
 
 	const mergedCategories: Category[] = [allCategory, ...(getCategoriesApiResponse?.data || [])];
 
-	const handlerCategoryBox = (categoryId: number) => {
-		setSelectedCategory(categoryId);
+	const handlerCategoryBox = (categoryId: string, name: string) => {
+		setProductsData([]); // Make products data empty when categorybox change
+		setSelectedCategoryId(categoryId);
+		setSelectedCategoryName(name);
+		setCurrentPage(1);
 	};
 
-	const renderCategoryBox = ({ item }: any) => {
-		const isSelected = item.id === selectedCategory;
-		return (
-			<Pressable
-				style={[styles.categoryBox, isSelected && styles.selectedCategoryBox]}
-				onPress={() => handlerCategoryBox(item.id)}
-			>
-				<Text style={[styles.normalText, isSelected && styles.selectedText]}>{item.name}</Text>
-			</Pressable>
-		);
-	};
+	const renderCategoryBox = useMemo(() => {
+		return ({ item }: any) => {
+			const isSelected = item.id === selectedCategoryId;
+			return (
+				<Pressable
+					style={[styles.categoryBox, isSelected && styles.selectedCategoryBox]}
+					onPress={() => handlerCategoryBox(item.id, item.name)}
+				>
+					<Text style={[styles.normalText, isSelected && styles.selectedText]}>{item.name}</Text>
+				</Pressable>
+			);
+		};
+	}, [selectedCategoryId]);
 
 	const btnPressedHandler = () => {
 		console.log('ggg');
@@ -80,50 +128,57 @@ const ViewMoreSimilarProduct = () => {
 	const renderProduct = ({ item }: any) => {
 		return <CategoryItemWithRatingText item={item} onPress={btnPressedHandler} />;
 	};
+
 	const handleEndReached = ({ distanceFromEnd }: any) => {
-		if (distanceFromEnd < 0) return;
+		if (distanceFromEnd <= 0) return;
 		setCurrentPage(currentPage + 1);
 	};
 
-	const Header = () => {
-		return (
-			<View style={{ marginBottom: 20 }}>
-				<FlatList
-					data={mergedCategories}
-					renderItem={renderCategoryBox}
-					horizontal={true}
-					showsHorizontalScrollIndicator={false}
-					keyExtractor={(item) => item.id.toString()}
-				/>
-			</View>
-		);
-	};
+	// const Header = () => {
+	// 	return (
+	// 		<View style={{ marginBottom: 20 }}>
+	// 			{isCategoryBoxLoading ? (
+	// 				<Text>Loading...</Text>
+	// 			) : (
+	// 				<FlatList
+	// 					ref={ref}
+	// 					data={mergedCategories}
+	// 					renderItem={renderCategoryBox}
+	// 					horizontal={true}
+	// 					showsHorizontalScrollIndicator={false}
+	// 					keyExtractor={(item) => item.id}
+	// 				/>
+	// 			)}
+	// 		</View>
+	// 	);
+	// };
 
 	return (
 		<View style={styles.container}>
-			{/* {isProductLoading ? (
-				<Text>Loading...</Text>
-			) : (
-				<FlatList
-					data={categoriesData}
-					keyExtractor={(item) => item.id.toString()}
-					renderItem={renderProduct}
-					numColumns={2}
-					ListHeaderComponent={Header}
-					showsHorizontalScrollIndicator={false}
-					onEndReached={handleEndReached}
-					onEndReachedThreshold={0.1}
-				/>
-			)} */}
+			<View style={{ marginBottom: 20 }}>
+				{isCategoryBoxLoading ? (
+					<Text>Loading...</Text>
+				) : (
+					<FlatList
+						ref={ref}
+						data={mergedCategories}
+						renderItem={renderCategoryBox}
+						horizontal={true}
+						showsHorizontalScrollIndicator={false}
+						keyExtractor={(item) => item.id}
+					/>
+				)}
+			</View>
 			<FlatList
-				data={categoriesData}
-				keyExtractor={(item) => item.id.toString()}
+				data={productsData}
+				keyExtractor={(item) => item.id}
 				renderItem={renderProduct}
 				numColumns={2}
-				ListHeaderComponent={Header}
+				// ListHeaderComponent={Header}
 				showsHorizontalScrollIndicator={false}
 				onEndReached={handleEndReached}
-				onEndReachedThreshold={0.1}
+				onEndReachedThreshold={0.7}
+				refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
 			/>
 		</View>
 	);
@@ -134,7 +189,8 @@ export default ViewMoreSimilarProduct;
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		paddingHorizontal: DefaultStyles.DefaultPadding - 8
+		paddingHorizontal: DefaultStyles.DefaultPadding - 8,
+		paddingBottom: DefaultStyles.DefaultPadding + 16
 	},
 	categoryBox: {
 		marginTop: 20,
@@ -142,7 +198,6 @@ const styles = StyleSheet.create({
 		padding: DefaultStyles.DefaultPadding - 1,
 		borderWidth: 0.5,
 		borderRadius: 5
-		// backgroundColor: 'green'
 	},
 	selectedCategoryBox: {
 		backgroundColor: 'green'

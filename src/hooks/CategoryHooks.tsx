@@ -8,7 +8,7 @@ import { RootState } from '@slices/store';
  * Note that this hook is tightly bound to query string.
  * In case different logic is needed, ideally build separate hook.
  */
-const useGetCategoriesFromQueryString = ({ brand }) => {
+const useGetCategoriesFromQueryString = ({ brand }: any) => {
 	// const { query } = useRouter();
 
 	const location = useSelector((state: RootState) => state.location);

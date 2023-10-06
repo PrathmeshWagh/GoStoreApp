@@ -42,19 +42,24 @@ const Categories = ({ categoryData }: any) => {
 
 	const [categoriesData, setCategoriesData] = useState<Category[]>([]);
 	const [currentPage, setCurrentPage] = useState<number>(1);
-	// const [refreshing, setRefreshing] = useState(false);
+	const [refreshing, setRefreshing] = useState(false);
 
 	useEffect(() => {
 		if (categories) {
-			setCategoriesData((prevData): any => [...prevData, ...categories.data]);
+			setCategoriesData((prevData) => [...prevData, ...categories.data]);
 		}
 	}, [categories]);
 
-	// const onRefresh = React.useCallback(() => {
-	// 	setRefreshing(true);
-	// 	// fetchData(currentPage);
-	// 	setRefreshing(false);
-	// }, [refreshing]);
+	const onRefresh = React.useCallback(() => {
+		setRefreshing(true);
+		setCategoriesData([]);
+		if (currentPage === 1) {
+			fetchData(currentPage);
+		} else {
+			setCurrentPage(1);
+		}
+		setRefreshing(false);
+	}, [refreshing]);
 
 	const fetchData = async (page: number) => {
 		const params = {
@@ -87,34 +92,20 @@ const Categories = ({ categoryData }: any) => {
 	};
 
 	const handleEndReached = ({ distanceFromEnd }: any) => {
-		if (distanceFromEnd < 0) return;
+		if (distanceFromEnd <= 0) return;
 		setCurrentPage(currentPage + 1);
 	};
 
 	return (
 		<View style={styles.container}>
-			{/* {isLoading ? (
-				<ActivityIndicator size="large" color="#0000ff" />
-			) : (
-				<FlatList
-					data={categoriesData}
-					keyExtractor={(item) => item.id}
-					renderItem={categoriesItem}
-					numColumns={2}
-					onEndReached={handleEndReached}
-					onEndReachedThreshold={0.1}
-					// refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-				/>
-			)} */}
-
 			<FlatList
 				data={categoriesData}
 				keyExtractor={(item): any => item.id}
 				renderItem={categoriesItem}
 				numColumns={2}
 				onEndReached={handleEndReached}
-				onEndReachedThreshold={0.1}
-				// refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+				onEndReachedThreshold={0.7}
+				refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
 			/>
 		</View>
 	);
