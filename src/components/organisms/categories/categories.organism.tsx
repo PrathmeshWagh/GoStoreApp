@@ -92,7 +92,7 @@ const Categories = ({ categoryData }: any) => {
 	};
 
 	const handleEndReached = ({ distanceFromEnd }: any) => {
-		if (distanceFromEnd < 0) return;
+		if (distanceFromEnd <= 0) return;
 		setCurrentPage(currentPage + 1);
 	};
 
