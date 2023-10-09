@@ -1,5 +1,5 @@
 import { FlatList, StyleSheet, View, Text, Pressable, RefreshControl } from 'react-native';
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import CategoryHooks from 'hooks/CategoryHooks';
 import CategoryItemWithRatingText from 'components/atoms/category-item-with-ratingtext-atom';
 import { DefaultStyles } from 'primitives';
@@ -19,7 +19,7 @@ interface ProductData {
 
 const ViewMoreSimilarProduct = () => {
 	interface Category {
-		id: number;
+		id: string;
 		name: string;
 	}
 	interface ProductData {
@@ -27,8 +27,6 @@ const ViewMoreSimilarProduct = () => {
 	}
 
 	const { navigate } = useEnhancedNavigation();
-
-	const ref = useRef<FlatList>(null);
 	const [productsData, setProductsData] = useState<ProductData[]>([]);
 	const [selectedCategoryId, setSelectedCategoryId] = useState<string>('0');
 	const [selectedCategoryName, setSelectedCategoryName] = useState<string>('');
@@ -172,7 +170,6 @@ const ViewMoreSimilarProduct = () => {
 					<Text>Loading...</Text>
 				) : (
 					<FlatList
-						ref={ref}
 						data={mergedCategories}
 						renderItem={renderCategoryBox}
 						horizontal={true}

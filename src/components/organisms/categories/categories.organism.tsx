@@ -2,6 +2,7 @@ import {
 	FlatList,
 	StyleSheet,
 	View,
+	Text,
 	Pressable,
 	RefreshControl,
 	ActivityIndicator
@@ -106,6 +107,9 @@ const Categories = ({ categoryData }: any) => {
 				onEndReached={handleEndReached}
 				onEndReachedThreshold={0.7}
 				refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+				ListFooterComponent={() => {
+					return isLoading ? <ActivityIndicator /> : <></>;
+				}}
 			/>
 		</View>
 	);
