@@ -106,6 +106,7 @@ const styles = StyleSheet.create({
 		borderBottomLeftRadius: 20
 	},
 	title: {
+		fontSize: 13,
 		lineHeight: 20,
 		fontFamily: FontGilroy.Bold
 	},

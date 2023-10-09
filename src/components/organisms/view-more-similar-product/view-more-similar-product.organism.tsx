@@ -1,4 +1,12 @@
-import { FlatList, StyleSheet, View, Text, Pressable, RefreshControl } from 'react-native';
+import {
+	FlatList,
+	StyleSheet,
+	View,
+	Text,
+	Pressable,
+	RefreshControl,
+	ActivityIndicator
+} from 'react-native';
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import CategoryHooks from 'hooks/CategoryHooks';
 import CategoryItemWithRatingText from 'components/atoms/category-item-with-ratingtext-atom';
@@ -16,7 +24,7 @@ interface ProductData {
 }
 
 const ViewMoreSimilarProduct = () => {
-	const ref = useRef<FlatList>(null);
+	// const ref = useRef<FlatList>(null);
 	const [productsData, setProductsData] = useState<ProductData[]>([]);
 	const [selectedCategoryId, setSelectedCategoryId] = useState<string>('0');
 	const [selectedCategoryName, setSelectedCategoryName] = useState<string>('');
@@ -29,6 +37,7 @@ const ViewMoreSimilarProduct = () => {
 		CategoryHooks.useGetCategoriesFromQueryString({ brand });
 
 	const { mutate: getProducts, isLoading: isProductLoading, data: productData } = useGetProducts();
+	// console.log(isProductLoading);
 
 	useEffect(() => {
 		if (productData) {
@@ -157,10 +166,10 @@ const ViewMoreSimilarProduct = () => {
 		<View style={styles.container}>
 			<View style={{ marginBottom: 20 }}>
 				{isCategoryBoxLoading ? (
-					<Text>Loading...</Text>
+					<ActivityIndicator size="small" color="#0000ff" />
 				) : (
 					<FlatList
-						ref={ref}
+						// ref={ref}
 						data={mergedCategories}
 						renderItem={renderCategoryBox}
 						horizontal={true}
@@ -169,6 +178,7 @@ const ViewMoreSimilarProduct = () => {
 					/>
 				)}
 			</View>
+
 			<FlatList
 				data={productsData}
 				keyExtractor={(item) => item.id}
@@ -179,6 +189,9 @@ const ViewMoreSimilarProduct = () => {
 				onEndReached={handleEndReached}
 				onEndReachedThreshold={0.7}
 				refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+				ListFooterComponent={() => {
+					return isProductLoading ? <ActivityIndicator /> : <></>;
+				}}
 			/>
 		</View>
 	);
