@@ -163,7 +163,7 @@ export default function ProductDetailsScreen({ route }: any) {
 										style={{
 											color: colors.primary,
 											fontFamily: FontGilroy.SemiBold,
-											fontSize: 16,
+											fontSize: 14,
 											marginLeft: 5
 										}}
 									>
@@ -189,12 +189,12 @@ export default function ProductDetailsScreen({ route }: any) {
 									<Text
 										style={{
 											color: colors.primary,
-											fontFamily: FontGilroy.SemiBold,
-											fontSize: 16,
+											fontFamily: FontGilroy.Regular,
+											fontSize: 14,
 											marginLeft: 5
 										}}
 									>
-										/Mo
+										/Mo*
 									</Text>
 								</View>
 								<View>
@@ -206,7 +206,7 @@ export default function ProductDetailsScreen({ route }: any) {
 												fontFamily: FontGilroy.Medium
 											}}
 										>
-											EMI OPTION
+											EMI Options
 										</Text>
 									</TouchableOpacity>
 								</View>
@@ -219,10 +219,14 @@ export default function ProductDetailsScreen({ route }: any) {
 							<Text style={{ fontFamily: FontGilroy.SemiBold }}>
 								Buy this for as low as <Rupee money={12200} styles={{ fontSize: 20 }} />
 							</Text>
-							<Text style={{ fontFamily: FontGilroy.SemiBold, fontSize: 16 }}>With this Offer</Text>
+							<Text style={{ fontFamily: FontGilroy.SemiBold }}>With this Offer</Text>
 						</View>
 						<TouchableOpacity onPress={toggleExpanded}>
-							<Icon name={expanded ? 'chevron-up' : 'chevron-down'} size={25} color="#000" />
+							<Icon
+								name={expanded ? 'chevron-up' : 'chevron-down'}
+								size={25}
+								color={colors.secondary}
+							/>
 						</TouchableOpacity>
 					</View>
 					{expanded && <Text style={styles.expandedtext}>10% Off on HDFC Credit Cards </Text>}
@@ -464,7 +468,7 @@ const styles = StyleSheet.create({
 	},
 
 	productInfoContainer: {
-		width: '92%',
+		width: '90%',
 		alignSelf: 'center'
 	},
 	productName: {
@@ -501,9 +505,8 @@ const styles = StyleSheet.create({
 		marginTop: 8
 	},
 	mrp: {
-		color: '#AAB7B8',
 		fontSize: 14,
-		fontWeight: '400',
+		fontFamily: FontGilroy.Medium,
 		textDecorationLine: 'line-through',
 		lineHeight: 20
 	},

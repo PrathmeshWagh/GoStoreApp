@@ -6,7 +6,7 @@ export const CustomColors = {
 	onError: '#FFFFFF',
 	tertiary: '#D7DBDD',
 	inActive: '#9CA3B0',
-	border: '#e5e7eb',
+	bordercolor: '#e5e7eb',
 	offerbg: '#EFF5F8',
-	gray: '#808080'
+	grey: '#6C6C6C'
 };

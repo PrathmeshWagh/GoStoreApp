@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { DefaultStyles, FontGilroy } from '@primitives/index';
+import { useTheme } from '@hooks/index';
 
 const Highlight = () => {
+	const { colors } = useTheme();
 	const [expanded, setExpanded] = useState(false);
 
 	const toggleDetails = () => {
@@ -15,18 +17,24 @@ const Highlight = () => {
 			<TouchableOpacity onPress={toggleDetails}>
 				<View style={styles.direction}>
 					<Text style={styles.highlightText}>Highlights</Text>
-					<Icon name={expanded ? 'chevron-up' : 'chevron-down'} size={25} color="#000" />
+					<Icon
+						name={expanded ? 'chevron-up' : 'chevron-down'}
+						size={25}
+						color={colors.secondary}
+					/>
 				</View>
 			</TouchableOpacity>
 
 			{expanded && (
 				<View>
-					<Text>Supported Apps: Netflix, Disney+Hotstar</Text>
-					<Text>Operating System: WebOS</Text>
-					<Text>Sound Output: 20 W</Text>
-					<Text>Prime Video, Youtube</Text>
-					<Text>Resolution: Ultra HD (4K) 3840 x 2160 Pixels</Text>
-					<Text>Refresh Rate: 60 Hz</Text>
+					<View style={styles.info}>
+						<Text style={styles.bulletText}>{'\u2022'}</Text>
+						<Text>Supported Apps: Netflix, Disney+Hotstar</Text>
+					</View>
+					<View style={styles.info}>
+						<Text style={styles.bulletText}>{'\u2022'}</Text>
+						<Text>Operating System: WebOS</Text>
+					</View>
 				</View>
 			)}
 		</View>
@@ -48,5 +56,13 @@ const styles = StyleSheet.create({
 	direction: {
 		flexDirection: 'row',
 		justifyContent: 'space-between'
+	},
+	bulletText: {
+		fontSize: 18,
+		marginRight: 10
+	},
+	info: {
+		flexDirection: 'row',
+		alignItems: 'center'
 	}
 });

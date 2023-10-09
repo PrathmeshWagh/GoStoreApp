@@ -4,7 +4,21 @@ import ListItems from './list-Items';
 import { useTheme } from '@hooks/index';
 import { DefaultStyles, FontGilroy } from '@primitives/index';
 
-const CategoryList = ({ title, data, step, defaultWidth = 158, isStepVisible = true }) => {
+interface Category {
+	Id: number;
+	name: string;
+	Description: string;
+}
+interface CategoryListProps {
+	title: string;
+	data: Category[];
+	step: number;
+	defaultWidth: number;
+	isStepVisible: boolean;
+}
+
+const CategoryList = (props: CategoryListProps) => {
+	const { title, data, step, defaultWidth = 158, isStepVisible = true } = props;
 	const { colors } = useTheme();
 	const [active, setActive] = useState<number>(0);
 
@@ -27,7 +41,7 @@ const CategoryList = ({ title, data, step, defaultWidth = 158, isStepVisible = t
 					{data?.map((category, index) => (
 						<ListItems
 							category={category}
-							key={category.Id || category.id || index}
+							key={category.Id || index}
 							active={active}
 							defaultWidth={defaultWidth}
 							index={index}

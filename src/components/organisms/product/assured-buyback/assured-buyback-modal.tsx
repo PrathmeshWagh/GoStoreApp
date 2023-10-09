@@ -6,6 +6,7 @@ import { DefaultStyles, FontGilroy } from '@primitives/index';
 import { CustomButtom } from 'components/atoms';
 import { useCheckPincodeServiceabilityMutation } from 'api/checkout/check-pincode-serviceability';
 import { Table, TableWrapper, Row, Rows, Col } from 'react-native-table-component';
+import { tableHead, tableData } from 'helpers/constants/product/assured-table';
 
 interface AssuredProps {
 	onPress: () => {};
@@ -19,15 +20,6 @@ export default function AssuredBuyBackModal(props: AssuredProps) {
 
 	const [pincode, setPincode] = useState<string>('');
 	const [isPincodeMsgVisible, setIsPicodeMsgVisible] = useState<boolean>(false);
-
-	const tableHead = ['Buy Back Period', 'Guaranteed Assured Buyback Price'];
-	const tableData = [
-		['6-12 Months', 'Get 60% of Appliance Invoice price.'],
-		['13-24 Months', 'Get 50% of Appliance Invoice price.'],
-		['25-36 Months', 'Get 40% of Appliance Invoice price.'],
-		['37-48 Months', 'Get 30% of Appliance Invoice price.'],
-		['49-60 Months', 'Get 20% of Appliance Invoice price.']
-	];
 
 	const {
 		mutate: checkPincodeServiceability,
@@ -82,16 +74,7 @@ export default function AssuredBuyBackModal(props: AssuredProps) {
 			</Table>
 
 			<Text style={styles.header}>Check Serviciability:</Text>
-			<View
-				style={{
-					flexDirection: 'row',
-					justifyContent: 'space-between',
-					alignItems: 'center',
-					borderColor: colors.primary,
-					borderRadius: 10,
-					borderBottomWidth: 1
-				}}
-			>
+			<View style={[styles.inputField, { borderColor: colors.primary }]}>
 				<TextInput
 					maxLength={6}
 					placeholder="Enter PIN code"
@@ -170,8 +153,6 @@ export default function AssuredBuyBackModal(props: AssuredProps) {
 const styles = StyleSheet.create({
 	container: {
 		padding: 16,
-		borderWidth: 1,
-		borderColor: '#ddd',
 		borderRadius: 8,
 		marginBottom: 16
 	},
@@ -205,20 +186,25 @@ const styles = StyleSheet.create({
 		marginBottom: 10
 	},
 	head: {
-		height: 40,
-		backgroundColor: '#f6f8fa'
+		height: 40
 	},
 	wrapper: {
 		flexDirection: 'row'
 	},
 	title: {
-		flex: 1,
-		backgroundColor: '#f6f8fa'
+		flex: 1
 	},
 	row: {
 		height: 40
 	},
 	text: {
 		textAlign: 'center'
+	},
+	inputField: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		borderRadius: 10,
+		borderBottomWidth: 1
 	}
 });

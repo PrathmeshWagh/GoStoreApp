@@ -1,14 +1,36 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { useTheme } from '@hooks/index';
 
-const ListItems = ({ category, event, active, defaultWidth = 158, index = 0 }: any) => {
+interface ListItem {
+	Id: number;
+	Description: string;
+	Name?: string;
+	goCareCategoryName?: string;
+	wareranties?: string;
+	categoryName?: string;
+	priceRange?: string;
+}
+interface ListItemsProps {
+	category: ListItem;
+	event?: any;
+	active: number;
+	defaultWidth: number;
+	index: number;
+}
+
+const ListItems = (props: ListItemsProps) => {
+	const { category, event, active, defaultWidth = 158, index = 0 } = props;
+
+	const { colors } = useTheme();
+
 	return (
 		<TouchableOpacity
 			style={[
 				styles.container,
 				{
 					width: defaultWidth,
-					borderColor: active === (category?.Id || index) ? 'grey' : '#000'
+					borderColor: active === (category?.Id || index) ? colors.grey : colors.secondary
 				}
 			]}
 			onPress={() =>

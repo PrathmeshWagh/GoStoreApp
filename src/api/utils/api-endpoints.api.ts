@@ -15,5 +15,6 @@ export const enum ApiEndpoints {
 	BANK_OFFERS = 'transactions/v2/offers',
 	CATEGORIES = '/products/v2/categories',
 	CATEGORIES_V1 = '/products/v1/categories',
-	ALL_PRODUCTS = '/product/getAllProducts'
+	ALL_PRODUCTS = '/product/getAllProducts',
+	EXCHANGE = '/gostor/cart/exchange'
 }

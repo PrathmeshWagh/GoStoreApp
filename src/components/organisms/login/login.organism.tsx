@@ -74,7 +74,7 @@ export default function Login() {
 					text="Get OTP"
 					styles={[
 						styles.btnStyles,
-						{ backgroundColor: mobileNumber.length === 10 ? colors.primary : 'gray' }
+						{ backgroundColor: mobileNumber.length === 10 ? colors.primary : colors.grey }
 					]}
 					textStyles={[{ color: colors.onSecondary }, styles.textStyle]}
 					varaint="titleLarge"

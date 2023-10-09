@@ -164,7 +164,7 @@ const SignUpScreen = () => {
 								style={[styles.checkedIcon, { backgroundColor: colors.primary }]}
 							/>
 						) : (
-							<Icon name="square" color="#A2A2A2" size={22} />
+							<Icon name="square" color={colors.grey} size={22} />
 						)}
 					</TouchableOpacity>
 					<Text style={styles.tncText}>
@@ -182,7 +182,7 @@ const SignUpScreen = () => {
 					mode="text"
 					text="Sign Up"
 					styles={[styles.btnStyles, { backgroundColor: colors.primary }]}
-					textStyles={[{ color: tnc ? colors.onSecondary : '#9CA3B0' }, styles.textStyle]}
+					textStyles={[{ color: tnc ? colors.onSecondary : colors.grey }, styles.textStyle]}
 					varaint="titleLarge"
 				/>
 				<View style={styles.loginContainer}>

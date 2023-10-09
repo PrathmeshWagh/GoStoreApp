@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useRef } from 'react';
 import { View, StyleSheet, Modal, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+import { useTheme } from '@hooks/index';
 
 type ModalProps = {
 	open?: boolean;
@@ -32,7 +33,7 @@ const ModalComponent: FC<ModalProps> = ({
 	isAllowedOutsideClick = true
 }) => {
 	const modalRootRef = useRef<View>(null);
-
+	const { colors } = useTheme();
 	useEffect(() => {
 		if (open) {
 			// Handle modal open logic here
@@ -48,7 +49,7 @@ const ModalComponent: FC<ModalProps> = ({
 					{!hideCloseButton && (
 						<View style={[styles.closeButton, headerStyle]}>
 							<TouchableOpacity onPress={onClose}>
-								<Icon name={'x'} color={'#A2A2A2'} size={22} />
+								<Icon name={'x'} color={colors.grey} size={22} />
 							</TouchableOpacity>
 						</View>
 					)}

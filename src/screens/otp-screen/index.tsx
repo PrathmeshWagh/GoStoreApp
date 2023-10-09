@@ -113,7 +113,10 @@ export default function OtpScreen({ route }: RouteProps) {
 					mode="text"
 					text="Verify OTP"
 					styles={[styles.btnStyles, { backgroundColor: colors.primary }]}
-					textStyles={[{ color: otp.length === 6 ? 'white' : '#9CA3B0' }, styles.textStyle]}
+					textStyles={[
+						{ color: otp.length === 6 ? colors.onSecondary : colors.grey },
+						styles.textStyle
+					]}
 					varaint="titleLarge"
 				/>
 
