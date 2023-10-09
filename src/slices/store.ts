@@ -3,12 +3,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import locationReducer from './location.slice';
 import webviewUrlReducer from './webview.slice';
 import modalReducer from './modal.slice';
+import snackbarReducer from './snackbar.slice';
 
 const store = configureStore({
     reducer: {
         location: locationReducer,
         urlWebview: webviewUrlReducer,
         modal: modalReducer,
+        snackbar: snackbarReducer,
     },
 });
 

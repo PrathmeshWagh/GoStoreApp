@@ -8,5 +8,9 @@ export const CustomColors = {
 	inActive: '#9CA3B0',
 	bordercolor: '#e5e7eb',
 	offerbg: '#EFF5F8',
-	grey: '#6C6C6C'
+	grey: '#6C6C6C',
+	// grey: '#D7DBDD',
+	textGrey1: '#909497',
+	white: '#FFFFFF',
+	black: '#000000'
 };

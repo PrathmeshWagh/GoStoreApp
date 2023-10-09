@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Button, Text } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
+import { Button } from 'react-native-paper';
 
 import { useTheme } from '@hooks/index';
 import { DefaultStyles } from '@primitives/index';
@@ -23,49 +23,24 @@ interface CustomButtomProps {
 }
 
 const CustomButtom = (props: CustomButtomProps) => {
-	const { colors } = useTheme();
-	const {
-		onPress,
-		loading,
-		uppercase,
-		styles,
-		mode = 'elevated',
-		disabled,
-		text,
-		textStyles,
-		varaint = 'titleLarge',
-		children,
-		buttonColor,
-		icon = null
-	} = props;
+    const { colors } = useTheme();
+    const { onPress, loading, uppercase, styles, mode = 'elevated', disabled, text, textStyles } = props;
 
-	return (
-		<Button
-			mode={mode}
-			buttonColor={mode === 'outlined' ? 'transparent' : colors.primary}
-			textColor={colors.onSecondary}
-			onPress={onPress}
-			style={[btnStyles.btn, styles]}
-			uppercase={uppercase ? uppercase : false}
-			loading={loading}
-			disabled={disabled}
-			labelStyle={{ marginVertical: 0 }}
-		>
-			{icon}
-			{/* <Icon name={'cart-outline'} size={20} color={'red'} /> */}
-
-			<Text
-				variant={varaint}
-				style={[
-					{ color: loading ? colors.secondary : colors.onSecondary },
-					btnStyles.text,
-					textStyles
-				]}
-			>
-				{text}
-			</Text>
-		</Button>
-	);
+    return (
+        <Button
+            mode={mode}
+            buttonColor={mode === 'outlined' ? 'transparent' : colors.primary}
+            textColor={colors.onSecondary}
+            onPress={onPress}
+            style={[btnStyles.btn, styles]}
+            uppercase={uppercase ? uppercase : false}
+            loading={loading}
+            disabled={disabled}
+            labelStyle={[{ color: loading ? colors.secondary : colors.onSecondary }, btnStyles.text, textStyles]}
+        >
+            { text }
+        </Button>
+    );
 };
 
 const btnStyles = StyleSheet.create({

@@ -4,3 +4,6 @@ export { default as StoreInActiveIcon } from './store-inactive.icons';
 export { default as GocareActiveIcon } from './gocare-active.icons';
 export { default as GocareInActiveIcon } from './gocare-inactive.icons';
 export { default as OfferIcon } from './offer.icons';
+export { default as GetLocationIcon } from './get-location.icons';
+export { default as LocationIcon } from './location.icon';
+export { default as BackIcon } from './back.icon';

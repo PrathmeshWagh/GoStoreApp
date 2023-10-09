@@ -13,4 +13,6 @@ export type RootStackParamList = {
 	[RouteConstants.ProductdeatilsScreenRoute]: { item: any };
 	[RouteConstants.CategoriesScreenRoute]: any;
 	[RouteConstants.ViewMoreSimilarProductScreenRoute]: undefined;
+	[RouteConstants.LocationScreenRoute]: undefined;
+	[RouteConstants.PincodeScreenRoute]: undefined;
 };
