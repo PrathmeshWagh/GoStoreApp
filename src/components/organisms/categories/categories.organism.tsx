@@ -40,6 +40,7 @@ interface Category {
 
 const Categories = ({ categoryData }: any) => {
 	// const location = useSelector((state: RootState) => state.location);
+	console.log('cate', categoryData);
 
 	const { mutate: getProducts, isLoading, data: categories } = useGetProducts();
 
@@ -85,7 +86,7 @@ const Categories = ({ categoryData }: any) => {
 	}, [currentPage]);
 
 	const btnPressedHandler = (item: any) => {
-		navigate(RouteConstants.ProductdeatilsScreenRoute, { item: item });
+		navigate(RouteConstants.ProductdeatilsScreenRoute, { item: item, categories: categoryData });
 	};
 
 	const categoriesItem = ({ item }: any) => {

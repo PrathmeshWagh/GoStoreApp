@@ -62,7 +62,7 @@ export default function PincodeServicality() {
 					}}
 				/>
 				<CustomButtom
-					loading={false}
+					loading={pincodeServiceabilityLoading}
 					onPress={() => {
 						onCheckPincodeServiceabilityPress();
 					}}
@@ -72,7 +72,7 @@ export default function PincodeServicality() {
 					styles={[
 						styles.checkButton,
 						{
-							backgroundColor: pincode.length !== 6 ? 'white' : colors.primary,
+							backgroundColor: pincode.length !== 6 ? colors.onSecondary : colors.primary,
 							borderColor: colors.tertiary
 						}
 					]}
@@ -97,7 +97,6 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		borderWidth: 1,
-
 		borderRadius: 10,
 		marginVertical: 15
 	},
@@ -105,7 +104,7 @@ const styles = StyleSheet.create({
 		flex: 1
 	},
 	checkButton: {
-		height: DefaultStyles.DefaultButtonHeight,
+		height: DefaultStyles.DefaultButtonHeight - 5,
 		borderRadius: DefaultStyles.DefaultButtonHeight - 40,
 		borderWidth: 1
 	},

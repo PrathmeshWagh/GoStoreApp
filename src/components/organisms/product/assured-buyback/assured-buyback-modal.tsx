@@ -9,7 +9,7 @@ import { Table, TableWrapper, Row, Rows, Col } from 'react-native-table-componen
 import { tableHead, tableData } from 'helpers/constants/product/assured-table';
 
 interface AssuredProps {
-	onPress: () => {};
+	onPress: () => void;
 }
 
 export default function AssuredBuyBackModal(props: AssuredProps) {
@@ -61,7 +61,7 @@ export default function AssuredBuyBackModal(props: AssuredProps) {
 	return (
 		<View style={styles.container}>
 			<Text style={[styles.header, styles.text]}>What is Buy Back Guarantee?</Text>
-			<Text style={[styles.text, { marginBottom: 10 }]}>
+			<Text style={[styles.text, { marginVertical: 8 }]}>
 				Buyback Plan is facilitated by Gostor which assures you a fixed buyback price up to 5 years
 				for your used products purchased from Gostor.
 			</Text>
@@ -73,11 +73,11 @@ export default function AssuredBuyBackModal(props: AssuredProps) {
 				</TableWrapper>
 			</Table>
 
-			<Text style={styles.header}>Check Serviciability:</Text>
+			<Text style={[styles.header, { marginTop: 10 }]}>Check Serviciability:</Text>
 			<View style={[styles.inputField, { borderColor: colors.primary }]}>
 				<TextInput
 					maxLength={6}
-					placeholder="Enter PIN code"
+					placeholder="Enter Pincode"
 					keyboardType="numeric"
 					style={{ flex: 1 }}
 					onChangeText={(text) => {
@@ -86,13 +86,13 @@ export default function AssuredBuyBackModal(props: AssuredProps) {
 					}}
 				/>
 				<CustomButtom
-					loading={false}
+					loading={pincodeServiceabilityLoading}
 					onPress={onCheckPincodeServiceabilityPress}
 					mode="text"
 					text="Apply"
 					disabled={pincode.length !== 6}
 					styles={{
-						height: DefaultStyles.DefaultButtonHeight,
+						height: DefaultStyles.DefaultButtonHeight - 6,
 						borderRadius: DefaultStyles.DefaultButtonHeight - 40,
 						backgroundColor: pincode.length !== 6 ? colors.onSecondary : colors.primary,
 						borderColor: colors.tertiary,
@@ -113,7 +113,7 @@ export default function AssuredBuyBackModal(props: AssuredProps) {
 					}}
 				>
 					{!tnc ? (
-						<Icon name={'square'} color={colors.gray} size={22} />
+						<Icon name={'square'} color={colors.grey} size={22} />
 					) : (
 						<Icon
 							name={'check'}
@@ -139,7 +139,7 @@ export default function AssuredBuyBackModal(props: AssuredProps) {
 				text="Add Plan"
 				disabled={false}
 				styles={{
-					height: DefaultStyles.DefaultButtonHeight,
+					height: DefaultStyles.DefaultButtonHeight - 5,
 					borderRadius: DefaultStyles.DefaultButtonHeight - 40,
 					backgroundColor: colors.primary,
 					marginTop: 10
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
 	container: {
 		padding: 16,
 		borderRadius: 8,
-		marginBottom: 16
+		marginBottom: 8
 	},
 	header: {
 		fontFamily: FontGilroy.Bold
@@ -198,7 +198,8 @@ const styles = StyleSheet.create({
 		height: 40
 	},
 	text: {
-		textAlign: 'center'
+		textAlign: 'center',
+		fontSize: 14
 	},
 	inputField: {
 		flexDirection: 'row',

@@ -50,8 +50,8 @@ import LottieView from 'lottie-react-native';
 import { useCouponsQuery } from 'api/coupons/get-coupons';
 
 export default function ProductDetailsScreen({ route }: any) {
-	const Productitem = route.params;
-	console.log('product', Productitem);
+	const Productitem = route.params.item;
+	const categories = route.params.categories;
 
 	const { navigate } = useEnhancedNavigation();
 	const { width, height } = useDimensions();
@@ -89,7 +89,7 @@ export default function ProductDetailsScreen({ route }: any) {
 	};
 
 	const handleViewMore = () => {
-		const slug = 'TELEVISIONS';
+		const slug = categories.categoryData.slug;
 		const id = Productitem.productId;
 
 		navigate(RouteConstants.CategoriesScreenRoute, { name: slug, id: id });
@@ -98,11 +98,11 @@ export default function ProductDetailsScreen({ route }: any) {
 	const renderAssuredBBIcon = (iconName: 'buyBackPrice' | 'seamless' | 'greatSaving') => {
 		switch (iconName) {
 			case 'buyBackPrice':
-				return <PreDetermineIcon width={30} height={30} />;
+				return <PreDetermineIcon width={35} height={35} />;
 			case 'seamless':
-				return <SeamlessIcon width={30} height={30} />;
+				return <SeamlessIcon width={35} height={35} />;
 			case 'greatSaving':
-				return <GreatSavingIcon width={30} height={30} />;
+				return <GreatSavingIcon width={35} height={35} />;
 			default:
 				return <></>;
 		}
@@ -229,7 +229,11 @@ export default function ProductDetailsScreen({ route }: any) {
 							/>
 						</TouchableOpacity>
 					</View>
-					{expanded && <Text style={styles.expandedtext}>10% Off on HDFC Credit Cards </Text>}
+					{expanded && (
+						<Text style={[styles.expandedtext, { borderColor: colors.bordercolor }]}>
+							10% Off on HDFC Credit Cards{' '}
+						</Text>
+					)}
 					<View>
 						<View style={styles.space}>
 							<View style={{ flexDirection: 'row' }}>
@@ -242,7 +246,7 @@ export default function ProductDetailsScreen({ route }: any) {
 									refRBSheet.current.open();
 								}}
 							>
-								<ViewMore />
+								<ViewMore width={45} />
 								<Text style={{ color: colors.primary }}>View all</Text>
 							</Pressable>
 						</View>
@@ -301,11 +305,11 @@ export default function ProductDetailsScreen({ route }: any) {
 									{assuredBBFeatures.map((feature) => (
 										<View style={styles.description}>
 											{renderAssuredBBIcon(feature.icon)}
-											<Text style={styles.text}>{feature.desc}</Text>
+											<Text style={[styles.text, { fontSize: 14 }]}>{feature.desc}</Text>
 										</View>
 									))}
 								</View>
-								<View style={[styles.space, { marginTop: 10 }]}>
+								<View style={[styles.space, { marginTop: 12, marginBottom: 8 }]}>
 									<Rupee money={1} styles={{ fontSize: 25 }} />
 									<CustomButtom
 										loading={false}
@@ -317,7 +321,7 @@ export default function ProductDetailsScreen({ route }: any) {
 										text="Add Plan"
 										disabled={false}
 										styles={{
-											height: DefaultStyles.DefaultButtonHeight,
+											height: DefaultStyles.DefaultButtonHeight - 5,
 											borderRadius: DefaultStyles.DefaultButtonHeight - 40,
 											backgroundColor: colors.primary
 										}}
@@ -333,7 +337,9 @@ export default function ProductDetailsScreen({ route }: any) {
 							onRequestClose={() => setModalVisible(false)}
 						>
 							<View style={styles.modalContainer}>
-								<View style={{ backgroundColor: '#fff', borderRadius: 15, elevation: 5 }}>
+								<View
+									style={{ backgroundColor: colors.onSecondary, borderRadius: 15, elevation: 5 }}
+								>
 									<AssuredBuyBackModal
 										onPress={() => {
 											setModalVisible(false);
@@ -344,8 +350,10 @@ export default function ProductDetailsScreen({ route }: any) {
 						</Modal>
 					</View>
 					<View>
-						<Text style={{ fontFamily: FontGilroy.SemiBold, fontSize: 17 }}>Exchange</Text>
-						<Text>Exchange any product and get benefits up to ₹14,000*</Text>
+						<Text style={styles.exchangeText}>Exchange</Text>
+						<Text style={{ fontSize: 13, marginBottom: 10, marginTop: 2 }}>
+							Exchange any product and get benefits up to ₹14,000*
+						</Text>
 						<ExchangeProduct setIsExchangeVisible={setIsExchangeVisible} />
 						<View style={[styles.withBuyback, { borderColor: colors.primary }]}>
 							<Text>Buy without Exchange</Text>
@@ -379,9 +387,10 @@ export default function ProductDetailsScreen({ route }: any) {
 						</Text>
 					</View>
 
-					<Text style={styles.dealerText}>
-						Sold By :<Text style={{ fontFamily: FontGilroy.Medium }}> BLUEZOO PRIVATE LIMITED</Text>
-					</Text>
+					<View style={styles.direction}>
+						<Text style={styles.dealerText}>Sold By:</Text>
+						<Text style={{ fontFamily: FontGilroy.Medium }}>Blue stone limited</Text>
+					</View>
 
 					<Highlight />
 					<SpecsAndInstaltion />
@@ -409,7 +418,7 @@ export default function ProductDetailsScreen({ route }: any) {
 			>
 				<View style={styles.offerContainer}>
 					<View style={[styles.offerDetails, { backgroundColor: colors.tertiary }]}>
-						<View style={[styles.greenBox, { backgroundColor: colors.primary }]}></View>
+						<View style={[styles.greenBox, { backgroundColor: colors.primary }]} />
 						<View style={{ marginHorizontal: 8 }}>
 							<LottieView source={require('@assets/bank-offers.json')} autoPlay loop />
 						</View>
@@ -532,7 +541,6 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		padding: 10,
 		borderRadius: 5,
-		borderColor: '#e5e7eb',
 		marginVertical: 10,
 		fontFamily: FontGilroy.Medium
 	},
@@ -602,12 +610,18 @@ const styles = StyleSheet.create({
 	},
 	dealerText: {
 		fontFamily: FontGilroy.Bold,
-		fontSize: 17,
-		marginVertical: 20
+		fontSize: 16,
+		marginVertical: 15,
+		marginRight: 10
 	},
 	space: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center'
+	},
+	exchangeText: {
+		fontFamily: FontGilroy.SemiBold,
+		fontSize: 17,
+		marginTop: 12
 	}
 });

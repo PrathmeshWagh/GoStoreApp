@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
 		marginVertical: 15
 	},
 	highlightText: {
-		fontSize: 18,
+		fontSize: 17,
 		fontFamily: FontGilroy.Bold
 	},
 	direction: {

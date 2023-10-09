@@ -70,7 +70,7 @@ export default function EXchangeDetails({ setIsExchangeVisible }: any) {
 								}}
 							/>
 							<CustomButtom
-								loading={false}
+								loading={pincodeServiceabilityLoading}
 								onPress={() => onCheckPincodeServiceabilityPress()}
 								mode="text"
 								text="Apply"
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
 		padding: 10
 	},
 	buttonStyles: {
-		height: DefaultStyles.DefaultButtonHeight,
+		height: DefaultStyles.DefaultButtonHeight - 8,
 		borderRadius: DefaultStyles.DefaultButtonHeight - 40,
 		marginTop: 20
 	},

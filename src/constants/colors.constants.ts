@@ -10,7 +10,5 @@ export const CustomColors = {
 	offerbg: '#EFF5F8',
 	grey: '#6C6C6C',
 	// grey: '#D7DBDD',
-	textGrey1: '#909497',
-	white: '#FFFFFF',
-	black: '#000000'
+	textGrey1: '#909497'
 };

@@ -23,6 +23,7 @@ const BannerImagesSection = (props: BannerImagesSectionProps) => {
 		banner.bannerType,
 		banner.parentBannerId
 	);
+	console.log('data', data);
 
 	const { bannerClick } = useBannerClick();
 

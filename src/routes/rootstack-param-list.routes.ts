@@ -10,7 +10,7 @@ export type RootStackParamList = {
 	[RouteConstants.LoginRoute]: undefined;
 	[RouteConstants.SignUpRoute]: undefined;
 	[RouteConstants.OtpRoute]: { mobileNumber: String };
-	[RouteConstants.ProductdeatilsScreenRoute]: { item: any };
+	[RouteConstants.ProductdeatilsScreenRoute]: { item: any; categories: any };
 	[RouteConstants.CategoriesScreenRoute]: any;
 	[RouteConstants.ViewMoreSimilarProductScreenRoute]: undefined;
 	[RouteConstants.LocationScreenRoute]: undefined;

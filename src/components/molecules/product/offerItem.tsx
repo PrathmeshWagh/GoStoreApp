@@ -4,32 +4,27 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTheme } from '@hooks/index';
 import { DefaultStyles, FontGilroy } from '@primitives/index';
 
-const OfferItem = ({ title, description, onPress }) => {
+interface OfferItemProps {
+	title: string;
+	description: string;
+	onPress: () => void;
+}
+
+const OfferItem = (props: OfferItemProps) => {
+	const { title, description, onPress } = props;
 	const { colors } = useTheme();
 	return (
-		<View style={styles.offer}>
-			<View
-				style={{
-					flexDirection: 'row',
-					backgroundColor: '#EFF5F8',
-					borderRadius: 5,
-					paddingHorizontal: 5
-				}}
-			>
+		<View style={[styles.offer, { borderColor: colors.bordercolor }]}>
+			<View style={[styles.titleContainer, { backgroundColor: colors.offerbg }]}>
 				<Icon name="brightness-percent" size={20} color={colors.primary} />
 				<Text style={styles.text}>{title}</Text>
 			</View>
-			<View
-				style={{
-					flex: 1,
-					justifyContent: 'space-between',
-					paddingHorizontal: 6,
-					paddingVertical: 3
-				}}
-			>
+			<View style={styles.descriptionContainer}>
 				<Text>{description}</Text>
 				<TouchableOpacity onPress={onPress}>
-					<Text style={{ textDecorationLine: 'underline' }}>9 offer</Text>
+					<Text style={{ textDecorationLine: 'underline', fontFamily: FontGilroy.Medium }}>
+						9 offer
+					</Text>
 				</TouchableOpacity>
 			</View>
 		</View>
@@ -42,13 +37,24 @@ const styles = StyleSheet.create({
 	text: {
 		fontSize: 16,
 		fontFamily: FontGilroy.Medium,
-		textAlign: 'center'
+		textAlign: 'center',
+		marginLeft: 5
 	},
 	offer: {
 		flex: 1,
 		height: 110,
 		borderWidth: 1,
+		borderRadius: 5
+	},
+	titleContainer: {
+		flexDirection: 'row',
 		borderRadius: 5,
-		borderColor: '#e5e7eb'
+		paddingHorizontal: 5
+	},
+	descriptionContainer: {
+		flex: 1,
+		justifyContent: 'space-between',
+		paddingHorizontal: 6,
+		paddingVertical: 3
 	}
 });

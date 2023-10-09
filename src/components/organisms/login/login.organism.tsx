@@ -20,7 +20,7 @@ export default function Login() {
 	const [mobileNumber, setmobileNumber] = useState('');
 	const [numberError, setNumberError] = useState(false);
 
-	const { mutate: getOtp } = useGenerateOtpMutation();
+	const { mutate: getOtp, isLoading: generateOTPloading } = useGenerateOtpMutation();
 
 	const GenerateOtp = async () => {
 		getOtp({ mobile: mobileNumber });
@@ -68,7 +68,7 @@ export default function Login() {
 					onPress={() => {
 						GenerateOtp();
 					}}
-					loading={false}
+					loading={generateOTPloading}
 					disabled={mobileNumber.length !== 10}
 					mode="text"
 					text="Get OTP"

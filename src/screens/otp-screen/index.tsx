@@ -28,7 +28,7 @@ export default function OtpScreen({ route }: RouteProps) {
 	const [resendTimer, setResendTimer] = useState(30);
 	const [isResendDisabled, setIsResendDisabled] = useState(true);
 
-	const { mutate: login } = useLoginMutation();
+	const { mutate: login, isLoading: loginLoading } = useLoginMutation();
 
 	let isNewUser: boolean = false;
 	useEffect(() => {
@@ -108,7 +108,7 @@ export default function OtpScreen({ route }: RouteProps) {
 
 				<CustomButtom
 					onPress={() => VerifyOtp()}
-					loading={false}
+					loading={loginLoading}
 					disabled={otp.length !== 6}
 					mode="text"
 					text="Verify OTP"

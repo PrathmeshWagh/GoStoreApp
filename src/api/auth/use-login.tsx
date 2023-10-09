@@ -24,7 +24,6 @@ export const LoginWithNumber = async function login(input: LoginInputType) {
 		data,
 		withCredsHttpConfig
 	);
-	console.log('response in login', response);
 
 	return response;
 };

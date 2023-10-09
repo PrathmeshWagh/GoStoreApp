@@ -9,7 +9,7 @@ export default function ReviewsRatings() {
 	const { colors } = useTheme();
 	return (
 		<>
-			<Text style={{ fontFamily: FontGilroy.Bold, fontSize: 18 }}>Reviews & Ratings</Text>
+			<Text style={{ fontFamily: FontGilroy.Bold, fontSize: 17 }}>Reviews & Ratings</Text>
 			<View style={styles.container}>
 				<View style={styles.ratingInfo}>
 					<View style={styles.ratingValue}>

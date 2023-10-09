@@ -12,17 +12,16 @@ import { updateUrl } from 'slices/webview.slice';
 import Config from 'react-native-config';
 
 const Categories = () => {
-    const { data, isLoading, isError, refetch } = useCategories();
-    const categoryData = data?.data || [];
-    const { navigate } = useEnhancedNavigation();
-    const dispatch = useDispatch<AppDispatch>();
-    const location = useSelector((state: RootState) => state.location);
-    console.log(location);
-    
+	const { data, isLoading, isError, refetch } = useCategories();
+	const categoryData = data?.data || [];
+	const { navigate } = useEnhancedNavigation();
+	const dispatch = useDispatch<AppDispatch>();
+	const location = useSelector((state: RootState) => state.location);
 
 	const onPress = (item: Category) => {
 		const url = `/category/${item.slug}?categoryId=${item.id}&sort_by=recommendation_asc`;
 		dispatch(updateUrl({ url: `${Config.BASE_WEBVIEW_URL}${url}` }));
+		console.log('ca', item);
 
 		navigate(RouteConstants.CategoriesScreenRoute, { categoryData: item });
 	};

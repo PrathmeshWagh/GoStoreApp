@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between'
 	},
 	headerText: {
-		fontSize: 18,
+		fontSize: 17,
 		fontFamily: FontGilroy.Bold
 	},
 	content: {},
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		paddingBottom: 10,
-		marginBottom: 15
+		marginBottom: 5
 	},
 	installationTitle: {
 		fontFamily: FontGilroy.SemiBold,

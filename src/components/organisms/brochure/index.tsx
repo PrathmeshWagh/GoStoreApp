@@ -5,7 +5,7 @@ import { DefaultStyles, FontGilroy } from '@primitives/index';
 export default function Brochure() {
 	return (
 		<View>
-			<Text style={{ fontFamily: FontGilroy.Bold, fontSize: 18 }}>
+			<Text style={{ fontFamily: FontGilroy.Bold, fontSize: 17 }}>
 				Know more about this product
 			</Text>
 		</View>

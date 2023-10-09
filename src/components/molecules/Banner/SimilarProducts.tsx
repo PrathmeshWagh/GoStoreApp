@@ -95,7 +95,7 @@ export default function SimilarProducts({ title, link, response, event, onPress 
 				{title && <Text style={styles.title}>{title}</Text>}
 				{link && (
 					<TouchableOpacity style={styles.link} onPress={onPress}>
-						<ViewMore />
+						<ViewMore width={45} />
 						<Text style={styles.linkText}>View more</Text>
 					</TouchableOpacity>
 				)}
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
 		paddingVertical: 2
 	},
 	title: {
-		fontSize: 18,
+		fontSize: 17,
 		fontFamily: FontGilroy.Medium
 	},
 	link: {
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
 	infoContainer: {
 		flex: 1,
 		paddingLeft: 15,
-		paddingRight: 20,
+		paddingRight: 10,
 		paddingVertical: 15,
 		backgroundColor: '#E8E8E8',
 		borderBottomRightRadius: 20,
@@ -253,6 +253,6 @@ const styles = StyleSheet.create({
 	renderContainer: {
 		borderWidth: 1,
 		borderRadius: 20,
-		marginHorizontal: 20
+		marginHorizontal: 5
 	}
 });
