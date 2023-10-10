@@ -5,11 +5,13 @@ import {
 	Text,
 	Pressable,
 	RefreshControl,
-	ActivityIndicator
+	ActivityIndicator,
+	ScrollView
 } from 'react-native';
 import React, { useEffect, useState, useRef } from 'react';
 import { FontGilroy, DefaultStyles } from '@primitives/index';
 import { CustomColors } from '../../../constants/colors.constants';
+import { useDimensions } from 'hooks';
 import { useGetProducts } from 'api/products/get-product-list';
 // import { useSelector } from 'react-redux';
 // import { RootState } from '@slices/store';
@@ -44,17 +46,24 @@ const sortOptions = [
 	{ id: 'pricelowToHigh', label: 'Price: Low To High' },
 	{ id: 'priceHighToLow', label: 'Price: High To Low' }
 ];
+const filterOptions = [
+	{ id: 'recommendation', label: 'Brands' },
+	{ id: 'discHighToLow', label: 'Price' },
+	{ id: 'pricelowToHighSmart', label: 'Smart TV' },
+	{ id: 'priceHighToLowSSS', label: 'Display Size' }
+];
 
 const Categories = ({ categoryData }: any) => {
 	// const location = useSelector((state: RootState) => state.location);
 	const refRBSheet = useRef<RBSheet>(null);
+	const refRBSheetFilter = useRef<RBSheet>(null);
+	const { height, width } = useDimensions();
 	const { mutate: getProducts, isLoading, data: categories } = useGetProducts();
-
 	const [categoriesData, setCategoriesData] = useState<Category[]>([]);
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const [refreshing, setRefreshing] = useState(false);
 	const [selectedSort, setSelectedSort] = useState('recommendation');
-	const [open, setOpen] = useState(false);
+	const [selectedFilter, setSelectedFilter] = useState('');
 
 	useEffect(() => {
 		if (categories) {
@@ -111,12 +120,9 @@ const Categories = ({ categoryData }: any) => {
 	const handleSortSelect = (sortOptionId) => {
 		setSelectedSort(sortOptionId);
 	};
-	const onClosePress = () => {
-		if (!open) {
-			refRBSheet.current.open();
-		} else {
-			refRBSheet.current.close();
-		}
+
+	const handleFilterSelect = (filterOptionId) => {
+		setSelectedFilter(filterOptionId);
 	};
 
 	return (
@@ -136,73 +142,147 @@ const Categories = ({ categoryData }: any) => {
 				/>
 			</View>
 
-			<View style={styles.sortAndFilterContainer}>
-				<Pressable style={styles.sortbtn} onPress={() => refRBSheet.current.open()}>
-					<Text style={{ fontSize: 18, fontWeight: 'bold', color: CustomColors.secondary }}>
-						Sort
-					</Text>
-				</Pressable>
+			<View style={{ overflow: 'hidden', paddingTop: 5 }}>
+				<View style={styles.sortAndFilterContainer}>
+					<Pressable style={styles.sortbtn} onPress={() => refRBSheet.current?.open()}>
+						<Text style={{ fontSize: 17, fontWeight: '600', color: CustomColors.secondary }}>
+							Sort
+						</Text>
+					</Pressable>
 
-				<Pressable style={styles.filterbtn}>
-					<Text style={{ fontSize: 18, fontWeight: 'bold', color: CustomColors.secondary }}>
-						Filter
-					</Text>
-				</Pressable>
+					<Pressable style={styles.filterbtn} onPress={() => refRBSheetFilter.current?.open()}>
+						<Text style={{ fontSize: 17, fontWeight: '600', color: CustomColors.secondary }}>
+							Filter
+						</Text>
+					</Pressable>
 
-				<RBSheet
-					ref={refRBSheet}
-					onOpen={() => setOpen(true)}
-					onClose={() => setOpen(false)}
-					customStyles={{
-						wrapper: {
-							backgroundColor: 'rgba(0, 0, 0, 0.5)'
-						},
-						// draggableIcon: {
-						// 	backgroundColor: '#000'
-						// },
-						container: {
-							width: '95%',
-							borderRadius: 10,
-							alignSelf: 'center'
-						}
-					}}
-				>
-					<View>
-						<View style={styles.sortbytextContainer}>
-							<Pressable>
-								<Text style={{ fontSize: 16, fontWeight: 'bold', color: 'black' }}>Sort By</Text>
-							</Pressable>
+					<RBSheet
+						ref={refRBSheet}
+						height={height / 2.5}
+						customStyles={{
+							wrapper: {
+								backgroundColor: 'rgba(0, 0, 0, 0.5)'
+							},
+							container: {
+								backgroundColor: '#F2F6FC',
+								width: '95%',
+								borderRadius: 10,
+								alignSelf: 'center'
+							}
+						}}
+					>
+						<View>
+							<View style={styles.sortbytextContainer}>
+								<Pressable>
+									<Text style={{ fontSize: 16, fontWeight: '500', color: 'black' }}>Sort By</Text>
+								</Pressable>
 
-							<Pressable onPress={onClosePress}>
-								<Icon name="close" size={20} color={'black'} />
-							</Pressable>
-						</View>
+								<Pressable onPress={() => refRBSheet.current?.close()}>
+									<Icon name="close" size={20} color={'black'} />
+								</Pressable>
+							</View>
 
-						<View style={styles.content}>
-							{sortOptions.map((option, index) => (
-								<Pressable
-									key={option.id}
-									style={[styles.info, index < sortOptions.length - 1 && styles.borderBottom]}
-									onPress={() => handleSortSelect(option.id)}
-								>
-									{selectedSort === option.id ? (
-										<Icon name="circle-slice-8" size={20} color={CustomColors.primary} />
-									) : (
-										<FontAwesome5 name={'circle'} size={20} color="black" />
-									)}
-									<Text
-										style={[
-											styles.optionText,
-											selectedSort === option.id && styles.selectedsortText
-										]}
+							<View style={styles.content}>
+								{sortOptions.map((option, index) => (
+									<Pressable
+										key={option.id}
+										style={[styles.info, index < sortOptions.length - 1 && styles.borderBottom]}
+										onPress={() => handleSortSelect(option.id)}
 									>
-										{option.label}
+										{selectedSort === option.id ? (
+											<Icon name="circle-slice-8" size={20} color={CustomColors.primary} />
+										) : (
+											<FontAwesome5 name={'circle'} size={20} color="black" />
+										)}
+										<Text
+											style={[
+												styles.optionText,
+												selectedSort === option.id && styles.selectedsortText
+											]}
+										>
+											{option.label}
+										</Text>
+									</Pressable>
+								))}
+							</View>
+						</View>
+					</RBSheet>
+
+					<RBSheet
+						ref={refRBSheetFilter}
+						height={height / 1.1}
+						customStyles={{
+							wrapper: {
+								backgroundColor: 'rgba(0, 0, 0, 0.5)'
+							},
+
+							container: {
+								width: '95%',
+								borderRadius: 10,
+								alignSelf: 'center'
+							}
+						}}
+					>
+						<View style={{ flex: 1, justifyContent: 'space-between' }}>
+							<View>
+								<View style={styles.sortbytextContainer}>
+									<Pressable>
+										<Text style={{ fontSize: 16, fontWeight: 'bold', color: 'black' }}>
+											Filters
+										</Text>
+									</Pressable>
+
+									<Pressable>
+										<Text style={{ fontSize: 16 }}>Reset</Text>
+									</Pressable>
+								</View>
+
+								<View style={styles.content}>
+									{filterOptions.map((option, index) => (
+										<View
+											key={option.id}
+											style={index < sortOptions.length - 1 && styles.borderBottom}
+										>
+											<Pressable
+												style={[styles.filterinfo]}
+												onPress={() => handleFilterSelect(option.id)}
+											>
+												<Text
+													style={[
+														styles.optionText,
+														selectedFilter === option.id && styles.selectedsortText
+													]}
+												>
+													{option.label}
+												</Text>
+												<Icon name="chevron-down" size={25} />
+											</Pressable>
+											{selectedFilter === option.id && (
+												<View>
+													<Text>HHH</Text>
+												</View>
+											)}
+										</View>
+									))}
+								</View>
+							</View>
+
+							<View style={styles.closeAndApplyContainer}>
+								<Pressable style={styles.sortbtn} onPress={() => refRBSheetFilter.current?.close()}>
+									<Text style={{ fontSize: 18, fontWeight: 'bold', color: CustomColors.secondary }}>
+										Close
 									</Text>
 								</Pressable>
-							))}
+
+								<Pressable style={styles.filterbtn}>
+									<Text style={{ fontSize: 18, fontWeight: 'bold', color: CustomColors.primary }}>
+										Apply
+									</Text>
+								</Pressable>
+							</View>
 						</View>
-					</View>
-				</RBSheet>
+					</RBSheet>
+				</View>
 			</View>
 		</>
 	);
@@ -211,20 +291,23 @@ const Categories = ({ categoryData }: any) => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		// paddingBottom: DefaultStyles.DefaultPadding + 16,
-		paddingTop: DefaultStyles.DefaultPadding,
+		marginTop: 20,
 		paddingHorizontal: DefaultStyles.DefaultPadding - 8
 	},
 	sortAndFilterContainer: {
 		flexDirection: 'row',
-		borderTopColor: 'black',
-		borderTopWidth: 0.4,
-		height: DefaultStyles.DefaultHeight
+		height: DefaultStyles.DefaultHeight,
+		backgroundColor: '#fff',
+		shadowColor: '#000',
+		shadowOffset: { width: 1, height: -1 },
+		shadowOpacity: 0.4,
+		shadowRadius: 3,
+		elevation: 5
 	},
 	sortbtn: {
 		flex: 1,
 		borderRightWidth: 1,
-		borderBottomColor: '#E8E8E8',
+		borderRightColor: '#E8E8E8',
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
@@ -237,24 +320,24 @@ const styles = StyleSheet.create({
 		paddingVertical: DefaultStyles.DefaultPadding,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
-		backgroundColor: '#E7E7E7',
+		backgroundColor: '#ECF0F3',
 		paddingHorizontal: DefaultStyles.DefaultPadding
 	},
 	info: {
 		flexDirection: 'row',
 		alignItems: 'center',
-		paddingVertical: 10
+		paddingVertical: 13
 	},
 	optionText: {
 		alignItems: 'center',
 		justifyContent: 'center',
-		fontSize: 20,
-		color: 'black',
+		fontSize: 17,
+		color: CustomColors.secondary,
 		paddingLeft: 5
 	},
 	content: {
 		marginBottom: 20,
-		padding: DefaultStyles.DefaultPadding - 4
+		padding: DefaultStyles.DefaultPadding
 	},
 	selectedsortText: {
 		fontFamily: FontGilroy.SemiBold
@@ -262,6 +345,17 @@ const styles = StyleSheet.create({
 	borderBottom: {
 		borderBottomWidth: 1,
 		borderBottomColor: '#E8E8E8'
+	},
+	closeAndApplyContainer: {
+		flexDirection: 'row',
+		borderTopColor: 'black',
+		borderTopWidth: 0.4,
+		height: DefaultStyles.DefaultHeight
+	},
+	filterinfo: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		paddingVertical: 10
 	}
 });
 

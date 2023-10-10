@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
 		paddingVertical: 2
 	},
 	bestsellerText: {
-		color: 'white',
+		color: CustomColors.onSecondary,
 		fontWeight: 'bold'
 	},
 	ratingBox: {
@@ -81,8 +81,7 @@ const styles = StyleSheet.create({
 		paddingVertical: 2
 	},
 	ratingText: {
-		color: 'white',
-		fontWeight: 'bold',
+		color: CustomColors.onSecondary,
 		paddingRight: 3
 	},
 
@@ -100,26 +99,28 @@ const styles = StyleSheet.create({
 		flex: 1,
 		paddingLeft: 15,
 		paddingRight: 20,
-		paddingVertical: 15,
+		paddingVertical: 10,
 		backgroundColor: '#E8E8E8',
 		borderBottomRightRadius: 20,
 		borderBottomLeftRadius: 20
 	},
 	title: {
+		fontFamily: FontGilroy.Medium,
 		fontSize: 13,
 		lineHeight: 20,
-		fontFamily: FontGilroy.Bold
+		color: CustomColors.secondary
 	},
 	price: {
 		lineHeight: 20,
-		fontSize: 16
+		color: CustomColors.secondary,
+		fontWeight: 'bold'
 	},
 	mrpWrapper: {
 		flexDirection: 'row',
 		alignItems: 'center'
 	},
 	mrp: {
-		color: '#AAB7B8',
+		// color: '#AAB7B8',
 		fontSize: 14,
 		fontWeight: '400',
 		textDecorationLine: 'line-through',
@@ -128,7 +129,7 @@ const styles = StyleSheet.create({
 	},
 	discount: {
 		lineHeight: 20,
-		fontWeight: '600'
+		fontSize: 12
 	}
 });
 
