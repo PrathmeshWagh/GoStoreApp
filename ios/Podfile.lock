@@ -1234,7 +1234,7 @@ PODS:
     - react-native-video/Video (= 5.2.1)
   - react-native-video/Video (5.2.1):
     - React-Core
-  - react-native-webview (13.5.1):
+  - react-native-webview (13.6.0):
     - React-Core
   - React-NativeModulesApple (0.72.3):
     - hermes-engine
@@ -1348,41 +1348,43 @@ PODS:
     - React-perflogger (= 0.72.3)
   - RNCAsyncStorage (1.19.3):
     - React-Core
+  - RNCClipboard (1.12.1):
+    - React-Core
   - RNFastImage (8.6.3):
     - React-Core
     - SDWebImage (~> 5.11.1)
     - SDWebImageWebPCoder (~> 0.8.4)
-  - RNFBAnalytics (18.3.2):
+  - RNFBAnalytics (18.4.0):
     - Firebase/Analytics (= 10.14.0)
     - React-Core
     - RNFBApp
-  - RNFBApp (18.3.2):
+  - RNFBApp (18.4.0):
     - Firebase/CoreOnly (= 10.14.0)
     - React-Core
-  - RNFBAppDistribution (18.3.2):
+  - RNFBAppDistribution (18.4.0):
     - Firebase/AppDistribution (= 10.14.0)
     - React-Core
     - RNFBApp
-  - RNFBCrashlytics (18.3.2):
+  - RNFBCrashlytics (18.4.0):
     - Firebase/Crashlytics (= 10.14.0)
     - FirebaseCoreExtension (= 10.14.0)
     - React-Core
     - RNFBApp
-  - RNFBDynamicLinks (18.3.2):
+  - RNFBDynamicLinks (18.4.0):
     - Firebase/DynamicLinks (= 10.14.0)
     - GoogleUtilities/AppDelegateSwizzler
     - React-Core
     - RNFBApp
-  - RNFBFirestore (18.3.2):
+  - RNFBFirestore (18.4.0):
     - Firebase/Firestore (= 10.14.0)
     - nanopb (< 2.30910.0, >= 2.30908.0)
     - React-Core
     - RNFBApp
-  - RNFBPerf (18.3.2):
+  - RNFBPerf (18.4.0):
     - Firebase/Performance (= 10.14.0)
     - React-Core
     - RNFBApp
-  - RNFBRemoteConfig (18.3.2):
+  - RNFBRemoteConfig (18.4.0):
     - Firebase/RemoteConfig (= 10.14.0)
     - React-Core
     - RNFBApp
@@ -1422,7 +1424,9 @@ PODS:
   - RNScreens (3.25.0):
     - React-Core
     - React-RCTImage
-  - RNSVG (13.13.0):
+  - RNSVG (13.14.0):
+    - React-Core
+  - RNVectorIcons (10.0.0):
     - React-Core
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
@@ -1485,6 +1489,7 @@ DEPENDENCIES:
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
+  - "RNCClipboard (from `../node_modules/@react-native-clipboard/clipboard`)"
   - RNFastImage (from `../node_modules/react-native-fast-image`)
   - "RNFBAnalytics (from `../node_modules/@react-native-firebase/analytics`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
@@ -1499,6 +1504,7 @@ DEPENDENCIES:
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
+  - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -1636,6 +1642,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-async-storage/async-storage"
+  RNCClipboard:
+    :path: "../node_modules/@react-native-clipboard/clipboard"
   RNFastImage:
     :path: "../node_modules/react-native-fast-image"
   RNFBAnalytics:
@@ -1664,6 +1672,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-screens"
   RNSVG:
     :path: "../node_modules/react-native-svg"
+  RNVectorIcons:
+    :path: "../node_modules/react-native-vector-icons"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -1720,7 +1730,7 @@ SPEC CHECKSUMS:
   React-Core: aaacca67f9ca54f142827e67f44bfbd815875eb6
   React-CoreModules: 32fab1d62416849a3b6dac6feff9d54e5ddc2d1e
   React-cxxreact: 37765b4975541105b2a3322a4b473417c158c869
-  React-debug: 6d222a4423ed0003426bc65239b0dd31ad51886b
+  React-debug: 05dee00294a1d495debd7f395eba5f5470809ff3
   React-hermes: 935ae71fb3d7654e947beba8498835cd5e479707
   React-jsi: ec628dc7a15ffea969f237b0ea6d2fde212b19dd
   React-jsiexecutor: 59d1eb03af7d30b7d66589c410f13151271e8006
@@ -1732,8 +1742,8 @@ SPEC CHECKSUMS:
   react-native-maps: 667f9b975549c6fa9b1631bf859440f68ebd3b8f
   react-native-safe-area-context: 7aa8e6d9d0f3100a820efb1a98af68aa747f9284
   react-native-video: c26780b224543c62d5e1b2a7244a5cd1b50e8253
-  react-native-webview: 8baa0f5c6d336d6ba488e942bcadea5bf51f050a
-  React-NativeModulesApple: 5241dbd75860704b327d80af2ccb72eed4643154
+  react-native-webview: 669ae162965f629a8d6a4bdd3b99a304d36ef1f2
+  React-NativeModulesApple: acf1d101427f159f4f8ed83887bc9a67aa78a3c8
   React-perflogger: 6bd153e776e6beed54c56b0847e1220a3ff92ba5
   React-RCTActionSheet: c0b62af44e610e69d9a2049a682f5dba4e9dff17
   React-RCTAnimation: fe7005136b58f58871cab2f70732343b6e330d30
@@ -1747,10 +1757,11 @@ SPEC CHECKSUMS:
   React-RCTVibration: ea3a68a49873a54ced927c90923fc6932baf344a
   React-rncore: 9672a017af4a7da7495d911f0b690cbcae9dd18d
   React-runtimeexecutor: 369ae9bb3f83b65201c0c8f7d50b72280b5a1dbc
-  React-runtimescheduler: 9fda6b4781fcdef5e05c4199a3befe0e41852dba
-  React-utils: d37de3f97868360b50fe98c779d84e60a850f234
-  ReactCommon: 702db804e2df02bc5843845a232ac84fd09fe632
+  React-runtimescheduler: aa48c97bae320b944315a47c2bdbfad52533c2a4
+  React-utils: 94936585077b34459122e1c109c38cefc674837f
+  ReactCommon: 01173cdd8273a03a5363113f81c86480caf34806
   RNCAsyncStorage: c913ede1fa163a71cea118ed4670bbaaa4b511bb
+  RNCClipboard: d77213bfa269013bf4b857b7a9ca37ee062d8ef1
   RNFastImage: 5c9c9fed9c076e521b3f509fe79e790418a544e8
   RNFBAnalytics: c8093f98753bb799409192411637402209748515
   RNFBApp: 8060d3ea89359ae78e0d1e6362a8ce9d2f5d19a8
@@ -1764,7 +1775,8 @@ SPEC CHECKSUMS:
   RNPermissions: 62b1a24fac477aec000a16a99605535e8d72e378
   RNReanimated: ab2e96c6d5591c3dfbb38a464f54c8d17fb34a87
   RNScreens: 85d3880b52d34db7b8eeebe2f1a0e807c05e69fa
-  RNSVG: ed492aaf3af9ca01bc945f7a149d76d62e73ec82
+  RNSVG: d00c8f91c3cbf6d476451313a18f04d220d4f396
+  RNVectorIcons: 8b5bb0fa61d54cd2020af4f24a51841ce365c7e9
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17

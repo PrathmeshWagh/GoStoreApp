@@ -5,8 +5,10 @@ export const CustomColors = {
 	error: '#B03A2E',
 	onError: '#FFFFFF',
 	tertiary: '#D7DBDD',
-	grey: '#D7DBDD',
-	textGrey1: '#909497',
-	white: '#FFFFFF',
-	black: '#000000',
+	inActive: '#9CA3B0',
+	bordercolor: '#e5e7eb',
+	offerbg: '#EFF5F8',
+	grey: '#6C6C6C',
+	// grey: '#D7DBDD',
+	textGrey1: '#909497'
 };
