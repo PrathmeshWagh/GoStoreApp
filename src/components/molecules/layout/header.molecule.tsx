@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { SvgUri } from 'react-native-svg';
 import { TouchableRipple } from 'react-native-paper';
 
@@ -13,7 +13,7 @@ import LocationIcon from '@assets/icons/location.svg';
 import { RouteConstants } from '@routes/constants.routes';
 
 interface HeaderProps {
-    layout: LayoutType;
+	layout: LayoutType;
 }
 
 const Header = (props: HeaderProps) => {
@@ -104,23 +104,23 @@ const Header = (props: HeaderProps) => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-    },
-    item: {
-        alignItems: 'center',
-        flexDirection: 'row',
-    },
-    icon: {
-        width: 32,
-        height: 32,
-    },
-    logo: {
-        width: 82,
-        height: 32,
-    },
+	container: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-between'
+	},
+	item: {
+		alignItems: 'center',
+		flexDirection: 'row'
+	},
+	icon: {
+		width: 32,
+		height: 32
+	},
+	logo: {
+		width: 82,
+		height: 32
+	}
 });
 
 export default Header;
