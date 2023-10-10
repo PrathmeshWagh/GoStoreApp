@@ -26,7 +26,7 @@ export default function SpecsAndInstaltion() {
 				<TouchableOpacity onPress={toggleDetails}>
 					<View style={styles.header}>
 						<Text style={styles.headerText}>Specifications</Text>
-						<Icon name={expanded ? 'chevron-up' : 'chevron-down'} size={25} color="#000" />
+						<Icon name={expanded ? 'chevron-up' : 'chevron-down'} size={22} color="#000" />
 					</View>
 				</TouchableOpacity>
 
@@ -46,7 +46,7 @@ export default function SpecsAndInstaltion() {
 				<TouchableOpacity onPress={toggleWarranty}>
 					<View style={styles.header}>
 						<Text style={styles.headerText}>Warranty</Text>
-						<Icon name={warranty ? 'chevron-up' : 'chevron-down'} size={25} color="#000" />
+						<Icon name={warranty ? 'chevron-up' : 'chevron-down'} size={22} color="#000" />
 					</View>
 				</TouchableOpacity>
 
@@ -61,7 +61,7 @@ export default function SpecsAndInstaltion() {
 			<TouchableOpacity onPress={toggleInstalltion}>
 				<View style={styles.freeInstall}>
 					<Text style={styles.headerText}>Free installation</Text>
-					<Icon name={installation ? 'chevron-up' : 'chevron-down'} size={25} color="#000" />
+					<Icon name={installation ? 'chevron-up' : 'chevron-down'} size={22} color="#000" />
 				</View>
 			</TouchableOpacity>
 
@@ -94,13 +94,14 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between'
 	},
 	headerText: {
-		fontSize: 17,
+		fontSize: 15,
 		fontFamily: FontGilroy.Bold
 	},
 	content: {},
 	warrantySummary: {
 		fontFamily: FontGilroy.SemiBold,
-		fontSize: 16
+		fontSize: 15,
+		marginVertical: 5
 	},
 	warrantyText: {
 		fontFamily: FontGilroy.Medium

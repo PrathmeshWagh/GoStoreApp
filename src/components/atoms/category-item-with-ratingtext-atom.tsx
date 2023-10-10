@@ -4,20 +4,9 @@ import { FontGilroy, DefaultStyles } from '@primitives/index';
 import { CustomColors } from '../../constants/colors.constants';
 import StarIcon from '@assets/icons/star.svg';
 
-interface CategoryItemProps {
-	item: any;
-	onBtnPress: (item: any) => void;
-}
-
-const CategoryItemWithRatingText = (props: CategoryItemProps) => {
-	const { item, onBtnPress } = props;
+const CategoryItemWithRatingText = ({ item, onBtnPress }: any) => {
 	return (
-		<Pressable
-			style={styles.item}
-			onPress={() => {
-				onBtnPress(item);
-			}}
-		>
+		<Pressable style={styles.item} onPress={onBtnPress}>
 			{/* {item.priority === 2000 && (
         <View
           style={[
@@ -93,7 +82,6 @@ const styles = StyleSheet.create({
 	},
 	ratingText: {
 		color: 'white',
-		fontWeight: 'bold',
 		paddingRight: 3
 	},
 
@@ -111,26 +99,28 @@ const styles = StyleSheet.create({
 		flex: 1,
 		paddingLeft: 15,
 		paddingRight: 20,
-		paddingVertical: 15,
+		paddingVertical: 10,
 		backgroundColor: '#E8E8E8',
 		borderBottomRightRadius: 20,
 		borderBottomLeftRadius: 20
 	},
 	title: {
+		fontFamily: FontGilroy.Medium,
 		fontSize: 13,
 		lineHeight: 20,
-		fontFamily: FontGilroy.Bold
+		color: CustomColors.secondary
 	},
 	price: {
 		lineHeight: 20,
-		fontSize: 16
+		color: CustomColors.secondary,
+		fontWeight: 'bold'
 	},
 	mrpWrapper: {
 		flexDirection: 'row',
 		alignItems: 'center'
 	},
 	mrp: {
-		color: '#AAB7B8',
+		// color: '#AAB7B8',
 		fontSize: 14,
 		fontWeight: '400',
 		textDecorationLine: 'line-through',
@@ -139,7 +129,7 @@ const styles = StyleSheet.create({
 	},
 	discount: {
 		lineHeight: 20,
-		fontWeight: '600'
+		fontSize: 12
 	}
 });
 

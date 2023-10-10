@@ -19,7 +19,7 @@ const Highlight = () => {
 					<Text style={styles.highlightText}>Highlights</Text>
 					<Icon
 						name={expanded ? 'chevron-up' : 'chevron-down'}
-						size={25}
+						size={22}
 						color={colors.secondary}
 					/>
 				</View>
@@ -29,11 +29,11 @@ const Highlight = () => {
 				<View>
 					<View style={styles.info}>
 						<Text style={styles.bulletText}>{'\u2022'}</Text>
-						<Text>Supported Apps: Netflix, Disney+Hotstar</Text>
+						<Text style={styles.infoText}>Supported Apps: Netflix, Disney+Hotstar</Text>
 					</View>
 					<View style={styles.info}>
 						<Text style={styles.bulletText}>{'\u2022'}</Text>
-						<Text>Operating System: WebOS</Text>
+						<Text style={styles.infoText}>Operating System: WebOS</Text>
 					</View>
 				</View>
 			)}
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
 		marginVertical: 15
 	},
 	highlightText: {
-		fontSize: 17,
+		fontSize: 15,
 		fontFamily: FontGilroy.Bold
 	},
 	direction: {
@@ -64,5 +64,9 @@ const styles = StyleSheet.create({
 	info: {
 		flexDirection: 'row',
 		alignItems: 'center'
+	},
+	infoText: {
+		fontFamily: FontGilroy.Medium,
+		fontSize: 12
 	}
 });

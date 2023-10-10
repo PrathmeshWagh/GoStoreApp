@@ -1,10 +1,24 @@
 import React from 'react';
 import Categories from '@organisms/categories/categories.organism';
+import Layout from 'components/molecules/layout/layout.molecule';
+
+const layout = {
+	menu: true,
+	search: false,
+	back: false,
+	logo: 'https://gostor.com/icons/header/logo-invert.svg',
+	cart: false,
+	pincode: false
+};
 
 const CategoriesScreen = ({ route }: any) => {
 	const categoryData = route.params;
 
-	return <Categories categoryData={categoryData} />;
+	return (
+		<Layout layout={layout}>
+			<Categories categoryData={categoryData} />
+		</Layout>
+	);
 };
 
 export default CategoriesScreen;

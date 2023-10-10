@@ -9,16 +9,23 @@ export default function ReviewsRatings() {
 	const { colors } = useTheme();
 	return (
 		<>
-			<Text style={{ fontFamily: FontGilroy.Bold, fontSize: 17 }}>Reviews & Ratings</Text>
+			<Text style={{ fontFamily: FontGilroy.Bold, fontSize: 15 }}>Reviews & Ratings</Text>
 			<View style={styles.container}>
 				<View style={styles.ratingInfo}>
 					<View style={styles.ratingValue}>
 						<Text style={styles.ratingText}>4</Text>
 						<StarIcon />
 					</View>
-					<Text style={styles.totalRatings}>
-						<Text style={styles.boldText}>4</Text> Customer Ratings Across Ecommerce Platforms
-					</Text>
+					{/* <Text style={styles.totalRatings}>
+						<Text style={styles.boldText}>4</Text>
+						<Text style={{ fontSize: 13 }}>Customer Ratings Across Ecommerce Platforms</Text>
+					</Text> */}
+					<View style={{ flexDirection: 'row' }}>
+						<Text style={{ fontSize: 12, fontFamily: FontGilroy.SemiBold }}>72</Text>
+						<Text style={styles.ratingDesText}>
+							Customer Ratings {'\n'} Across Ecommerce {'\n'} Platforms
+						</Text>
+					</View>
 				</View>
 				<View style={styles.circularProgressContainer}>
 					<View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -28,7 +35,7 @@ export default function ReviewsRatings() {
 								inActiveStrokeColor={colors.primary}
 								inActiveStrokeOpacity={0.2}
 								progressValueColor={'#000'}
-								radius={25}
+								radius={20}
 								activeStrokeWidth={3}
 								inActiveStrokeWidth={3}
 							/>
@@ -41,7 +48,7 @@ export default function ReviewsRatings() {
 								inActiveStrokeColor={colors.primary}
 								inActiveStrokeOpacity={0.2}
 								progressValueColor={'#000'}
-								radius={25}
+								radius={20}
 								activeStrokeWidth={3}
 								inActiveStrokeWidth={3}
 							/>
@@ -54,7 +61,7 @@ export default function ReviewsRatings() {
 							inActiveStrokeColor={colors.primary}
 							inActiveStrokeOpacity={0.2}
 							progressValueColor={'#000'}
-							radius={25}
+							radius={20}
 							activeStrokeWidth={3}
 							inActiveStrokeWidth={3}
 						/>
@@ -84,7 +91,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center'
 	},
 	ratingText: {
-		fontSize: 20,
+		fontSize: 18,
 		color: 'green'
 	},
 	starIcon: {
@@ -93,16 +100,22 @@ const styles = StyleSheet.create({
 	},
 	totalRatings: {
 		color: 'gray',
-		fontSize: 16,
 		textAlign: 'center'
 	},
 	boldText: {
-		fontWeight: 'bold'
+		fontFamily: FontGilroy.Medium,
+		fontSize: 14,
+		marginRight: 5
 	},
 	circularProgressContainer: {},
 	circularProgressItem: {
 		flexDirection: 'column',
 		alignItems: 'center',
 		margin: 10
+	},
+	ratingDesText: {
+		textAlign: 'center',
+		fontSize: 12,
+		fontFamily: FontGilroy.Medium
 	}
 });

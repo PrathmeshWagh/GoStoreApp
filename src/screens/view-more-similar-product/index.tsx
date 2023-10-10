@@ -1,7 +1,21 @@
 import ViewMoreSimilarProduct from 'components/organisms/view-more-similar-product/view-more-similar-product.organism';
+import Layout from 'components/molecules/layout/layout.molecule';
+
+const layout = {
+	menu: true,
+	search: false,
+	back: false,
+	logo: 'https://gostor.com/icons/header/logo-invert.svg',
+	cart: false,
+	pincode: false
+};
 
 const ViewMoreSimilarProductScreen = () => {
-	return <ViewMoreSimilarProduct />;
+	return (
+		<Layout layout={layout}>
+			<ViewMoreSimilarProduct />
+		</Layout>
+	);
 };
 
 export default ViewMoreSimilarProductScreen;

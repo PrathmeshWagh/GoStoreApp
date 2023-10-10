@@ -76,7 +76,7 @@ function MainContent() {
 	return (
 		<>
 			<Router />
-			<Toast config={toastConfig} />
+			<Toast config={toastConfig} visibilityTime={2000} />
 			<CustomModal />
 			<Snackbar
 				visible={snackbar.isVisible}

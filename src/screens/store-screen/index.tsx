@@ -11,7 +11,6 @@ export default function StoreScreen() {
 	const { width, height } = useDimensions();
 
 	const { stores, isLoading } = useStoresHook();
-	console.log('store', stores);
 
 	if (stores?.length === 0) {
 		console.log('No store data');

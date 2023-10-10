@@ -34,12 +34,12 @@ const styles = StyleSheet.create({
 		borderRadius: 8
 	},
 	text: {
-		fontSize: 15,
+		fontSize: 13,
 		fontFamily: FontGilroy.Medium,
 		textAlign: 'center'
 	},
 	icon: {
-		width: 32,
-		height: 32
+		width: 30,
+		height: 30
 	}
 });

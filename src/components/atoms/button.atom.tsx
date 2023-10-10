@@ -52,6 +52,7 @@ const CustomButtom = (props: CustomButtomProps) => {
 				textStyles
 			]}
 		>
+			{icon}
 			{text}
 		</Button>
 	);

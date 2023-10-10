@@ -20,9 +20,11 @@ const OfferItem = (props: OfferItemProps) => {
 				<Text style={styles.text}>{title}</Text>
 			</View>
 			<View style={styles.descriptionContainer}>
-				<Text>{description}</Text>
+				<Text style={styles.text}>{description}</Text>
 				<TouchableOpacity onPress={onPress}>
-					<Text style={{ textDecorationLine: 'underline', fontFamily: FontGilroy.Medium }}>
+					<Text
+						style={{ textDecorationLine: 'underline', fontFamily: FontGilroy.Medium, fontSize: 13 }}
+					>
 						9 offer
 					</Text>
 				</TouchableOpacity>
@@ -35,9 +37,9 @@ export default OfferItem;
 
 const styles = StyleSheet.create({
 	text: {
-		fontSize: 16,
+		fontSize: 13,
 		fontFamily: FontGilroy.Medium,
-		textAlign: 'center',
+		textAlign: 'left',
 		marginLeft: 5
 	},
 	offer: {

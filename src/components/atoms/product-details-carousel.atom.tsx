@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import React from 'react';
 import CarouselSlider from './carousel.atom';
 import { useDimensions, usePermissionHandlers } from '@hooks/index';
+import FastImage from 'react-native-fast-image';
 
 export default function ProductdetailsSlider() {
 	const { width, height } = useDimensions();
@@ -46,13 +47,20 @@ export default function ProductdetailsSlider() {
 	const renderCarousel = ({ item, index }: any) => {
 		return (
 			<View>
-				<Image source={{ uri: item.image }} style={{ width: width, height: height / 3 }} />
+				<FastImage
+					style={{ width: '100%', height: height / 2 }}
+					source={{
+						uri: item.image,
+						priority: FastImage.priority.normal
+					}}
+					resizeMode={FastImage.resizeMode.contain}
+				/>
 			</View>
 		);
 	};
 
 	return (
-		<View>
+		<View style={styles.container}>
 			<CarouselSlider
 				data={data}
 				renderItem={renderCarousel}
@@ -65,4 +73,8 @@ export default function ProductdetailsSlider() {
 	);
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+	container: {
+		marginBottom: 20
+	}
+});

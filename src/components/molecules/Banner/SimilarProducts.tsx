@@ -6,6 +6,7 @@ import StarIcon from '@assets/icons/productDetails/star.svg';
 import { CustomButtom, ProductSlider, Rupee } from 'components/atoms';
 import { useTheme } from '@hooks/index';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import CategoryItemWithRatingText from 'components/atoms/category-item-with-ratingtext-atom';
 
 interface Props {
 	title: string;
@@ -86,6 +87,7 @@ export default function SimilarProducts({ title, link, response, event, onPress 
 					</View>
 				</View>
 			</View>
+			// <CategoryItemWithRatingText item={item} onPress={() => {}} />
 		);
 	};
 
@@ -95,7 +97,7 @@ export default function SimilarProducts({ title, link, response, event, onPress 
 				{title && <Text style={styles.title}>{title}</Text>}
 				{link && (
 					<TouchableOpacity style={styles.link} onPress={onPress}>
-						<ViewMore width={45} />
+						<ViewMore width={35} height={18} />
 						<Text style={styles.linkText}>View more</Text>
 					</TouchableOpacity>
 				)}
@@ -110,12 +112,7 @@ export default function SimilarProducts({ title, link, response, event, onPress 
 							<Icon name={'chevron-left'} size={25} color={colors.primary} />
 						</TouchableOpacity>
 
-						<FlatList
-							data={data}
-							renderItem={renderItem}
-							horizontal
-							showsHorizontalScrollIndicator={true}
-						/>
+						<FlatList data={data} renderItem={renderItem} horizontal />
 						<TouchableOpacity
 							style={[styles.carouselButton, styles.rightChevron]}
 							onPress={() => {}}
@@ -142,11 +139,11 @@ const styles = StyleSheet.create({
 		paddingVertical: 2
 	},
 	title: {
-		fontSize: 17,
+		fontSize: 16,
 		fontFamily: FontGilroy.Medium
 	},
 	link: {
-		alignItems: 'center'
+		alignItems: 'flex-end'
 	},
 	linkImage: {
 		width: 30,
@@ -221,9 +218,9 @@ const styles = StyleSheet.create({
 		fontWeight: '600'
 	},
 	carouselButton: {
-		width: 40,
-		height: 40,
-		borderRadius: 20,
+		width: 35,
+		height: 35,
+		borderRadius: 17,
 		borderColor: 'green',
 		borderWidth: 1,
 		backgroundColor: 'white',

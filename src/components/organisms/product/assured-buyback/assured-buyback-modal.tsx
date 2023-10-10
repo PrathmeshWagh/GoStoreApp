@@ -7,6 +7,7 @@ import { CustomButtom } from 'components/atoms';
 import { useCheckPincodeServiceabilityMutation } from 'api/checkout/check-pincode-serviceability';
 import { Table, TableWrapper, Row, Rows, Col } from 'react-native-table-component';
 import { tableHead, tableData } from 'helpers/constants/product/assured-table';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 interface AssuredProps {
 	onPress: () => void;
@@ -59,94 +60,103 @@ export default function AssuredBuyBackModal(props: AssuredProps) {
 	};
 
 	return (
-		<View style={styles.container}>
-			<Text style={[styles.header, styles.text]}>What is Buy Back Guarantee?</Text>
-			<Text style={[styles.text, { marginVertical: 8 }]}>
-				Buyback Plan is facilitated by Gostor which assures you a fixed buyback price up to 5 years
-				for your used products purchased from Gostor.
-			</Text>
-
-			<Table borderStyle={{ borderWidth: 1 }}>
-				<Row data={tableHead} style={styles.head} flexArr={[2, 3]} textStyle={styles.text} />
-				<TableWrapper style={styles.wrapper}>
-					<Rows data={tableData} flexArr={[2, 3]} style={styles.row} textStyle={styles.text} />
-				</TableWrapper>
-			</Table>
-
-			<Text style={[styles.header, { marginTop: 10 }]}>Check Serviciability:</Text>
-			<View style={[styles.inputField, { borderColor: colors.primary }]}>
-				<TextInput
-					maxLength={6}
-					placeholder="Enter Pincode"
-					keyboardType="numeric"
-					style={{ flex: 1 }}
-					onChangeText={(text) => {
-						setIsPicodeMsgVisible(false);
-						setPincode(text);
-					}}
-				/>
-				<CustomButtom
-					loading={pincodeServiceabilityLoading}
-					onPress={onCheckPincodeServiceabilityPress}
-					mode="text"
-					text="Apply"
-					disabled={pincode.length !== 6}
-					styles={{
-						height: DefaultStyles.DefaultButtonHeight - 6,
-						borderRadius: DefaultStyles.DefaultButtonHeight - 40,
-						backgroundColor: pincode.length !== 6 ? colors.onSecondary : colors.primary,
-						borderColor: colors.tertiary,
-						borderWidth: 1
-					}}
-					textStyles={[
-						styles.buttonText,
-						{ color: pincode.length !== 6 ? colors.tertiary : colors.onSecondary }
-					]}
-				/>
-			</View>
-			{isPincodeMsgVisible && renderServiceabilityCheckFeedback()}
-			<View style={styles.flexing}>
-				<TouchableOpacity
-					style={styles.tnc}
-					onPress={() => {
-						setTnc(!tnc);
-					}}
-				>
-					{!tnc ? (
-						<Icon name={'square'} color={colors.grey} size={22} />
-					) : (
-						<Icon
-							name={'check'}
-							color={colors.onSecondary}
-							size={18}
-							style={{
-								backgroundColor: colors.primary,
-								borderRadius: 5
-							}}
-						/>
-					)}
-				</TouchableOpacity>
-				<Text style={[{ fontSize: 12 }, styles.labelFont]}>
-					I agree to the
-					<Text style={styles.underline}>Term & Conditions</Text>
+		<KeyboardAwareScrollView>
+			<View style={styles.container}>
+				<Text style={[styles.text, { fontSize: 13, fontFamily: FontGilroy.SemiBold }]}>
+					What is Buy Back Guarantee?
 				</Text>
-			</View>
+				<Text style={[styles.text, { marginVertical: 8 }]}>
+					Buyback Plan is facilitated by Gostor which assures you a fixed buyback price up to 5
+					years for your used products purchased from Gostor.
+				</Text>
 
-			<CustomButtom
-				loading={false}
-				onPress={onPress}
-				mode="text"
-				text="Add Plan"
-				disabled={false}
-				styles={{
-					height: DefaultStyles.DefaultButtonHeight - 5,
-					borderRadius: DefaultStyles.DefaultButtonHeight - 40,
-					backgroundColor: colors.primary,
-					marginTop: 10
-				}}
-				textStyles={[styles.buttonText]}
-			/>
-		</View>
+				<Table borderStyle={{ borderWidth: 1 }}>
+					<Row data={tableHead} style={styles.head} flexArr={[2, 3]} textStyle={[styles.text]} />
+					<TableWrapper style={styles.wrapper}>
+						<Rows
+							data={tableData}
+							flexArr={[2, 3]}
+							style={styles.row}
+							textStyle={[styles.text, { textAlign: 'left', marginLeft: 3 }]}
+						/>
+					</TableWrapper>
+				</Table>
+
+				<Text style={[styles.header, { marginTop: 10 }]}>Check Serviciability:</Text>
+				<View style={[styles.inputField, { borderColor: colors.primary }]}>
+					<TextInput
+						maxLength={6}
+						placeholder="Enter Pincode"
+						keyboardType="numeric"
+						style={{ flex: 1, paddingVertical: 0 }}
+						onChangeText={(text) => {
+							setIsPicodeMsgVisible(false);
+							setPincode(text);
+						}}
+					/>
+					<CustomButtom
+						loading={pincodeServiceabilityLoading}
+						onPress={onCheckPincodeServiceabilityPress}
+						mode="text"
+						text="Apply"
+						disabled={pincode.length !== 6}
+						styles={{
+							height: DefaultStyles.DefaultButtonHeight - 6,
+							borderRadius: DefaultStyles.DefaultButtonHeight - 40,
+							backgroundColor: pincode.length !== 6 ? colors.onSecondary : colors.primary,
+							borderColor: colors.tertiary,
+							borderWidth: 1
+						}}
+						textStyles={[
+							styles.buttonText,
+							{ color: pincode.length !== 6 ? colors.tertiary : colors.onSecondary }
+						]}
+					/>
+				</View>
+				{isPincodeMsgVisible && renderServiceabilityCheckFeedback()}
+				<View style={styles.flexing}>
+					<TouchableOpacity
+						style={styles.tnc}
+						onPress={() => {
+							setTnc(!tnc);
+						}}
+					>
+						{!tnc ? (
+							<Icon name={'square'} color={colors.grey} size={22} />
+						) : (
+							<Icon
+								name={'check'}
+								color={colors.onSecondary}
+								size={18}
+								style={{
+									backgroundColor: colors.primary,
+									borderRadius: 5
+								}}
+							/>
+						)}
+					</TouchableOpacity>
+					<Text style={[{ fontSize: 12 }, styles.labelFont]}>
+						I agree to the
+						<Text style={styles.underline}>Term & Conditions</Text>
+					</Text>
+				</View>
+
+				<CustomButtom
+					loading={false}
+					onPress={onPress}
+					mode="text"
+					text="Add Plan"
+					disabled={false}
+					styles={{
+						height: DefaultStyles.DefaultButtonHeight - 10,
+						borderRadius: DefaultStyles.DefaultButtonHeight - 40,
+						backgroundColor: colors.primary,
+						marginTop: 10
+					}}
+					textStyles={[styles.buttonText]}
+				/>
+			</View>
+		</KeyboardAwareScrollView>
 	);
 }
 
@@ -178,7 +188,8 @@ const styles = StyleSheet.create({
 	},
 	buttonText: {
 		fontFamily: FontGilroy.SemiBold,
-		marginTop: 8
+		marginTop: 8,
+		fontSize: 12
 	},
 	feedbackText: {
 		fontFamily: FontGilroy.Medium,
@@ -199,7 +210,8 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		textAlign: 'center',
-		fontSize: 14
+		fontSize: 11,
+		fontFamily: FontGilroy.Medium
 	},
 	inputField: {
 		flexDirection: 'row',

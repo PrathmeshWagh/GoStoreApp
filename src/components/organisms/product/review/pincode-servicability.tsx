@@ -89,8 +89,8 @@ export default function PincodeServicality() {
 
 const styles = StyleSheet.create({
 	text: {
-		fontFamily: FontGilroy.SemiBold,
-		fontSize: 17
+		fontFamily: FontGilroy.Bold,
+		fontSize: 15
 	},
 	inputContainer: {
 		flexDirection: 'row',
@@ -98,19 +98,22 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		borderWidth: 1,
 		borderRadius: 10,
-		marginVertical: 15
+		marginVertical: 15,
+		paddingLeft: 10
 	},
 	input: {
-		flex: 1
+		flex: 1,
+		paddingVertical: 0
 	},
 	checkButton: {
-		height: DefaultStyles.DefaultButtonHeight - 5,
+		height: DefaultStyles.DefaultButtonHeight - 10,
 		borderRadius: DefaultStyles.DefaultButtonHeight - 40,
 		borderWidth: 1
 	},
 	buttonText: {
 		fontFamily: FontGilroy.SemiBold,
-		marginTop: 8
+		marginTop: 8,
+		fontSize: 12
 	},
 	feedbackText: {
 		fontFamily: FontGilroy.Medium,

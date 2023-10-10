@@ -9,8 +9,6 @@ const useStoresHook = () => {
 	const { mutate: getStoreList, isLoading, data: storeResponse, error } = useGetStoresMutation();
 	const [stores, setStores] = useState([]);
 	const location = useSelector((state: RootState) => state.location);
-	console.log('storehook', storeResponse);
-	console.log('location', location);
 
 	useEffect(() => {
 		if (location) {

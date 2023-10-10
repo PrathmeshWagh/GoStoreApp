@@ -5,6 +5,7 @@ import { DefaultStyles, FontGilroy } from '@primitives/index';
 import { useTheme } from '@hooks/index';
 import { useCheckPincodeExchangeMutation } from 'api/Exchange/checkPincodeExchangeAvailability';
 import ProductCategories from './product-categories';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export default function EXchangeDetails({ setIsExchangeVisible }: any) {
 	const [isPicodeVisible, setIsPincodeVisible] = useState(true);
@@ -45,7 +46,11 @@ export default function EXchangeDetails({ setIsExchangeVisible }: any) {
 	};
 
 	return (
-		<ScrollView>
+		<KeyboardAwareScrollView
+			style={{ flex: 1 }}
+			contentContainerStyle={{ flexGrow: 1 }}
+			keyboardShouldPersistTaps="handled"
+		>
 			<View style={styles.container}>
 				{isPicodeVisible && (
 					<>
@@ -71,7 +76,7 @@ export default function EXchangeDetails({ setIsExchangeVisible }: any) {
 							/>
 							<CustomButtom
 								loading={pincodeServiceabilityLoading}
-								onPress={() => onCheckPincodeServiceabilityPress()}
+								onPress={onCheckPincodeServiceabilityPress}
 								mode="text"
 								text="Apply"
 								disabled={pincode.length !== 6}
@@ -105,7 +110,7 @@ export default function EXchangeDetails({ setIsExchangeVisible }: any) {
 					/>
 				)}
 			</View>
-		</ScrollView>
+		</KeyboardAwareScrollView>
 	);
 }
 const styles = StyleSheet.create({
@@ -119,11 +124,11 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between'
 	},
 	headerText: {
-		fontSize: 18,
+		fontSize: 16,
 		fontWeight: 'bold'
 	},
 	subHeaderText: {
-		fontSize: 16,
+		fontSize: 14,
 		fontWeight: 'bold',
 		marginTop: 14
 	},
@@ -142,13 +147,14 @@ const styles = StyleSheet.create({
 		padding: 10
 	},
 	buttonStyles: {
-		height: DefaultStyles.DefaultButtonHeight - 8,
+		height: DefaultStyles.DefaultButtonHeight - 10,
 		borderRadius: DefaultStyles.DefaultButtonHeight - 40,
 		marginTop: 20
 	},
 	buttonText: {
 		fontFamily: FontGilroy.SemiBold,
-		marginTop: 8
+		marginTop: 8,
+		fontSize: 12
 	},
 	infoText: {
 		fontSize: 10,
