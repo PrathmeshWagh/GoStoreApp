@@ -1,11 +1,9 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 
 import { useTheme } from '@hooks/index';
 import { DefaultStyles } from '@primitives/index';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import CarryIcon from '@assets/icons/productDetails/carry_bag.svg';
 
 interface CustomButtomProps {
 	onPress: () => void;
@@ -33,7 +31,6 @@ const CustomButtom = (props: CustomButtomProps) => {
 		disabled,
 		text,
 		textStyles,
-		icon
 	} = props;
 
 	return (
@@ -49,7 +46,7 @@ const CustomButtom = (props: CustomButtomProps) => {
 			labelStyle={[
 				{ color: loading ? colors.secondary : colors.onSecondary },
 				btnStyles.text,
-				textStyles
+				textStyles,
 			]}
 		>
 			{text}
@@ -61,11 +58,11 @@ const btnStyles = StyleSheet.create({
 	btn: {
 		height: DefaultStyles.DefaultButtonHeight,
 		borderRadius: DefaultStyles.DefaultRadius,
-		justifyContent: 'center'
+		justifyContent: 'center',
 	},
 	text: {
-		letterSpacing: 1.6
-	}
+		letterSpacing: 1.6,
+	},
 });
 
 export default CustomButtom;

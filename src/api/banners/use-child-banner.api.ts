@@ -35,7 +35,7 @@ export function useChildBanner(type: string, id: number, tag?: string) {
 		bannerType: type,
 		bId: id,
 		clusterId: location.cluster_id,
-		state: location.state
+		state: location.state,
 	} as BannerType;
 	if (type === 'WITHOUT_BANNER') {
 		bannerType.tagType = tag;

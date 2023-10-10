@@ -16,3 +16,4 @@ export { default as CustomStatusBar } from './status-bar.atom';
 export { default as TextLoader } from './text-loader.atom';
 export { default as BackdropBottomsheet } from './backdrop-bottomsheet.atom';
 export { default as KeyboardWrapper } from './keyboard-wrapper.atom';
+export { default as CustomInput } from './custom-input.atom';

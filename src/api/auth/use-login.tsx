@@ -1,23 +1,25 @@
 import axios from 'axios';
 import { useMutation } from 'react-query';
-import { ApiEndpoints } from '../utils/api-endpoints.api';
-import { LoginInputType, LoginMutationType } from '../utils/types';
 import Config from 'react-native-config';
-import Toast from 'react-native-toast-message';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { LOCAL_STORAGE_KEYS } from 'helpers';
+import { useDispatch } from 'react-redux';
+
+import { ApiEndpoints } from '../utils/api-endpoints.api';
+import { LoginInputType } from '../utils/types';
 import { useEnhancedNavigation } from '@hooks/index';
-import { RouteConstants } from 'routes/constants.routes';
+import { RouteConstants } from '@routes/constants.routes';
+import { AppDispatch } from '@slices/store';
+import { showSnackbar } from '@slices/snackbar.slice';
+import { authenticateUser } from '@slices/auth.slice';
 
 export const LoginWithNumber = async function login(input: LoginInputType) {
 	const data = {
 		username: input.mobile,
 		otp: input.otp,
 		isWO: 1,
-		isNewUser: input.isNewUser
+		isNewUser: input.isNewUser,
 	};
 	const withCredsHttpConfig = {
-		withCredentials: true
+		withCredentials: true,
 	};
 	const response = await axios.post(
 		`${Config.BASE_PATH}${ApiEndpoints.LOGIN}`,
@@ -29,35 +31,24 @@ export const LoginWithNumber = async function login(input: LoginInputType) {
 };
 
 export const useLoginMutation = () => {
-	const { navigate, router } = useEnhancedNavigation();
+	const { navigate } = useEnhancedNavigation();
+	const dispatch = useDispatch<AppDispatch>();
 
 	return useMutation((input: LoginInputType) => LoginWithNumber(input), {
 		onSuccess: (data: any) => {
 			if (data?.data?.status === 'error') {
-				Toast.show({
-					type: 'gostor_type',
-					props: { msg: data?.data?.msg },
-					position: 'bottom'
-				});
+				dispatch(showSnackbar({ message: data?.data?.msg, label: 'Close' }));
 			} else {
-				//  AsyncStorage.setItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, data.data.token.accessToken);
-				// AsyncStorage.setItem(ASYNC_KEYS.REFRESH_TOKEN, data?.data?.token?.refreshToken);
-				// AsyncStorage.setItem(ASYNC_KEYS.GOSTOR_TOKEN, data?.data?.goStoreTokenInfo?.accessToken);
-				// AsyncStorage.setItem(ASYNC_KEYS.GOSTOR_REFRESH_TOKEN, data?.data?.goStoreTokenInfo?.refreshToken);
-				Toast.show({
-					type: 'gostor_type',
-					props: { msg: 'Logged in' },
-					position: 'bottom'
-				});
-				navigate(RouteConstants.HomeScreenRoute);
+				dispatch(showSnackbar({ message: 'Logged in!', label: 'Close' }));
+				dispatch(authenticateUser({
+                    token: data?.data?.token?.accessToken,
+					refreshToken: data?.data?.token?.refreshToken,
+                    navigateFunction: () => navigate(RouteConstants.TabsScreenRoute),
+				}));
 			}
 		},
-		onError: (data) => {
-			Toast.show({
-				type: 'gostor_type',
-				props: { msg: 'Network Error' },
-				position: 'bottom'
-			});
-		}
+		onError: () => {
+			dispatch(showSnackbar({ message: 'Network error.', label: 'Close' }));
+		},
 	});
 };

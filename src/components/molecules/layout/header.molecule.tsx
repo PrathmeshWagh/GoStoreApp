@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { SvgUri } from 'react-native-svg';
 import { TouchableRipple } from 'react-native-paper';
 
@@ -23,7 +23,7 @@ const Header = (props: HeaderProps) => {
 
     const handleMain = () => {
         if (layout.menu) {
-            console.log("open menu");
+            navigate(RouteConstants.SideDrawerScreenRoute);
         } else {
             pop();
         }
@@ -38,11 +38,10 @@ const Header = (props: HeaderProps) => {
                 >
                     {
                         layout.menu ?
-                            null
-                            // <MenuIcon
-                            //     width={32}
-                            //     height={32}
-                            // />
+                            <MenuIcon
+                                width={32}
+                                height={32}
+                            />
                             :
                             <BackIcon
                                 width={24}
@@ -66,7 +65,7 @@ const Header = (props: HeaderProps) => {
                     layout.search &&
                         <TouchableRipple
                             onPress={() => console.log('Pressed')}
-                            style={[ { marginHorizontal: DefaultStyles.DefaultPadding * 0.38 } ]}
+                            style={[ { marginHorizontal: DefaultStyles.DefaultPadding * 0.50 } ]}
                         >
                             <SearchIcon
                                 width={24}

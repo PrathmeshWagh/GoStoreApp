@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Layout from '@molecules/layout/layout.molecule';
-import Otp from '@organisms/otp/otp.organism';
+import SideDrawer from '@organisms/side-drawer/side-drawer.organism';
 
 const layout = {
     menu: false,
@@ -12,10 +12,12 @@ const layout = {
     pincode: false,
 };
 
-export default function OtpScreen() {
+const SideDrawerScreen = () => {
 	return (
 		<Layout layout={layout}>
-			<Otp/>
+            <SideDrawer/>
 		</Layout>
 	);
-}
+};
+
+export default SideDrawerScreen;
