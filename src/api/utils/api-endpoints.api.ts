@@ -16,5 +16,7 @@ export const enum ApiEndpoints {
 	CATEGORIES = '/products/v2/categories',
 	CATEGORIES_V1 = '/products/v1/categories',
 	ALL_PRODUCTS = '/product/getAllProducts',
-	EXCHANGE = '/gostor/cart/exchange'
+	EXCHANGE = '/gostor/cart/exchange',
+	ADDRESS = '/gostor/addresses',
+	CART_COUNT = '/gostor/v2/cart/count'
 }

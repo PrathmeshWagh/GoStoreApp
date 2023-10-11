@@ -20,14 +20,6 @@ interface ProductData {
 }
 
 const ViewMoreSimilarProduct = () => {
-	interface Category {
-		id: string;
-		name: string;
-	}
-	interface ProductData {
-		data: ProductType[];
-	}
-
 	const { navigate } = useEnhancedNavigation();
 	const [productsData, setProductsData] = useState<ProductData[]>([]);
 	const [selectedCategoryId, setSelectedCategoryId] = useState<string>('0');

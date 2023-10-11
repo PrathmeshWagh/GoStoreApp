@@ -7,7 +7,10 @@ import {
 	OtpScreen,
 	CategoriesScreen,
 	ViewMoreSimilarProductScreen,
-	ProductDetailsScreen, LocationScreen, PincodeScreen
+	ProductDetailsScreen,
+	LocationScreen,
+	PincodeScreen,
+	CartScreen
 } from './export.routes';
 import { RouteConstants } from './constants.routes';
 
@@ -66,17 +69,24 @@ const RoutesList = [
 		component: CategoriesScreen,
 		options: { headerShown: false }
 	},
-	{ 
-		id: 10,
-		 name: RouteConstants.LocationScreenRoute,
-		  component: LocationScreen, options: { headerShown: false }
-		 },
 	{
-		 id: 11,
-		 name: RouteConstants.PincodeScreenRoute, 
-		 component: PincodeScreen,
-		 options: { headerShown: false }
-		 },
+		id: 10,
+		name: RouteConstants.LocationScreenRoute,
+		component: LocationScreen,
+		options: { headerShown: false }
+	},
+	{
+		id: 11,
+		name: RouteConstants.PincodeScreenRoute,
+		component: PincodeScreen,
+		options: { headerShown: false }
+	},
+	{
+		id: 11,
+		name: RouteConstants.CartScreenRoute,
+		component: CartScreen,
+		options: { headerShown: false }
+	}
 ];
 
 export { RoutesList };

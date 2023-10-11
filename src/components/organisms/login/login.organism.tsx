@@ -106,9 +106,9 @@ const styles = StyleSheet.create({
 	},
 	headerText: {
 		textAlign: 'center',
-		margin: 10,
-		fontFamily: FontGilroy.SemiBold,
-		fontSize: 17
+		marginTop: 3,
+		fontFamily: FontGilroy.Medium,
+		fontSize: 15
 	},
 	tncText: {
 		fontSize: 12,
@@ -124,7 +124,8 @@ const styles = StyleSheet.create({
 		marginTop: 20
 	},
 	labelText: {
-		fontFamily: FontGilroy.Medium
+		fontFamily: FontGilroy.Medium,
+		fontSize: 13
 	},
 	signupLink: {
 		flexDirection: 'row',
@@ -133,7 +134,8 @@ const styles = StyleSheet.create({
 	},
 	linkText: {
 		marginLeft: 5,
-		fontFamily: FontGilroy.Medium
+		fontFamily: FontGilroy.Medium,
+		fontSize: 13
 	},
 	textStyle: {
 		marginTop: 8,

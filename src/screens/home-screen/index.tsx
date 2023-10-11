@@ -6,12 +6,12 @@ import { RouteConstants } from '@routes/constants.routes';
 import { useEnhancedNavigation } from '@hooks/index';
 
 const layout = {
-    menu: true,
-    search: false,
-    back: false,
-    logo: 'https://gostor.com/icons/header/logo-invert.svg',
-    cart: false,
-    pincode: true,
+	menu: true,
+	search: false,
+	back: false,
+	logo: 'https://gostor.com/icons/header/logo-invert.svg',
+	cart: false,
+	pincode: true
 };
 
 const HomeScreen = () => {
@@ -24,6 +24,13 @@ const HomeScreen = () => {
 				}}
 			>
 				<Text>Login</Text>
+			</TouchableOpacity>
+			<TouchableOpacity
+				onPress={() => {
+					navigate(RouteConstants.CartScreenRoute);
+				}}
+			>
+				<Text>Cart</Text>
 			</TouchableOpacity>
 			<Home />
 		</Layout>

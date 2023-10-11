@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import React, { useState } from 'react';
-import Icon from 'react-native-vector-icons/Feather';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTheme } from '@hooks/index';
 import { DefaultStyles, FontGilroy } from '@primitives/index';
 import { CustomButtom } from 'components/atoms';
@@ -8,6 +8,7 @@ import { useCheckPincodeServiceabilityMutation } from 'api/checkout/check-pincod
 import { Table, TableWrapper, Row, Rows, Col } from 'react-native-table-component';
 import { tableHead, tableData } from 'helpers/constants/product/assured-table';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { KeyboardWrapper } from '@atoms/index';
 
 interface AssuredProps {
 	onPress: () => void;
@@ -60,7 +61,7 @@ export default function AssuredBuyBackModal(props: AssuredProps) {
 	};
 
 	return (
-		<KeyboardAwareScrollView>
+		<KeyboardWrapper>
 			<View style={styles.container}>
 				<Text style={[styles.text, { fontSize: 13, fontFamily: FontGilroy.SemiBold }]}>
 					What is Buy Back Guarantee?
@@ -122,7 +123,7 @@ export default function AssuredBuyBackModal(props: AssuredProps) {
 						}}
 					>
 						{!tnc ? (
-							<Icon name={'square'} color={colors.grey} size={22} />
+							<Icon name={'square-outline'} color={colors.grey} size={18} />
 						) : (
 							<Icon
 								name={'check'}
@@ -156,7 +157,7 @@ export default function AssuredBuyBackModal(props: AssuredProps) {
 					textStyles={[styles.buttonText]}
 				/>
 			</View>
-		</KeyboardAwareScrollView>
+		</KeyboardWrapper>
 	);
 }
 

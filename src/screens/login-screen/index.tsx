@@ -12,9 +12,5 @@ export default function LoginScreen() {
 		cart: false,
 		pincode: false
 	};
-	return (
-		<Layout layout={layout}>
-			<Login />
-		</Layout>
-	);
+	return <Login />;
 }

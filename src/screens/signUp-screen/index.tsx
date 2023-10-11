@@ -10,7 +10,7 @@ import { LoginWithNumber } from 'api/auth/use-login';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useEnhancedNavigation } from '@hooks/index';
 import { RouteConstants } from 'routes/constants.routes';
-import Icon from 'react-native-vector-icons/Feather';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { GenerateOTP } from 'api/auth/use-generate-otp';
 import Images from 'assets/Images';
 
@@ -156,15 +156,18 @@ const SignUpScreen = () => {
 							setTnc(!tnc);
 						}}
 					>
-						{tnc ? (
+						{!tnc ? (
+							<Icon name={'square-outline'} color={colors.grey} size={18} />
+						) : (
 							<Icon
-								name="check"
+								name={'check'}
 								color={colors.onSecondary}
 								size={18}
-								style={[styles.checkedIcon, { backgroundColor: colors.primary }]}
+								style={{
+									backgroundColor: colors.primary,
+									borderRadius: 5
+								}}
 							/>
-						) : (
-							<Icon name="square" color={colors.grey} size={22} />
 						)}
 					</TouchableOpacity>
 					<Text style={styles.tncText}>

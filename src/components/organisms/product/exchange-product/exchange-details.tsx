@@ -46,70 +46,64 @@ export default function EXchangeDetails({ setIsExchangeVisible }: any) {
 	};
 
 	return (
-		<KeyboardAwareScrollView
-			style={{ flex: 1 }}
-			contentContainerStyle={{ flexGrow: 1 }}
-			keyboardShouldPersistTaps="handled"
-		>
-			<View style={styles.container}>
-				{isPicodeVisible && (
-					<>
-						<View style={styles.header}>
-							<Text style={styles.headerText}>Exchange your Product</Text>
-							<TouchableOpacity onPress={closeExchangePage}>
-								<Text>Close</Text>
-							</TouchableOpacity>
-						</View>
-						<Text style={styles.subHeaderText}>Check availability for exchange</Text>
-						<View style={styles.inputContainer}>
-							<TextInput
-								style={styles.input}
-								placeholder="Enter Pincode"
-								keyboardType="numeric"
-								value={pincode}
-								maxLength={6}
-								onChangeText={(text) => {
-									if (text.length <= 6) {
-										setPincode(text);
-									}
-								}}
-							/>
-							<CustomButtom
-								loading={pincodeServiceabilityLoading}
-								onPress={onCheckPincodeServiceabilityPress}
-								mode="text"
-								text="Apply"
-								disabled={pincode.length !== 6}
-								styles={[
-									styles.buttonStyles,
-									{
-										backgroundColor: pincode.length !== 6 ? colors.onSecondary : colors.primary
-									}
-								]}
-								textStyles={[
-									styles.buttonText,
-									{
-										color: pincode.length !== 6 ? colors.tertiary : colors.onSecondary
-									}
-								]}
-							/>
-						</View>
-						<Text style={styles.infoText}>Exchange available in your area</Text>
-						{servicableErrorMsg && (
-							<Text style={styles.errorText}>Not serviceable in this location.</Text>
-						)}
-					</>
-				)}
+		<KeyboardAwareScrollView contentContainerStyle={styles.container}>
+			{isPicodeVisible && (
+				<>
+					<View style={styles.header}>
+						<Text style={styles.headerText}>Exchange your Product</Text>
+						<TouchableOpacity onPress={closeExchangePage}>
+							<Text>Close</Text>
+						</TouchableOpacity>
+					</View>
+					<Text style={styles.subHeaderText}>Check availability for exchange</Text>
+					<View style={styles.inputContainer}>
+						<TextInput
+							style={styles.input}
+							placeholder="Enter Pincode"
+							keyboardType="numeric"
+							value={pincode}
+							maxLength={6}
+							onChangeText={(text) => {
+								if (text.length <= 6) {
+									setPincode(text);
+								}
+							}}
+						/>
+						<CustomButtom
+							loading={pincodeServiceabilityLoading}
+							onPress={onCheckPincodeServiceabilityPress}
+							mode="text"
+							text="Apply"
+							disabled={pincode.length !== 6}
+							styles={[
+								styles.buttonStyles,
+								{
+									backgroundColor: pincode.length !== 6 ? colors.onSecondary : colors.primary
+								}
+							]}
+							textStyles={[
+								styles.buttonText,
+								{
+									color: pincode.length !== 6 ? colors.tertiary : colors.onSecondary
+								}
+							]}
+						/>
+					</View>
+					<Text style={styles.infoText}>Exchange available in your area</Text>
+					{servicableErrorMsg && (
+						<Text style={styles.errorText}>Not serviceable in this location.</Text>
+					)}
+				</>
+			)}
 
-				{isServicable && (
-					<ProductCategories
-					// setIsPincodeVisible={setIsPincodeVisible}
-					// setIsExchangeVisible={setIsExchangeVisible}
-					// onAddToCart={onAddToCart}
-					// storePrice={storePrice}
-					/>
-				)}
-			</View>
+			{isServicable && (
+				<ProductCategories
+				// setIsPincodeVisible={setIsPincodeVisible}
+				// setIsExchangeVisible={setIsExchangeVisible}
+				// onAddToCart={onAddToCart}
+				// storePrice={storePrice}
+				/>
+			)}
 		</KeyboardAwareScrollView>
 	);
 }

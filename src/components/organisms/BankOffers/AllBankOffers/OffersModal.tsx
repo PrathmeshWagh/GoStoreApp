@@ -12,7 +12,6 @@ interface OfferModalProps {
 export default function OffersModal(props: OfferModalProps) {
 	const { bankOffersData, noCostEmiOffers, onPress } = props;
 	const { colors } = useTheme();
-	console.log('offer data in offer modal', bankOffersData);
 
 	return (
 		<View style={styles.container}>

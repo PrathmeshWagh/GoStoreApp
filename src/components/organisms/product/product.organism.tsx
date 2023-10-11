@@ -10,10 +10,9 @@ import {
 	Modal
 } from 'react-native';
 import React, { useEffect, useState, useRef } from 'react';
-import { useDimensions, usePermissionHandlers } from '@hooks/index';
+import { useDimensions, usePermissionHandlers, useTheme } from '@hooks/index';
 import { DefaultStyles, FontGilroy } from '@primitives/index';
 import { CustomButtom, ProductSlider, Rupee } from 'components/atoms';
-import { useTheme } from '@hooks/index';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FeatureSection from 'components/molecules/product/feature-section';
 import assuredBBFeatures from 'helpers/constants/product-abb/assuredBBFeatures';
@@ -62,6 +61,7 @@ export default function ProductDetails({ Productitem, categories }: any) {
 		isError: priceDetailsError,
 		error
 	} = useProductMutation();
+	console.log('in');
 
 	const { data: assuredBuyBackData, refetch: checkAssuredBuyBack } = useCheckAssuredBuyBack({
 		productId: Productitem.productId,
@@ -125,6 +125,7 @@ export default function ProductDetails({ Productitem, categories }: any) {
 			clusterId: 7,
 			supplierId: Productitem.supplierId
 		};
+		console.log('1');
 
 		getProductPriceDetails(payload);
 	}, []);
