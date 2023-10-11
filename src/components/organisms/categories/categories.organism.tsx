@@ -6,7 +6,8 @@ import {
 	Pressable,
 	RefreshControl,
 	ActivityIndicator,
-	ScrollView
+	TextInput,
+	Modal
 } from 'react-native';
 import React, { useEffect, useState, useRef } from 'react';
 import { FontGilroy, DefaultStyles } from '@primitives/index';
@@ -21,6 +22,12 @@ import { RouteConstants } from 'routes/constants.routes';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import CheckBox from 'react-native-check-box';
+import Slider from '@react-native-community/slider';
+import DropdownBox from 'components/atoms/dropdownBox';
+import PriceModal from 'components/atoms/priceModal';
+
 interface Category {
 	id?: number;
 	productId?: string;
@@ -41,6 +48,11 @@ interface Category {
 	supplierId?: number;
 	discount?: number;
 }
+
+interface PriceData {
+	id: number;
+	label: string;
+}
 const sortOptions = [
 	{ id: 'recommendation', label: 'Recommendation' },
 	{ id: 'discHighToLow', label: 'Discount: High To Low' },
@@ -54,8 +66,16 @@ const filterOptions = [
 	{ id: 'priceHighToLowSSS', label: 'Display Size' }
 ];
 
+const brandsData = [
+	{ id: 0, label: 'Samsung' },
+	{ id: 1, label: 'Sony' },
+	{ id: 2, label: 'LG' },
+	{ id: 3, label: 'Onida' }
+];
+
 const Categories = ({ categoryData }: any) => {
 	// const location = useSelector((state: RootState) => state.location);
+	const { navigate } = useEnhancedNavigation();
 	const refRBSheet = useRef<RBSheet>(null);
 	const refRBSheetFilter = useRef<RBSheet>(null);
 	const { height, width } = useDimensions();
@@ -64,8 +84,12 @@ const Categories = ({ categoryData }: any) => {
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const [refreshing, setRefreshing] = useState(false);
 	const [selectedSort, setSelectedSort] = useState('recommendation');
-	const [selectedFilter, setSelectedFilter] = useState('');
-	const { navigate } = useEnhancedNavigation();
+	const [selectedFilter, setSelectedFilter] = useState([]);
+	const [isCheckedArray, setIsCheckedArray] = useState(brandsData.map(() => false));
+	const [isMinModalVisible, setIsMinModalVisible] = useState(false);
+	const [isMaxModalVisible, setIsMaxModalVisible] = useState(false);
+	const [minPriceData, setMinPriceData] = useState<PriceData[]>([]);
+	const [maxPriceData, setMaxPriceData] = useState<PriceData[]>([]);
 
 	useEffect(() => {
 		if (categories) {
@@ -117,12 +141,44 @@ const Categories = ({ categoryData }: any) => {
 		setCurrentPage(currentPage + 1);
 	};
 
-	const handleSortSelect = (sortOptionId) => {
-		setSelectedSort(sortOptionId);
+	// const handleSortSelect = (sortOptionId) => {
+	// 	setSelectedSort(sortOptionId);
+	// };
+
+	const handleFilterSelect = (optionId) => {
+		if (selectedFilter.includes(optionId)) {
+			setSelectedFilter(selectedFilter.filter((id: string | number) => id !== optionId));
+		} else {
+			setSelectedFilter([...selectedFilter, optionId]);
+		}
 	};
 
-	const handleFilterSelect = (filterOptionId) => {
-		setSelectedFilter(filterOptionId);
+	const handleCheckBoxClick = (index: number) => {
+		const newIsCheckedArray = [...isCheckedArray];
+		newIsCheckedArray[index] = !newIsCheckedArray[index];
+		setIsCheckedArray(newIsCheckedArray);
+	};
+
+	const openMinPriceModal = () => {
+		setMinPriceData([
+			{ id: 1, label: 'Min price' },
+			{ id: 2, label: '10000' },
+			{ id: 3, label: '20000' },
+			{ id: 4, label: '30000' },
+			{ id: 5, label: '40000' }
+		]);
+		setIsMinModalVisible(true);
+	};
+
+	const openMaxPriceModal = () => {
+		setMaxPriceData([
+			{ id: 1, label: '50000' },
+			{ id: 2, label: '60000' },
+			{ id: 3, label: '70000' },
+			{ id: 4, label: '80000' },
+			{ id: 5, label: '90000' }
+		]);
+		setIsMaxModalVisible(true);
 	};
 
 	return (
@@ -187,7 +243,9 @@ const Categories = ({ categoryData }: any) => {
 									<Pressable
 										key={option.id}
 										style={[styles.info, index < sortOptions.length - 1 && styles.borderBottom]}
-										onPress={() => handleSortSelect(option.id)}
+										onPress={() => {
+											refRBSheet.current?.close();
+										}}
 									>
 										{selectedSort === option.id ? (
 											<Icon name="circle-slice-8" size={20} color={CustomColors.primary} />
@@ -257,9 +315,88 @@ const Categories = ({ categoryData }: any) => {
 												</Text>
 												<Icon name="chevron-down" size={25} />
 											</Pressable>
-											{selectedFilter === option.id && (
+											{selectedFilter.includes(option.id) && (
 												<View>
-													<Text>HHH</Text>
+													<View
+														style={{
+															flexDirection: 'row',
+															alignItems: 'center'
+														}}
+													>
+														<TextInput placeholder="Search Brands" style={styles.textinput} />
+														<MaterialCommunityIcons
+															name="magnify"
+															size={30}
+															color={CustomColors.primary}
+														/>
+													</View>
+													<View style={{ marginTop: 10 }}>
+														{brandsData.map((brand, index) => (
+															<View key={index}>
+																<CheckBox
+																	style={{ paddingTop: 10 }}
+																	onClick={() => handleCheckBoxClick(index)}
+																	isChecked={isCheckedArray[index]}
+																	rightText={brand.label}
+																	rightTextStyle={styles.brandText}
+																	checkedCheckBoxColor={CustomColors.primary}
+																	uncheckedCheckBoxColor={CustomColors.grey}
+																/>
+															</View>
+														))}
+													</View>
+													<Slider
+														style={{ width: '100%', height: 40 }}
+														minimumValue={0}
+														maximumValue={1}
+														minimumTrackTintColor={CustomColors.primary}
+														maximumTrackTintColor={CustomColors.grey}
+													/>
+													<View
+														style={{
+															flexDirection: 'row',
+															justifyContent: 'space-between',
+															paddingBottom: DefaultStyles.DefaultPadding
+														}}
+													>
+														<DropdownBox
+															style={styles.dropdownstyle}
+															title={'Min'}
+															onBoxPress={openMinPriceModal}
+														/>
+														<Modal
+															animationType="fade"
+															transparent={true}
+															visible={isMinModalVisible}
+															// onRequestClose={onClose}
+														>
+															<View style={styles.centeredView}>
+																<PriceModal
+																	setModalVisible={() => setIsMinModalVisible(false)}
+																	priceData={minPriceData}
+																/>
+															</View>
+														</Modal>
+
+														<DropdownBox
+															style={styles.dropdownstyle}
+															title={50000}
+															onBoxPress={openMaxPriceModal}
+														/>
+														<Modal
+															animationType="fade"
+															transparent={true}
+															visible={isMaxModalVisible}
+															// onRequestClose={onClose}
+														>
+															<View style={styles.centeredView}>
+																<PriceModal
+																	setModalVisible={() => setIsMaxModalVisible(false)}
+																	priceData={maxPriceData}
+																/>
+															</View>
+														</Modal>
+													</View>
 												</View>
 											)}
 										</View>
@@ -293,7 +430,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		marginTop: 20,
 		paddingHorizontal: DefaultStyles.DefaultPadding - 8,
-		color: CustomColors.secondary
+		backgroundColor: CustomColors.onSecondary
 	},
 	sortAndFilterContainer: {
 		flexDirection: 'row',
@@ -357,6 +494,31 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		paddingVertical: 10
+	},
+	brandText: {
+		color: CustomColors.secondary,
+		fontSize: 15,
+		fontFamily: FontGilroy.Medium
+	},
+	textinput: {
+		paddingLeft: 10,
+		color: CustomColors.secondary,
+		borderBottomWidth: 0.5,
+		borderBottomColor: CustomColors.textGrey1,
+		width: '80%'
+	},
+	dropdownstyle: {
+		width: '42%',
+		// paddingVertical: 5,
+		borderWidth: 1,
+		borderColor: CustomColors.primary,
+		borderRadius: 5
+	},
+	centeredView: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: 'rgba(0, 0, 0, 0.5)' // Semi-transparent black background
 	}
 });
 

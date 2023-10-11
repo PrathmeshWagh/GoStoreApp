@@ -2,9 +2,9 @@ import ViewMoreSimilarProduct from 'components/organisms/view-more-similar-produ
 import Layout from 'components/molecules/layout/layout.molecule';
 
 const layout = {
-	menu: true,
+	menu: false,
 	search: false,
-	back: false,
+	back: true,
 	logo: 'https://gostor.com/icons/header/logo-invert.svg',
 	cart: false,
 	pincode: false

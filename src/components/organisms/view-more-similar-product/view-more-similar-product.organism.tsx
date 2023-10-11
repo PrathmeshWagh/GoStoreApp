@@ -1,4 +1,12 @@
-import { FlatList, StyleSheet, View, Text, Pressable, RefreshControl } from 'react-native';
+import {
+	FlatList,
+	StyleSheet,
+	View,
+	Text,
+	Pressable,
+	RefreshControl,
+	ActivityIndicator
+} from 'react-native';
 import React, { useState, useEffect, useMemo } from 'react';
 import CategoryHooks from 'hooks/CategoryHooks';
 import CategoryItemWithRatingText from 'components/atoms/category-item-with-ratingtext-atom';
@@ -7,9 +15,7 @@ import { DefaultStyles, FontGilroy } from 'primitives';
 // import { RootState } from '@slices/store';
 import { useGetProducts } from 'api/products/get-product-list';
 import { useEnhancedNavigation } from '@hooks/index';
-import { RouteConstants } from 'routes/constants.routes';
 import { CustomColors } from 'constants/colors.constants';
-import { categories } from 'api/categories/use-categories.api';
 
 interface Category {
 	id: string;
@@ -89,14 +95,6 @@ const ViewMoreSimilarProduct = () => {
 		fetchData(currentPage, selectedCategoryId, selectedCategoryName);
 	}, [currentPage, selectedCategoryId, selectedCategoryName]);
 
-	// useEffect(() => {
-	// 	console.log('scroll to index');
-	// 	ref.current?.scrollToIndex({
-	// 		index: 0,
-	// 		viewPosition: 0.5
-	// 	});
-	// }, []);
-
 	const allCategory: Category = {
 		id: '0',
 		name: 'All'
@@ -126,11 +124,11 @@ const ViewMoreSimilarProduct = () => {
 	}, [selectedCategoryId]);
 
 	const btnPressedHandler = (item: any) => {
-		navigate(RouteConstants.ProductdeatilsScreenRoute, { item: item });
+		console.log('kkk');
 	};
 
 	const renderProduct = ({ item }: any) => {
-		return <CategoryItemWithRatingText item={item} onBtnPress={btnPressedHandler} />;
+		return <CategoryItemWithRatingText item={item} onPress={btnPressedHandler} />;
 	};
 
 	const handleEndReached = ({ distanceFromEnd }: any) => {
@@ -138,30 +136,11 @@ const ViewMoreSimilarProduct = () => {
 		setCurrentPage(currentPage + 1);
 	};
 
-	// const Header = () => {
-	// 	return (
-	// 		<View style={{ marginBottom: 20 }}>
-	// 			{isCategoryBoxLoading ? (
-	// 				<Text>Loading...</Text>
-	// 			) : (
-	// 				<FlatList
-	// 					ref={ref}
-	// 					data={mergedCategories}
-	// 					renderItem={renderCategoryBox}
-	// 					horizontal={true}
-	// 					showsHorizontalScrollIndicator={false}
-	// 					keyExtractor={(item) => item.id}
-	// 				/>
-	// 			)}
-	// 		</View>
-	// 	);
-	// };
-
 	return (
 		<View style={styles.container}>
 			<View style={{ marginBottom: 10 }}>
 				{isCategoryBoxLoading ? (
-					<Text>Loading...</Text>
+					<ActivityIndicator size="small" color="#0000ff" />
 				) : (
 					<FlatList
 						data={mergedCategories}
@@ -172,16 +151,19 @@ const ViewMoreSimilarProduct = () => {
 					/>
 				)}
 			</View>
+
 			<FlatList
 				data={productsData}
 				keyExtractor={(item) => item.id}
 				renderItem={renderProduct}
 				numColumns={2}
-				// ListHeaderComponent={Header}
 				showsHorizontalScrollIndicator={false}
 				onEndReached={handleEndReached}
 				onEndReachedThreshold={0.7}
 				refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+				ListFooterComponent={() => {
+					return isProductLoading ? <ActivityIndicator /> : <></>;
+				}}
 			/>
 		</View>
 	);
@@ -198,7 +180,6 @@ const styles = StyleSheet.create({
 	},
 	categoryBox: {
 		marginVertical: 12,
-		// marginRight: 10,
 		marginHorizontal: 5,
 		padding: DefaultStyles.DefaultPadding - 3,
 		borderRadius: 5,
