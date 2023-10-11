@@ -2,12 +2,14 @@ import { FlatList, StyleSheet, View, Text, Pressable, RefreshControl } from 'rea
 import React, { useState, useEffect, useMemo } from 'react';
 import CategoryHooks from 'hooks/CategoryHooks';
 import CategoryItemWithRatingText from 'components/atoms/category-item-with-ratingtext-atom';
-import { DefaultStyles } from 'primitives';
+import { DefaultStyles, FontGilroy } from 'primitives';
 // import { useSelector } from 'react-redux';
 // import { RootState } from '@slices/store';
 import { useGetProducts } from 'api/products/get-product-list';
 import { useEnhancedNavigation } from '@hooks/index';
 import { RouteConstants } from 'routes/constants.routes';
+import { CustomColors } from 'constants/colors.constants';
+import { categories } from 'api/categories/use-categories.api';
 
 interface Category {
 	id: string;
@@ -165,7 +167,7 @@ const ViewMoreSimilarProduct = () => {
 
 	return (
 		<View style={styles.container}>
-			<View style={{ marginBottom: 20 }}>
+			<View style={{ marginBottom: 10 }}>
 				{isCategoryBoxLoading ? (
 					<Text>Loading...</Text>
 				) : (
@@ -199,22 +201,31 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		paddingHorizontal: DefaultStyles.DefaultPadding - 8,
-		paddingBottom: DefaultStyles.DefaultPadding + 16
+		paddingBottom: DefaultStyles.DefaultPadding + 16,
+		backgroundColor: CustomColors.onSecondary
 	},
 	categoryBox: {
-		marginTop: 20,
-		marginRight: 10,
-		padding: DefaultStyles.DefaultPadding - 1,
-		borderWidth: 0.5,
-		borderRadius: 5
+		marginVertical: 12,
+		// marginRight: 10,
+		marginHorizontal: 5,
+		padding: DefaultStyles.DefaultPadding - 3,
+		borderRadius: 5,
+		shadowColor: '#171717',
+		shadowOffset: { width: 0, height: 0 },
+		shadowOpacity: 0.2,
+		shadowRadius: 3,
+		elevation: 5,
+		backgroundColor: CustomColors.onSecondary
 	},
 	selectedCategoryBox: {
-		backgroundColor: 'green'
+		backgroundColor: CustomColors.primary
 	},
 	normalText: {
-		color: 'black'
+		color: CustomColors.secondary,
+		fontFamily: FontGilroy.Medium
 	},
 	selectedText: {
-		color: 'white'
+		color: CustomColors.onSecondary,
+		fontFamily: FontGilroy.Medium
 	}
 });

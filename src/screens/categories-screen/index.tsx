@@ -3,9 +3,9 @@ import Categories from '@organisms/categories/categories.organism';
 import Layout from 'components/molecules/layout/layout.molecule';
 
 const layout = {
-	menu: true,
+	menu: false,
 	search: false,
-	back: false,
+	back: true,
 	logo: 'https://gostor.com/icons/header/logo-invert.svg',
 	cart: false,
 	pincode: false

@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
 		paddingVertical: 2
 	},
 	bestsellerText: {
-		color: 'white',
+		color: CustomColors.onSecondary,
 		fontWeight: 'bold'
 	},
 	ratingBox: {
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
 		paddingVertical: 2
 	},
 	ratingText: {
-		color: 'white',
+		color: CustomColors.onSecondary,
 		paddingRight: 3
 	},
 
