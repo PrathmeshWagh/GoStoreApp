@@ -10,7 +10,8 @@ export default function ProductdetailsSlider() {
 		{
 			id: 1,
 			title: 'ABC',
-			image: 'https://static.gostor.com/UPDATED_BANNER_IMAGES/image_1695578198363559'
+			image:
+				'https://static.arzooo.com/images/products/bc2b9/ca480/bc2b9ca4804c017dbb4de607077123ff0506c4aecb0b0a5b276e643ff3a40de0_03.jpg'
 		},
 		{
 			id: 2,
@@ -20,7 +21,8 @@ export default function ProductdetailsSlider() {
 		{
 			id: 3,
 			title: 'GHE',
-			image: 'https://static.gostor.com/UPDATED_BANNER_IMAGES/image_1696080642373409'
+			image:
+				'https://static.arzooo.com/images/products/bc2b9/ca480/bc2b9ca4804c017dbb4de607077123ff0506c4aecb0b0a5b276e643ff3a40de0_02.jpg'
 		},
 		{
 			id: 4,
@@ -30,7 +32,8 @@ export default function ProductdetailsSlider() {
 		{
 			id: 5,
 			title: 'gdf',
-			image: 'https://static.gostor.com/UPDATED_BANNER_IMAGES/image_1696080642373409'
+			image:
+				'https://static.arzooo.com/images/products/bc2b9/ca480/bc2b9ca4804c017dbb4de607077123ff0506c4aecb0b0a5b276e643ff3a40de0_03.jpg'
 		},
 		{
 			id: 6,

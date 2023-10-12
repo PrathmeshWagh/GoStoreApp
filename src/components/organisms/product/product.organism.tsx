@@ -217,7 +217,7 @@ export default function ProductDetails({ Productitem, categories }: any) {
 					<View style={styles.space}>
 						<View>
 							<Text style={{ fontFamily: FontGilroy.SemiBold }}>
-								Buy this for as low as{' '}
+								Buy this for as low as
 								<Rupee money={12200} styles={{ fontSize: 20, fontFamily: FontGilroy.Regular }} />
 							</Text>
 							<Text style={{ fontFamily: FontGilroy.SemiBold, fontSize: 13 }}>With this Offer</Text>
@@ -232,11 +232,11 @@ export default function ProductDetails({ Productitem, categories }: any) {
 					</View>
 					{expanded && (
 						<Text style={[styles.expandedtext, { borderColor: colors.bordercolor }]}>
-							10% Off on HDFC Credit Cards{' '}
+							10% Off on HDFC Credit Cards
 						</Text>
 					)}
 					<View>
-						<View style={styles.space}>
+						<View style={[styles.space, { marginVertical: 10 }]}>
 							<View style={{ flexDirection: 'row' }}>
 								{/* <LottieView source={require('../path/to/animation.json')} autoPlay loop /> */}
 								<Text style={{ fontFamily: FontGilroy.Bold, fontSize: 15 }}>Available Offers</Text>
@@ -299,12 +299,13 @@ export default function ProductDetails({ Productitem, categories }: any) {
 									flexDirection: 'row',
 									backgroundColor: colors.offerbg,
 									borderRadius: 5,
-									paddingHorizontal: 5,
+									paddingHorizontal: 10,
+									paddingVertical: 5,
 									alignItems: 'center'
 								}}
 							>
 								<BuyBackIcon width={24} height={24} />
-								<Text style={styles.text}>Buy Back Guarantee</Text>
+								<Text style={[styles.text, { fontSize: 13 }]}>Buy Back Guarantee</Text>
 								<Text style={styles.detailsText}>Details</Text>
 							</View>
 							<View style={styles.assueredFeature}>
@@ -526,7 +527,8 @@ const styles = StyleSheet.create({
 	buttonText: {
 		fontFamily: FontGilroy.SemiBold,
 		marginTop: 8,
-		fontSize: 13
+		fontSize: 13,
+		letterSpacing: 0.5
 	},
 	mrp: {
 		fontSize: 13,
