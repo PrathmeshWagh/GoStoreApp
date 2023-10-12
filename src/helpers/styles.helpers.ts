@@ -43,3 +43,7 @@ export const itemsBetween = (): ViewStyle => ({
 export const radiusFull = (): ViewStyle => ({
     borderRadius: 199,
 });
+
+export const textAlign = (align: 'center' | 'auto' | 'left' | 'right' | 'justify') => ({
+    textAlign: align,
+});

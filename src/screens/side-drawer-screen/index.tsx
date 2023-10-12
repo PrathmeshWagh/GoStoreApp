@@ -1,20 +1,23 @@
 import React from 'react';
-import Login from '@organisms/login/login.organism';
+
 import Layout from '@molecules/layout/layout.molecule';
+import SideDrawer from '@organisms/side-drawer/side-drawer.organism';
 
 const layout = {
     menu: false,
     search: false,
     back: true,
-    logo: 'https://gostor.com/icons/header/logo-invert.svg',
+    logo: '',
     cart: false,
-    pincode: true,
+    pincode: false,
 };
 
-export default function LoginScreen() {
+const SideDrawerScreen = () => {
 	return (
 		<Layout layout={layout}>
-			<Login />
+            <SideDrawer/>
 		</Layout>
 	);
-}
+};
+
+export default SideDrawerScreen;

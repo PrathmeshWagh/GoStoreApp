@@ -16,5 +16,11 @@ export const enum ApiEndpoints {
 	CATEGORIES = '/products/v2/categories',
 	CATEGORIES_V1 = '/products/v1/categories',
 	ALL_PRODUCTS = '/product/getAllProducts',
-	EXCHANGE = '/gostor/cart/exchange'
+	EXCHANGE = '/gostor/cart/exchange',
+	Categories = '/categories',
+    ParentBannerStruture = '/banners/v2/getParentBannersForConsumer',
+    BannerDetails = '/banners/v1/getBannersForConsumer',
+    Products = '/products/v2/getProducts',
+    Coordinates = '/locations/latlng',
+    Pincode = '/locations/pincode'
 }

@@ -8,7 +8,9 @@ export const enum FontGilroy {
 }
 
 export const enum AppTypes {
-	UserHasSeenPermissions = 'user_has_seen_permissions'
+	UserHasSeenPermissions = 'user_has_seen_permissions',
+	UserToken = 'user_token',
+    RefreshToken = 'refresh_token',
 }
 
 export const enum DefaultStyles {
@@ -16,5 +18,6 @@ export const enum DefaultStyles {
 	DefaultRadius = 6,
 	DefaultFontSize = 14,
 	DefaultButtonHeight = 52,
-	DefaultHeight = 54
+	DefaultHeight = 54,
+	DefaultInputHeight = 54,
 }

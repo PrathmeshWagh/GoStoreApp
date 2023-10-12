@@ -11,3 +11,4 @@ export { default as CategoriesScreen } from '@screens/categories-screen';
 export { default as ViewMoreSimilarProductScreen } from '@screens/view-more-similar-product';
 export { default as LocationScreen } from '@screens/location-screen';
 export { default as PincodeScreen } from '@screens/pincode-screen';
+export { default as SideDrawerScreen } from '@screens/side-drawer-screen';

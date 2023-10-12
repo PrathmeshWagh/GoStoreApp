@@ -5,14 +5,15 @@ import { DefaultStyles } from '@primitives/index';
 
 interface KeyboardWrapperProps {
     children: ReactNode;
-    scrollviewStyles?: ViewStyle
+    scrollviewStyles?: ViewStyle,
+    containerStyles?: ViewStyle
 }
 
 const KeyboardWrapper = (props: KeyboardWrapperProps) => {
-    const { children, scrollviewStyles } = props;
+    const { children, scrollviewStyles, containerStyles } = props;
     return (
         <KeyboardAvoidingView
-            style={[ styles.container ]}
+            style={[ styles.container, containerStyles ]}
             behavior={ Platform.OS === 'ios' ? 'padding' : 'height' }
             keyboardVerticalOffset={ Platform.OS === 'ios' ? 0 : 20 }
         >
