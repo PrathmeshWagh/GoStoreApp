@@ -1,26 +1,26 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { NavigationContainer, DefaultTheme as NavigationTheme } from '@react-navigation/native';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider as ReduxProvider, useSelector, useDispatch } from 'react-redux';
-import {
-	PaperProvider,
-	MD3LightTheme as DefaultTheme,
-	configureFonts,
-	Snackbar
-} from 'react-native-paper';
+import { PaperProvider, MD3LightTheme as DefaultTheme, configureFonts, Snackbar } from 'react-native-paper';
 import { LogBox, View, StyleSheet, Text } from 'react-native';
 import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+// import firebase from '@react-native-firebase/app';
+// import firebase2 from '@react-native-firebase/app';
+import ReactMoE from 'react-native-moengage';
+import Config from 'react-native-config';
+import { Mixpanel } from 'mixpanel-react-native';
+
 import store, { RootState } from '@slices/store';
 import { Router } from '@routes/router.routes';
 import { BaseFont, CustomColors, CustomFontVariants } from '@constants/index';
 import { CustomModal } from '@atoms/index';
-import Config from 'react-native-config';
-import { UIProvider } from 'context/ui.context';
 import { container } from '@helpers/index';
 import { hideSnackbar } from '@slices/snackbar.slice';
 import { FontGilroy } from '@primitives/index';
+// import { defaultAppConfig } from 'services/firebase.service';
 
 LogBox.ignoreLogs([]);
 
@@ -35,15 +35,15 @@ const theme = {
 	...DefaultTheme,
 	colors: {
 		...DefaultTheme.colors,
-		...CustomColors
-	}
+		...CustomColors,
+	},
 };
 
 const fonts = configureFonts({
 	config: {
 		...baseVariants,
-		...CustomFontVariants
-	}
+		...CustomFontVariants,
+	},
 });
 
 /** React Navigation Theme */
@@ -51,9 +51,23 @@ const navTheme = {
 	...NavigationTheme,
 	colors: {
 		...NavigationTheme.colors,
-		...CustomColors
-	}
+		...CustomColors,
+	},
 };
+
+// try {
+
+
+//  if (!firebase.apps.length) {
+//         firebase.initializeApp(defaultAppConfig);
+//     }
+
+//     // if (!firebase2.apps.some(app => app.name === 'secondary')) {
+//     //     firebase2.initializeApp(defaultAppConfig);
+//     // }
+// } catch (error) {
+//     console.error("Firebase initialization error:", error);
+// }
 
 const toastConfig = {
 	success: (props: any) => <BaseToast {...props} />,
@@ -66,7 +80,7 @@ const toastConfig = {
 				<Text style={styles.arzoooToastMessage}>{props.msg}</Text>
 			</View>
 		);
-	}
+	},
 };
 
 function MainContent() {
@@ -94,6 +108,11 @@ function MainContent() {
 }
 
 function App() {
+	const trackAutomaticEvents = true;
+	const mixpanel = new Mixpanel(Config.BASE_MIX_PANEL_ID as string, trackAutomaticEvents);
+	mixpanel.init();
+	ReactMoE.initialize(Config.BASE_MOENGAGE_ID as string);
+
 	return (
 		<ReduxProvider store={store}>
 			<PaperProvider theme={{ ...theme, fonts }}>
@@ -117,11 +136,11 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 15,
 		paddingVertical: 10,
 		borderRadius: 20,
-		marginHorizontal: 10
+		marginHorizontal: 10,
 	},
 	arzoooToastMessage: {
-		color: 'white' // Assuming white color for text on the dark background
-	}
+		color: 'white',
+	},
 });
 
 export default App;

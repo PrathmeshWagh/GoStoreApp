@@ -906,6 +906,20 @@ PODS:
   - lottie-react-native (6.3.1):
     - lottie-ios (~> 4.3.0)
     - React-Core
+  - Mixpanel-swift (4.1.3):
+    - Mixpanel-swift/Complete (= 4.1.3)
+  - Mixpanel-swift/Complete (4.1.3)
+  - MixpanelReactNative (2.3.1):
+    - Mixpanel-swift (= 4.1.3)
+    - React-Core
+  - MoEngage-iOS-SDK (9.11.3)
+  - MoEngageInApp (4.11.1):
+    - MoEngage-iOS-SDK (< 9.12.0, >= 9.11.1)
+  - MoEngagePluginBase (4.4.0):
+    - MoEngage-iOS-SDK (< 9.12.0, >= 9.11.0)
+    - MoEngageInApp (< 4.12.0, >= 4.11.0)
+  - MoEngageRichNotification (7.11.0):
+    - MoEngage-iOS-SDK (< 9.12.0, >= 9.11.0)
   - nanopb (2.30909.0):
     - nanopb/decode (= 2.30909.0)
     - nanopb/encode (= 2.30909.0)
@@ -1346,6 +1360,10 @@ PODS:
     - React-jsi (= 0.72.3)
     - React-logger (= 0.72.3)
     - React-perflogger (= 0.72.3)
+  - ReactNativeMoEngage (8.5.3):
+    - MoEngagePluginBase (< 4.5.0, >= 4.4.0)
+    - MoEngageRichNotification (< 7.12.0, >= 7.11.0)
+    - React
   - RNCAsyncStorage (1.19.3):
     - React-Core
   - RNCClipboard (1.12.1):
@@ -1447,6 +1465,7 @@ DEPENDENCIES:
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
   - libevent (~> 2.1.12)
   - lottie-react-native (from `../node_modules/lottie-react-native`)
+  - MixpanelReactNative (from `../node_modules/mixpanel-react-native`)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -1488,6 +1507,7 @@ DEPENDENCIES:
   - React-runtimescheduler (from `../node_modules/react-native/ReactCommon/react/renderer/runtimescheduler`)
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - ReactNativeMoEngage (from `../node_modules/react-native-moengage`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNCClipboard (from `../node_modules/@react-native-clipboard/clipboard`)"
   - RNFastImage (from `../node_modules/react-native-fast-image`)
@@ -1536,6 +1556,11 @@ SPEC REPOS:
     - libevent
     - libwebp
     - lottie-ios
+    - Mixpanel-swift
+    - MoEngage-iOS-SDK
+    - MoEngageInApp
+    - MoEngagePluginBase
+    - MoEngageRichNotification
     - nanopb
     - PromisesObjC
     - PromisesSwift
@@ -1562,6 +1587,8 @@ EXTERNAL SOURCES:
     :tag: hermes-2023-03-20-RNv0.72.0-49794cfc7c81fb8f69fd60c3bbf85a7480cc5a77
   lottie-react-native:
     :path: "../node_modules/lottie-react-native"
+  MixpanelReactNative:
+    :path: "../node_modules/mixpanel-react-native"
   RCT-Folly:
     :podspec: "../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTRequired:
@@ -1640,6 +1667,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/react/utils"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  ReactNativeMoEngage:
+    :path: "../node_modules/react-native-moengage"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-async-storage/async-storage"
   RNCClipboard:
@@ -1718,6 +1747,12 @@ SPEC CHECKSUMS:
   libwebp: 1786c9f4ff8a279e4dac1e8f385004d5fc253009
   lottie-ios: 48af491639ba6e8bb7cfaf7649b8a339487da935
   lottie-react-native: c9f1db4f4124dcce9f8159e65d8dc6e8bcb11fb4
+  Mixpanel-swift: d7c7c6a2f7c65f735af3cb4746ed61a5aab0e551
+  MixpanelReactNative: 07c808338a1eb69b0c9077668e3acfb0b2dd6689
+  MoEngage-iOS-SDK: c6a4dbe11f90964ff33724327ed9bf42eb73338b
+  MoEngageInApp: aeb989934968bf449b71968a7aa71e9308724d4a
+  MoEngagePluginBase: b4d498cadff122b1e24b71efb9fa1b4cfcd5b043
+  MoEngageRichNotification: a20e4cb3645a93fcae0a7f603e89fba380e52f1f
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   PromisesSwift: 28dca69a9c40779916ac2d6985a0192a5cb4a265
@@ -1760,6 +1795,7 @@ SPEC CHECKSUMS:
   React-runtimescheduler: 9fda6b4781fcdef5e05c4199a3befe0e41852dba
   React-utils: d37de3f97868360b50fe98c779d84e60a850f234
   ReactCommon: 702db804e2df02bc5843845a232ac84fd09fe632
+  ReactNativeMoEngage: 6998a9708ee609af81627fa6985ca076d179fc12
   RNCAsyncStorage: c913ede1fa163a71cea118ed4670bbaaa4b511bb
   RNCClipboard: d77213bfa269013bf4b857b7a9ca37ee062d8ef1
   RNFastImage: 5c9c9fed9c076e521b3f509fe79e790418a544e8
@@ -1772,7 +1808,7 @@ SPEC CHECKSUMS:
   RNFBPerf: 412b6dc5c628088be107a4956c0c9c2cfb65f314
   RNFBRemoteConfig: d43d2b59fb5e16911279e9953e6b40cc4b21449c
   RNGestureHandler: 38aa38413896620338948fbb5c90579a7b1c3fde
-  RNPermissions: ac5991487ad04ad1888b26896d44d969e65531b7
+  RNPermissions: 51b990759ad1c2a46d74f72ea11f76b8e4d68f28
   RNReanimated: ab2e96c6d5591c3dfbb38a464f54c8d17fb34a87
   RNScreens: 85d3880b52d34db7b8eeebe2f1a0e807c05e69fa
   RNSVG: d00c8f91c3cbf6d476451313a18f04d220d4f396
@@ -1782,6 +1818,6 @@ SPEC CHECKSUMS:
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 8796b55dba14d7004f980b54bcc9833ee45b28ce
 
-PODFILE CHECKSUM: 2c0eace12e057bf5b0019a71b7c9b1b6e2080e6f
+PODFILE CHECKSUM: ea4fc9b5574559d9926fabe7d0a91312e2ece17a
 
 COCOAPODS: 1.11.3
