@@ -3,18 +3,29 @@ import { View, Pressable, StyleSheet, Text, TextInput, ScrollView } from 'react-
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { CustomColors } from 'constants/colors.constants';
-import { FontGilroy } from 'primitives';
+import { DefaultStyles, FontGilroy } from 'primitives';
 import CheckBox from 'react-native-check-box';
 
-const BrandFilter = (data: any) => {
+const BrandFilter = (data: any, { onSelectedBrand }) => {
 	const [expanded, setExpanded] = useState(true);
-	const [isCheckedArray, setIsCheckedArray] = useState(data.data?.map(() => false));
+	const [filterData, setFilterData] = useState([]);
+	const [isCheckedArray, setIsCheckedArray] = useState(filterData?.map(() => false));
+	const [search, setSearch] = useState('');
+	const [oldData, setOldData] = useState([]);
+
+	useEffect(() => {
+		if (data?.data) {
+			setFilterData(data?.data);
+			setOldData(data?.data);
+		}
+	}, []);
 
 	const togglerBrandDetails = () => {
 		setExpanded(!expanded);
 	};
 
-	const handleCheckBoxClick = (index: number) => {
+	const handleCheckBoxClick = (index: number, brand: string) => {
+		// onSelectedBrand(brand);
 		const newIsCheckedArray = [...isCheckedArray];
 
 		newIsCheckedArray[index] = !newIsCheckedArray[index];
@@ -22,10 +33,29 @@ const BrandFilter = (data: any) => {
 		setIsCheckedArray(newIsCheckedArray);
 	};
 
+	const onSearch = (text: string) => {
+		if (text == '') {
+			setFilterData(oldData);
+		} else {
+			let tempList = filterData?.filter((item) => {
+				return item.toLowerCase().indexOf(text.toLowerCase()) > -1;
+			});
+
+			setFilterData(tempList);
+		}
+	};
+
 	return (
 		<View>
 			<Pressable style={[styles.filterinfo]} onPress={togglerBrandDetails}>
-				<Text style={[styles.optionText]}>Brands</Text>
+				<Text
+					style={[
+						styles.optionText,
+						isCheckedArray.some((isChecked: boolean) => isChecked) ? styles.selectedValueText : null
+					]}
+				>
+					Brands
+				</Text>
 				<Icon name={expanded ? 'chevron-up' : 'chevron-down'} size={25} />
 			</Pressable>
 			{expanded && (
@@ -36,24 +66,48 @@ const BrandFilter = (data: any) => {
 							alignItems: 'center'
 						}}
 					>
-						<TextInput placeholder="Search Brands" style={styles.textinput} />
+						<TextInput
+							placeholder="Search Brands"
+							style={styles.textinput}
+							value={search}
+							onChangeText={(text) => {
+								onSearch(text);
+								setSearch(text);
+							}}
+						/>
+
 						<MaterialCommunityIcons name="magnify" size={30} color={CustomColors.primary} />
 					</View>
-					<ScrollView style={{ marginTop: 10 }}>
-						{data.data?.map((brand: string, index: number) => (
-							<View key={index}>
-								<CheckBox
-									style={{ paddingTop: 10 }}
-									onClick={() => handleCheckBoxClick(index)}
-									isChecked={isCheckedArray[index]}
-									rightText={brand}
-									rightTextStyle={styles.brandText}
-									checkedCheckBoxColor={CustomColors.primary}
-									uncheckedCheckBoxColor={CustomColors.grey}
-								/>
-							</View>
-						))}
-					</ScrollView>
+					{filterData?.length < 1 ? (
+						<View
+							style={{
+								height: DefaultStyles.DefaultHeight,
+								flex: 1,
+								justifyContent: 'center',
+								alignItems: 'center'
+							}}
+						>
+							<Text style={{ textAlign: 'center', color: CustomColors.secondary }}>
+								No Brands Found
+							</Text>
+						</View>
+					) : (
+						<ScrollView style={{ marginTop: 10 }}>
+							{filterData?.map((brand: string, index: number) => (
+								<View key={index}>
+									<CheckBox
+										style={{ paddingTop: 10 }}
+										onClick={() => handleCheckBoxClick(index, brand)}
+										isChecked={isCheckedArray[index]}
+										rightText={brand}
+										rightTextStyle={styles.brandText}
+										checkedCheckBoxColor={CustomColors.primary}
+										uncheckedCheckBoxColor={CustomColors.grey}
+									/>
+								</View>
+							))}
+						</ScrollView>
+					)}
 				</View>
 			)}
 		</View>
@@ -86,5 +140,8 @@ const styles = StyleSheet.create({
 		color: CustomColors.secondary,
 		fontSize: 12,
 		fontFamily: FontGilroy.Medium
+	},
+	selectedValueText: {
+		fontFamily: FontGilroy.SemiBold
 	}
 });

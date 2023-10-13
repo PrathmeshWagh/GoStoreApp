@@ -25,22 +25,24 @@ const PriceFilter = () => {
 
 	const openMinPriceModal = () => {
 		setMinPriceData([
-			{ id: 1, label: 'Min price' },
+			{ id: 1, label: 'min' },
 			{ id: 2, label: '10000' },
 			{ id: 3, label: '20000' },
 			{ id: 4, label: '30000' },
-			{ id: 5, label: '40000' }
+			{ id: 5, label: '40000' },
+			{ id: 6, label: '50000' }
 		]);
 		setIsMinModalVisible(true);
 	};
 
 	const openMaxPriceModal = () => {
 		setMaxPriceData([
-			{ id: 1, label: '50000' },
-			{ id: 2, label: '60000' },
-			{ id: 3, label: '70000' },
-			{ id: 4, label: '80000' },
-			{ id: 5, label: '90000' }
+			{ id: 1, label: '15000' },
+			{ id: 2, label: '30000' },
+			{ id: 3, label: '40000' },
+			{ id: 4, label: '50000' },
+			{ id: 5, label: '60000' },
+			{ id: 6, label: '60000+' }
 		]);
 		setIsMaxModalVisible(true);
 	};
@@ -69,15 +71,10 @@ const PriceFilter = () => {
 					>
 						<DropdownBox
 							style={styles.dropdownstyle}
-							title={'Min'}
+							title={'min'}
 							onBoxPress={openMinPriceModal}
 						/>
-						<Modal
-							animationType="fade"
-							transparent={true}
-							visible={isMinModalVisible}
-							// onRequestClose={onClose}
-						>
+						<Modal animationType="fade" transparent={true} visible={isMinModalVisible}>
 							<View style={styles.centeredView}>
 								<PriceModal
 									setModalVisible={() => setIsMinModalVisible(false)}
@@ -91,12 +88,7 @@ const PriceFilter = () => {
 							title={50000}
 							onBoxPress={openMaxPriceModal}
 						/>
-						<Modal
-							animationType="fade"
-							transparent={true}
-							visible={isMaxModalVisible}
-							// onRequestClose={onClose}
-						>
+						<Modal animationType="fade" transparent={true} visible={isMaxModalVisible}>
 							<View style={styles.centeredView}>
 								<PriceModal
 									setModalVisible={() => setIsMaxModalVisible(false)}
@@ -122,10 +114,10 @@ const styles = StyleSheet.create({
 	optionText: {
 		alignItems: 'center',
 		justifyContent: 'center',
-		fontSize: 17,
+		fontSize: 15,
 		color: CustomColors.secondary,
 		paddingLeft: 5,
-		fontFamily: FontGilroy.SemiBold
+		fontFamily: FontGilroy.Medium
 	},
 	dropdownstyle: {
 		width: '42%',

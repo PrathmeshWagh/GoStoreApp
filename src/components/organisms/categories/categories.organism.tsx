@@ -27,6 +27,7 @@ import PriceFilter from '../Shop/price-filters';
 import Divider from 'components/atoms/divider.atom';
 import { useFiltersMutation } from 'api/clp/use-filters';
 import { getProductParams } from 'helpers/products';
+import OtherFilters from '../Shop/other-filters';
 
 interface Category {
 	id?: number;
@@ -61,7 +62,9 @@ const Categories = ({ categoryData }: any) => {
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const [refreshing, setRefreshing] = useState(false);
 	const [sort, setSelectedSort] = useState('recommendation_asc');
-	// const [filterData, setFiltersData] = useState<{}>();
+	const [expanded, setExpanded] = useState(false);
+	// const [brandArr, setBrandArr] = useState([]);
+	const [selectedBrand, setSelectedBrand] = useState();
 
 	const {
 		mutate: getFilters,
@@ -70,13 +73,8 @@ const Categories = ({ categoryData }: any) => {
 		isLoading: isFilterLoading
 	} = useFiltersMutation();
 
-	// useEffect(() => {
-	// 	if (filters) {
-	// 		setFiltersData(filters.brandFilters);
-	// 	}
-	// }, []);
-
 	const rootKey = 'storeId';
+
 	useEffect(() => {
 		const params = {
 			isKiosk: false
@@ -158,6 +156,12 @@ const Categories = ({ categoryData }: any) => {
 
 	const handleSortSelect = (sortOptionId: string) => {
 		setSelectedSort(sortOptionId);
+	};
+
+	const updateFromChild = (brand) => {
+		console.log(brand);
+
+		setSelectedBrand(brand);
 	};
 
 	return (
@@ -253,47 +257,48 @@ const Categories = ({ categoryData }: any) => {
 							container: {
 								width: '95%',
 								borderRadius: 10,
-								alignSelf: 'center',
-								// backgroundColor: 'green',
-								flexDirection: 'column',
-								justifyContent: 'space-between'
+								alignSelf: 'center'
 							}
 						}}
 					>
-						<View>
+						<View style={{ flex: 1 }}>
+							<View style={styles.sortbytextContainer}>
+								<Pressable>
+									<Text style={{ fontSize: 16, fontWeight: 'bold', color: 'black' }}>Filters</Text>
+								</Pressable>
+
+								<Pressable>
+									<Text style={{ fontSize: 16 }}>Reset</Text>
+								</Pressable>
+							</View>
+
+							<ScrollView style={styles.filtercontent}>
+								<BrandFilter data={filters?.brandFilters} onSelectedBrand={updateFromChild} />
+								<Divider type="dashed" style={{ width: '92%', alignSelf: 'center' }} />
+								<PriceFilter />
+								<Divider type="dashed" style={{ width: '92%', alignSelf: 'center' }} />
+								<OtherFilters filters={filters?.productFilters} />
+							</ScrollView>
+
 							<View>
-								<View style={styles.sortbytextContainer}>
-									<Pressable>
-										<Text style={{ fontSize: 16, fontWeight: 'bold', color: 'black' }}>
-											Filters
+								<View style={styles.closeAndApplyContainer}>
+									<Pressable
+										style={styles.sortbtn}
+										onPress={() => refRBSheetFilter.current?.close()}
+									>
+										<Text
+											style={{ fontSize: 18, fontWeight: 'bold', color: CustomColors.secondary }}
+										>
+											Close
 										</Text>
 									</Pressable>
 
-									<Pressable>
-										<Text style={{ fontSize: 16 }}>Reset</Text>
+									<Pressable style={styles.filterbtn}>
+										<Text style={{ fontSize: 18, fontWeight: 'bold', color: CustomColors.primary }}>
+											Apply
+										</Text>
 									</Pressable>
 								</View>
-
-								<ScrollView style={styles.content}>
-									<BrandFilter data={filters?.brandFilters} />
-									<Divider type="dashed" style={{ width: '92%', alignSelf: 'center' }} />
-									<PriceFilter />
-									<Divider type="dashed" style={{ width: '92%', alignSelf: 'center' }} />
-								</ScrollView>
-							</View>
-
-							<View style={styles.closeAndApplyContainer}>
-								<Pressable style={styles.sortbtn} onPress={() => refRBSheetFilter.current?.close()}>
-									<Text style={{ fontSize: 18, fontWeight: 'bold', color: CustomColors.secondary }}>
-										Close
-									</Text>
-								</Pressable>
-
-								<Pressable style={styles.filterbtn}>
-									<Text style={{ fontSize: 18, fontWeight: 'bold', color: CustomColors.primary }}>
-										Apply
-									</Text>
-								</Pressable>
 							</View>
 						</View>
 					</RBSheet>
@@ -353,6 +358,10 @@ const styles = StyleSheet.create({
 	},
 	content: {
 		marginBottom: 1,
+		padding: DefaultStyles.DefaultPadding
+	},
+	filtercontent: {
+		flex: 1,
 		padding: DefaultStyles.DefaultPadding
 	},
 	selectedsortText: {
