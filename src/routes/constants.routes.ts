@@ -13,5 +13,6 @@ export const enum RouteConstants {
 	ViewMoreSimilarProductScreenRoute = 'VIEW_MORE_SIMILAR_PRODUCT_SCREEN_ROUTE',
 	LocationScreenRoute = 'LOCATION_SCREEN_ROUTE',
 	PincodeScreenRoute = 'PINCODE_SCREEN_ROUTE',
-	CartScreenRoute = 'CART_SCREEN_ROUTE'
+	CartScreenRoute = 'CART_SCREEN_ROUTE',
+	SideDrawerScreenRoute = 'SIDE_SCREEN_ROUTE'
 }

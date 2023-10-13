@@ -21,5 +21,7 @@ export const enum ApiEndpoints {
 	CART_COUNT = '/gostor/v2/cart/count',
 	ORDER_SUMMARY = '/gostor/orders/v2/summary',
 	USER_PINCODE = '/locations/pincode',
-	REFRESH_TOKEN = '/user/seller/refresh_token'
+	REFRESH_TOKEN = '/user/seller/refresh_token',
+	Coordinates = '/locations/latlng',
+	Pincode = '/locations/pincode'
 }

@@ -3,6 +3,8 @@
 
 #import <React/RCTBundleURLProvider.h>
 #import <GoogleMaps/GoogleMaps.h>
+#import <ReactNativeMoEngage/MoEngageInitializer.h>
+#import <MoEngageSDK/MoEngageSDK.h>
 
 @implementation AppDelegate
 
@@ -16,6 +18,11 @@
 
 
   [FIRApp configure];
+
+  MoEngageSDKConfig* sdkConfig = [[MoEngageSDKConfig alloc] initWithAppID:@"RTRIKXNG50AG6RF3OJGAVUWE"];
+  sdkConfig.enableLogs = true;
+  sdkConfig.appGroupID = @"group.com.alphadevs.MoEngage.NotificationServices";
+  [[MoEngageInitializer sharedInstance] initializeDefaultSDKConfig:sdkConfig andLaunchOptions:launchOptions];
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 

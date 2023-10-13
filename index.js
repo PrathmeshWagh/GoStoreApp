@@ -1,3 +1,4 @@
+import React from 'react';
 import { AppRegistry, LogBox } from 'react-native';
 
 import App from './App';
@@ -6,14 +7,11 @@ import { ManagedCheckoutContext } from 'context/checkout/checkout.context';
 import { ManagedUIContext } from 'context/ui.context';
 
 
+
 export default function Main() {
   return (
-    <ManagedUIContext>
-      <ManagedCheckoutContext>
-        <App />
-      </ManagedCheckoutContext>
-    </ManagedUIContext>
-  )
+    <App />
+  );
 }
 
 LogBox.ignoreAllLogs();
