@@ -4,7 +4,7 @@ import { ApiEndpoints } from '../utils/api-endpoints.api';
 import { httpTokenGet } from '../utils/utils';
 
 export const fetchAddress = async () => {
-	let data = await httpTokenGet(`${Config.BASE_PATH_INVENTORY}${ApiEndpoints.ADDRESS}`);
+	let data = await httpTokenGet(`${Config.BASE_PATH}${ApiEndpoints.ADDRESS}`);
 	return data.data;
 };
 

@@ -4,11 +4,11 @@ import Layout from 'components/molecules/layout/layout.molecule';
 
 const layout = {
 	menu: false,
-	search: false,
+	search: true,
 	back: true,
 	logo: 'https://gostor.com/icons/header/logo-invert.svg',
-	cart: false,
-	pincode: false
+	cart: true,
+	pincode: true
 };
 
 const CategoriesScreen = ({ route }: any) => {

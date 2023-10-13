@@ -2,6 +2,8 @@ import { useMutation, useQuery } from 'react-query';
 import Config from 'react-native-config';
 import { ApiEndpoints } from '../utils/api-endpoints.api';
 import { httpTokenGet } from '../utils/utils';
+import { useCheckout } from 'context/checkout/checkout.context';
+import { useCheckoutContext } from 'context/ui.checkout.cart';
 
 async function getCheckoutSummary(params) {
 	const queryString = new URLSearchParams(params).toString();

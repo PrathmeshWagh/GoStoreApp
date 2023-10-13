@@ -13,8 +13,13 @@ import ProductList from 'components/molecules/checkout/Summary/productList';
 import { useGetPincodeMutation } from 'api/locate-user/get-pincode';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ApplyCoupon from 'components/molecules/checkout/Summary/applyCoupon';
+import { useAddressMutation } from 'api/checkout/use-address';
+import { useCheckoutSummaryMutation } from 'api/checkout/use-summary';
+import { useSelector } from 'react-redux';
+import { RootState } from '@slices/store';
 
 export default function Cart() {
+	const location = useSelector((state: RootState) => state.location);
 	const { navigate } = useEnhancedNavigation();
 	const { width, height } = useDimensions();
 	const { colors } = useTheme();
@@ -30,8 +35,24 @@ export default function Cart() {
 		error: pincodeError
 	} = useGetPincodeMutation();
 
+	const { mutate: getAddresses, data, isLoading: addressLoader } = useAddressMutation();
+
+	const { mutate: getCheckoutSummary } = useCheckoutSummaryMutation();
+
 	useEffect(() => {
 		getPinCodeDetails(pincode);
+	}, []);
+
+	useEffect(() => {
+		const requestData = {
+			cta: 'CART',
+			pincode,
+			state: location.state,
+			useWallet: false,
+			isKiosk: false
+		};
+		getAddresses();
+		getCheckoutSummary(requestData);
 	}, []);
 
 	return (

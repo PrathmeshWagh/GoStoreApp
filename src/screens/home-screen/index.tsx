@@ -10,7 +10,7 @@ const layout = {
 	search: false,
 	back: false,
 	logo: 'https://gostor.com/icons/header/logo-invert.svg',
-	cart: false,
+	cart: true,
 	pincode: true
 };
 
@@ -25,13 +25,7 @@ const HomeScreen = () => {
 			>
 				<Text>Login</Text>
 			</TouchableOpacity>
-			<TouchableOpacity
-				onPress={() => {
-					navigate(RouteConstants.CartScreenRoute);
-				}}
-			>
-				<Text>Cart</Text>
-			</TouchableOpacity>
+
 			<Home />
 		</Layout>
 	);

@@ -102,6 +102,7 @@
 		"react-native-gesture-handler": "^2.13.1",
 		"react-native-keyboard-aware-scroll-view": "^0.9.5",
 		"react-native-maps": "^1.7.1",
+		"react-native-modal": "^13.0.1",
 		"react-native-paper": "^5.10.1",
 		"react-native-permissions": "^3.8.4",
 		"react-native-raw-bottom-sheet": "^2.2.0",

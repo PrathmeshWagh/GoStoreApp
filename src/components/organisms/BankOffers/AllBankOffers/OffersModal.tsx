@@ -4,14 +4,20 @@ import { useTheme } from '@hooks/index';
 import { FontGilroy } from 'primitives';
 
 interface OfferModalProps {
-	bankOffersData: any;
-	noCostEmiOffers: any;
+	bankOffersData?: any;
+	noCostEmiOffers?: any;
+	couponOfferData?: any;
 	onPress: () => void;
+	showOfferType?: any;
+	offerTypes: any;
 }
 
 export default function OffersModal(props: OfferModalProps) {
-	const { bankOffersData, noCostEmiOffers, onPress } = props;
+	const { bankOffersData, noCostEmiOffers, couponOfferData, onPress, showOfferType, offerTypes } =
+		props;
 	const { colors } = useTheme();
+	console.log('modal', showOfferType, offerTypes);
+	console.log('coupon', couponOfferData);
 
 	return (
 		<View style={styles.container}>
@@ -24,33 +30,75 @@ export default function OffersModal(props: OfferModalProps) {
 					<Text>Close</Text>
 				</TouchableOpacity>
 			</View>
-			<View style={{ marginHorizontal: 16 }}>
-				<Text style={{ fontFamily: FontGilroy.Medium, fontSize: 16, marginVertical: 10 }}>
-					Bank Offers
-				</Text>
-			</View>
-			<ScrollView>
-				{bankOffersData.map((offer, index) => (
-					<View style={[styles.offerContainer, { backgroundColor: colors.tertiary }]}>
-						<View style={[styles.greenBox, { backgroundColor: colors.primary }]}></View>
-						<View style={{ marginHorizontal: 8, flex: 1 }}>
-							<Text numberOfLines={2} style={{ fontSize: 12 }}>
-								{offer.offerTitle}
-							</Text>
-						</View>
-						<Text
-							style={{
-								textDecorationLine: 'underline',
-								color: colors.primary,
-								fontFamily: FontGilroy.Medium,
-								fontSize: 12
-							}}
-						>
-							T&C
+			{((bankOffersData && bankOffersData.length > 0 && showOfferType === offerTypes['BANK']) ||
+				(!showOfferType && bankOffersData.length > 0)) && (
+				<>
+					<View style={{ marginHorizontal: 16 }}>
+						<Text style={{ fontFamily: 'FontGilroy-Medium', fontSize: 16, marginVertical: 10 }}>
+							Bank Offers
 						</Text>
 					</View>
-				))}
-			</ScrollView>
+					<ScrollView>
+						{bankOffersData &&
+							bankOffersData.map((offer, index) => (
+								<View style={[styles.offerContainer, { backgroundColor: colors.tertiary }]}>
+									<View style={[styles.greenBox, { backgroundColor: colors.primary }]}></View>
+									<View style={{ marginHorizontal: 8, flex: 1 }}>
+										<Text numberOfLines={2} style={{ fontSize: 12 }}>
+											{offer.offerTitle}
+										</Text>
+									</View>
+									<Text
+										style={{
+											textDecorationLine: 'underline',
+											color: colors.primary,
+											fontFamily: 'FontGilroy-Medium',
+											fontSize: 12
+										}}
+									>
+										T&C
+									</Text>
+								</View>
+							))}
+					</ScrollView>
+				</>
+			)}
+
+			{((couponOfferData &&
+				couponOfferData.length > 0 &&
+				showOfferType === offerTypes['COUPONS']) ||
+				(!showOfferType && couponOfferData.length > 0)) && (
+				<>
+					<View style={{ marginHorizontal: 16 }}>
+						<Text style={{ fontFamily: 'FontGilroy-Medium', fontSize: 16, marginVertical: 10 }}>
+							Platform Offers
+						</Text>
+					</View>
+					<ScrollView>
+						{couponOfferData &&
+							couponOfferData.map((offer, index) => (
+								<View style={[styles.offerContainer, { backgroundColor: colors.tertiary }]}>
+									<View style={[styles.greenBox, { backgroundColor: colors.primary }]}></View>
+									<View style={{ marginHorizontal: 8, flex: 1 }}>
+										<Text numberOfLines={2} style={{ fontSize: 12 }}>
+											{offer.description}
+										</Text>
+									</View>
+									<Text
+										style={{
+											textDecorationLine: 'underline',
+											color: colors.primary,
+											fontFamily: 'FontGilroy-Medium',
+											fontSize: 12
+										}}
+									>
+										T&C
+									</Text>
+								</View>
+							))}
+					</ScrollView>
+				</>
+			)}
 		</View>
 	);
 }

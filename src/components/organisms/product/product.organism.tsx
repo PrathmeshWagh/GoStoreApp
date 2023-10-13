@@ -48,12 +48,20 @@ import { RouteConstants } from '@routes/constants.routes';
 import LottieView from 'lottie-react-native';
 import { useCouponsQuery } from 'api/coupons/get-coupons';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import CouponIcon from '@atoms/icons/coupon';
+
+const offerTypes = {
+	BANK: 'BANK',
+	COUPONS: 'COUPONS',
+	NO_COST_EMI: 'NO_COST_EMI'
+};
 
 export default function ProductDetails({ Productitem, categories }: any) {
 	const { navigate } = useEnhancedNavigation();
 	const { width, height } = useDimensions();
 	const { colors } = useTheme();
-	const refRBSheet = useRef();
+	const refRBBank = useRef();
+
 	const {
 		mutate: getProductPriceDetails,
 		data: priceDetails,
@@ -61,7 +69,6 @@ export default function ProductDetails({ Productitem, categories }: any) {
 		isError: priceDetailsError,
 		error
 	} = useProductMutation();
-	console.log('in');
 
 	const { data: assuredBuyBackData, refetch: checkAssuredBuyBack } = useCheckAssuredBuyBack({
 		productId: Productitem.productId,
@@ -77,6 +84,8 @@ export default function ProductDetails({ Productitem, categories }: any) {
 	const [isExchangeVisible, setIsExchangeVisible] = useState<boolean>(false);
 	const [bankOffersData, setBankOffersData] = useState([]);
 	const [noCostEmiOffers, setNoCostEmiOffers] = useState([]);
+	const [couponOffers, setCouponOffers] = useState([]);
+	const [showOfferType, setShowOfferType] = useState();
 
 	const toggleExpanded = () => {
 		setExpanded(!expanded);
@@ -118,6 +127,10 @@ export default function ProductDetails({ Productitem, categories }: any) {
 		setBankOffersData(bankOffersData);
 		setNoCostEmiOffers(noCostEmiOffers);
 	}, [bankOffers]);
+
+	useEffect(() => {
+		setCouponOffers(platformOffersData.data);
+	}, [platformOffersData]);
 
 	useEffect(() => {
 		const payload = {
@@ -243,8 +256,8 @@ export default function ProductDetails({ Productitem, categories }: any) {
 							</View>
 							<Pressable
 								onPress={() => {
-									console.log('press');
-									refRBSheet.current.open();
+									setShowOfferType(null);
+									refRBBank.current.open();
 								}}
 							>
 								<ViewMore width={45} height={18} />
@@ -255,23 +268,25 @@ export default function ProductDetails({ Productitem, categories }: any) {
 							<OfferItem
 								title="Bank offer"
 								description="10% off on Yes bank Credit Card EMI"
+								setShowOfferType={setShowOfferType}
+								offerType={offerTypes['BANK']}
 								onPress={() => {
-									refRBSheet.current.open();
+									refRBBank.current.open();
 								}}
 							/>
 							<OfferItem
 								title="Coupons"
 								description="Use coupon code IPHONE15 and get up to the maximum"
+								setShowOfferType={setShowOfferType}
+								offerType={offerTypes['COUPONS']}
 								onPress={() => {
-									// Handle the press event for this offer item
+									refRBBank.current.open();
 								}}
 							/>
 						</View>
 
 						<RBSheet
-							ref={refRBSheet}
-							// closeOnDragDown={true}
-							// closeOnPressMask={false}
+							ref={refRBBank}
 							height={height / (3 / 2)}
 							customStyles={{
 								wrapper: {
@@ -282,8 +297,11 @@ export default function ProductDetails({ Productitem, categories }: any) {
 							<OffersModal
 								bankOffersData={bankOffersData}
 								noCostEmiOffers={noCostEmiOffers}
+								couponOfferData={couponOffers}
+								showOfferType={showOfferType}
+								offerTypes={offerTypes}
 								onPress={() => {
-									refRBSheet.current.close();
+									refRBBank.current.close();
 								}}
 							/>
 						</RBSheet>
