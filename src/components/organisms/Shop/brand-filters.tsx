@@ -6,31 +6,53 @@ import { CustomColors } from 'constants/colors.constants';
 import { DefaultStyles, FontGilroy } from 'primitives';
 import CheckBox from 'react-native-check-box';
 
-const BrandFilter = (data: any, { onSelectedBrand }) => {
+const BrandFilter = ({ data, updateSelectedBrand, resetFilter }) => {
+	console.log('aaaaa', resetFilter);
+
 	const [expanded, setExpanded] = useState(true);
 	const [filterData, setFilterData] = useState([]);
-	const [isCheckedArray, setIsCheckedArray] = useState(filterData?.map(() => false));
+	const [isCheckedArray, setIsCheckedArray] = useState(new Array(filterData?.length).fill(false));
 	const [search, setSearch] = useState('');
 	const [oldData, setOldData] = useState([]);
+	const [selectedBrand, setSelectedBrand] = useState([]);
 
 	useEffect(() => {
-		if (data?.data) {
-			setFilterData(data?.data);
-			setOldData(data?.data);
+		if (data) {
+			setFilterData(data);
+			setOldData(data);
 		}
 	}, []);
+
+	useEffect(() => {
+		if (resetFilter) {
+			resetBrandFilter();
+		}
+	}, [resetFilter]);
+
+	useEffect(() => {
+		updateSelectedBrand(selectedBrand);
+	}, [selectedBrand]);
 
 	const togglerBrandDetails = () => {
 		setExpanded(!expanded);
 	};
 
+	const resetBrandFilter = () => {
+		setIsCheckedArray(new Array(filterData?.length).fill(false));
+		setSelectedBrand([]);
+	};
+
 	const handleCheckBoxClick = (index: number, brand: string) => {
-		// onSelectedBrand(brand);
 		const newIsCheckedArray = [...isCheckedArray];
-
+		// console.log(newIsCheckedArray[index]); indicate true or false
 		newIsCheckedArray[index] = !newIsCheckedArray[index];
-
 		setIsCheckedArray(newIsCheckedArray);
+
+		if (newIsCheckedArray[index]) {
+			setSelectedBrand([...selectedBrand, brand]);
+		} else {
+			setSelectedBrand(selectedBrand?.filter((selectedbrand) => selectedbrand !== brand));
+		}
 	};
 
 	const onSearch = (text: string) => {

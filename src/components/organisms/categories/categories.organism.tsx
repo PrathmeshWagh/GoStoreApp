@@ -64,7 +64,9 @@ const Categories = ({ categoryData }: any) => {
 	const [sort, setSelectedSort] = useState('recommendation_asc');
 	const [expanded, setExpanded] = useState(false);
 	// const [brandArr, setBrandArr] = useState([]);
-	const [selectedBrand, setSelectedBrand] = useState();
+	const [selectedBrand, setSelectedBrand] = useState([]);
+	const [selectedOtherFilter, setSelectedOtherFilter] = useState({});
+	const [resetAllFilter, setResetAllFilter] = useState(false);
 
 	const {
 		mutate: getFilters,
@@ -79,7 +81,6 @@ const Categories = ({ categoryData }: any) => {
 		const params = {
 			isKiosk: false
 		};
-
 		const productData = {
 			category: categoryData.categoryData?.slug,
 			categoryId: categoryData.categoryData?.id,
@@ -113,7 +114,7 @@ const Categories = ({ categoryData }: any) => {
 	}, [refreshing]);
 
 	const fetchData = async (page: number, sort: string) => {
-		const params = {
+		let params = {
 			category: categoryData.categoryData?.slug,
 			categoryId: categoryData.categoryData?.id,
 			priceFilter: {},
@@ -124,6 +125,13 @@ const Categories = ({ categoryData }: any) => {
 			pageSize: 24,
 			page
 		};
+		if (selectedBrand.length) {
+			params.brandArr = selectedBrand;
+		}
+
+		if (selectedOtherFilter && Object.keys(selectedOtherFilter).length) {
+			params.filterObj = selectedOtherFilter;
+		}
 
 		getProducts({ params });
 	};
@@ -140,6 +148,15 @@ const Categories = ({ categoryData }: any) => {
 			setCurrentPage(1);
 		}
 	}, [sort]);
+
+	useEffect(() => {
+		setCategoriesData([]);
+		if (currentPage === 1) {
+			fetchData(currentPage, sort);
+		} else {
+			setCurrentPage(1);
+		}
+	}, [selectedBrand, selectedOtherFilter]);
 
 	const btnPressedHandler = (item: any) => {
 		navigate(RouteConstants.ProductdeatilsScreenRoute, { item: item, categories: categoryData });
@@ -158,10 +175,16 @@ const Categories = ({ categoryData }: any) => {
 		setSelectedSort(sortOptionId);
 	};
 
-	const updateFromChild = (brand) => {
-		console.log(brand);
+	const updateSelectedBrandFunc = (newSelectedBrand) => {
+		setSelectedBrand(newSelectedBrand);
+	};
 
-		setSelectedBrand(brand);
+	const updateOtherSelectedFilterFunc = (otherSelectedFilter) => {
+		setSelectedOtherFilter(otherSelectedFilter);
+	};
+
+	const resetBtnHandler = () => {
+		setResetAllFilter(!resetAllFilter);
 	};
 
 	return (
@@ -267,17 +290,25 @@ const Categories = ({ categoryData }: any) => {
 									<Text style={{ fontSize: 16, fontWeight: 'bold', color: 'black' }}>Filters</Text>
 								</Pressable>
 
-								<Pressable>
+								<Pressable onPress={resetBtnHandler}>
 									<Text style={{ fontSize: 16 }}>Reset</Text>
 								</Pressable>
 							</View>
 
 							<ScrollView style={styles.filtercontent}>
-								<BrandFilter data={filters?.brandFilters} onSelectedBrand={updateFromChild} />
+								<BrandFilter
+									data={filters?.brandFilters}
+									updateSelectedBrand={updateSelectedBrandFunc}
+									resetFilter={resetAllFilter}
+								/>
 								<Divider type="dashed" style={{ width: '92%', alignSelf: 'center' }} />
 								<PriceFilter />
 								<Divider type="dashed" style={{ width: '92%', alignSelf: 'center' }} />
-								<OtherFilters filters={filters?.productFilters} />
+								<OtherFilters
+									filters={filters?.productFilters}
+									updateOtherSelectedFilter={updateOtherSelectedFilterFunc}
+									resetFilter={resetAllFilter}
+								/>
 							</ScrollView>
 
 							<View>
@@ -293,7 +324,10 @@ const Categories = ({ categoryData }: any) => {
 										</Text>
 									</Pressable>
 
-									<Pressable style={styles.filterbtn}>
+									<Pressable
+										style={styles.filterbtn}
+										onPress={() => refRBSheetFilter.current?.close()}
+									>
 										<Text style={{ fontSize: 18, fontWeight: 'bold', color: CustomColors.primary }}>
 											Apply
 										</Text>
