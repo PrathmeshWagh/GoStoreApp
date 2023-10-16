@@ -20,6 +20,7 @@ import { CustomModal } from '@atoms/index';
 import { container } from '@helpers/index';
 import { hideSnackbar } from '@slices/snackbar.slice';
 import { FontGilroy } from '@primitives/index';
+import linking from '@routes/linking.routes';
 // import { defaultAppConfig } from 'services/firebase.service';
 
 LogBox.ignoreLogs([]);
@@ -98,7 +99,7 @@ function MainContent() {
 				duration={Snackbar.DURATION_SHORT}
 				action={{
 					label: snackbar.label ? snackbar.label : '',
-					labelStyle: { fontSize: 12, fontFamily: FontGilroy.Light, color: '#FFF' }
+					labelStyle: { fontSize: 12, fontFamily: FontGilroy.Light, color: '#FFF' },
 				}}
 			>
 				{snackbar.message}
@@ -117,7 +118,10 @@ function App() {
 		<ReduxProvider store={store}>
 			<PaperProvider theme={{ ...theme, fonts }}>
 				<QueryClientProvider client={queryClient}>
-					<NavigationContainer theme={navTheme}>
+					<NavigationContainer
+						theme={navTheme}
+						linking={linking}
+					>
 						<GestureHandlerRootView style={{ ...container() }}>
 							<BottomSheetModalProvider>
 								<MainContent />

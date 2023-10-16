@@ -51,7 +51,12 @@
 		"aos:beta:release-apk": "yarn aos:SR-apk && yarn open-apk",
 		"aos:prod-apk": "yarn aos:PD-apk && yarn open-apk",
 		"aos:prod:release-apk": "yarn aos:PR-apk && yarn open-apk",
-		"aos:bundle": "yarn aos:PR-Bundle && yarn open-bundle"
+		"aos:bundle": "yarn aos:PR-Bundle && yarn open-bundle",
+		"codepush:beta:ios": "appcenter codepush release-react -a arzooo-tech/gostor-ios -d Staging",
+		"codepush:prod:ios": "appcenter codepush release-react -a arzooo-tech/gostor-ios -d Production",
+		"codepush:beta:aos": "appcenter codepush release-react -a arzooo-tech/gostor-android -d Staging",
+		"codepush:prod:aos": "appcenter codepush release-react -a arzooo-tech/gostor-android -d Production",
+		"assets": "npx react-native-asset"
 	},
 	"reactNativePermissionsIOS": [
 		"Camera",
@@ -96,6 +101,7 @@
 		"react-hook-form": "^7.47.0",
 		"react-native": "0.72.3",
 		"react-native-circular-progress-indicator": "^4.4.2",
+		"react-native-code-push": "^8.1.0",
 		"react-native-config": "^1.5.1",
 		"react-native-fast-image": "^8.6.3",
 		"react-native-gesture-handler": "^2.13.1",

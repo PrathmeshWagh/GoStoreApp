@@ -9,7 +9,7 @@ import {
 	HomeIcon,
 	OfferIcon,
 	StoreActiveIcon,
-	StoreInActiveIcon
+	StoreInActiveIcon,
 } from '@icons/index';
 import { HomeScreen, MainWebviewScreen, StoreScreen } from './export.routes';
 import { withActiveTab } from '@hoc/index';
@@ -26,7 +26,7 @@ const BottomTabList = [
 				<Text
 					style={[
 						{ marginTop: Platform.OS === 'ios' ? 4 : 12 },
-						focused ? { color: '#3a9545' } : { color: '#000' }
+						focused ? { color: '#3a9545' } : { color: '#000' },
 					]}
 					variant="titleSmall"
 				>
@@ -35,8 +35,8 @@ const BottomTabList = [
 			),
 			tabBarActiveTintColor: '#3a9545',
 			tabBarInactiveTintColor: '#000000',
-			tabBarIcon: ({ focused }: any) => <HomeIcon isActive={focused} size={24} />
-		}
+			tabBarIcon: ({ focused }: any) => <HomeIcon isActive={focused} size={24} />,
+		},
 	},
 	{
 		id: 2,
@@ -48,7 +48,7 @@ const BottomTabList = [
 				<Text
 					style={[
 						{ marginTop: Platform.OS === 'ios' ? 4 : 12 },
-						focused ? { color: '#3a9545' } : { color: '#000' }
+						focused ? { color: '#3a9545' } : { color: '#000' },
 					]}
 					variant="titleSmall"
 				>
@@ -58,7 +58,7 @@ const BottomTabList = [
 			tabBarActiveTintColor: '#3a9545',
 			tabBarInactiveTintColor: '#000000',
 			tabBarIcon: ({ focused }: { focused: boolean }) =>
-				focused ? <StoreActiveIcon size={24} /> : <StoreInActiveIcon size={24} />
+				focused ? <StoreActiveIcon size={24} /> : <StoreInActiveIcon size={24} />,
 		},
 	},
 	{
@@ -71,7 +71,7 @@ const BottomTabList = [
 				<Text
 					style={[
 						{ marginTop: Platform.OS === 'ios' ? 4 : 12 },
-						focused ? { color: '#3a9545' } : { color: '#000' }
+						focused ? { color: '#3a9545' } : { color: '#000' },
 					]}
 					variant="titleSmall"
 				>
@@ -81,8 +81,8 @@ const BottomTabList = [
 			tabBarActiveTintColor: '#3a9545',
 			tabBarInactiveTintColor: '#000000',
 			tabBarIcon: ({ focused }: { focused: boolean }) =>
-				focused ? <GocareActiveIcon size={24} /> : <GocareInActiveIcon size={24} />
-		}
+				focused ? <GocareActiveIcon size={24} /> : <GocareInActiveIcon size={24} />,
+		},
 	},
 	{
 		id: 4,
@@ -94,7 +94,7 @@ const BottomTabList = [
 				<Text
 					style={[
 						{ marginTop: Platform.OS === 'ios' ? 4 : 12 },
-						focused ? { color: '#3a9545' } : { color: '#000' }
+						focused ? { color: '#3a9545' } : { color: '#000' },
 					]}
 					variant="titleSmall"
 				>
@@ -103,8 +103,8 @@ const BottomTabList = [
 			),
 			tabBarActiveTintColor: '#3a9545',
 			tabBarInactiveTintColor: '#000000',
-			tabBarIcon: ({ focused }: any) => <OfferIcon isActive={focused} size={24} />
-		}
+			tabBarIcon: ({ focused }: any) => <OfferIcon isActive={focused} size={24} />,
+		},
 	},
 	{
 		id: 4,
@@ -116,7 +116,7 @@ const BottomTabList = [
 				<Text
 					style={[
 						{ marginTop: Platform.OS === 'ios' ? 4 : 12 },
-						focused ? { color: '#3a9545' } : { color: '#000' }
+						focused ? { color: '#3a9545' } : { color: '#000' },
 					]}
 					variant="titleSmall"
 				>
@@ -125,9 +125,9 @@ const BottomTabList = [
 			),
 			tabBarActiveTintColor: '#3a9545',
 			tabBarInactiveTintColor: '#000000',
-			tabBarIcon: ({ focused }: any) => <OfferIcon isActive={focused} size={24} />
-		}
-	}
+			tabBarIcon: ({ focused }: any) => <OfferIcon isActive={focused} size={24} />,
+		},
+	},
 ];
 
 export { BottomTabList };
