@@ -23,5 +23,6 @@ export const enum ApiEndpoints {
 	USER_PINCODE = '/locations/pincode',
 	REFRESH_TOKEN = '/user/seller/refresh_token',
 	Coordinates = '/locations/latlng',
-	Pincode = '/locations/pincode'
+	Pincode = '/locations/pincode',
+	FILTERS = '/products/v2/getFilters'
 }
