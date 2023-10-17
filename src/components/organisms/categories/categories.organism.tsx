@@ -63,8 +63,11 @@ const Categories = ({ categoryData }: any) => {
 	const [refreshing, setRefreshing] = useState(false);
 	const [sort, setSelectedSort] = useState('recommendation_asc');
 	const [expanded, setExpanded] = useState(false);
+	const [low, setLow] = useState('');
+	const [high, setHigh] = useState('');
 	// const [brandArr, setBrandArr] = useState([]);
 	const [selectedBrand, setSelectedBrand] = useState([]);
+	// const [selectedPrice, setSelectedPrice] = useState({});
 	const [selectedOtherFilter, setSelectedOtherFilter] = useState({});
 	const [resetAllFilter, setResetAllFilter] = useState(false);
 
@@ -93,8 +96,20 @@ const Categories = ({ categoryData }: any) => {
 			page: 1
 		};
 
+		if (selectedBrand.length) {
+			productData.brandArr = selectedBrand;
+		}
+
+		if (selectedOtherFilter && Object.keys(selectedOtherFilter).length) {
+			productData.filterObj = selectedOtherFilter;
+		}
+
+		// if (low || (high && Object.keys(low || high).length)) {
+		// 	productData.priceFilter = { minPrice: low, maxPrice: high };
+		// }
+
 		getFilters({ params, productData, rootKey: rootKey });
-	}, [rootKey, location]);
+	}, [rootKey, location, selectedBrand, selectedOtherFilter]);
 
 	useEffect(() => {
 		if (categories) {
@@ -132,6 +147,10 @@ const Categories = ({ categoryData }: any) => {
 		if (selectedOtherFilter && Object.keys(selectedOtherFilter).length) {
 			params.filterObj = selectedOtherFilter;
 		}
+
+		// if (low || (high && Object.keys(low || high).length)) {
+		// 	params.priceFilter = { minPrice: low, maxPrice: high };
+		// }
 
 		getProducts({ params });
 	};
@@ -299,11 +318,21 @@ const Categories = ({ categoryData }: any) => {
 								<BrandFilter
 									data={filters?.brandFilters}
 									updateSelectedBrand={updateSelectedBrandFunc}
+									setSelectedBrand={setSelectedBrand}
+									selectedBrand={selectedBrand}
 									resetFilter={resetAllFilter}
 								/>
 								<Divider type="dashed" style={{ width: '92%', alignSelf: 'center' }} />
-								<PriceFilter />
+								<PriceFilter
+									low={low}
+									high={high}
+									setLow={setLow}
+									setHigh={setHigh}
+									category={categoryData.categoryData?.slug}
+									price={filters?.priceFilter}
+								/>
 								<Divider type="dashed" style={{ width: '92%', alignSelf: 'center' }} />
+								{isFilterLoading && <ActivityIndicator />}
 								<OtherFilters
 									filters={filters?.productFilters}
 									updateOtherSelectedFilter={updateOtherSelectedFilterFunc}

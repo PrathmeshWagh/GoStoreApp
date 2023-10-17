@@ -8,6 +8,8 @@ import CheckBox from 'react-native-check-box';
 
 interface Props {
 	filters: Array<object>;
+	updateOtherSelectedFilter: () => void;
+	resetFilter: () => void;
 }
 
 const OtherFilters: React.FC<Props> = ({ filters, updateOtherSelectedFilter, resetFilter }) => {
@@ -22,13 +24,9 @@ const OtherFilters: React.FC<Props> = ({ filters, updateOtherSelectedFilter, res
 
 	useEffect(() => {
 		if (resetFilter) {
+			setSelectedFilter({});
 		}
 	}, [resetFilter]);
-
-	// const resetOtherFilter = () => {
-	// 	setIsCheckedArray(new Array(filterData?.length).fill(false));
-	// 	setSelectedBrand([]);
-	// };
 
 	const handleCheckBoxClick = (singlefilterOption: string, filter: any) => {
 		let tempFilters = { ...selectedFilter };

@@ -1,27 +1,103 @@
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { View, Pressable, StyleSheet, Text, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { CustomColors } from 'constants/colors.constants';
 import { DefaultStyles, FontGilroy } from 'primitives';
-import Slider from '@react-native-community/slider';
 import DropdownBox from 'components/atoms/dropdownBox';
+import { PRICE_SLIDER_DATA } from 'helpers/constants/priceSliderContstants';
 import PriceModal from 'components/atoms/priceModal';
+import Slider from 'rn-range-slider';
+import Thumb from 'components/atoms/Slider/Thumb';
+import Rail from 'components/atoms/Slider/Rail';
+import RailSelected from 'components/atoms/Slider/RailSelected';
+import MaxPriceModal from 'components/atoms/maxPriceModal';
+import MinPriceModal from 'components/atoms/minPriceModal';
+
+interface PriceFilterProp {
+	low: string;
+	high: string;
+	setLow: () => void;
+	setHigh: () => void;
+}
 
 interface PriceData {
 	id: number;
 	label: string;
 }
 
-const PriceFilter = () => {
+export interface ByPriceProps {
+	price?: {
+		minPrice?: number;
+		maxPrice?: number;
+	};
+}
+
+const PriceFilter = ({ low, high, setLow, setHigh, category, price }: ByPriceProps) => {
+	console.log(price);
+
+	const [rangeDisabled, setRangeDisabled] = useState(false);
+	// const [low, setLow] = useState('6049');
+	// const [high, setHigh] = useState('95649');
+	const [min, setMin] = useState(6049);
+	const [max, setMax] = useState(95649);
+	const [priceRange, setPriceRange] = useState<any>();
+
+	// console.log('priceRange', priceRange);
+
+	const renderThumb = useCallback(() => <Thumb />, []);
+	const renderRail = useCallback(() => <Rail />, []);
+	const renderRailSelected = useCallback(() => <RailSelected />, []);
+
 	const [isMinModalVisible, setIsMinModalVisible] = useState(false);
+	const [isMinOptionPressed, setIsMinOptionPressed] = useState(1);
+	const [isMaxOptionPressed, setIsMaxOptionPressed] = useState<number>(6);
+
 	const [isMaxModalVisible, setIsMaxModalVisible] = useState(false);
 	const [minPriceData, setMinPriceData] = useState<PriceData[]>([]);
 	const [maxPriceData, setMaxPriceData] = useState<PriceData[]>([]);
+
 	const [expanded, setExpanded] = useState(false);
 
 	const togglerFilterDetails = () => {
 		setExpanded(!expanded);
 	};
+
+	useEffect(() => {
+		// let category: string = router?.query?.category?.toString();
+		// category = category?.replace(' ', '_').toUpperCase();
+		PRICE_SLIDER_DATA?.[category]
+			? setPriceRange(PRICE_SLIDER_DATA?.[category])
+			: setPriceRange(PRICE_SLIDER_DATA?.DEFAULT_VALUE);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [category]);
+	// const renderNotch = useCallback(() => <Notch />, []);
+	const handleValueChange = useCallback((low, high) => {
+		if (low <= 10000) {
+			setLow('min');
+		} else if (low <= 15000) {
+			setLow('15000');
+		} else if (low <= 30000) {
+			setLow('30000');
+		} else if (low <= 40000) {
+			setLow('40000');
+		} else {
+			setLow('60000');
+		}
+
+		if (high <= 15000) {
+			setHigh('15000');
+		} else if (high <= 30000) {
+			setHigh('30000');
+		} else if (high <= 40000) {
+			setHigh('40000');
+		} else if (high <= 50000) {
+			setHigh('50000');
+		} else if (high <= 60000) {
+			setHigh('60000');
+		} else {
+			setHigh('60000+');
+		}
+	}, []);
 
 	const openMinPriceModal = () => {
 		setMinPriceData([
@@ -56,43 +132,45 @@ const PriceFilter = () => {
 			{expanded && (
 				<>
 					<Slider
-						style={{ width: '100%', height: 40 }}
-						minimumValue={0}
-						maximumValue={1}
-						minimumTrackTintColor={CustomColors.primary}
-						maximumTrackTintColor={CustomColors.grey}
+						// style={styles.slider}
+						min={min}
+						max={max}
+						step={5}
+						renderThumb={renderThumb}
+						renderRail={renderRail}
+						renderRailSelected={renderRailSelected}
+						// renderNotch={renderNotch}
+						onValueChanged={handleValueChange}
+						minRange={5}
 					/>
+
 					<View
 						style={{
 							flexDirection: 'row',
 							justifyContent: 'space-between',
-							paddingBottom: DefaultStyles.DefaultPadding
+							paddingVertical: DefaultStyles.DefaultPadding
 						}}
 					>
-						<DropdownBox
-							style={styles.dropdownstyle}
-							title={'min'}
-							onBoxPress={openMinPriceModal}
-						/>
+						<DropdownBox style={styles.dropdownstyle} title={low} onBoxPress={openMinPriceModal} />
 						<Modal animationType="fade" transparent={true} visible={isMinModalVisible}>
 							<View style={styles.centeredView}>
-								<PriceModal
+								<MinPriceModal
 									setModalVisible={() => setIsMinModalVisible(false)}
 									priceData={minPriceData}
+									isMinOptionPressed={isMinOptionPressed}
+									setIsMinOptionPressed={setIsMinOptionPressed}
 								/>
 							</View>
 						</Modal>
 
-						<DropdownBox
-							style={styles.dropdownstyle}
-							title={50000}
-							onBoxPress={openMaxPriceModal}
-						/>
+						<DropdownBox style={styles.dropdownstyle} title={high} onBoxPress={openMaxPriceModal} />
 						<Modal animationType="fade" transparent={true} visible={isMaxModalVisible}>
 							<View style={styles.centeredView}>
-								<PriceModal
+								<MaxPriceModal
 									setModalVisible={() => setIsMaxModalVisible(false)}
 									priceData={maxPriceData}
+									isMaxOptionPressed={isMaxOptionPressed}
+									setIsMaxOptionPressed={setIsMaxOptionPressed}
 								/>
 							</View>
 						</Modal>

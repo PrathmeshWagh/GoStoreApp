@@ -13,6 +13,7 @@ interface GetProduct {
 
 const getProducts = async ({ params, productData, rootKey }: GetProduct) => {
 	const { isKiosk } = useKiosk();
+	// console.log('params', params);
 
 	const response = await axios.get(
 		`${Config.BASE_PATH_INVENTORY}${ApiEndpoints.GET_PRODUCTS}?queryStr=${encodeURIComponent(

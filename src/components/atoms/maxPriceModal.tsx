@@ -1,5 +1,5 @@
 import { DefaultStyles, FontGilroy } from 'primitives';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { View, Modal, StyleSheet, Text, Pressable } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { CustomColors } from 'constants/colors.constants';
@@ -7,17 +7,17 @@ import { CustomColors } from 'constants/colors.constants';
 interface PriceModalProps {
 	setModalVisible?: boolean;
 	priceData: { id: number; label: string }[];
+	setIsMaxOptionPressed: (id: number) => void;
+	isMaxOptionPressed: number;
 }
 
-const PriceModal = (props: PriceModalProps) => {
-	const { setModalVisible, priceData } = props;
-	const [isOptionPressed, setIsOptionPress] = useState<number>(1);
+const MaxPriceModal = (props: PriceModalProps) => {
+	const { setModalVisible, priceData, setIsMaxOptionPressed, isMaxOptionPressed } = props;
 
 	const closeModal = (id: number) => {
-		setIsOptionPress(id);
+		setIsMaxOptionPressed(id);
 		setModalVisible(false);
 	};
-
 	return (
 		<>
 			<View style={styles.modalView}>
@@ -30,7 +30,7 @@ const PriceModal = (props: PriceModalProps) => {
 						<Text key={index} style={styles.optionText}>
 							{price.label}
 						</Text>
-						{isOptionPressed === price.id ? (
+						{isMaxOptionPressed === price.id ? (
 							<Icon name="circle-slice-8" size={20} color={CustomColors.primary} />
 						) : (
 							<Icon name="circle-outline" size={20} />
@@ -42,7 +42,7 @@ const PriceModal = (props: PriceModalProps) => {
 	);
 };
 
-export default PriceModal;
+export default MaxPriceModal;
 const styles = StyleSheet.create({
 	modalView: {
 		width: '95%',

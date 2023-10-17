@@ -6,15 +6,18 @@ import { CustomColors } from 'constants/colors.constants';
 import { DefaultStyles, FontGilroy } from 'primitives';
 import CheckBox from 'react-native-check-box';
 
-const BrandFilter = ({ data, updateSelectedBrand, resetFilter }) => {
-	console.log('aaaaa', resetFilter);
-
+const BrandFilter = ({
+	data,
+	updateSelectedBrand,
+	resetFilter,
+	setSelectedBrand,
+	selectedBrand
+}) => {
 	const [expanded, setExpanded] = useState(true);
 	const [filterData, setFilterData] = useState([]);
 	const [isCheckedArray, setIsCheckedArray] = useState(new Array(filterData?.length).fill(false));
 	const [search, setSearch] = useState('');
 	const [oldData, setOldData] = useState([]);
-	const [selectedBrand, setSelectedBrand] = useState([]);
 
 	useEffect(() => {
 		if (data) {
