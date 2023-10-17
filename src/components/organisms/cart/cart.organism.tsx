@@ -23,7 +23,6 @@ export default function Cart() {
 	const { navigate } = useEnhancedNavigation();
 	const { width, height } = useDimensions();
 	const { colors } = useTheme();
-
 	const [applyModal, setApplyModal] = useState<boolean>(false);
 
 	let isLogin = false;

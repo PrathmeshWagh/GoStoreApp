@@ -47,4 +47,32 @@ const httpTokenGet = async <Data = any>(url, addConfig = {}): Promise<Data> => {
 		});
 };
 
-export { httpTokenGet };
+const httpTokenPut = async (url, data, addConfig = {}) => {
+	const token = await getAccessToken();
+	if (token) {
+		httpConfig.headers['Authorization'] = 'Bearer '.concat(token);
+	}
+	return axios
+		.patch(url, data, { ...httpConfig, ...addConfig })
+		.then(async (response) => {
+			if (response.data.msg === 'Invalid Token') {
+			}
+			if (response.data.msg === 'Token Expired') {
+				let refreshResponse = await refreshToken(getRefreshToken());
+				httpConfig.headers['Authorization'] = 'Bearer '.concat(refreshResponse);
+				return axios.patch(url, data, httpConfig).then((res) => {
+					if (res.data.msg === 'Invalid Token') {
+					}
+					if (res.data.status !== 'error') return res.data;
+					throw res.data;
+				});
+			}
+			if (response.data.status !== 'error') return response.data;
+			throw response.data;
+		})
+		.catch((err) => {
+			throw err;
+		});
+};
+
+export { httpTokenGet, httpTokenPut };

@@ -49,6 +49,7 @@ import LottieView from 'lottie-react-native';
 import { useCouponsQuery } from 'api/coupons/get-coupons';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import CouponIcon from '@atoms/icons/coupon';
+import { useAddOrDeleteToCartMutation } from 'api/cart/use-cart';
 
 const offerTypes = {
 	BANK: 'BANK',
@@ -78,6 +79,14 @@ export default function ProductDetails({ Productitem, categories }: any) {
 	const { data: bankOffers, isLoading: isOffersLoading, isError } = useBankOffers(2, 1000000);
 
 	const { data: platformOffersData } = useCouponsQuery();
+	const {
+		mutate: addOrDeleteToCart,
+		isLoading: addOrDeleteToCartLoading,
+		data: cartSuccessResponse,
+		error: cartErrorResponse
+	} = useAddOrDeleteToCartMutation({
+		preventCheckoutSummaryUpdate: true
+	});
 
 	const [expanded, setExpanded] = useState<boolean>(false);
 	const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -142,6 +151,21 @@ export default function ProductDetails({ Productitem, categories }: any) {
 
 		getProductPriceDetails(payload);
 	}, []);
+
+	const handleAddtoCart = () => {
+		const post = {
+			productId: '643f7f6521eafe170faf9233',
+			mysqlId: 146305,
+			supplier_id: 345789,
+			seller_id: 25734,
+			seller_type: 'GOSTOR_SELLER',
+			price: '8999.000',
+			quantity: 1,
+			exchangeDetails: null,
+			abbDetails: null
+		};
+		addOrDeleteToCart(post);
+	};
 
 	return (
 		<View style={styles.container}>
@@ -470,8 +494,10 @@ export default function ProductDetails({ Productitem, categories }: any) {
 				</View>
 				<View style={styles.buttonsContainer}>
 					<CustomButtom
-						loading={false}
-						onPress={() => {}}
+						loading={addOrDeleteToCartLoading}
+						onPress={() => {
+							handleAddtoCart();
+						}}
 						mode="text"
 						text="Add To Cart"
 						disabled
