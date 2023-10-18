@@ -10,7 +10,10 @@ import {
 	ProductDetailsScreen,
 	LocationScreen,
 	PincodeScreen,
-	CartScreen
+	CartScreen,
+	UserAccountScreen,
+	MyProfileScreen,
+	CustomerSupportScreen
 } from './export.routes';
 import { RouteConstants } from './constants.routes';
 
@@ -85,6 +88,24 @@ const RoutesList = [
 		id: 11,
 		name: RouteConstants.CartScreenRoute,
 		component: CartScreen,
+		options: { headerShown: false }
+	},
+	{
+		id: 12,
+		name: RouteConstants.UserAccountScreenRoute,
+		component: UserAccountScreen,
+		options: { headerShown: false }
+	},
+	{
+		id: 13,
+		name: RouteConstants.MyProfileScreenRoute,
+		component: MyProfileScreen,
+		options: { headerShown: false }
+	},
+	{
+		id: 14,
+		name: RouteConstants.CustomerSupportScreen,
+		component: CustomerSupportScreen,
 		options: { headerShown: false }
 	}
 ];

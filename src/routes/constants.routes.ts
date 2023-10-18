@@ -13,5 +13,8 @@ export const enum RouteConstants {
 	ViewMoreSimilarProductScreenRoute = 'VIEW_MORE_SIMILAR_PRODUCT_SCREEN_ROUTE',
 	LocationScreenRoute = 'LOCATION_SCREEN_ROUTE',
 	PincodeScreenRoute = 'PINCODE_SCREEN_ROUTE',
-	CartScreenRoute = 'CART_SCREEN_ROUTE'
+	CartScreenRoute = 'CART_SCREEN_ROUTE',
+	UserAccountScreenRoute = 'USER_ACCOUNT_SCREEN_ROUTE',
+	MyProfileScreenRoute = 'MY_PROFILE_SCREEN_ROUTE',
+	CustomerSupportScreen = 'CUSTOMER_SUPPORT_SCREEEN'
 }

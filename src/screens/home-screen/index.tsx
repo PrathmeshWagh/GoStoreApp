@@ -32,6 +32,13 @@ const HomeScreen = () => {
 			>
 				<Text>Cart</Text>
 			</TouchableOpacity>
+			<TouchableOpacity
+				onPress={() => {
+					navigate(RouteConstants.UserAccountScreenRoute);
+				}}
+			>
+				<Text>Account</Text>
+			</TouchableOpacity>
 			<Home />
 		</Layout>
 	);

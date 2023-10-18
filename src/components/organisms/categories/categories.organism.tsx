@@ -65,6 +65,8 @@ const Categories = ({ categoryData }: any) => {
 	const [expanded, setExpanded] = useState(false);
 	const [low, setLow] = useState('');
 	const [high, setHigh] = useState('');
+	console.log('low', low);
+
 	// const [brandArr, setBrandArr] = useState([]);
 	const [selectedBrand, setSelectedBrand] = useState([]);
 	// const [selectedPrice, setSelectedPrice] = useState({});

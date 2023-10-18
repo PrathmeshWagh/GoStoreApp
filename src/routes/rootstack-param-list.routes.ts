@@ -16,4 +16,7 @@ export type RootStackParamList = {
 	[RouteConstants.LocationScreenRoute]: undefined;
 	[RouteConstants.PincodeScreenRoute]: undefined;
 	[RouteConstants.CartScreenRoute]: undefined;
+	[RouteConstants.UserAccountScreenRoute]: undefined;
+	[RouteConstants.MyProfileScreenRoute]: undefined;
+	[RouteConstants.CustomerSupportScreen]: undefined;
 };

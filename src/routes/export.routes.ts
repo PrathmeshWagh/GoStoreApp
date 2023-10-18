@@ -12,3 +12,6 @@ export { default as ViewMoreSimilarProductScreen } from '@screens/view-more-simi
 export { default as LocationScreen } from '@screens/location-screen';
 export { default as PincodeScreen } from '@screens/pincode-screen';
 export { default as CartScreen } from '@screens/cart-screen';
+export { default as UserAccountScreen } from '@screens/user-account-screen';
+export { default as MyProfileScreen } from '@screens/my-profile-screen';
+export { default as CustomerSupportScreen } from 'screens/customer-support-screen';
