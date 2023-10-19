@@ -1,23 +1,31 @@
 import { useState, useCallback, useEffect } from 'react';
-import { View, Pressable, StyleSheet, Text, Modal } from 'react-native';
+import {
+	View,
+	Pressable,
+	StyleSheet,
+	Text,
+	Modal,
+	TouchableOpacity,
+	Dimensions
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { CustomColors } from 'constants/colors.constants';
 import { DefaultStyles, FontGilroy } from 'primitives';
 import DropdownBox from 'components/atoms/dropdownBox';
 import { PRICE_SLIDER_DATA } from 'helpers/constants/priceSliderContstants';
-import PriceModal from 'components/atoms/priceModal';
-import Slider from 'rn-range-slider';
 import Thumb from 'components/atoms/Slider/Thumb';
 import Rail from 'components/atoms/Slider/Rail';
 import RailSelected from 'components/atoms/Slider/RailSelected';
 import MaxPriceModal from 'components/atoms/maxPriceModal';
 import MinPriceModal from 'components/atoms/minPriceModal';
-
+import MultiSlider from '@ptomasroos/react-native-multi-slider';
 interface PriceFilterProp {
 	low: string;
 	high: string;
-	setLow: () => void;
-	setHigh: () => void;
+	setLow: React.Dispatch<React.SetStateAction<string>>;
+	setHigh: React.Dispatch<React.SetStateAction<string>>;
+	price?: ByPriceProps;
+	category: any;
 }
 
 interface PriceData {
@@ -26,35 +34,39 @@ interface PriceData {
 }
 
 export interface ByPriceProps {
-	price?: {
-		minPrice?: number;
-		maxPrice?: number;
-	};
+	minPrice?: number;
+	maxPrice?: number;
 }
 
-const PriceFilter = ({ low, high, setLow, setHigh, category, price }: ByPriceProps) => {
-	console.log(price);
+const minPriceList = [
+	{ id: 1, label: 'min' },
+	{ id: 2, label: '10000' },
+	{ id: 3, label: '15000' },
+	{ id: 4, label: '30000' },
+	{ id: 5, label: '40000' },
+	{ id: 6, label: '50000' }
+];
 
-	const [rangeDisabled, setRangeDisabled] = useState(false);
-	// const [low, setLow] = useState('6049');
-	// const [high, setHigh] = useState('95649');
-	const [min, setMin] = useState(6049);
-	const [max, setMax] = useState(95649);
+const maxPriceList = [
+	{ id: 1, label: '15000' },
+	{ id: 2, label: '30000' },
+	{ id: 3, label: '40000' },
+	{ id: 4, label: '50000' },
+	{ id: 5, label: '60000' },
+	{ id: 6, label: '60000+' }
+];
+
+const PriceFilter = ({ low, high, setLow, setHigh, category, price }: PriceFilterProp) => {
 	const [priceRange, setPriceRange] = useState<any>();
-
-	// console.log('priceRange', priceRange);
-
 	const renderThumb = useCallback(() => <Thumb />, []);
-	const renderRail = useCallback(() => <Rail />, []);
-	const renderRailSelected = useCallback(() => <RailSelected />, []);
 
 	const [isMinModalVisible, setIsMinModalVisible] = useState(false);
-	const [isMinOptionPressed, setIsMinOptionPressed] = useState(1);
+	const [isMinOptionPressed, setIsMinOptionPressed] = useState<number>(1);
 	const [isMaxOptionPressed, setIsMaxOptionPressed] = useState<number>(6);
 
 	const [isMaxModalVisible, setIsMaxModalVisible] = useState(false);
-	const [minPriceData, setMinPriceData] = useState<PriceData[]>([]);
-	const [maxPriceData, setMaxPriceData] = useState<PriceData[]>([]);
+	const [minPriceData, setMinPriceData] = useState<PriceData[]>(minPriceList);
+	const [maxPriceData, setMaxPriceData] = useState<PriceData[]>(maxPriceList);
 
 	const [expanded, setExpanded] = useState(false);
 
@@ -70,29 +82,64 @@ const PriceFilter = ({ low, high, setLow, setHigh, category, price }: ByPricePro
 			: setPriceRange(PRICE_SLIDER_DATA?.DEFAULT_VALUE);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [category]);
-	// const renderNotch = useCallback(() => <Notch />, []);
-	const handleValueChange = useCallback((low, high) => {
-		if (low <= 10000) {
+	useEffect(() => {
+		valueChangeCallBack();
+	}, [low, high]);
+
+	const valueChangeCallBack = useCallback(() => {
+		if (low == '10000') {
+			setIsMinOptionPressed(2);
+		} else if (low == '15000') {
+			setIsMinOptionPressed(3);
+		} else if (low == '30000') {
+			setIsMinOptionPressed(4);
+		} else if (low == '40000') {
+			setIsMinOptionPressed(5);
+		} else if (low == '50000') {
+			setIsMinOptionPressed(6);
+		} else {
+			setIsMinOptionPressed(1);
+		}
+		if (high == '15000') {
+			setIsMaxOptionPressed(1);
+		} else if (high == '30000') {
+			setIsMaxOptionPressed(2);
+		} else if (high == '40000') {
+			setIsMaxOptionPressed(3);
+		} else if (high == '50000') {
+			setIsMaxOptionPressed(4);
+		} else if (high == '60000') {
+			setIsMaxOptionPressed(5);
+		} else {
+			setIsMaxOptionPressed(6);
+		}
+	}, [low, high]);
+
+	const handleValueChange = useCallback((values: number[]) => {
+		const low = values[0];
+		const high = values[1];
+		if (low == 1) {
 			setLow('min');
-		} else if (low <= 15000) {
+		} else if (low == 2) {
+			setLow('10000');
+		} else if (low == 3) {
 			setLow('15000');
-		} else if (low <= 30000) {
+		} else if (low == 4) {
 			setLow('30000');
-		} else if (low <= 40000) {
+		} else if (low == 5) {
 			setLow('40000');
 		} else {
-			setLow('60000');
+			setLow('50000');
 		}
-
-		if (high <= 15000) {
+		if (high == 1) {
 			setHigh('15000');
-		} else if (high <= 30000) {
+		} else if (high == 2) {
 			setHigh('30000');
-		} else if (high <= 40000) {
+		} else if (high == 3) {
 			setHigh('40000');
-		} else if (high <= 50000) {
+		} else if (high == 4) {
 			setHigh('50000');
-		} else if (high <= 60000) {
+		} else if (high == 5) {
 			setHigh('60000');
 		} else {
 			setHigh('60000+');
@@ -100,27 +147,21 @@ const PriceFilter = ({ low, high, setLow, setHigh, category, price }: ByPricePro
 	}, []);
 
 	const openMinPriceModal = () => {
-		setMinPriceData([
-			{ id: 1, label: 'min' },
-			{ id: 2, label: '10000' },
-			{ id: 3, label: '20000' },
-			{ id: 4, label: '30000' },
-			{ id: 5, label: '40000' },
-			{ id: 6, label: '50000' }
-		]);
 		setIsMinModalVisible(true);
 	};
 
 	const openMaxPriceModal = () => {
-		setMaxPriceData([
-			{ id: 1, label: '15000' },
-			{ id: 2, label: '30000' },
-			{ id: 3, label: '40000' },
-			{ id: 4, label: '50000' },
-			{ id: 5, label: '60000' },
-			{ id: 6, label: '60000+' }
-		]);
 		setIsMaxModalVisible(true);
+	};
+
+	const onPressMinOption = (id: number) => {
+		setIsMinOptionPressed(id);
+		setLow(minPriceList.filter((item) => item.id == id)[0].label);
+	};
+
+	const onPressMaxOption = (id: number) => {
+		setIsMaxOptionPressed(id);
+		setHigh(maxPriceList.filter((item) => item.id == id)[0].label);
 	};
 
 	return (
@@ -131,19 +172,30 @@ const PriceFilter = ({ low, high, setLow, setHigh, category, price }: ByPricePro
 			</Pressable>
 			{expanded && (
 				<>
-					<Slider
-						// style={styles.slider}
-						min={min}
-						max={max}
-						step={5}
-						renderThumb={renderThumb}
-						renderRail={renderRail}
-						renderRailSelected={renderRailSelected}
-						// renderNotch={renderNotch}
-						onValueChanged={handleValueChange}
-						minRange={5}
+					<MultiSlider
+						trackStyle={{ backgroundColor: '#bdc3c7' }}
+						selectedStyle={{ height: 3.5, backgroundColor: CustomColors.primary, borderRadius: 2 }}
+						values={[isMinOptionPressed, isMaxOptionPressed]}
+						onValuesChange={handleValueChange}
+						min={isMinOptionPressed}
+						max={isMaxOptionPressed}
+						step={6}
+						sliderLength={Dimensions.get('window').width - 40 * 2}
+						allowOverlap={true}
+						customMarkerLeft={renderThumb}
+						customMarkerRight={renderThumb}
+						snapped={true}
+						unselectedStyle={{
+							height: 3.5,
+							borderRadius: 2,
+							backgroundColor: CustomColors.tertiary
+						}}
+						containerStyle={{
+							alignSelf: 'center'
+						}}
+						isMarkersSeparated={true}
+						optionsArray={[1, 2, 3, 4, 5, 6]}
 					/>
-
 					<View
 						style={{
 							flexDirection: 'row',
@@ -158,7 +210,7 @@ const PriceFilter = ({ low, high, setLow, setHigh, category, price }: ByPricePro
 									setModalVisible={() => setIsMinModalVisible(false)}
 									priceData={minPriceData}
 									isMinOptionPressed={isMinOptionPressed}
-									setIsMinOptionPressed={setIsMinOptionPressed}
+									setIsMinOptionPressed={onPressMinOption}
 								/>
 							</View>
 						</Modal>
@@ -170,7 +222,7 @@ const PriceFilter = ({ low, high, setLow, setHigh, category, price }: ByPricePro
 									setModalVisible={() => setIsMaxModalVisible(false)}
 									priceData={maxPriceData}
 									isMaxOptionPressed={isMaxOptionPressed}
-									setIsMaxOptionPressed={setIsMaxOptionPressed}
+									setIsMaxOptionPressed={onPressMaxOption}
 								/>
 							</View>
 						</Modal>

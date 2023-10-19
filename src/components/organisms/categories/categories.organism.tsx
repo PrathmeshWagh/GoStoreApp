@@ -50,6 +50,11 @@ interface Category {
 	discount?: number;
 }
 
+type PriceType = {
+	minPrice?: string;
+	maxPrice?: string;
+};
+
 const Categories = ({ categoryData }: any) => {
 	const location = useSelector((state: RootState) => state.location);
 	const { navigate } = useEnhancedNavigation();
@@ -63,8 +68,10 @@ const Categories = ({ categoryData }: any) => {
 	const [refreshing, setRefreshing] = useState(false);
 	const [sort, setSelectedSort] = useState('recommendation_asc');
 	const [expanded, setExpanded] = useState(false);
-	const [low, setLow] = useState('');
-	const [high, setHigh] = useState('');
+
+	const [highPrice, setHighPrice] = useState('60000+');
+	const [lowPrice, setLowPrice] = useState('min');
+
 	// const [brandArr, setBrandArr] = useState([]);
 	const [selectedBrand, setSelectedBrand] = useState([]);
 	// const [selectedPrice, setSelectedPrice] = useState({});
@@ -104,9 +111,25 @@ const Categories = ({ categoryData }: any) => {
 			productData.filterObj = selectedOtherFilter;
 		}
 
-		// if (low || (high && Object.keys(low || high).length)) {
-		// 	productData.priceFilter = { minPrice: low, maxPrice: high };
-		// }
+		let priceObj: PriceType = {};
+		if (lowPrice !== 'min') {
+			priceObj = {
+				minPrice: lowPrice
+			};
+		}
+		if (highPrice !== '60000+') {
+			priceObj = {
+				...priceObj,
+				maxPrice: highPrice
+			};
+		}
+		if (priceObj?.minPrice || priceObj?.maxPrice) {
+			const priceTempObj = {
+				minPrice: priceObj.minPrice,
+				maxPrice: priceObj.maxPrice
+			};
+			productData.priceFilter = priceTempObj;
+		}
 
 		getFilters({ params, productData, rootKey: rootKey });
 	}, [rootKey, location, selectedBrand, selectedOtherFilter]);
@@ -147,10 +170,32 @@ const Categories = ({ categoryData }: any) => {
 		if (selectedOtherFilter && Object.keys(selectedOtherFilter).length) {
 			params.filterObj = selectedOtherFilter;
 		}
-
-		// if (low || (high && Object.keys(low || high).length)) {
-		// 	params.priceFilter = { minPrice: low, maxPrice: high };
+		let priceObj: PriceType = {};
+		if (lowPrice !== 'min') {
+			priceObj = {
+				minPrice: lowPrice
+			};
+		}
+		if (highPrice !== '60000+') {
+			priceObj = {
+				...priceObj,
+				maxPrice: highPrice
+			};
+		}
+		// if (lowPrice || (highPrice && Object.keys(lowPrice || highPrice).length)) {
+		// 	const priceObj = {
+		// 		minPrice: lowPrice == 'min' ? '' : lowPrice,
+		// 		maxPrice: highPrice == '60000+' ? '' : highPrice
+		// 	};
+		// 	params.priceFilter = priceObj;
 		// }
+		if (priceObj?.minPrice || priceObj?.maxPrice) {
+			const priceTempObj = {
+				minPrice: priceObj.minPrice,
+				maxPrice: priceObj.maxPrice
+			};
+			params.priceFilter = priceTempObj;
+		}
 
 		getProducts({ params });
 	};
@@ -175,7 +220,7 @@ const Categories = ({ categoryData }: any) => {
 		} else {
 			setCurrentPage(1);
 		}
-	}, [selectedBrand, selectedOtherFilter]);
+	}, [selectedBrand, selectedOtherFilter, lowPrice, highPrice]);
 
 	const btnPressedHandler = (item: any) => {
 		navigate(RouteConstants.ProductdeatilsScreenRoute, { item: item, categories: categoryData });
@@ -204,6 +249,12 @@ const Categories = ({ categoryData }: any) => {
 
 	const resetBtnHandler = () => {
 		setResetAllFilter(!resetAllFilter);
+		if (lowPrice !== '0') {
+			setLowPrice('0');
+		}
+		if (highPrice !== '60000+') {
+			setHighPrice('60000+');
+		}
 	};
 
 	return (
@@ -324,10 +375,10 @@ const Categories = ({ categoryData }: any) => {
 								/>
 								<Divider type="dashed" style={{ width: '92%', alignSelf: 'center' }} />
 								<PriceFilter
-									low={low}
-									high={high}
-									setLow={setLow}
-									setHigh={setHigh}
+									low={lowPrice}
+									high={highPrice}
+									setLow={setLowPrice}
+									setHigh={setHighPrice}
 									category={categoryData.categoryData?.slug}
 									price={filters?.priceFilter}
 								/>
