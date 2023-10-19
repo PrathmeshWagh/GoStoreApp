@@ -57,7 +57,10 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         updateUser: (state, action: PayloadAction<Partial<AuthState>>) => {
-            Object.assign(state, action.payload);
+            return {
+                ...state,
+                ...action.payload,
+            };
         },
         setToken: (state, action: PayloadAction<string>) => {
             state.token = action.payload;

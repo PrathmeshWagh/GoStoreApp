@@ -6,3 +6,5 @@ export { default as usePermissionHandlers } from './permission-handlers.hook';
 export { default as useLocalstorage } from './local-storage.hook';
 export { default as useHome } from './home.hook';
 export { default as useBannerClick } from './banner-click.hook';
+export { default as useStore } from './stores.hook';
+export { default as useRetailerHook } from './retailer.hook';

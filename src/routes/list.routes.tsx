@@ -7,7 +7,7 @@ import {
 	OtpScreen,
 	CategoriesScreen,
 	ViewMoreSimilarProductScreen,
-	ProductDetailsScreen, LocationScreen, PincodeScreen, SideDrawerScreen
+	ProductDetailsScreen, LocationScreen, PincodeScreen, SideDrawerScreen, VideoCallScreen,
 } from './export.routes';
 import { RouteConstants } from './constants.routes';
 
@@ -78,9 +78,15 @@ const RoutesList = [
 		options: { headerShown: false },
 	},
 	{
-		id: 11,
+		id: 12,
 		name: RouteConstants.SideDrawerScreenRoute,
 		component: SideDrawerScreen,
+		options: { headerShown: false },
+	},
+	{
+		id: 13,
+		name: RouteConstants.VideoCallScreenRoute,
+		component: VideoCallScreen,
 		options: { headerShown: false },
 	},
 ];

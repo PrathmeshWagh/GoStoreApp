@@ -12,3 +12,4 @@ export { default as ViewMoreSimilarProductScreen } from '@screens/view-more-simi
 export { default as LocationScreen } from '@screens/location-screen';
 export { default as PincodeScreen } from '@screens/pincode-screen';
 export { default as SideDrawerScreen } from '@screens/side-drawer-screen';
+export { default as VideoCallScreen } from '@screens/video-call-screen';

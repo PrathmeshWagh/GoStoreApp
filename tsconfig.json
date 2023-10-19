@@ -1,6 +1,7 @@
 {
 	"extends": "@tsconfig/react-native/tsconfig.json",
 	"compilerOptions": {
+		"target": "ES2022",
 		"lib": ["dom", "es6"],
 		"baseUrl": ".",
 		"paths": {

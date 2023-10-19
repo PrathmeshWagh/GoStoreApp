@@ -73,4 +73,8 @@ const linking = {
     config,
 };
 
-export default linking;
+const navigationContainerProps = {
+    linking,
+};
+
+export { linking, navigationContainerProps };

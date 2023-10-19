@@ -7,11 +7,10 @@ import { LogBox, View, StyleSheet, Text } from 'react-native';
 import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-// import firebase from '@react-native-firebase/app';
-// import firebase2 from '@react-native-firebase/app';
 import ReactMoE from 'react-native-moengage';
 import Config from 'react-native-config';
 import { Mixpanel } from 'mixpanel-react-native';
+import firebase from '@react-native-firebase/app';
 
 import store, { RootState } from '@slices/store';
 import { Router } from '@routes/router.routes';
@@ -20,8 +19,8 @@ import { CustomModal } from '@atoms/index';
 import { container } from '@helpers/index';
 import { hideSnackbar } from '@slices/snackbar.slice';
 import { FontGilroy } from '@primitives/index';
-import linking from '@routes/linking.routes';
-// import { defaultAppConfig } from 'services/firebase.service';
+import { linking } from '@routes/linking.routes';
+import { config, credentials } from '@services/firebase.service';
 
 LogBox.ignoreLogs([]);
 
@@ -87,6 +86,7 @@ const toastConfig = {
 function MainContent() {
 	const dispatch = useDispatch();
 	const snackbar = useSelector((state: RootState) => state.snackbar);
+	firebase.initializeApp(credentials, config);
 
 	return (
 		<>
@@ -100,6 +100,7 @@ function MainContent() {
 				action={{
 					label: snackbar.label ? snackbar.label : '',
 					labelStyle: { fontSize: 12, fontFamily: FontGilroy.Light, color: '#FFF' },
+					onPress: snackbar.onPress ? snackbar.onPress : () => dispatch(hideSnackbar()),
 				}}
 			>
 				{snackbar.message}
