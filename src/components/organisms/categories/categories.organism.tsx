@@ -91,7 +91,7 @@ const Categories = ({ categoryData }: any) => {
 			categoryId: categoryData.categoryData?.id,
 			priceFilter: {},
 			filterObj: {},
-			clusterId: 1,
+			clusterId: location.cluster_id,
 			state: 'Karnataka',
 			sort,
 			pageSize: 24,

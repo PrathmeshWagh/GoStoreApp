@@ -93,6 +93,8 @@ export default function ProductDetails({ Productitem, categories }: any) {
 		navigate(RouteConstants.CategoriesScreenRoute, { name: slug, id: id });
 	};
 
+	console.log('fdf', categories.categoryData);
+
 	const renderAssuredBBIcon = (iconName: 'buyBackPrice' | 'seamless' | 'greatSaving') => {
 		switch (iconName) {
 			case 'buyBackPrice':

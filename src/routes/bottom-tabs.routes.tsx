@@ -11,7 +11,7 @@ import {
 	StoreActiveIcon,
 	StoreInActiveIcon
 } from '@icons/index';
-import { HomeScreen, MainWebviewScreen, StoreScreen } from './export.routes';
+import { HomeScreen, MainWebviewScreen, StoreScreen, UserAccountScreen } from './export.routes';
 import { withActiveTab } from '@hoc/index';
 import { Platform } from 'react-native';
 
@@ -108,8 +108,8 @@ const BottomTabList = [
 	},
 	{
 		id: 4,
-		name: RouteConstants.MainWebviewScreenRoute + 'account',
-		component: withActiveTab(MainWebviewScreen, 'account'),
+		name: RouteConstants.UserAccountScreenRoute,
+		component: UserAccountScreen,
 		options: {
 			headerShown: false,
 			tabBarLabel: ({ focused }: any) => (
@@ -120,7 +120,7 @@ const BottomTabList = [
 					]}
 					variant="titleSmall"
 				>
-					Offers
+					Account
 				</Text>
 			),
 			tabBarActiveTintColor: '#3a9545',

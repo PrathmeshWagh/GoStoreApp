@@ -13,7 +13,8 @@ import {
 	CartScreen,
 	UserAccountScreen,
 	MyProfileScreen,
-	CustomerSupportScreen
+	CustomerSupportScreen,
+	NoOrderScreen
 } from './export.routes';
 import { RouteConstants } from './constants.routes';
 
@@ -104,8 +105,14 @@ const RoutesList = [
 	},
 	{
 		id: 14,
-		name: RouteConstants.CustomerSupportScreen,
+		name: RouteConstants.CustomerSupportScreenRoute,
 		component: CustomerSupportScreen,
+		options: { headerShown: false }
+	},
+	{
+		id: 15,
+		name: RouteConstants.NoOrderScreenRoute,
+		component: NoOrderScreen,
 		options: { headerShown: false }
 	}
 ];
