@@ -13,6 +13,8 @@ import useKiosk from '@atoms/Kiosk/useKiosk.hook';
 import { useCheckoutSummaryMutation } from 'api/checkout/use-summary';
 import { RootState } from 'slices/store';
 import { httpTokenPut } from '../utils/utils';
+import { useEnhancedNavigation } from 'hooks';
+import { RouteConstants } from 'routes/constants.routes';
 
 const withCredsHttpConfig = {
 	withCredentials: true
@@ -23,7 +25,7 @@ async function getCartCount() {
 		withCredentials: true
 	};
 	const response = httpTokenGet<ApiResponses.GetCartCountResponse>(
-		`${Config.BASE_PATH_INVENTORY}${ApiEndpoints.CART_COUNT}`,
+		`${Config.BASE_PATH}${ApiEndpoints.CART_COUNT}`,
 		withCredsHttpConfig
 	);
 	return response;
@@ -62,7 +64,7 @@ async function getAllCartItem(params = { clusterId: '' }) {
 	if (params?.clusterId) {
 		const queryString = new URLSearchParams(params).toString();
 		const response = httpTokenGet<ApiResponses.GetCartDataResponse>(
-			`${Config.BASE_PATH_INVENTORY}${ApiEndpoints.CART}?cta=CART&${queryString}`,
+			`${Config.BASE_PATH}${ApiEndpoints.CART}?cta=CART&${queryString}`,
 			withCredsHttpConfig
 		);
 		return response;
@@ -75,7 +77,7 @@ async function addOrDeleteToCart(params, data: AddRemoveCart) {
 		withCredentials: true
 	};
 	const response = httpTokenPut(
-		`${Config.NEXT_PUBLIC_MAIN}${ApiEndpoints.CART}?${queryString}`,
+		`${Config.BASE_PATH}${ApiEndpoints.CART}?${queryString}`,
 		data,
 		withCredsHttpConfig
 	);
@@ -89,7 +91,7 @@ export const useAddOrDeleteToCartMutation = (options?: {
 	const { mutate: getCartItems } = useAllCartMutation();
 	const location = useSelector((state: RootState) => state.location);
 	const checkoutData = useSelector((state: RootState) => state.cart);
-
+	const { navigate } = useEnhancedNavigation();
 	const { mutate: getCheckoutSummary, isLoading } = useCheckoutSummaryMutation();
 
 	// const { cta } = useUI();
@@ -112,11 +114,13 @@ export const useAddOrDeleteToCartMutation = (options?: {
 				await getCartCount();
 				getCartItems({
 					state: location?.state,
-					pincode: location?.pincode
+					pincode: location?.pincode,
+					clusterId: 1
 				});
 				!options?.preventCheckoutSummaryUpdate && getCheckoutSummary(requestData);
 
 				dispatch(showSnackbar({ message: 'Cart updated', label: 'Close' }));
+				navigate(RouteConstants.CartScreenRoute);
 			} else {
 				dispatch(showSnackbar({ message: 'Unable Add to Cart!', label: 'Close' }));
 			}

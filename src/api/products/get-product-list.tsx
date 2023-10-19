@@ -25,9 +25,6 @@ const getProducts = async ({ params, productData, rootKey }: GetProduct) => {
 
 export const useGetProducts = () => {
 	return useMutation((input: GetProduct) => getProducts(input), {
-		// onSuccess: (response) => {
-		// 	console.log('mutation ', response);
-		// },
 		onError: (error: { status: string; msg: string }) => {
 			console.error('Categories Carousel Error', error);
 		}

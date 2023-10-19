@@ -53,74 +53,74 @@ export default function SimilarProducts({ title, link, response, event, onPress 
 
 	const renderItem = ({ item }: any) => {
 		return (
-			<View
-				style={{
-					width: width - 50,
-					height: height / 2,
-					justifyContent: 'center',
-					flexDirection: 'row'
-				}}
-			>
-				<View style={[styles.renderContainer, { borderColor: 'gray' }]}>
-					<View style={[styles.ratingBox, { backgroundColor: colors.primary }]}>
-						<Text style={styles.ratingText}>4</Text>
-						<StarIcon width={12} height={12} />
-					</View>
+			// <View
+			// 	style={{
+			// 		width: width - 50,
+			// 		height: height / 2,
+			// 		justifyContent: 'center',
+			// 		flexDirection: 'row'
+			// 	}}
+			// >
+			// 	<View style={[styles.renderContainer, { borderColor: 'gray' }]}>
+			// 		<View style={[styles.ratingBox, { backgroundColor: colors.primary }]}>
+			// 			<Text style={styles.ratingText}>4</Text>
+			// 			<StarIcon width={12} height={12} />
+			// 		</View>
 
-					<View style={[styles.imageContainer]}>
-						<Image
-							source={{
-								uri: 'https://static.gostor.com/UPDATED_BANNER_IMAGES/image_1695578198363559'
-							}}
-							style={[styles.image]}
-							resizeMode="contain"
-						/>
-					</View>
+			// 		<View style={[styles.imageContainer]}>
+			// 			<Image
+			// 				source={{
+			// 					uri: 'https://static.gostor.com/UPDATED_BANNER_IMAGES/image_1695578198363559'
+			// 				}}
+			// 				style={[styles.image]}
+			// 				resizeMode="contain"
+			// 			/>
+			// 		</View>
 
-					<View style={styles.infoContainer}>
-						<Text numberOfLines={2} style={[styles.title]}>
-							television
-						</Text>
-						<Rupee money={12121} styles={[styles.price]} />
-						<View style={[styles.mrpWrapper]}>
-							<Rupee money={1212} styles={[styles.mrp]} />
-							<Text numberOfLines={2} style={[styles.discount, { color: colors.primary }]}>
-								12% off
-							</Text>
-						</View>
-					</View>
-				</View>
-				<View style={[styles.renderContainer, { borderColor: 'gray' }]}>
-					<View style={[styles.ratingBox, { backgroundColor: colors.primary }]}>
-						<Text style={styles.ratingText}>4</Text>
-						<StarIcon width={12} height={12} />
-					</View>
+			// 		<View style={styles.infoContainer}>
+			// 			<Text numberOfLines={2} style={[styles.title]}>
+			// 				television
+			// 			</Text>
+			// 			<Rupee money={12121} styles={[styles.price]} />
+			// 			<View style={[styles.mrpWrapper]}>
+			// 				<Rupee money={1212} styles={[styles.mrp]} />
+			// 				<Text numberOfLines={2} style={[styles.discount, { color: colors.primary }]}>
+			// 					12% off
+			// 				</Text>
+			// 			</View>
+			// 		</View>
+			// 	</View>
+			// 	<View style={[styles.renderContainer, { borderColor: 'gray' }]}>
+			// 		<View style={[styles.ratingBox, { backgroundColor: colors.primary }]}>
+			// 			<Text style={styles.ratingText}>4</Text>
+			// 			<StarIcon width={12} height={12} />
+			// 		</View>
 
-					<View style={[styles.imageContainer]}>
-						<Image
-							source={{
-								uri: 'https://static.gostor.com/UPDATED_BANNER_IMAGES/image_1695578198363559'
-							}}
-							style={[styles.image]}
-							resizeMode="contain"
-						/>
-					</View>
+			// 		<View style={[styles.imageContainer]}>
+			// 			<Image
+			// 				source={{
+			// 					uri: 'https://static.gostor.com/UPDATED_BANNER_IMAGES/image_1695578198363559'
+			// 				}}
+			// 				style={[styles.image]}
+			// 				resizeMode="contain"
+			// 			/>
+			// 		</View>
 
-					<View style={styles.infoContainer}>
-						<Text numberOfLines={2} style={[styles.title]}>
-							television
-						</Text>
-						<Rupee money={12121} styles={[styles.price]} />
-						<View style={[styles.mrpWrapper]}>
-							<Rupee money={1212} styles={[styles.mrp]} />
-							<Text numberOfLines={2} style={[styles.discount, { color: colors.primary }]}>
-								12% off
-							</Text>
-						</View>
-					</View>
-				</View>
-			</View>
-			// <CategoryItemWithRatingText item={item} onPress={() => {}} />
+			// 		<View style={styles.infoContainer}>
+			// 			<Text numberOfLines={2} style={[styles.title]}>
+			// 				television
+			// 			</Text>
+			// 			<Rupee money={12121} styles={[styles.price]} />
+			// 			<View style={[styles.mrpWrapper]}>
+			// 				<Rupee money={1212} styles={[styles.mrp]} />
+			// 				<Text numberOfLines={2} style={[styles.discount, { color: colors.primary }]}>
+			// 					12% off
+			// 				</Text>
+			// 			</View>
+			// 		</View>
+			// 	</View>
+			// </View>
+			<CategoryItemWithRatingText item={item} onPress={() => {}} />
 		);
 	};
 

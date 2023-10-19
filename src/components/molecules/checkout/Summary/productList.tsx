@@ -6,7 +6,8 @@ import { RootState } from '@slices/store';
 import { useSelector } from 'react-redux';
 
 export default function ProductList() {
-	const count = useSelector((state: RootState) => state.cart);
+	const { count } = useSelector((state: RootState) => state.cart);
+	const { checkoutData } = useSelector((state) => state.checkout);
 
 	return (
 		<View>
@@ -15,8 +16,9 @@ export default function ProductList() {
 					{count} {count > 1 ? 'items' : 'item'} in the cart
 				</Text>
 			) : null}
-			;
-			<ProductCart />
+			{checkoutData?.data?.map((item) => {
+				return <ProductCart item={item} />;
+			})}
 		</View>
 	);
 }

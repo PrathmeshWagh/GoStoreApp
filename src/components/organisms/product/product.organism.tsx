@@ -50,6 +50,7 @@ import { useCouponsQuery } from 'api/coupons/get-coupons';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import CouponIcon from '@atoms/icons/coupon';
 import { useAddOrDeleteToCartMutation } from 'api/cart/use-cart';
+import { useGetProducts } from 'api/products/get-product-list';
 
 const offerTypes = {
 	BANK: 'BANK',
@@ -62,6 +63,7 @@ export default function ProductDetails({ Productitem, categories }: any) {
 	const { width, height } = useDimensions();
 	const { colors } = useTheme();
 	const refRBBank = useRef();
+	const { mutate: getProducts, isLoading, data } = useGetProducts();
 
 	const {
 		mutate: getProductPriceDetails,
@@ -138,7 +140,9 @@ export default function ProductDetails({ Productitem, categories }: any) {
 	}, [bankOffers]);
 
 	useEffect(() => {
-		setCouponOffers(platformOffersData.data);
+		if (platformOffersData) {
+			setCouponOffers(platformOffersData?.data);
+		}
 	}, [platformOffersData]);
 
 	useEffect(() => {
@@ -147,9 +151,17 @@ export default function ProductDetails({ Productitem, categories }: any) {
 			clusterId: 7,
 			supplierId: Productitem.supplierId
 		};
-		console.log('1');
-
 		getProductPriceDetails(payload);
+	}, []);
+
+	useEffect(() => {
+		const param = {
+			clusterId: 5,
+			state: 'Delhi',
+			pageSize: 24,
+			categoryId: Productitem.productId
+		};
+		getProducts({ params: param });
 	}, []);
 
 	const handleAddtoCart = () => {
@@ -500,7 +512,7 @@ export default function ProductDetails({ Productitem, categories }: any) {
 						}}
 						mode="text"
 						text="Add To Cart"
-						disabled
+						disabled={false}
 						styles={[
 							styles.button,
 							{

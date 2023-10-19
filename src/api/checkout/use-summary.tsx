@@ -5,7 +5,7 @@ import { httpTokenGet } from '../utils/utils';
 import { useCheckout } from 'context/checkout/checkout.context';
 import { useCheckoutContext } from 'context/ui.checkout.cart';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkOutData, checkOutDetails } from 'slices/checkOut.slice';
+import { checkOutData, checkOutDetails } from 'slices/checkout.slice';
 
 async function getCheckoutSummary(params) {
 	const queryString = new URLSearchParams(params).toString();
@@ -21,7 +21,6 @@ async function getCheckoutSummary(params) {
 
 export const useCheckoutSummaryMutation = () => {
 	const dispatch = useDispatch();
-
 	return useMutation(getCheckoutSummary, {
 		onSuccess: async (data) => {
 			dispatch(checkOutData({ checkoutData: data }));

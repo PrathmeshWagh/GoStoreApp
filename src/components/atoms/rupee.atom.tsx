@@ -11,7 +11,7 @@ const Rupee = (props: RupeeProps) => {
 
 	return (
 		<Text style={styles}>
-			{money.toLocaleString('en-IN', {
+			{money?.toLocaleString('en-IN', {
 				style: 'currency',
 				currency: 'INR',
 				minimumFractionDigits: 0,

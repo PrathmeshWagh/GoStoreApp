@@ -26,7 +26,7 @@ export default function Cart() {
 	const [applyModal, setApplyModal] = useState<boolean>(false);
 
 	let isLogin = false;
-	let pincode: 395006;
+	let pincode = 395006;
 	const {
 		mutate: getPinCodeDetails,
 		isLoading: isPincodeDetailsLoading,
@@ -105,7 +105,6 @@ export default function Cart() {
 							<View style={styles.couponContainer}>
 								<View style={{ flexDirection: 'row', alignItems: 'center' }}>
 									<Text>Icon</Text>
-
 									<Text style={[styles.text, { fontSize: 15, marginLeft: 8 }]}>Apply Coupon</Text>
 								</View>
 								<Icon name={'chevron-right'} size={20} color={colors.secondary} />

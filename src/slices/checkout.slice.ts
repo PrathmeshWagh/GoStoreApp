@@ -1,26 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-type cartCount = {
+type checkout= {
 	count: number;
 	checkoutData: Array<any>;
 	checkoutDetails: any;
 };
 
-const initialState: cartCount = {
+const initialState: checkout = {
 	count: 0,
 	checkoutData: [],
 	checkoutDetails: null
 };
 
-const cartSlice = createSlice({
-	name: 'cart',
+const checkoutSlice = createSlice({
+	name: 'checkoutSlice',
 	initialState,
 	reducers: {
 		cartCount: (state, action) => {
 			return { ...state, ...action.payload };
 		},
 		checkOutData: (state, action) => {
-			return { ...state, checkoutData: action.payload };
+			return { ...state, checkoutData: action.payload.checkoutData };
 		},
 		checkOutDetails: (state, action) => {
 			return { ...state, checkoutDetails: action.payload };
@@ -28,5 +28,5 @@ const cartSlice = createSlice({
 	}
 });
 
-export const { cartCount, checkOutData, checkOutDetails } = cartSlice.actions;
-export default cartSlice.reducer;
+export const { cartCount, checkOutData, checkOutDetails } = checkoutSlice.actions;
+export default checkoutSlice.reducer;
