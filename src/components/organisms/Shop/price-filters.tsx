@@ -26,10 +26,11 @@ interface PriceFilterProp {
 	setHigh: React.Dispatch<React.SetStateAction<string>>;
 	price?: ByPriceProps;
 	category: any;
+	maxLength: number;
 }
 
 interface PriceData {
-	id: number;
+	value: number;
 	label: string;
 }
 
@@ -56,93 +57,80 @@ const maxPriceList = [
 	{ id: 6, label: '60000+' }
 ];
 
-const PriceFilter = ({ low, high, setLow, setHigh, category, price }: PriceFilterProp) => {
-	const [priceRange, setPriceRange] = useState<any>();
+const PriceFilter = ({
+	low,
+	high,
+	setLow,
+	setHigh,
+	category,
+	price,
+	maxLength
+}: PriceFilterProp) => {
 	const renderThumb = useCallback(() => <Thumb />, []);
 
 	const [isMinModalVisible, setIsMinModalVisible] = useState(false);
 	const [isMinOptionPressed, setIsMinOptionPressed] = useState<number>(1);
-	const [isMaxOptionPressed, setIsMaxOptionPressed] = useState<number>(6);
-
+	const [isMaxOptionPressed, setIsMaxOptionPressed] = useState<number>(maxLength);
 	const [isMaxModalVisible, setIsMaxModalVisible] = useState(false);
-	const [minPriceData, setMinPriceData] = useState<PriceData[]>(minPriceList);
-	const [maxPriceData, setMaxPriceData] = useState<PriceData[]>(maxPriceList);
 
 	const [expanded, setExpanded] = useState(false);
 
 	const togglerFilterDetails = () => {
 		setExpanded(!expanded);
 	};
+	const findPriceSliderData = PRICE_SLIDER_DATA[category];
 
-	useEffect(() => {
-		// let category: string = router?.query?.category?.toString();
-		// category = category?.replace(' ', '_').toUpperCase();
-		PRICE_SLIDER_DATA?.[category]
-			? setPriceRange(PRICE_SLIDER_DATA?.[category])
-			: setPriceRange(PRICE_SLIDER_DATA?.DEFAULT_VALUE);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [category]);
+	const minPriceListData = findPriceSliderData?.min?.map((item, index) => {
+		return { ...item, id: index + 1 };
+	});
+
+	const maxPriceListData = findPriceSliderData?.max?.map((item, index) => {
+		return {
+			...item,
+			id: index + 1
+		};
+	});
+
 	useEffect(() => {
 		valueChangeCallBack();
 	}, [low, high]);
 
+	const assignOptionValue = (data: PriceData, isMin: boolean) => {
+		const tempLabel = isMin ? low : high;
+		const valueFind = data?.filter((item) => item?.label == tempLabel);
+		if (valueFind?.length !== 0) {
+			if (isMin) {
+				setIsMinOptionPressed(valueFind[0].id);
+			} else {
+				setIsMaxOptionPressed(valueFind[0].id);
+			}
+		}
+	};
+
 	const valueChangeCallBack = useCallback(() => {
-		if (low == '10000') {
-			setIsMinOptionPressed(2);
-		} else if (low == '15000') {
-			setIsMinOptionPressed(3);
-		} else if (low == '30000') {
-			setIsMinOptionPressed(4);
-		} else if (low == '40000') {
-			setIsMinOptionPressed(5);
-		} else if (low == '50000') {
-			setIsMinOptionPressed(6);
-		} else {
-			setIsMinOptionPressed(1);
-		}
-		if (high == '15000') {
-			setIsMaxOptionPressed(1);
-		} else if (high == '30000') {
-			setIsMaxOptionPressed(2);
-		} else if (high == '40000') {
-			setIsMaxOptionPressed(3);
-		} else if (high == '50000') {
-			setIsMaxOptionPressed(4);
-		} else if (high == '60000') {
-			setIsMaxOptionPressed(5);
-		} else {
-			setIsMaxOptionPressed(6);
-		}
+		assignOptionValue(minPriceListData, true);
+		assignOptionValue(maxPriceListData, false);
 	}, [low, high]);
+
+	const assignOptionLabel = (data: PriceData, value: number, isMin: boolean) => {
+		const valueFind = data?.filter((item) => item?.id == value);
+		if (valueFind?.length !== 0) {
+			if (isMin) {
+				setLow(valueFind[0].label);
+			} else {
+				setHigh(valueFind[0].label);
+			}
+		}
+	};
 
 	const handleValueChange = useCallback((values: number[]) => {
 		const low = values[0];
 		const high = values[1];
-		if (low == 1) {
-			setLow('min');
-		} else if (low == 2) {
-			setLow('10000');
-		} else if (low == 3) {
-			setLow('15000');
-		} else if (low == 4) {
-			setLow('30000');
-		} else if (low == 5) {
-			setLow('40000');
-		} else {
-			setLow('50000');
+		if (low) {
+			assignOptionLabel(minPriceListData, low, true);
 		}
-		if (high == 1) {
-			setHigh('15000');
-		} else if (high == 2) {
-			setHigh('30000');
-		} else if (high == 3) {
-			setHigh('40000');
-		} else if (high == 4) {
-			setHigh('50000');
-		} else if (high == 5) {
-			setHigh('60000');
-		} else {
-			setHigh('60000+');
+		if (high) {
+			assignOptionLabel(maxPriceListData, high, false);
 		}
 	}, []);
 
@@ -154,14 +142,14 @@ const PriceFilter = ({ low, high, setLow, setHigh, category, price }: PriceFilte
 		setIsMaxModalVisible(true);
 	};
 
-	const onPressMinOption = (id: number) => {
-		setIsMinOptionPressed(id);
-		setLow(minPriceList.filter((item) => item.id == id)[0].label);
+	const onPressMinOption = (value: number) => {
+		setIsMinOptionPressed(value);
+		setLow(minPriceListData?.filter((item) => item.id == value)[0]?.label);
 	};
 
-	const onPressMaxOption = (id: number) => {
-		setIsMaxOptionPressed(id);
-		setHigh(maxPriceList.filter((item) => item.id == id)[0].label);
+	const onPressMaxOption = (value: number) => {
+		setIsMaxOptionPressed(value);
+		setHigh(maxPriceListData?.filter((item) => item.id == value)[0]?.label);
 	};
 
 	return (
@@ -194,7 +182,7 @@ const PriceFilter = ({ low, high, setLow, setHigh, category, price }: PriceFilte
 							alignSelf: 'center'
 						}}
 						isMarkersSeparated={true}
-						optionsArray={[1, 2, 3, 4, 5, 6]}
+						optionsArray={maxPriceListData?.map((item) => item.id)}
 					/>
 					<View
 						style={{
@@ -208,7 +196,7 @@ const PriceFilter = ({ low, high, setLow, setHigh, category, price }: PriceFilte
 							<View style={styles.centeredView}>
 								<MinPriceModal
 									setModalVisible={() => setIsMinModalVisible(false)}
-									priceData={minPriceData}
+									priceData={minPriceListData}
 									isMinOptionPressed={isMinOptionPressed}
 									setIsMinOptionPressed={onPressMinOption}
 								/>
@@ -220,7 +208,7 @@ const PriceFilter = ({ low, high, setLow, setHigh, category, price }: PriceFilte
 							<View style={styles.centeredView}>
 								<MaxPriceModal
 									setModalVisible={() => setIsMaxModalVisible(false)}
-									priceData={maxPriceData}
+									priceData={maxPriceListData}
 									isMaxOptionPressed={isMaxOptionPressed}
 									setIsMaxOptionPressed={onPressMaxOption}
 								/>

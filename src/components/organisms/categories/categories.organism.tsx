@@ -28,6 +28,7 @@ import Divider from 'components/atoms/divider.atom';
 import { useFiltersMutation } from 'api/clp/use-filters';
 import { getProductParams } from 'helpers/products';
 import OtherFilters from '../Shop/other-filters';
+import { PRICE_SLIDER_DATA } from 'helpers/constants/priceSliderContstants';
 
 interface Category {
 	id?: number;
@@ -69,8 +70,8 @@ const Categories = ({ categoryData }: any) => {
 	const [sort, setSelectedSort] = useState('recommendation_asc');
 	const [expanded, setExpanded] = useState(false);
 
-	const [highPrice, setHighPrice] = useState('60000+');
-	const [lowPrice, setLowPrice] = useState('min');
+	const [highPrice, setHighPrice] = useState('');
+	const [lowPrice, setLowPrice] = useState('');
 
 	// const [brandArr, setBrandArr] = useState([]);
 	const [selectedBrand, setSelectedBrand] = useState([]);
@@ -86,6 +87,12 @@ const Categories = ({ categoryData }: any) => {
 	} = useFiltersMutation();
 
 	const rootKey = 'storeId';
+
+	const findPriceSliderData = PRICE_SLIDER_DATA[categoryData?.categoryData?.slug];
+	useEffect(() => {
+		setLowPrice(findPriceSliderData?.min[0]?.label);
+		setHighPrice(findPriceSliderData?.max[findPriceSliderData?.max?.length - 1]?.label);
+	}, [findPriceSliderData]);
 
 	useEffect(() => {
 		const params = {
@@ -381,6 +388,7 @@ const Categories = ({ categoryData }: any) => {
 									setHigh={setHighPrice}
 									category={categoryData.categoryData?.slug}
 									price={filters?.priceFilter}
+									maxLength={findPriceSliderData?.max?.length - 1}
 								/>
 								<Divider type="dashed" style={{ width: '92%', alignSelf: 'center' }} />
 								{isFilterLoading && <ActivityIndicator />}

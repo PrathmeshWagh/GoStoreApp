@@ -6,16 +6,16 @@ import { CustomColors } from 'constants/colors.constants';
 
 interface PriceModalProps {
 	setModalVisible?: boolean;
-	priceData: { id: number; label: string }[];
-	setIsMaxOptionPressed: (id: number) => void;
+	priceData: { id: number; value: number; label: string }[];
+	setIsMaxOptionPressed: (value: number) => void;
 	isMaxOptionPressed: number;
 }
 
 const MaxPriceModal = (props: PriceModalProps) => {
 	const { setModalVisible, priceData, setIsMaxOptionPressed, isMaxOptionPressed } = props;
 
-	const closeModal = (id: number) => {
-		setIsMaxOptionPressed(id);
+	const closeModal = (value: number) => {
+		setIsMaxOptionPressed(value);
 		setModalVisible(false);
 	};
 	return (
