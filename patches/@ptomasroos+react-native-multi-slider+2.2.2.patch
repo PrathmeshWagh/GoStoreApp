@@ -1,0 +1,120 @@
+diff --git a/node_modules/@ptomasroos/react-native-multi-slider/MultiSlider.js b/node_modules/@ptomasroos/react-native-multi-slider/MultiSlider.js
+index f3114aa..4fb3cb0 100755
+--- a/node_modules/@ptomasroos/react-native-multi-slider/MultiSlider.js
++++ b/node_modules/@ptomasroos/react-native-multi-slider/MultiSlider.js
+@@ -8,11 +8,13 @@ import {
+   Dimensions,
+   I18nManager,
+   ImageBackground,
++  Pressable,
+ } from 'react-native';
+ 
+ import DefaultMarker from './DefaultMarker';
+ import DefaultLabel from './DefaultLabel';
+ import { createArray, valueToPosition, positionToValue } from './converters';
++import {CustomColors} from '../../../src/constants/colors.constants'
+ 
+ export default class MultiSlider extends React.Component {
+   static defaultProps = {
+@@ -51,8 +53,8 @@ export default class MultiSlider extends React.Component {
+     super(props);
+ 
+     this.optionsArray =
+-      this.props.optionsArray ||
+-      createArray(this.props.min, this.props.max, this.props.step);
++    this.props.optionsArray ||
++    createArray(this.props.min, this.props.max, this.props.step);
+     this.stepLength = this.props.sliderLength / this.optionsArray.length;
+ 
+     var initialValues = this.props.values.map(value =>
+@@ -178,7 +180,6 @@ export default class MultiSlider extends React.Component {
+       this.setState({
+         positionOne: this.props.snapped ? snapped : confined,
+       });
+-
+       if (value !== this.state.valueOne) {
+         this.setState(
+           {
+@@ -242,7 +243,6 @@ export default class MultiSlider extends React.Component {
+         this.optionsArray,
+         this.props.sliderLength,
+       );
+-
+       this.setState({
+         positionTwo: this.props.snapped ? snapped : confined,
+       });
+@@ -344,8 +344,8 @@ export default class MultiSlider extends React.Component {
+         prevProps.values[1])
+     ) {
+       this.optionsArray =
+-        this.props.optionsArray ||
+-        createArray(this.props.min, this.props.max, this.props.step);
++      this.props.optionsArray ||
++      createArray(this.props.min, this.props.max, this.props.step);
+ 
+       this.stepLength = this.props.sliderLength / this.optionsArray.length;
+ 
+@@ -428,9 +428,10 @@ export default class MultiSlider extends React.Component {
+       });
+     }
+ 
++    console.log("=====",this.state.valueTwo,this.state.valueOne);
+     const body = (
+       <React.Fragment>
+-        <View style={[styles.fullTrack, { width: sliderLength }]}>
++        <View style={[styles.fullTrack, { width: sliderLength}]}>
+           <View
+             style={[
+               styles.track,
+@@ -448,6 +449,7 @@ export default class MultiSlider extends React.Component {
+             ]}
+             {...(twoMarkers ? this._panResponderBetween.panHandlers : {})}
+           />
++          
+           {twoMarkers && (
+             <View
+               style={[
+@@ -458,6 +460,15 @@ export default class MultiSlider extends React.Component {
+               ]}
+             />
+           )}
++          <View style={styles.dotContainer}>
++            {this.optionsArray.map((item,index)=>{
++              return(
++                <View style={[styles.dotIconStyle,{
++                  borderColor: this.state.valueOne > index || this.state.valueTwo < index+1 ? CustomColors.tertiary:'rgb(133,215,247)',
++                }]}/>
++              )
++            })}
++          </View>
+           <View
+             style={[
+               styles.markerContainer,
+@@ -535,6 +546,7 @@ export default class MultiSlider extends React.Component {
+               </View>
+             </View>
+           )}
++          
+         </View>
+       </React.Fragment>
+     );
+@@ -624,4 +636,19 @@ const styles = StyleSheet.create({
+     alignItems: 'center',
+     alignSelf: 'stretch',
+   },
++  dotIconStyle:{
++    height:10,
++    width:10,
++    borderRadius:10,
++    backgroundColor:'white',
++    borderWidth:3,
++  },
++ dotContainer:{
++    flexDirection:"row",
++    flexWrap:"wrap",
++    justifyContent:"space-between",
++    width:"100%",
++    position:'absolute',
++    alignSelf:"center",
++  }
+ });

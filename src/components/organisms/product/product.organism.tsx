@@ -61,7 +61,6 @@ export default function ProductDetails({ Productitem, categories }: any) {
 		isError: priceDetailsError,
 		error
 	} = useProductMutation();
-	console.log('in');
 
 	const { data: assuredBuyBackData, refetch: checkAssuredBuyBack } = useCheckAssuredBuyBack({
 		productId: Productitem.productId,
@@ -127,7 +126,6 @@ export default function ProductDetails({ Productitem, categories }: any) {
 			clusterId: 7,
 			supplierId: Productitem.supplierId
 		};
-		console.log('1');
 
 		getProductPriceDetails(payload);
 	}, []);

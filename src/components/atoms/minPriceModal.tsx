@@ -6,16 +6,16 @@ import { CustomColors } from 'constants/colors.constants';
 
 interface PriceModalProps {
 	setModalVisible?: boolean;
-	priceData: { id: number; label: string }[];
+	priceData: { id: number; value: number; label: string }[];
 	isMinOptionPressed: number;
-	setIsMinOptionPressed: (id: number) => void;
+	setIsMinOptionPressed: (value: number) => void;
 }
 
 const MinPriceModal = (props: PriceModalProps) => {
 	const { setModalVisible, priceData, setIsMinOptionPressed, isMinOptionPressed } = props;
 
-	const closeModal = (id: number) => {
-		setIsMinOptionPressed(id);
+	const closeModal = (value: number) => {
+		setIsMinOptionPressed(value);
 		setModalVisible(false);
 	};
 	return (

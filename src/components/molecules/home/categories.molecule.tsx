@@ -21,7 +21,6 @@ const Categories = () => {
 	const onPress = (item: Category) => {
 		const url = `/category/${item.slug}?categoryId=${item.id}&sort_by=recommendation_asc`;
 		dispatch(updateUrl({ url: `${Config.BASE_WEBVIEW_URL}${url}` }));
-		
 
 		navigate(RouteConstants.CategoriesScreenRoute, { categoryData: item });
 	};

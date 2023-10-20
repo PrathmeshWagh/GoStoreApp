@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { View, Pressable, StyleSheet, Text, TextInput, ScrollView } from 'react-native';
+import { View, Pressable, StyleSheet, Text, TextInput, ScrollView, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { CustomColors } from 'constants/colors.constants';
@@ -15,7 +15,6 @@ const BrandFilter = ({
 }) => {
 	const [expanded, setExpanded] = useState(true);
 	const [filterData, setFilterData] = useState([]);
-	const [isCheckedArray, setIsCheckedArray] = useState(new Array(filterData?.length).fill(false));
 	const [search, setSearch] = useState('');
 	const [oldData, setOldData] = useState([]);
 
@@ -32,29 +31,25 @@ const BrandFilter = ({
 		}
 	}, [resetFilter]);
 
-	useEffect(() => {
-		updateSelectedBrand(selectedBrand);
-	}, [selectedBrand]);
+	// useEffect(() => {
+	// 	updateSelectedBrand(selectedBrand);
+	// }, [selectedBrand]);
 
 	const togglerBrandDetails = () => {
 		setExpanded(!expanded);
 	};
 
 	const resetBrandFilter = () => {
-		setIsCheckedArray(new Array(filterData?.length).fill(false));
 		setSelectedBrand([]);
 	};
 
 	const handleCheckBoxClick = (index: number, brand: string) => {
-		const newIsCheckedArray = [...isCheckedArray];
-		// console.log(newIsCheckedArray[index]); indicate true or false
-		newIsCheckedArray[index] = !newIsCheckedArray[index];
-		setIsCheckedArray(newIsCheckedArray);
-
-		if (newIsCheckedArray[index]) {
-			setSelectedBrand([...selectedBrand, brand]);
+		const checkedArray = [...selectedBrand];
+		const itemFound = checkedArray?.filter((item) => item == brand);
+		if (itemFound.length !== 0) {
+			setSelectedBrand(checkedArray?.filter((item) => item !== brand));
 		} else {
-			setSelectedBrand(selectedBrand?.filter((selectedbrand) => selectedbrand !== brand));
+			setSelectedBrand([...checkedArray, brand]);
 		}
 	};
 
@@ -74,10 +69,7 @@ const BrandFilter = ({
 		<View>
 			<Pressable style={[styles.filterinfo]} onPress={togglerBrandDetails}>
 				<Text
-					style={[
-						styles.optionText,
-						isCheckedArray.some((isChecked: boolean) => isChecked) ? styles.selectedValueText : null
-					]}
+					style={[styles.optionText, selectedBrand.length !== 0 ? styles.selectedValueText : null]}
 				>
 					Brands
 				</Text>
@@ -123,7 +115,7 @@ const BrandFilter = ({
 									<CheckBox
 										style={{ paddingTop: 10 }}
 										onClick={() => handleCheckBoxClick(index, brand)}
-										isChecked={isCheckedArray[index]}
+										isChecked={selectedBrand?.filter((it) => it == brand)[0]}
 										rightText={brand}
 										rightTextStyle={styles.brandText}
 										checkedCheckBoxColor={CustomColors.primary}

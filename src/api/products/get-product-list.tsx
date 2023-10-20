@@ -13,7 +13,6 @@ interface GetProduct {
 
 const getProducts = async ({ params, productData, rootKey }: GetProduct) => {
 	const { isKiosk } = useKiosk();
-	// console.log('params', params);
 
 	const response = await axios.get(
 		`${Config.BASE_PATH_INVENTORY}${ApiEndpoints.GET_PRODUCTS}?queryStr=${encodeURIComponent(
@@ -26,9 +25,6 @@ const getProducts = async ({ params, productData, rootKey }: GetProduct) => {
 
 export const useGetProducts = () => {
 	return useMutation((input: GetProduct) => getProducts(input), {
-		// onSuccess: (response) => {
-		// 	console.log('mutation ', response);
-		// },
 		onError: (error: { status: string; msg: string }) => {
 			console.error('Categories Carousel Error', error);
 		}
