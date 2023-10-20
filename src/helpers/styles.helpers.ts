@@ -47,3 +47,15 @@ export const radiusFull = (): ViewStyle => ({
 export const textAlign = (align: 'center' | 'auto' | 'left' | 'right' | 'justify') => ({
     textAlign: align,
 });
+
+export const borderBottom = ({ width = 1, color = '#808B96' }): any => ({
+    borderBottomWidth: width,
+    borderBottomColor: color,
+});
+
+export const flexCenter = (): any => ({
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+});

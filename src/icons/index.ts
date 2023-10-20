@@ -17,3 +17,5 @@ export { default as OrdersIcon } from './orders.icon';
 export { default as ProfileIcon } from './profile.icon';
 export { default as ReferalIcon } from './refreal.icon';
 export { default as SupportIcon } from './support.icon';
+export { default as SearchIcon } from './search.icon';
+export { default as CloseIcon } from './close.icon';

@@ -110,4 +110,21 @@ declare namespace CustomTypes {
 		status: String;
 		data: ChildBanner[];
 	};
+
+	interface SearchData {
+		text: string;
+		queryQuality: string;
+	}
+
+	interface TrendingSearchResponse {
+		status: 'success' | 'error';
+		statusCode: number;
+		data: SearchItem[];
+		msg: string;
+	}
+	interface SearchItem {
+		search: string;
+		count: number;
+		nbHits: number;
+	}
 }

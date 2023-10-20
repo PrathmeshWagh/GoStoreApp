@@ -15,4 +15,5 @@ export const enum RouteConstants {
 	PincodeScreenRoute = 'PINCODE_SCREEN_ROUTE',
 	SideDrawerScreenRoute = 'SIDE_SCREEN_ROUTE',
 	VideoCallScreenRoute = 'VIDEO_CALL_SCREEN_ROUTE',
+	SearchScreenRoute = 'SEARCH_SCREEN_ROUTE'
 }

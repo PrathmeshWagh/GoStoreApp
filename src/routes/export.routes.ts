@@ -13,3 +13,4 @@ export { default as LocationScreen } from '@screens/location-screen';
 export { default as PincodeScreen } from '@screens/pincode-screen';
 export { default as SideDrawerScreen } from '@screens/side-drawer-screen';
 export { default as VideoCallScreen } from '@screens/video-call-screen';
+export { default as SearchScreen } from '@screens/search-screen';

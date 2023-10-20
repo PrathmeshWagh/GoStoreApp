@@ -17,4 +17,5 @@ export type RootStackParamList = {
 	[RouteConstants.PincodeScreenRoute]: undefined;
 	[RouteConstants.SideDrawerScreenRoute]: undefined;
 	[RouteConstants.VideoCallScreenRoute]: { sellerId: number, sellerName: string };
+	[RouteConstants.SearchScreenRoute]: undefined;
 };

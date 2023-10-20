@@ -23,5 +23,7 @@ export const enum ApiEndpoints {
     Products = '/products/v2/getProducts',
     Coordinates = '/locations/latlng',
     Pincode = '/locations/pincode',
-	CreateMeeting = '/video/create-meeting'
+	CreateMeeting = '/video/create-meeting',
+	Discovery = 'discovery/suggestions?queryStr=',
+	SearchAnalytics = '/search-analytics/top-searches?pageSize=6'
 }

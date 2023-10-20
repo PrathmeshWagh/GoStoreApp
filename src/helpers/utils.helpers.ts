@@ -30,3 +30,15 @@ export function formatUrl(title: string) {
     title = title.replace(/([+])/g, '-');
     return title;
 };
+
+export function debounce(func: any) {
+    let timer: any;
+    return  (...args: any) => {
+            const context = this;
+            if (timer) clearTimeout(timer);
+            timer = setTimeout(() => {
+                timer = null;
+                func.apply(context, args);
+            }, 500);
+        };
+};
