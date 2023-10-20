@@ -16,7 +16,8 @@ import {
 	CustomerSupportScreen,
 	NoOrderScreen,
 	SideDrawerScreen,
-	PaymentScreen
+	PaymentScreen,
+	UPIDetailsScreen
 } from './export.routes';
 import { RouteConstants } from './constants.routes';
 
@@ -127,6 +128,12 @@ const RoutesList = [
 		id: 15,
 		name: RouteConstants.PaymentScreenRoute,
 		component: PaymentScreen,
+		options: { headerShown: false }
+	},
+	{
+		id: 16,
+		name: RouteConstants.UPIDetailsScreenRoute,
+		component: UPIDetailsScreen,
 		options: { headerShown: false }
 	}
 ];

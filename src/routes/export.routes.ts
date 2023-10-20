@@ -18,3 +18,4 @@ export { default as CustomerSupportScreen } from 'screens/customer-support-scree
 export { default as NoOrderScreen } from '@screens/order-screen/no-order';
 export { default as SideDrawerScreen } from '@screens/side-drawer-screen';
 export { default as PaymentScreen } from '@screens/payment-screen';
+export { default as UPIDetailsScreen } from '@screens/upi-details-screen';

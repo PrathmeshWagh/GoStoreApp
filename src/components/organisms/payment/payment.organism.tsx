@@ -4,6 +4,7 @@ import Summary from './summary';
 import OfferSection from './offers-section';
 import { DefaultStyles } from 'primitives';
 import UPI from './UPI';
+import Cards from './cards';
 
 const Payment = () => {
 	return (
@@ -12,6 +13,7 @@ const Payment = () => {
 			<View style={styles.container}>
 				<OfferSection />
 				<UPI />
+				<Cards />
 			</View>
 		</View>
 	);

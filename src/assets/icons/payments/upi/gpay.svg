@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="56" height="56" viewBox="0 0 56 56">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_16531" data-name="Rectangle 16531" width="56" height="56" fill="none" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+  </defs>
+  <g id="Group_71198" data-name="Group 71198" transform="translate(-28 -407)">
+    <g id="Mask_Group_2056" data-name="Mask Group 2056" transform="translate(28 407)" clip-path="url(#clip-path)">
+      <g id="google-pay-seeklogo.com_2" data-name="google-pay-seeklogo.com 2" transform="translate(1.333 5.333)">
+        <path id="Path_79161" data-name="Path 79161" d="M143.289,36.566a11,11,0,0,0-15.023,4.027L120.6,53.864c-2.217,3.832.637,5.171,3.819,7.079L131.8,65.2a5.217,5.217,0,0,0,7.125-1.908L146.8,49.652A9.578,9.578,0,0,0,143.289,36.566Z" transform="translate(-94.862 -27.783)" fill="#ea4335"/>
+        <path id="Path_79162" data-name="Path 79162" d="M85.355,45.832l-7.372-4.255c-4.07-2.259-6.374-2.409-8.045.247L59.065,60.654a10.983,10.983,0,0,0,4.027,15.007,9.578,9.578,0,0,0,13.086-3.507L87.259,52.96A5.211,5.211,0,0,0,85.355,45.832Z" transform="translate(-45.596 -31.556)" fill="#fbbc04"/>
+        <path id="Path_79163" data-name="Path 79163" d="M75.681,4.6,70.5,1.606A11.973,11.973,0,0,0,54.147,5.988L44.288,23.062a5.267,5.267,0,0,0,1.928,7.2l5.8,3.348a5.985,5.985,0,0,0,8.178-2.191L71.455,11.91A8.446,8.446,0,0,1,82.994,8.819Z" transform="translate(-34.504 0)" fill="#34a853"/>
+        <path id="Path_79164" data-name="Path 79164" d="M21.044,37.293l-5.6-3.224a5.221,5.221,0,0,0-7.125,1.9l-6.715,11.6A11.926,11.926,0,0,0,5.988,63.891l4.261,2.454,5.168,2.977,2.243,1.29A9.17,9.17,0,0,1,14.848,58.4l1.739-3,6.368-11A5.2,5.2,0,0,0,21.044,37.293Z" transform="translate(0 -26.42)" fill="#4285f4"/>
+      </g>
+    </g>
+  </g>
+</svg>
