@@ -531,8 +531,10 @@ export default function ProductDetails({ Productitem, categories }: any) {
 						loading={false}
 						mode="text"
 						text="Buy Now"
-						onPress={() => {}}
-						disabled
+						onPress={() => {
+							navigate(RouteConstants.CartScreenRoute);
+						}}
+						disabled={false}
 						styles={[styles.button, { marginLeft: 10, backgroundColor: colors.primary }]}
 						textStyles={[styles.buttonText, { color: colors.onSecondary }]}
 						icon={<CarryIcon width={24} height={24} />}

@@ -5,6 +5,7 @@ import OfferSection from './offers-section';
 import { DefaultStyles } from 'primitives';
 import UPI from './UPI';
 import Cards from './cards';
+import OtherPayOption from './other-payments-option';
 
 const Payment = () => {
 	return (
@@ -14,6 +15,7 @@ const Payment = () => {
 				<OfferSection />
 				<UPI />
 				<Cards />
+				<OtherPayOption />
 			</View>
 		</View>
 	);

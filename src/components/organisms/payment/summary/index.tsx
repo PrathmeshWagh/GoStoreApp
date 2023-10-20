@@ -4,7 +4,7 @@ import { useEnhancedNavigation } from 'hooks';
 import { RouteConstants } from 'routes/constants.routes';
 import { CustomColors } from 'constants/colors.constants';
 import { Rupee } from 'components/atoms';
-import { FontGilroy } from 'primitives';
+import { DefaultStyles, FontGilroy } from 'primitives';
 
 const Summary = () => {
 	const { navigate } = useEnhancedNavigation();
@@ -16,12 +16,14 @@ const Summary = () => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.priceText}>
-				<Text style={{ fontSize: 13 }}>Total Payable Amount</Text>
+				<Text style={{ fontSize: 13, color: CustomColors.cart, fontFamily: FontGilroy.Medium }}>
+					Total Payable Amount
+				</Text>
 				<Rupee money={31497} styles={styles.mrp} />
 			</View>
 
 			<TouchableOpacity onPress={viewDetailsHandler}>
-				<Text style={{ color: CustomColors.primary, fontSize: 12 }}>View Details</Text>
+				<Text style={{ color: CustomColors.primary, fontSize: 10 }}>View Details</Text>
 			</TouchableOpacity>
 		</View>
 	);
@@ -35,7 +37,8 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',
-		backgroundColor: CustomColors.grey
+		backgroundColor: CustomColors.tertiary,
+		paddingHorizontal: DefaultStyles.DefaultPadding
 	},
 	priceText: {
 		flexDirection: 'row'

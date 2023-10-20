@@ -6,6 +6,7 @@ import PhonePay from '@assets/icons/payments/upi/phonepay.svg';
 import Paytm from '@assets/icons/payments/upi/paytm.svg';
 import { useEnhancedNavigation } from 'hooks';
 import { RouteConstants } from 'routes/constants.routes';
+import { CustomColors } from 'constants/colors.constants';
 
 const UPI = () => {
 	const { navigate } = useEnhancedNavigation();
@@ -20,15 +21,30 @@ const UPI = () => {
 	};
 
 	return (
-		<View>
-			<Text>{PAYMENT_OPTIONS.UPI_APPS.label}</Text>
-			{PAYMENT_OPTIONS.UPI_APPS.options.map((upiapp) => (
-				<TouchableOpacity key={upiapp.label} style={styles.upiAppBox} onPress={upiAppHandler}>
-					{paymentMethodIcons[upiapp.id]}
-					<Text>{upiapp.label}</Text>
-				</TouchableOpacity>
-			))}
-			<TouchableOpacity></TouchableOpacity>
+		<View style={{ marginTop: 20 }}>
+			<Text style={{ color: CustomColors.cart, marginBottom: 20 }}>
+				{PAYMENT_OPTIONS.UPI_APPS.label}
+			</Text>
+			<View style={styles.upiAppBox}>
+				{PAYMENT_OPTIONS.UPI_APPS.options.map((upiapp) => (
+					<TouchableOpacity
+						key={upiapp.label}
+						onPress={upiAppHandler}
+						style={{ alignItems: 'center' }}
+					>
+						{paymentMethodIcons[upiapp.id]}
+						<Text style={{ marginTop: 5, fontSize: 12, color: CustomColors.cart }}>
+							{upiapp.label}
+						</Text>
+					</TouchableOpacity>
+				))}
+				<View style={{ alignItems: 'center' }}>
+					<TouchableOpacity style={{ width: 24, height: 24, borderWidth: 1, borderRadius: 7 }}>
+						<Text style={{ textAlign: 'center' }}>+</Text>
+					</TouchableOpacity>
+					<Text style={{ marginTop: 5, fontSize: 12, color: CustomColors.cart }}>Add New</Text>
+				</View>
+			</View>
 		</View>
 	);
 };
@@ -37,6 +53,6 @@ export default UPI;
 const styles = StyleSheet.create({
 	upiAppBox: {
 		flexDirection: 'row',
-		justifyContent: 'space-evenly'
+		justifyContent: 'space-around'
 	}
 });
