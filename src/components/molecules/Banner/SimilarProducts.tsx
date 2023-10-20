@@ -1,10 +1,19 @@
-import { StyleSheet, Text, View, TouchableOpacity, Pressable, Image, FlatList } from 'react-native';
-import React from 'react';
+import {
+	StyleSheet,
+	Text,
+	View,
+	TouchableOpacity,
+	Pressable,
+	Image,
+	FlatList,
+	Animated
+} from 'react-native';
+import React, { useRef, useState } from 'react';
 import { DefaultStyles, FontGilroy } from '@primitives/index';
 import ViewMore from '@assets/icons/view-icon.svg';
 import StarIcon from '@assets/icons/productDetails/star.svg';
 import { CustomButtom, ProductSlider, Rupee } from 'components/atoms';
-import { useTheme } from '@hooks/index';
+import { useDimensions, useTheme } from '@hooks/index';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import CategoryItemWithRatingText from 'components/atoms/category-item-with-ratingtext-atom';
 
@@ -15,79 +24,103 @@ interface Props {
 	className?: string | '';
 }
 
-const data = [
-	{
-		id: 1,
-		title: 'ABC',
-		image: 'https://static.gostor.com/UPDATED_BANNER_IMAGES/image_1695578198363559'
-	},
-	{
-		id: 2,
-		title: 'DEF',
-		image: 'https://static.gostor.com/UPDATED_BANNER_IMAGES/image_1696080642373409'
-	},
-	{
-		id: 3,
-		title: 'GHE',
-		image: 'https://static.gostor.com/UPDATED_BANNER_IMAGES/image_1696080642373409'
-	},
-	{
-		id: 4,
-		title: 'IJK',
-		image: 'https://static.gostor.com/UPDATED_BANNER_IMAGES/image_1696080642373409'
-	},
-	{
-		id: 5,
-		title: 'gdf',
-		image: 'https://static.gostor.com/UPDATED_BANNER_IMAGES/image_1696080642373409'
-	},
-	{
-		id: 6,
-		title: 'gff',
-		image: 'https://static.gostor.com/UPDATED_BANNER_IMAGES/image_1696080642373409'
-	},
-	{
-		id: 7,
-		title: 'gff',
-		image: 'https://static.gostor.com/UPDATED_BANNER_IMAGES/image_1696080642373409'
-	}
-];
-
 export default function SimilarProducts({ title, link, response, event, onPress }: any) {
 	const { colors } = useTheme();
+	const { width, height } = useDimensions();
+	const [data, SetData] = useState([1, 1, 1, 1]);
+	const [currentIndex, setCurrentIndex] = useState<number>(0);
+	const ref = useRef();
+
+	const handlePreviousPress = () => {
+		if (currentIndex > 0) {
+			setCurrentIndex(currentIndex - 1);
+			ref.current.scrollToIndex({
+				animated: true,
+				index: parseInt(currentIndex) - 1
+			});
+		}
+	};
+
+	const handleNextPress = () => {
+		if (currentIndex < data.length - 1) {
+			setCurrentIndex(currentIndex + 1);
+			ref.current.scrollToIndex({
+				animated: true,
+				index: parseInt(currentIndex) + 1
+			});
+		}
+	};
 
 	const renderItem = ({ item }: any) => {
 		return (
-			<View style={[styles.renderContainer, { borderColor: 'gray' }]}>
-				<View style={[styles.ratingBox, { backgroundColor: colors.primary }]}>
-					<Text style={styles.ratingText}>4</Text>
-					<StarIcon width={12} height={12} />
-				</View>
+			// <View
+			// 	style={{
+			// 		width: width - 50,
+			// 		height: height / 2,
+			// 		justifyContent: 'center',
+			// 		flexDirection: 'row'
+			// 	}}
+			// >
+			// 	<View style={[styles.renderContainer, { borderColor: 'gray' }]}>
+			// 		<View style={[styles.ratingBox, { backgroundColor: colors.primary }]}>
+			// 			<Text style={styles.ratingText}>4</Text>
+			// 			<StarIcon width={12} height={12} />
+			// 		</View>
 
-				<View style={[styles.imageContainer]}>
-					<Image
-						source={{
-							uri: 'https://static.gostor.com/UPDATED_BANNER_IMAGES/image_1695578198363559'
-						}}
-						style={[styles.image]}
-						resizeMode="contain"
-					/>
-				</View>
+			// 		<View style={[styles.imageContainer]}>
+			// 			<Image
+			// 				source={{
+			// 					uri: 'https://static.gostor.com/UPDATED_BANNER_IMAGES/image_1695578198363559'
+			// 				}}
+			// 				style={[styles.image]}
+			// 				resizeMode="contain"
+			// 			/>
+			// 		</View>
 
-				<View style={styles.infoContainer}>
-					<Text numberOfLines={2} style={[styles.title]}>
-						television
-					</Text>
-					<Rupee money={12121} styles={[styles.price]} />
-					<View style={[styles.mrpWrapper]}>
-						<Rupee money={1212} styles={[styles.mrp]} />
-						<Text numberOfLines={2} style={[styles.discount, { color: colors.primary }]}>
-							12% off
-						</Text>
-					</View>
-				</View>
-			</View>
-			// <CategoryItemWithRatingText item={item} onPress={() => {}} />
+			// 		<View style={styles.infoContainer}>
+			// 			<Text numberOfLines={2} style={[styles.title]}>
+			// 				television
+			// 			</Text>
+			// 			<Rupee money={12121} styles={[styles.price]} />
+			// 			<View style={[styles.mrpWrapper]}>
+			// 				<Rupee money={1212} styles={[styles.mrp]} />
+			// 				<Text numberOfLines={2} style={[styles.discount, { color: colors.primary }]}>
+			// 					12% off
+			// 				</Text>
+			// 			</View>
+			// 		</View>
+			// 	</View>
+			// 	<View style={[styles.renderContainer, { borderColor: 'gray' }]}>
+			// 		<View style={[styles.ratingBox, { backgroundColor: colors.primary }]}>
+			// 			<Text style={styles.ratingText}>4</Text>
+			// 			<StarIcon width={12} height={12} />
+			// 		</View>
+
+			// 		<View style={[styles.imageContainer]}>
+			// 			<Image
+			// 				source={{
+			// 					uri: 'https://static.gostor.com/UPDATED_BANNER_IMAGES/image_1695578198363559'
+			// 				}}
+			// 				style={[styles.image]}
+			// 				resizeMode="contain"
+			// 			/>
+			// 		</View>
+
+			// 		<View style={styles.infoContainer}>
+			// 			<Text numberOfLines={2} style={[styles.title]}>
+			// 				television
+			// 			</Text>
+			// 			<Rupee money={12121} styles={[styles.price]} />
+			// 			<View style={[styles.mrpWrapper]}>
+			// 				<Rupee money={1212} styles={[styles.mrp]} />
+			// 				<Text numberOfLines={2} style={[styles.discount, { color: colors.primary }]}>
+			// 					12% off
+			// 				</Text>
+			// 			</View>
+			// 		</View>
+			// 	</View>
+			// </View>
+			<CategoryItemWithRatingText item={item} onPress={() => {}} />
 		);
 	};
 
@@ -105,20 +138,39 @@ export default function SimilarProducts({ title, link, response, event, onPress 
 			<View style={styles.carouselItem}>
 				<Pressable style={styles.item}>
 					<View style={styles.contentContainer}>
-						<TouchableOpacity
-							style={[styles.carouselButton, styles.leftChevron]}
-							onPress={() => {}}
-						>
-							<Icon name={'chevron-left'} size={25} color={colors.primary} />
-						</TouchableOpacity>
+						{currentIndex != 0 && (
+							<TouchableOpacity
+								style={[styles.carouselButton, styles.leftChevron]}
+								onPress={handlePreviousPress}
+							>
+								<Icon name={'chevron-left'} size={25} color={colors.primary} />
+							</TouchableOpacity>
+						)}
 
-						<FlatList data={data} renderItem={renderItem} horizontal />
-						<TouchableOpacity
-							style={[styles.carouselButton, styles.rightChevron]}
-							onPress={() => {}}
-						>
-							<Icon name={'chevron-right'} size={25} color={colors.primary} />
-						</TouchableOpacity>
+						<Animated.FlatList
+							ref={ref}
+							data={data}
+							showsHorizontalScrollIndicator={false}
+							pagingEnabled
+							onScroll={(e: any) => {
+								const x = e.nativeEvent.contentOffset.x;
+								console.log('x vlaue', x);
+
+								console.log('x' + x / width);
+
+								setCurrentIndex((x / width).toFixed(0));
+							}}
+							horizontal
+							renderItem={renderItem}
+						/>
+						{data.length - 1 == currentIndex ? null : (
+							<TouchableOpacity
+								style={[styles.carouselButton, styles.rightChevron]}
+								onPress={handleNextPress}
+							>
+								<Icon name={'chevron-right'} size={25} color={colors.primary} />
+							</TouchableOpacity>
+						)}
 					</View>
 				</Pressable>
 			</View>
@@ -248,8 +300,10 @@ const styles = StyleSheet.create({
 		right: 0
 	},
 	renderContainer: {
+		flex: 1,
 		borderWidth: 1,
 		borderRadius: 20,
-		marginHorizontal: 5
+		marginHorizontal: 5,
+		width: 200
 	}
 });

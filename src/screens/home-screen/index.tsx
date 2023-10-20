@@ -1,21 +1,21 @@
-import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import React, {TouchableOpacity, Text} from 'react-native';
+
 import Layout from '@molecules/layout/layout.molecule';
 import Home from '@organisms/home/home.organism';
-import { RouteConstants } from '@routes/constants.routes';
 import { useEnhancedNavigation } from '@hooks/index';
+import { RouteConstants } from 'routes/constants.routes';
 
 const layout = {
 	menu: true,
 	search: false,
 	back: false,
 	logo: 'https://gostor.com/icons/header/logo-invert.svg',
-	cart: false,
+	cart: true,
 	pincode: true
 };
 
 const HomeScreen = () => {
-	const { navigate } = useEnhancedNavigation();
+	const {navigate} = useEnhancedNavigation()
 	return (
 		<Layout layout={layout}>
 			<TouchableOpacity
@@ -31,13 +31,6 @@ const HomeScreen = () => {
 				}}
 			>
 				<Text>Cart</Text>
-			</TouchableOpacity>
-			<TouchableOpacity
-				onPress={() => {
-					navigate(RouteConstants.UserAccountScreenRoute);
-				}}
-			>
-				<Text>Account</Text>
 			</TouchableOpacity>
 			<Home />
 		</Layout>

@@ -6,8 +6,9 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import TrashIcon from '@assets/icons/trash.svg';
 import { useTheme, useDimensions, usePermissionHandlers } from '@hooks/index';
 import { DefaultStyles, FontGilroy } from '@primitives/index';
+import moment from 'moment';
 
-export default function ProductCart() {
+export default function ProductCart({ item }) {
 	const { colors } = useTheme();
 	return (
 		<View style={{ marginVertical: 10 }}>
@@ -24,11 +25,11 @@ export default function ProductCart() {
 					</View>
 					<View style={styles.infoContainer}>
 						<Text style={styles.title} numberOfLines={2}>
-							LG 43 inch LED Full HD Smart TV ( 43LM5600PTC )
+							{item.title}
 						</Text>
 						<View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8 }}>
-							<Rupee money={12000} styles={styles.price} />
-							<Rupee money={1200} styles={styles.mrp} />
+							<Rupee money={item.price} styles={styles.price} />
+							<Rupee money={item.mrp} styles={styles.mrp} />
 							<Text style={{ fontFamily: FontGilroy.Medium, color: colors.primary }}>35% Off</Text>
 						</View>
 						<View style={styles.itemNumberContainer}>
@@ -36,7 +37,9 @@ export default function ProductCart() {
 								<Icon name={'minus'} size={18} color={colors.onSecondary} />
 							</TouchableOpacity>
 							<View style={[styles.button, { marginHorizontal: 5, backgroundColor: '#6F89A2' }]}>
-								<Text style={{ textAlign: 'center', color: colors.onSecondary }}>5</Text>
+								<Text style={{ textAlign: 'center', color: colors.onSecondary }}>
+									{item.cartQuantity}
+								</Text>
 							</View>
 							<TouchableOpacity style={[styles.button, { backgroundColor: '#D9E1E7' }]}>
 								<Icon name={'plus'} size={18} color={colors.onSecondary} />
@@ -44,7 +47,9 @@ export default function ProductCart() {
 						</View>
 						<View style={styles.deliveryContainer}>
 							<Text style={[styles.deliveryText, { color: colors.primary }]}>
-								Estimated delivery by 16 Oct - 18 Oct
+								{`Estimated delivery by ${moment(item.deliveryDateRange.fromDate).format(
+									'DD MMM'
+								)} - ${moment(item.deliveryDateRange.toDate).format('DD MMM')}`}
 							</Text>
 							<TouchableOpacity style={styles.deleteIcon}>
 								<TrashIcon width={30} />

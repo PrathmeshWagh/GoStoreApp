@@ -1,5 +1,5 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import { Pressable, ScrollView, StyleSheet, Text, View, Modal } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import { CustomButtom, ProductSlider, Rupee } from 'components/atoms';
 import { useTheme, useDimensions, usePermissionHandlers } from '@hooks/index';
 import { DefaultStyles, FontGilroy } from '@primitives/index';
@@ -10,13 +10,49 @@ import OrderSummary from 'components/molecules/orders/order-summary';
 import InformationIcon from '@assets/icons/information-icon.svg';
 import TrashIcon from '@assets/icons/trash.svg';
 import ProductList from 'components/molecules/checkout/Summary/productList';
+import { useGetPincodeMutation } from 'api/locate-user/get-pincode';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import ApplyCoupon from 'components/molecules/checkout/Summary/applyCoupon';
+import { useAddressMutation } from 'api/checkout/use-address';
+import { useCheckoutSummaryMutation } from 'api/checkout/use-summary';
+import { useSelector } from 'react-redux';
+import { RootState } from '@slices/store';
 
 export default function Cart() {
+	const location = useSelector((state: RootState) => state.location);
 	const { navigate } = useEnhancedNavigation();
 	const { width, height } = useDimensions();
 	const { colors } = useTheme();
+	const [applyModal, setApplyModal] = useState<boolean>(false);
 
 	let isLogin = false;
+	let pincode = 395006;
+	const {
+		mutate: getPinCodeDetails,
+		isLoading: isPincodeDetailsLoading,
+		data: pincodeResponse,
+		error: pincodeError
+	} = useGetPincodeMutation();
+
+	const { mutate: getAddresses, data, isLoading: addressLoader } = useAddressMutation();
+
+	const { mutate: getCheckoutSummary } = useCheckoutSummaryMutation();
+
+	useEffect(() => {
+		getPinCodeDetails(pincode);
+	}, []);
+
+	useEffect(() => {
+		const requestData = {
+			cta: 'CART',
+			pincode,
+			state: location.state,
+			useWallet: false,
+			isKiosk: false
+		};
+		getAddresses();
+		getCheckoutSummary(requestData);
+	}, []);
 
 	return (
 		<View style={styles.container}>
@@ -59,7 +95,12 @@ export default function Cart() {
 						)}
 					</View>
 					<ProductList />
-					<View style={{ marginTop: 15, marginBottom: 25 }}>
+					<TouchableOpacity
+						onPress={() => {
+							setApplyModal(true);
+						}}
+						style={{ marginTop: 15, marginBottom: 25 }}
+					>
 						<BasicCard style={{ paddingVertical: 8 }}>
 							<View style={styles.couponContainer}>
 								<View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -69,7 +110,36 @@ export default function Cart() {
 								<Icon name={'chevron-right'} size={20} color={colors.secondary} />
 							</View>
 						</BasicCard>
-					</View>
+					</TouchableOpacity>
+
+					<Modal
+						visible={applyModal}
+						animationType="fade"
+						transparent={true}
+						onRequestClose={() => setApplyModal(false)}
+					>
+						<View
+							style={{
+								flex: 1,
+								backgroundColor: 'rgba(0, 0, 0, 0.5)',
+								justifyContent: 'center'
+							}}
+						>
+							{/* <KeyboardAwareScrollView> */}
+							<View
+								style={{
+									backgroundColor: colors.onSecondary,
+									borderRadius: 15,
+									elevation: 5,
+									height: height / (3 / 2)
+								}}
+							>
+								<ApplyCoupon setApplyModal={setApplyModal} />
+							</View>
+							{/* </KeyboardAwareScrollView> */}
+						</View>
+					</Modal>
+
 					<OrderSummary />
 				</View>
 			</ScrollView>
@@ -119,5 +189,11 @@ const styles = StyleSheet.create({
 	text: {
 		fontSize: 12,
 		fontFamily: FontGilroy.Medium
+	},
+	modalContainer: {
+		flex: 1,
+		backgroundColor: 'rgba(0, 0, 0, 0.5)',
+		justifyContent: 'center',
+		alignItems: 'center'
 	}
 });

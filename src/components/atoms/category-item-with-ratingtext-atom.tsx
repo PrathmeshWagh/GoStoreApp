@@ -6,7 +6,7 @@ import StarIcon from '@assets/icons/star.svg';
 
 const CategoryItemWithRatingText = ({ item, onBtnPress }: any) => {
 	return (
-		<Pressable style={styles.item} onPress={onBtnPress}>
+		<Pressable style={styles.item} onPress={() => onBtnPress(item)}>
 			{/* {item.priority === 2000 && (
         <View
           style={[

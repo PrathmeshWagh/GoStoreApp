@@ -8,20 +8,27 @@ interface OfferItemProps {
 	title: string;
 	description: string;
 	onPress: () => void;
+	icon?: any;
+	offerType: string;
+	setShowOfferType: (offerType) => void;
 }
 
 const OfferItem = (props: OfferItemProps) => {
-	const { title, description, onPress } = props;
+	const { title, description, onPress, setShowOfferType, offerType } = props;
 	const { colors } = useTheme();
 	return (
 		<View style={[styles.offer, { borderColor: colors.bordercolor }]}>
 			<View style={[styles.titleContainer, { backgroundColor: colors.offerbg }]}>
-				<Icon name="brightness-percent" size={20} color={colors.primary} />
 				<Text style={styles.text}>{title}</Text>
 			</View>
 			<View style={styles.descriptionContainer}>
 				<Text style={styles.text}>{description}</Text>
-				<TouchableOpacity onPress={onPress}>
+				<TouchableOpacity
+					onPress={() => {
+						onPress();
+						setShowOfferType(offerType);
+					}}
+				>
 					<Text
 						style={{ textDecorationLine: 'underline', fontFamily: FontGilroy.Medium, fontSize: 13 }}
 					>
@@ -51,7 +58,8 @@ const styles = StyleSheet.create({
 	titleContainer: {
 		flexDirection: 'row',
 		borderRadius: 5,
-		paddingHorizontal: 5
+		paddingHorizontal: 10,
+		paddingVertical: 5
 	},
 	descriptionContainer: {
 		flex: 1,

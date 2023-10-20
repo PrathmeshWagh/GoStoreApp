@@ -28,7 +28,7 @@ function uiReducer(state: State, action: Action) {
 	}
 }
 
-export const UIProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const UIProvider: FC<{ children: React.ReactNode }> = (props) => {
 	const [state, dispatch] = useReducer(uiReducer, initialState);
 	const userlogin = () => dispatch({ type: 'LOGIN_DATA' });
 
@@ -36,7 +36,7 @@ export const UIProvider: React.FC<{ children: React.ReactNode }> = ({ children }
 		userlogin;
 	}, [state]);
 
-	return <UIContext.Provider value={value}>{children}</UIContext.Provider>;
+	return <UIContext.Provider value={value} {...props} />;
 };
 
 export const useUI = () => {
@@ -47,10 +47,6 @@ export const useUI = () => {
 	return context;
 };
 
-// export const ManagedUIContext: React.FC = (children) => {
-// 	<UIProvider>{children}</UIProvider>;
-// };
-
-// export const ManagedUIContext: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-// 	return <UIProvider>{children}</UIProvider>;
-// };
+export const ManagedUIContext: React.FC = ({ children }: any) => (
+	<UIProvider>{children}</UIProvider>
+);

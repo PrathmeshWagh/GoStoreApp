@@ -11,5 +11,7 @@ export const CustomColors = {
 	grey: '#6C6C6C',
 	// grey: '#D7DBDD',
 	textGrey1: '#909497',
-	cart: '#6F89A2'
+	cart: '#6F89A2',
+	greyBg: '#EAEAE8',
+	white: '#FFFFFF',
 };

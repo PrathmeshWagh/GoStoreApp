@@ -59,7 +59,7 @@ const BottomTabList = [
 			tabBarInactiveTintColor: '#000000',
 			tabBarIcon: ({ focused }: { focused: boolean }) =>
 				focused ? <StoreActiveIcon size={24} /> : <StoreInActiveIcon size={24} />
-		}
+		},
 	},
 	{
 		id: 3,

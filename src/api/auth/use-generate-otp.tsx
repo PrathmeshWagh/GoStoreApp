@@ -1,19 +1,22 @@
 import axios from 'axios';
 import { useMutation } from 'react-query';
-import { RegisterInputType } from '../utils/types';
-import { ApiEndpoints } from '../utils/api-endpoints.api';
 import Config from 'react-native-config';
-import Toast from 'react-native-toast-message';
+import { useDispatch } from 'react-redux';
+
 import { useUI } from 'context/ui.context';
 import { useEnhancedNavigation } from '@hooks/index';
-import { RouteConstants } from 'routes/constants.routes';
+import { RouteConstants } from '@routes/constants.routes';
+import { AppDispatch } from '@slices/store';
+import { RegisterInputType } from '../utils/types';
+import { ApiEndpoints } from '../utils/api-endpoints.api';
+import { showSnackbar } from '@slices/snackbar.slice';
 
 export const GenerateOTP = async (values: RegisterInputType, isNewUser: boolean) => {
 	const data = {
 		username: values.mobile,
 		role_value: 'wo_customer',
 		isWO: 1,
-		isNewUser
+		isNewUser,
 	};
 
 	const response = await axios.post(`${Config.BASE_PATH}${ApiEndpoints.GENERATE_OTP}`, data);
@@ -22,33 +25,23 @@ export const GenerateOTP = async (values: RegisterInputType, isNewUser: boolean)
 };
 
 export const useGenerateOtpMutation = () => {
-	const { setNewUser, isNewUser, setMessages } = useUI();
+	const { isNewUser } = useUI();
 	const { navigate } = useEnhancedNavigation();
+	const dispatch = useDispatch<AppDispatch>();
+
 	return useMutation((values: RegisterInputType) => GenerateOTP(values, isNewUser), {
 		onSuccess: (data: any) => {
 			if (data?.data?.status === 'success') {
-				Toast.show({
-					type: 'gostor_type',
-					props: { msg: data?.data?.msg },
-					position: 'bottom'
-				});
+				dispatch(showSnackbar({ message: 'Otp generated successfully!', label: 'Close' }));
 				navigate(RouteConstants.OtpRoute, { mobileNumber: JSON.parse(data.config.data).username });
 			} else if (data?.data?.status === 'error' && data?.data?.isNewUser) {
 				navigate(RouteConstants.SignUpRoute);
 			} else {
-				Toast.show({
-					type: 'gostor_type',
-					props: { msg: data?.data?.msg },
-					position: 'bottom'
-				});
+				dispatch(showSnackbar({ message: data?.data?.msg, label: 'Close' }));
 			}
 		},
-		onError: (data) => {
-			Toast.show({
-				type: 'gostor_type',
-				props: { msg: 'Network Error' },
-				position: 'bottom'
-			});
-		}
+		onError: () => {
+			dispatch(showSnackbar({ message: 'Network Error', label: 'Close' }));
+		},
 	});
 };

@@ -48,12 +48,23 @@ import { RouteConstants } from '@routes/constants.routes';
 import LottieView from 'lottie-react-native';
 import { useCouponsQuery } from 'api/coupons/get-coupons';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import CouponIcon from '@atoms/icons/coupon';
+import { useAddOrDeleteToCartMutation } from 'api/cart/use-cart';
+import { useGetProducts } from 'api/products/get-product-list';
+
+const offerTypes = {
+	BANK: 'BANK',
+	COUPONS: 'COUPONS',
+	NO_COST_EMI: 'NO_COST_EMI'
+};
 
 export default function ProductDetails({ Productitem, categories }: any) {
 	const { navigate } = useEnhancedNavigation();
 	const { width, height } = useDimensions();
 	const { colors } = useTheme();
-	const refRBSheet = useRef();
+	const refRBBank = useRef();
+	const { mutate: getProducts, isLoading, data } = useGetProducts();
+
 	const {
 		mutate: getProductPriceDetails,
 		data: priceDetails,
@@ -70,12 +81,22 @@ export default function ProductDetails({ Productitem, categories }: any) {
 	const { data: bankOffers, isLoading: isOffersLoading, isError } = useBankOffers(2, 1000000);
 
 	const { data: platformOffersData } = useCouponsQuery();
+	const {
+		mutate: addOrDeleteToCart,
+		isLoading: addOrDeleteToCartLoading,
+		data: cartSuccessResponse,
+		error: cartErrorResponse
+	} = useAddOrDeleteToCartMutation({
+		preventCheckoutSummaryUpdate: true
+	});
 
 	const [expanded, setExpanded] = useState<boolean>(false);
 	const [modalVisible, setModalVisible] = useState<boolean>(false);
 	const [isExchangeVisible, setIsExchangeVisible] = useState<boolean>(false);
 	const [bankOffersData, setBankOffersData] = useState([]);
 	const [noCostEmiOffers, setNoCostEmiOffers] = useState([]);
+	const [couponOffers, setCouponOffers] = useState([]);
+	const [showOfferType, setShowOfferType] = useState();
 
 	const toggleExpanded = () => {
 		setExpanded(!expanded);
@@ -121,14 +142,44 @@ export default function ProductDetails({ Productitem, categories }: any) {
 	}, [bankOffers]);
 
 	useEffect(() => {
+		if (platformOffersData) {
+			setCouponOffers(platformOffersData?.data);
+		}
+	}, [platformOffersData]);
+
+	useEffect(() => {
 		const payload = {
 			productId: Productitem.productId,
 			clusterId: 7,
 			supplierId: Productitem.supplierId
 		};
-
 		getProductPriceDetails(payload);
 	}, []);
+
+	useEffect(() => {
+		const param = {
+			clusterId: 5,
+			state: 'Delhi',
+			pageSize: 24,
+			categoryId: Productitem.productId
+		};
+		getProducts({ params: param });
+	}, []);
+
+	const handleAddtoCart = () => {
+		const post = {
+			productId: '643f7f6521eafe170faf9233',
+			mysqlId: 146305,
+			supplier_id: 345789,
+			seller_id: 25734,
+			seller_type: 'GOSTOR_SELLER',
+			price: '8999.000',
+			quantity: 1,
+			exchangeDetails: null,
+			abbDetails: null
+		};
+		addOrDeleteToCart(post);
+	};
 
 	return (
 		<View style={styles.container}>
@@ -217,7 +268,7 @@ export default function ProductDetails({ Productitem, categories }: any) {
 					<View style={styles.space}>
 						<View>
 							<Text style={{ fontFamily: FontGilroy.SemiBold }}>
-								Buy this for as low as{' '}
+								Buy this for as low as
 								<Rupee money={12200} styles={{ fontSize: 20, fontFamily: FontGilroy.Regular }} />
 							</Text>
 							<Text style={{ fontFamily: FontGilroy.SemiBold, fontSize: 13 }}>With this Offer</Text>
@@ -232,19 +283,19 @@ export default function ProductDetails({ Productitem, categories }: any) {
 					</View>
 					{expanded && (
 						<Text style={[styles.expandedtext, { borderColor: colors.bordercolor }]}>
-							10% Off on HDFC Credit Cards{' '}
+							10% Off on HDFC Credit Cards
 						</Text>
 					)}
 					<View>
-						<View style={styles.space}>
+						<View style={[styles.space, { marginVertical: 10 }]}>
 							<View style={{ flexDirection: 'row' }}>
 								{/* <LottieView source={require('../path/to/animation.json')} autoPlay loop /> */}
 								<Text style={{ fontFamily: FontGilroy.Bold, fontSize: 15 }}>Available Offers</Text>
 							</View>
 							<Pressable
 								onPress={() => {
-									console.log('press');
-									refRBSheet.current.open();
+									setShowOfferType(null);
+									refRBBank.current.open();
 								}}
 							>
 								<ViewMore width={45} height={18} />
@@ -255,23 +306,25 @@ export default function ProductDetails({ Productitem, categories }: any) {
 							<OfferItem
 								title="Bank offer"
 								description="10% off on Yes bank Credit Card EMI"
+								setShowOfferType={setShowOfferType}
+								offerType={offerTypes['BANK']}
 								onPress={() => {
-									refRBSheet.current.open();
+									refRBBank.current.open();
 								}}
 							/>
 							<OfferItem
 								title="Coupons"
 								description="Use coupon code IPHONE15 and get up to the maximum"
+								setShowOfferType={setShowOfferType}
+								offerType={offerTypes['COUPONS']}
 								onPress={() => {
-									// Handle the press event for this offer item
+									refRBBank.current.open();
 								}}
 							/>
 						</View>
 
 						<RBSheet
-							ref={refRBSheet}
-							// closeOnDragDown={true}
-							// closeOnPressMask={false}
+							ref={refRBBank}
 							height={height / (3 / 2)}
 							customStyles={{
 								wrapper: {
@@ -282,8 +335,11 @@ export default function ProductDetails({ Productitem, categories }: any) {
 							<OffersModal
 								bankOffersData={bankOffersData}
 								noCostEmiOffers={noCostEmiOffers}
+								couponOfferData={couponOffers}
+								showOfferType={showOfferType}
+								offerTypes={offerTypes}
 								onPress={() => {
-									refRBSheet.current.close();
+									refRBBank.current.close();
 								}}
 							/>
 						</RBSheet>
@@ -299,12 +355,13 @@ export default function ProductDetails({ Productitem, categories }: any) {
 									flexDirection: 'row',
 									backgroundColor: colors.offerbg,
 									borderRadius: 5,
-									paddingHorizontal: 5,
+									paddingHorizontal: 10,
+									paddingVertical: 5,
 									alignItems: 'center'
 								}}
 							>
 								<BuyBackIcon width={24} height={24} />
-								<Text style={styles.text}>Buy Back Guarantee</Text>
+								<Text style={[styles.text, { fontSize: 13 }]}>Buy Back Guarantee</Text>
 								<Text style={styles.detailsText}>Details</Text>
 							</View>
 							<View style={styles.assueredFeature}>
@@ -451,11 +508,13 @@ export default function ProductDetails({ Productitem, categories }: any) {
 				</View>
 				<View style={styles.buttonsContainer}>
 					<CustomButtom
-						loading={false}
-						onPress={() => {}}
+						loading={addOrDeleteToCartLoading}
+						onPress={() => {
+							handleAddtoCart();
+						}}
 						mode="text"
 						text="Add To Cart"
-						disabled
+						disabled={false}
 						styles={[
 							styles.button,
 							{
@@ -526,7 +585,8 @@ const styles = StyleSheet.create({
 	buttonText: {
 		fontFamily: FontGilroy.SemiBold,
 		marginTop: 8,
-		fontSize: 13
+		fontSize: 13,
+		letterSpacing: 0.5
 	},
 	mrp: {
 		fontSize: 13,

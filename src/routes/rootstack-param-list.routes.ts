@@ -20,4 +20,5 @@ export type RootStackParamList = {
 	[RouteConstants.MyProfileScreenRoute]: undefined;
 	[RouteConstants.CustomerSupportScreenRoute]: undefined;
 	[RouteConstants.NoOrderScreenRoute]: undefined;
+	[RouteConstants.SideDrawerScreenRoute]: undefined;
 };
