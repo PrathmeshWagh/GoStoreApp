@@ -25,6 +25,7 @@ type AuthState = {
     pincode?: number;
     iat?: number;
     exp?: number;
+    refreshToken?: string;
 };
 
 const initialState: AuthState = {
@@ -46,6 +47,7 @@ export const authenticateUser = createAsyncThunk(
         const userDetails = jwtDecode(token);
         dispatch(updateUser({
             loggedIn: true,
+            refreshToken: refreshToken,
             ...userDetails as Partial<AuthState>,
         }));
         navigateFunction();

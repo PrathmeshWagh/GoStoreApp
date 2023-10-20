@@ -17,6 +17,21 @@ const MainWebview = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const { colors } = useTheme();
 	const url = useSelector((state: RootState) => state.urlWebview.url);
+	const auth = useSelector((state: RootState) => state.auth);
+
+	let injectedJs = INJECTED_CODE;
+	if (auth.loggedIn) {
+		injectedJs += `
+			(function() {
+			let token = window.localStorage.getItem('ACCESS_TOKEN');
+			if (!token || (token && token !== '${auth.token}')) {
+				window.localStorage.setItem('ACCESS_TOKEN', '${auth.token}');
+				window.localStorage.setItem('REFRESH_TOKEN', '${auth.refreshToken}');
+				window.location.reload();
+			}
+			})();
+		`;
+	}
 
 	const eventHandlers = async (event: any) => {
 		try {
@@ -55,7 +70,7 @@ const MainWebview = () => {
 				onLoadStart={() => setIsLoading(true)}
 				onLoadEnd={() => setIsLoading(false)}
 				javaScriptEnabled={true}
-				injectedJavaScript={INJECTED_CODE}
+				injectedJavaScript={injectedJs}
 				onMessage={(syntheticEvent) => {
 					const { nativeEvent } = syntheticEvent;
 					eventHandlers(nativeEvent.data);

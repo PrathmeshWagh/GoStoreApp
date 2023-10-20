@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useRef, useEffect } from 'react';
-import { FlatList, View, ActivityIndicator, Platform, StyleSheet } from 'react-native';
+import { FlatList, View, Platform, StyleSheet } from 'react-native';
 import { HMSSDK, HMSUpdateListenerActions, HMSConfig, HMSTrackType, HMSTrackUpdate, HMSPeerUpdate, HMSTrackSource } from '@100mslive/react-native-hms';
 import { Text } from 'react-native-paper';
 
 import { useDimensions, useEnhancedNavigation, useTheme } from '@hooks/index';
-import { ButtonWrapper } from '@atoms/index';
+import { ButtonWrapper, Spinner } from '@atoms/index';
 import EndCallIcon from '@assets/icons/end-call.svg';
 import MicrophoneSlashIcon from '@assets/icons/microphone-slash.svg';
 import MicrophoneIcon from '@assets/icons/microphone.svg';
@@ -42,9 +42,8 @@ const VideoCall = ({ token }: VideoCallProps) => {
                 </View>
             );
         } else {
-            // Arrange peers with equal spacing when there is more than one peer.
             return (
-                <View style={styles.peerTile}>
+                <View style={[styles.peerTile, { height: height / 2 }]}>
                     {track && track.trackId && !track.isMute() ? (
                         <HmsView
                             trackId={track.trackId}
@@ -137,29 +136,27 @@ const VideoCall = ({ token }: VideoCallProps) => {
 
     return (
         <View style={styles.container}>
-        {loading ? (
-            <View style={styles.loadingContainer}>
-                <ActivityIndicator size={'large'} color="#2471ED" />
-            </View>
-        ) : (
-            <View style={{ ...container() }}>
-                {peerTrackNodes.length > 0 && (
-                    <FlatList
-                        centerContent={true}
-                        data={peerTrackNodes}
-                        showsVerticalScrollIndicator={false}
-                        keyExtractor={_keyExtractor}
-                        renderItem={_renderItem}
-                        contentContainerStyle={styles.contentContainerStyle}
-                    />
-                )}
-                <View style={styles.bottomButtonContainer}>
-                    {renderButtons()}
+            {loading ? (
+                <Spinner text="Creating Meeting..." />
+            ) : (
+                <View style={[{ ...container(), backgroundColor: colors.black }]}>
+                    {peerTrackNodes.length > 0 && (
+                        <FlatList
+                            centerContent={true}
+                            data={peerTrackNodes}
+                            showsVerticalScrollIndicator={false}
+                            keyExtractor={_keyExtractor}
+                            renderItem={_renderItem}
+                            contentContainerStyle={styles.contentContainerStyle}
+                        />
+                    )}
+                    <View style={styles.bottomButtonContainer}>
+                        {renderButtons()}
+                    </View>
                 </View>
-            </View>
-        )}
-    </View>
-);
+            )}
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({
@@ -182,9 +179,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     peerTile: {
-        flex: 1,
-        margin: 8,
-        borderRadius: 20,
+        marginVertical: DefaultStyles.DefaultPadding - 6,
+        borderRadius: DefaultStyles.DefaultRadius,
         overflow: 'hidden',
         backgroundColor: '#000',
     },

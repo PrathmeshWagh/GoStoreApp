@@ -13,4 +13,6 @@ export const CustomColors = {
 	textGrey1: '#909497',
 	greyBg: '#EAEAE8',
 	white: '#FFFFFF',
+	borderDarkColor1: '#D0D3D4',
+	black: '#000',
 };
