@@ -45,7 +45,6 @@ export default OfferList;
 
 const styles = StyleSheet.create({
 	offerTextWithBtnBox: {
-		marginHorizontal: 15,
 		borderRadius: 5,
 		backgroundColor: CustomColors.textGrey1,
 		paddingHorizontal: DefaultStyles.DefaultPadding,

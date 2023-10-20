@@ -1,5 +1,6 @@
 import { CustomColors } from 'constants/colors.constants';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const ApplyOffer = ({ openOffersModal }: any) => {
 	return (
@@ -8,7 +9,7 @@ const ApplyOffer = ({ openOffersModal }: any) => {
 				<Text>?</Text>
 				<Text style={styles.applytext}>Apply Bank Offer</Text>
 			</View>
-			<Text>?</Text>
+			<Icon name="greater-than" size={20} />
 		</TouchableOpacity>
 	);
 };
@@ -17,7 +18,7 @@ export default ApplyOffer;
 const styles = StyleSheet.create({
 	container: {
 		borderWidth: 1,
-		borderRadius: 8,
+		borderRadius: 10,
 		height: 40,
 		flexDirection: 'row',
 		justifyContent: 'space-between'
