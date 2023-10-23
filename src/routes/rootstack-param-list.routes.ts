@@ -23,4 +23,5 @@ export type RootStackParamList = {
 	[RouteConstants.SideDrawerScreenRoute]: undefined;
 	[RouteConstants.PaymentScreenRoute]: undefined;
 	[RouteConstants.UPIDetailsScreenRoute]: undefined;
+	[RouteConstants.CardDetailsScrenRoute]: undefined;
 };
