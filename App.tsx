@@ -2,7 +2,12 @@ import React from 'react';
 import { NavigationContainer, DefaultTheme as NavigationTheme } from '@react-navigation/native';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider as ReduxProvider, useSelector, useDispatch } from 'react-redux';
-import { PaperProvider, MD3LightTheme as DefaultTheme, configureFonts, Snackbar } from 'react-native-paper';
+import {
+	PaperProvider,
+	MD3LightTheme as DefaultTheme,
+	configureFonts,
+	Snackbar
+} from 'react-native-paper';
 import { LogBox, View, StyleSheet, Text } from 'react-native';
 import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -21,6 +26,8 @@ import { hideSnackbar } from '@slices/snackbar.slice';
 import { FontGilroy } from '@primitives/index';
 import { linking } from '@routes/linking.routes';
 import { config, credentials } from '@services/firebase.service';
+// import { defaultAppConfig } from 'services/firebase.service';
+import { MenuProvider } from 'react-native-popup-menu';
 
 LogBox.ignoreLogs([]);
 
@@ -35,15 +42,15 @@ const theme = {
 	...DefaultTheme,
 	colors: {
 		...DefaultTheme.colors,
-		...CustomColors,
-	},
+		...CustomColors
+	}
 };
 
 const fonts = configureFonts({
 	config: {
 		...baseVariants,
-		...CustomFontVariants,
-	},
+		...CustomFontVariants
+	}
 });
 
 /** React Navigation Theme */
@@ -51,12 +58,11 @@ const navTheme = {
 	...NavigationTheme,
 	colors: {
 		...NavigationTheme.colors,
-		...CustomColors,
-	},
+		...CustomColors
+	}
 };
 
 // try {
-
 
 //  if (!firebase.apps.length) {
 //         firebase.initializeApp(defaultAppConfig);
@@ -80,7 +86,7 @@ const toastConfig = {
 				<Text style={styles.arzoooToastMessage}>{props.msg}</Text>
 			</View>
 		);
-	},
+	}
 };
 
 function MainContent() {
@@ -116,6 +122,7 @@ function App() {
 	ReactMoE.initialize(Config.BASE_MOENGAGE_ID as string);
 
 	return (
+<<<<<<< HEAD
 		<ReduxProvider store={store}>
 			<PaperProvider theme={{ ...theme, fonts }}>
 				<QueryClientProvider client={queryClient}>
@@ -132,6 +139,23 @@ function App() {
 				</QueryClientProvider>
 			</PaperProvider>
 		</ReduxProvider>
+=======
+		<MenuProvider>
+			<ReduxProvider store={store}>
+				<PaperProvider theme={{ ...theme, fonts }}>
+					<QueryClientProvider client={queryClient}>
+						<NavigationContainer theme={navTheme}>
+							<GestureHandlerRootView style={{ ...container() }}>
+								<BottomSheetModalProvider>
+									<MainContent />
+								</BottomSheetModalProvider>
+							</GestureHandlerRootView>
+						</NavigationContainer>
+					</QueryClientProvider>
+				</PaperProvider>
+			</ReduxProvider>
+		</MenuProvider>
+>>>>>>> bed309dd03095916498dd55f2f14c39697cea35f
 	);
 }
 
@@ -141,11 +165,11 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 15,
 		paddingVertical: 10,
 		borderRadius: 20,
-		marginHorizontal: 10,
+		marginHorizontal: 10
 	},
 	arzoooToastMessage: {
-		color: 'white',
-	},
+		color: 'white'
+	}
 });
 
 export default App;

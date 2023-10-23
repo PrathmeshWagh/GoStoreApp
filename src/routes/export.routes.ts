@@ -19,3 +19,8 @@ export { default as MyOrderScreen } from '@screens/order-screen/myorder';
 export { default as SideDrawerScreen } from '@screens/side-drawer-screen';
 export { default as VideoCallScreen } from '@screens/video-call-screen';
 export { default as SearchScreen } from '@screens/search-screen';
+export { default as PaymentScreen } from '@screens/payment-screen';
+export { default as UPIDetailsScreen } from '@screens/upi-details-screen';
+export { default as CardDetailsScren } from '@screens/card-details-screen';
+export { default as EMIDetailsScreen } from '@screens/emi-details-screen';
+export { default as PayOnDeliveryScreen } from '@screens/pay-on-delivery-screen';

@@ -17,6 +17,7 @@ import { useAddressMutation } from 'api/checkout/use-address';
 import { useCheckoutSummaryMutation } from 'api/checkout/use-summary';
 import { useSelector } from 'react-redux';
 import { RootState } from '@slices/store';
+import { RouteConstants } from 'routes/constants.routes';
 
 export default function Cart() {
 	const location = useSelector((state: RootState) => state.location);
@@ -148,6 +149,7 @@ export default function Cart() {
 					loading={false}
 					onPress={() => {
 						console.log('press');
+						navigate(RouteConstants.PaymentScreenRoute);
 					}}
 					mode="text"
 					text="Please Login to proceed to payment"

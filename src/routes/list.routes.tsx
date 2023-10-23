@@ -17,7 +17,12 @@ import {
 	MyOrderScreen,
 	SideDrawerScreen,
 	VideoCallScreen,
-	SearchScreen
+	SearchScreen,
+	PaymentScreen,
+	UPIDetailsScreen,
+	CardDetailsScren,
+	EMIDetailsScreen,
+	PayOnDeliveryScreen
 } from './export.routes';
 import { RouteConstants } from './constants.routes';
 
@@ -134,6 +139,36 @@ const RoutesList = [
 		id: 19,
 		name: RouteConstants.SearchScreenRoute,
 		component: SearchScreen,
+		options: { headerShown: false }
+	},
+	{
+		id: 20,
+		name: RouteConstants.PaymentScreenRoute,
+		component: PaymentScreen,
+		options: { headerShown: false }
+	},
+	{
+		id: 21,
+		name: RouteConstants.UPIDetailsScreenRoute,
+		component: UPIDetailsScreen,
+		options: { headerShown: false }
+	},
+	{
+		id: 22,
+		name: RouteConstants.CardDetailsScreenRoute,
+		component: CardDetailsScren,
+		options: { headerShown: false }
+	}
+	{
+		id: 23,
+		name: RouteConstants.EMIDetailsScreenRoute,
+		component: EMIDetailsScreen,
+		options: { headerShown: false }
+	},
+	{
+		id: 24,
+		name: RouteConstants.PayOnDeliveryScreenRoute,
+		component: PayOnDeliveryScreen,
 		options: { headerShown: false }
 	}
 ];

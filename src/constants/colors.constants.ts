@@ -17,4 +17,6 @@ export const CustomColors = {
 	borderDarkColor1: '#D0D3D4',
 	black: '#000',
 	lightGrey: '#CACFD2',
+	cardTxt: '#3d6b82',
+	cardTitleTxt: '#194f6c'
 };

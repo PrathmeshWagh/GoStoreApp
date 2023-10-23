@@ -23,4 +23,10 @@ export type RootStackParamList = {
 	[RouteConstants.SideDrawerScreenRoute]: undefined;
 	[RouteConstants.VideoCallScreenRoute]: { sellerId: number; sellerName: string };
 	[RouteConstants.SearchScreenRoute]: undefined;
+	[RouteConstants.PaymentScreenRoute]: undefined;
+	[RouteConstants.UPIDetailsScreenRoute]: undefined;
+	[RouteConstants.CardDetailsScreenRoute]: { type: string };
+	[RouteConstants.EMIDetailsScreenRoute]: undefined;
+	[RouteConstants.PayOnDeliveryScreenRoute]: undefined;
+	// [RouteConstants.CardDetailsScrenRoute]: undefined;
 };

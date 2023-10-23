@@ -20,5 +20,10 @@ export const enum RouteConstants {
 	MyOrderScreenRoute = 'My_ORDER-SCREEN_ROUTE',
 	SideDrawerScreenRoute = 'SIDE_SCREEN_ROUTE',
 	VideoCallScreenRoute = 'VIDEO_CALL_SCREEN_ROUTE',
-	SearchScreenRoute = 'SEARCH_SCREEN_ROUTE'
+	SearchScreenRoute = 'SEARCH_SCREEN_ROUTE',
+	PaymentScreenRoute = 'PAYMENT_SCREEN_ROUTE',
+	UPIDetailsScreenRoute = 'UPI_DETAILS_SCREEN_ROUTE',
+	CardDetailsScreenRoute = 'CARD_DETAILS_SCREEN',
+	EMIDetailsScreenRoute = 'EMI_DETAILS_SCREEN',
+	PayOnDeliveryScreenRoute = 'PAY_ON_DELIVERY_SCREEN'
 }

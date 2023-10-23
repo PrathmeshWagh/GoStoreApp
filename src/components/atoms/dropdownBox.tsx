@@ -1,20 +1,21 @@
 import { CustomColors } from 'constants/colors.constants';
 import { DefaultStyles, FontGilroy } from 'primitives';
-import { Pressable, Text, StyleSheet } from 'react-native';
+import { Pressable, Text, StyleSheet, TextStyle } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 interface DropdownBoxProps {
 	style?: any;
 	title?: string | number;
 	onBoxPress?: () => void;
+	titleStyle?: TextStyle;
 }
 
 const DropdownBox = (props: DropdownBoxProps) => {
-	const { style, title, onBoxPress } = props;
+	const { style, title, onBoxPress, titleStyle } = props;
 
 	return (
 		<Pressable style={[styles.titleandicon, style]} onPress={onBoxPress}>
-			<Text style={styles.title}>{title}</Text>
+			<Text style={[styles.title, titleStyle]}>{title}</Text>
 			<Icon name="chevron-down" size={25} />
 		</Pressable>
 	);
