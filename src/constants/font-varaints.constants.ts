@@ -8,7 +8,7 @@ export const CustomFontVariants = {
 	headlineSmall: {
 		fontFamily: FontGilroy.SemiBold,
 		fontWeight: '600',
-		fontSize: 16,
+		fontSize: 18,
 		letterSpacing: 0,
 	},
     headlineMedium: {

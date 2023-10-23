@@ -8,17 +8,18 @@ import CustomStatusBar from './status-bar.atom';
 interface LayoutWrapperProps {
     children: ReactNode;
     styles?: ViewStyle;
+    statusBarColor?: string;
 }
 
 const LayoutWrapper = (props: LayoutWrapperProps) => {
-    const { children, styles } = props;
+    const { children, styles, statusBarColor } = props;
     const { colors } = useTheme();
 
     return (
         <>
             <SafeAreaProvider>
                 <CustomStatusBar
-                    backgroundColor={colors.primary}
+                    backgroundColor={statusBarColor ? statusBarColor : colors.primary}
                 />
                 <SafeAreaView style={[wrapperStyles.container, styles]}>
                     { children }

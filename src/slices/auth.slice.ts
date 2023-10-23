@@ -25,6 +25,7 @@ type AuthState = {
     pincode?: number;
     iat?: number;
     exp?: number;
+    refreshToken?: string;
 };
 
 const initialState: AuthState = {
@@ -46,6 +47,7 @@ export const authenticateUser = createAsyncThunk(
         const userDetails = jwtDecode(token);
         dispatch(updateUser({
             loggedIn: true,
+            refreshToken: refreshToken,
             ...userDetails as Partial<AuthState>,
         }));
         navigateFunction();
@@ -57,7 +59,10 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         updateUser: (state, action: PayloadAction<Partial<AuthState>>) => {
-            Object.assign(state, action.payload);
+            return {
+                ...state,
+                ...action.payload,
+            };
         },
         setToken: (state, action: PayloadAction<string>) => {
             state.token = action.payload;

@@ -12,6 +12,7 @@
 		"adb-r": "adb reverse tcp:8081 tcp:8081",
 		"tron": "adb reverse tcp:9090 tcp:9090",
 		"reset": "yarn start -- --reset-cache",
+		"postinstall": "react-native setup-ios-permissions && cd ios && pod install",
 		"node:clean": "rm -rf node_modules && rm yarn.lock && yarn cache clean && yarn install",
 		"setDevelopment": "ENVFILE=.env.development",
 		"setBeta": "ENVFILE=.env.beta",
@@ -52,7 +53,12 @@
 		"aos:prod-apk": "yarn aos:PD-apk && yarn open-apk",
 		"aos:prod:release-apk": "yarn aos:PR-apk && yarn open-apk",
 		"aos:bundle": "yarn aos:PR-Bundle && yarn open-bundle",
-		"postinstall": "patch-package"
+		"postinstall": "patch-package",
+		"codepush:beta:ios": "appcenter codepush release-react -a arzooo-tech/gostor-ios -d Staging",
+		"codepush:prod:ios": "appcenter codepush release-react -a arzooo-tech/gostor-ios -d Production",
+		"codepush:beta:aos": "appcenter codepush release-react -a arzooo-tech/gostor-android -d Staging",
+		"codepush:prod:aos": "appcenter codepush release-react -a arzooo-tech/gostor-android -d Production",
+		"assets": "npx react-native-asset"
 	},
 	"reactNativePermissionsIOS": [
 		"Camera",
@@ -67,6 +73,7 @@
 		"SpeechRecognition"
 	],
 	"dependencies": {
+		"@100mslive/react-native-hms": "^1.9.0",
 		"@gorhom/bottom-sheet": "^4",
 		"@hookform/resolvers": "^3.3.1",
 		"@ptomasroos/react-native-multi-slider": "^2.2.2",
@@ -101,6 +108,7 @@
 		"react-native": "0.72.3",
 		"react-native-check-box": "^2.1.7",
 		"react-native-circular-progress-indicator": "^4.4.2",
+		"react-native-code-push": "^8.1.0",
 		"react-native-config": "^1.5.1",
 		"react-native-fast-image": "^8.6.3",
 		"react-native-gesture-handler": "^2.13.1",

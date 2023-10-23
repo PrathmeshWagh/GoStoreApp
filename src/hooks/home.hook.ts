@@ -11,6 +11,7 @@ import VideoPlayer from '@molecules/home/video.molecule';
 import useDimensions from './dimensions.hook';
 import { useParentBanner } from '@api/banners/use-parent-banner-struture.api';
 import BannerImagesFlatlistSection from '@molecules/home/banner-images-flatlist.molecule';
+import Search from '@molecules/home/search.molecule';
 
 type ComponentListItem = {
 	id: string;
@@ -55,8 +56,8 @@ const useHome = () => {
 			props: {
 				banner,
 				itemWidth: Math.round(width * 0.92) + 5,
-				imgHeight: 0.4
-			}
+				imgHeight: 0.4,
+			},
 		}),
 		STRIP_BANNER_1: (banner) => ({
 			component: BannerImagesSection,
@@ -67,9 +68,9 @@ const useHome = () => {
 				textStyles: {
 					paddingHorizontal: DefaultStyles.DefaultPadding,
 					marginTop: DefaultStyles.DefaultPadding + 10,
-					marginBottom: DefaultStyles.DefaultPadding - 10
-				}
-			}
+					marginBottom: DefaultStyles.DefaultPadding - 10,
+				},
+			},
 		}),
 		OFFER_BANNER_1_2: (banner) => ({
 			component: BannerImagesSection,
@@ -80,9 +81,9 @@ const useHome = () => {
 				textStyles: {
 					paddingHorizontal: DefaultStyles.DefaultPadding,
 					marginTop: DefaultStyles.DefaultPadding + 10,
-					marginBottom: DefaultStyles.DefaultPadding - 10
-				}
-			}
+					marginBottom: DefaultStyles.DefaultPadding - 10,
+				},
+			},
 		}),
 		TRENDING_DEALS: (banner) => ({
 			component: BannerImagesFlatlistSection,
@@ -93,13 +94,13 @@ const useHome = () => {
 				imgHeight: 1.4,
 				itemsToShow: 2.8,
 				textStyles: {
-					marginTop: DefaultStyles.DefaultPadding + 10
+					marginTop: DefaultStyles.DefaultPadding + 10,
 				},
 				containerStyles: {
 					paddingHorizontal: DefaultStyles.DefaultPadding,
-					marginTop: DefaultStyles.DefaultPadding
-				}
-			}
+					marginTop: DefaultStyles.DefaultPadding,
+				},
+			},
 		}),
 		RECTANGLE_2_3: (banner) => ({
 			component: ColumnsSection,
@@ -109,10 +110,10 @@ const useHome = () => {
 				columns: 3,
 				containerStyles: {
 					paddingHorizontal: DefaultStyles.DefaultPadding,
-					marginTop: DefaultStyles.DefaultPadding
+					marginTop: DefaultStyles.DefaultPadding,
 				},
-				textStyles: { marginBottom: DefaultStyles.DefaultPadding - 10 }
-			}
+				textStyles: { marginBottom: DefaultStyles.DefaultPadding - 10 },
+			},
 		}),
 		RECTANGLE_1_3: (banner) => ({
 			component: ColumnsSection,
@@ -122,10 +123,10 @@ const useHome = () => {
 				columns: 3,
 				containerStyles: {
 					paddingHorizontal: DefaultStyles.DefaultPadding,
-					marginTop: DefaultStyles.DefaultPadding
+					marginTop: DefaultStyles.DefaultPadding,
 				},
-				textStyles: { marginBottom: DefaultStyles.DefaultPadding - 10 }
-			}
+				textStyles: { marginBottom: DefaultStyles.DefaultPadding - 10 },
+			},
 		}),
 		STANDARD_CARD_BANNER_2_2: (banner) => ({
 			component: ColumnsSection,
@@ -135,10 +136,10 @@ const useHome = () => {
 				columns: 2,
 				containerStyles: {
 					paddingHorizontal: DefaultStyles.DefaultPadding,
-					marginTop: DefaultStyles.DefaultPadding
+					marginTop: DefaultStyles.DefaultPadding,
 				},
-				textStyles: { marginBottom: DefaultStyles.DefaultPadding - 10 }
-			}
+				textStyles: { marginBottom: DefaultStyles.DefaultPadding - 10 },
+			},
 		}),
 		CATEGORY_BANNER_1_2: (banner) => ({
 			component: ColumnsSection,
@@ -148,10 +149,10 @@ const useHome = () => {
 				columns: 1,
 				containerStyles: {
 					paddingHorizontal: DefaultStyles.DefaultPadding,
-					marginTop: DefaultStyles.DefaultPadding
+					marginTop: DefaultStyles.DefaultPadding,
 				},
-				textStyles: { marginBottom: DefaultStyles.DefaultPadding - 10 }
-			}
+				textStyles: { marginBottom: DefaultStyles.DefaultPadding - 10 },
+			},
 		}),
 		PRODUCT_LISTING_BANNER: (banner) => ({
 			component: ProductListSection,
@@ -161,11 +162,11 @@ const useHome = () => {
 				imgHeight: Math.round(width * 0.5),
 				containerStyles: {
 					paddingHorizontal: DefaultStyles.DefaultPadding,
-					marginTop: DefaultStyles.DefaultPadding
+					marginTop: DefaultStyles.DefaultPadding,
 				},
-				textStyles: { marginBottom: DefaultStyles.DefaultPadding - 10 }
-			}
-		})
+				textStyles: { marginBottom: DefaultStyles.DefaultPadding - 10 },
+			},
+		}),
 	};
 
 	//return the data from banner
@@ -175,7 +176,7 @@ const useHome = () => {
 		if (mapFunction) {
 			return {
 				id: banner.parentBannerId.toString(),
-				...mapFunction(banner)
+				...mapFunction(banner),
 			};
 		}
 		return null;
@@ -188,7 +189,7 @@ const useHome = () => {
 		if (isLoading && !bannerData.length) {
 			results.push({
 				id: '40',
-				component: Indicator
+				component: Indicator,
 			});
 		} else if (isError && !bannerData.length) {
 			results.push({
@@ -197,8 +198,8 @@ const useHome = () => {
 				props: {
 					errorText: 'Unable to fetch data.',
 					btnText: 'retry',
-					refetch: refetch
-				}
+					refetch: refetch,
+				},
 			});
 		} else {
 			for (const banner of bannerData) {
@@ -213,15 +214,16 @@ const useHome = () => {
 
 	//making the component
 	const componentList: ComponentListItem[] = [
+		{ id: '0', component: Search },
 		{ id: '1', component: Categories },
 		{ id: '2', component: VideoPlayer, props: { isPaused: !isFocused || !isVideoVisible } },
-		...bannersComponentList()
+		...bannersComponentList(),
 	];
 
 	return {
 		componentList,
 		handleViewableItemsChanged,
-		viewabilityConfig
+		viewabilityConfig,
 	};
 };
 

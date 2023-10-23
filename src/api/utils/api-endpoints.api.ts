@@ -25,5 +25,8 @@ export const enum ApiEndpoints {
 	Coordinates = '/locations/latlng',
 	Pincode = '/locations/pincode',
 	FILTERS = '/products/v2/getFilters',
-	CART = '/gostor/v2/cart'
+	CART = '/gostor/v2/cart',
+	CreateMeeting = '/video/create-meeting',
+	Discovery = 'discovery/suggestions?queryStr=',
+	SearchAnalytics = '/search-analytics/top-searches?pageSize=6'
 }

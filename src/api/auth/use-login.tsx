@@ -1,13 +1,12 @@
 import axios from 'axios';
 import { useMutation } from 'react-query';
 import Config from 'react-native-config';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { ApiEndpoints } from '../utils/api-endpoints.api';
 import { LoginInputType } from '../utils/types';
 import { useEnhancedNavigation } from '@hooks/index';
-import { RouteConstants } from '@routes/constants.routes';
-import { AppDispatch } from '@slices/store';
+import { AppDispatch, RootState } from '@slices/store';
 import { showSnackbar } from '@slices/snackbar.slice';
 import { authenticateUser } from '@slices/auth.slice';
 
@@ -33,6 +32,7 @@ export const LoginWithNumber = async function login(input: LoginInputType) {
 export const useLoginMutation = () => {
 	const { navigate } = useEnhancedNavigation();
 	const dispatch = useDispatch<AppDispatch>();
+	const ui = useSelector((state: RootState) => state.ui);
 
 	return useMutation((input: LoginInputType) => LoginWithNumber(input), {
 		onSuccess: (data: any) => {
@@ -43,7 +43,7 @@ export const useLoginMutation = () => {
 				dispatch(authenticateUser({
                     token: data?.data?.token?.accessToken,
 					refreshToken: data?.data?.token?.refreshToken,
-                    navigateFunction: () => navigate(RouteConstants.TabsScreenRoute),
+                    navigateFunction: () => navigate(ui.loginRedirect),
 				}));
 			}
 		},

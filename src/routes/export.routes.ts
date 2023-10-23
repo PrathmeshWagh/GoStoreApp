@@ -17,3 +17,5 @@ export { default as MyProfileScreen } from '@screens/my-profile-screen';
 export { default as CustomerSupportScreen } from 'screens/customer-support-screen';
 export { default as NoOrderScreen } from '@screens/order-screen/no-order';
 export { default as SideDrawerScreen } from '@screens/side-drawer-screen';
+export { default as VideoCallScreen } from '@screens/video-call-screen';
+export { default as SearchScreen } from '@screens/search-screen';

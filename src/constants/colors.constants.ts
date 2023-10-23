@@ -14,4 +14,7 @@ export const CustomColors = {
 	cart: '#6F89A2',
 	greyBg: '#EAEAE8',
 	white: '#FFFFFF',
+	borderDarkColor1: '#D0D3D4',
+	black: '#000',
+	lightGrey: '#CACFD2',
 };

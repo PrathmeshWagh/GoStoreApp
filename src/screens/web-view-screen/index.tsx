@@ -7,6 +7,8 @@ import { ActivityIndicator } from 'react-native-paper';
 import { RootState } from '@slices/store';
 import { useTheme } from '@hooks/index';
 import { LayoutWrapper } from '@atoms/index';
+import { centerBoth, container } from '@helpers/index';
+import { DefaultStyles } from '@primitives/index';
 
 const INJECTED_CODE =
 	"let meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0'); document.getElementsByTagName('head')[0].appendChild(meta);";
@@ -17,6 +19,21 @@ const MainWebview = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const { colors } = useTheme();
 	const url = useSelector((state: RootState) => state.urlWebview.url);
+	const auth = useSelector((state: RootState) => state.auth);
+
+	let injectedJs = INJECTED_CODE;
+	if (auth.loggedIn) {
+		injectedJs += `
+			(function() {
+			let token = window.localStorage.getItem('ACCESS_TOKEN');
+			if (!token || (token && token !== '${auth.token}')) {
+				window.localStorage.setItem('ACCESS_TOKEN', '${auth.token}');
+				window.localStorage.setItem('REFRESH_TOKEN', '${auth.refreshToken}');
+				window.location.reload();
+			}
+			})();
+		`;
+	}
 
 	const eventHandlers = async (event: any) => {
 		try {
@@ -55,7 +72,7 @@ const MainWebview = () => {
 				onLoadStart={() => setIsLoading(true)}
 				onLoadEnd={() => setIsLoading(false)}
 				javaScriptEnabled={true}
-				injectedJavaScript={INJECTED_CODE}
+				injectedJavaScript={injectedJs}
 				onMessage={(syntheticEvent) => {
 					const { nativeEvent } = syntheticEvent;
 					eventHandlers(nativeEvent.data);
@@ -72,20 +89,19 @@ const MainWebview = () => {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		marginTop: 20
+		...container(),
+		marginTop: DefaultStyles.DefaultPadding + 6,
 	},
 	webview: {
 		flex: 1,
-		zIndex: 0
+		zIndex: 0,
 	},
 	loaderContainer: {
 		...StyleSheet.absoluteFillObject,
-		justifyContent: 'center',
-		alignItems: 'center',
+		...centerBoth(),
 		zIndex: 1,
-		backgroundColor: 'rgba(255, 255, 255, 0.8)'
-	}
+		backgroundColor: 'rgba(255, 255, 255, 0.8)',
+	},
 });
 
 export default MainWebview;
