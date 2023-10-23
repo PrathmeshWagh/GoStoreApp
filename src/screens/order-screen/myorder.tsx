@@ -1,5 +1,5 @@
 import Layout from 'components/molecules/layout/layout.molecule';
-import NoOrder from 'components/organisms/orders/no-order';
+import MyOrder from 'components/organisms/orders/myorder';
 
 const layout = {
 	menu: true,
@@ -9,12 +9,12 @@ const layout = {
 	cart: true,
 	pincode: true
 };
-const NoOrderScreen = () => {
+const MyOrderScreen = () => {
 	return (
 		<Layout layout={layout}>
-			<NoOrder />
+			<MyOrder />
 		</Layout>
 	);
 };
 
-export default NoOrderScreen;
+export default MyOrderScreen;

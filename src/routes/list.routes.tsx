@@ -14,7 +14,7 @@ import {
 	UserAccountScreen,
 	MyProfileScreen,
 	CustomerSupportScreen,
-	NoOrderScreen,
+	MyOrderScreen,
 	SideDrawerScreen,
 	VideoCallScreen,
 	SearchScreen
@@ -114,8 +114,8 @@ const RoutesList = [
 	},
 	{
 		id: 16,
-		name: RouteConstants.NoOrderScreenRoute,
-		component: NoOrderScreen,
+		name: RouteConstants.MyOrderScreenRoute,
+		component: MyOrderScreen,
 		options: { headerShown: false }
 	},
 	{

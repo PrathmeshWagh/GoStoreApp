@@ -19,8 +19,8 @@ export type RootStackParamList = {
 	[RouteConstants.UserAccountScreenRoute]: undefined;
 	[RouteConstants.MyProfileScreenRoute]: undefined;
 	[RouteConstants.CustomerSupportScreenRoute]: undefined;
-	[RouteConstants.NoOrderScreenRoute]: undefined;
+	[RouteConstants.MyOrderScreenRoute]: undefined;
 	[RouteConstants.SideDrawerScreenRoute]: undefined;
-	[RouteConstants.VideoCallScreenRoute]: { sellerId: number, sellerName: string };
+	[RouteConstants.VideoCallScreenRoute]: { sellerId: number; sellerName: string };
 	[RouteConstants.SearchScreenRoute]: undefined;
 };

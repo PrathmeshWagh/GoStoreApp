@@ -47,7 +47,7 @@ const UserAccount = () => {
 				navigate(RouteConstants.MyProfileScreenRoute);
 				break;
 			case 1:
-				navigate(RouteConstants.NoOrderScreenRoute);
+				navigate(RouteConstants.MyOrderScreenRoute);
 				break;
 
 			case 3:
