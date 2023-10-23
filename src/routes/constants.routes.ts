@@ -24,4 +24,5 @@ export const enum RouteConstants {
 	CardDetailsScreenRoute = 'CARD_DETAILS_SCREEN',
 	EMIDetailsScreenRoute = 'EMI_DETAILS_SCREEN',
 	PayOnDeliveryScreenRoute = 'PAY_ON_DELIVERY_SCREEN',
+	// CardDetailsScrenRoute = 'CARD_DETAILS_SCREEN_ROUTE'
 }

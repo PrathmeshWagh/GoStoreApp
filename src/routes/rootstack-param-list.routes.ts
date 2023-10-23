@@ -26,6 +26,5 @@ export type RootStackParamList = {
 	[RouteConstants.CardDetailsScreenRoute]:{type:string},
 	[RouteConstants.EMIDetailsScreenRoute]:undefined,
 	[RouteConstants.PayOnDeliveryScreenRoute]:undefined,
-
-
+	// [RouteConstants.CardDetailsScrenRoute]: undefined;
 };

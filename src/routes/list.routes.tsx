@@ -17,7 +17,8 @@ import {
 	NoOrderScreen,
 	SideDrawerScreen,
 	PaymentScreen,
-	UPIDetailsScreen
+	UPIDetailsScreen,
+	CardDetailsScren
 } from './export.routes';
 import { RouteConstants } from './constants.routes';
 import CardDetailsScreen from 'screens/card-details-screen';
@@ -157,6 +158,8 @@ const RoutesList = [
 		component: PayOnDeliveryScreen,
 		options: { headerShown: false }
 	}
+	// name: RouteConstants.CardDetailsScrenRoute,
+	// component: CardDetailsScren,
 ];
 
 export { RoutesList };
