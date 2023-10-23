@@ -14,4 +14,6 @@ export const CustomColors = {
 	cart: '#6F89A2',
 	greyBg: '#EAEAE8',
 	white: '#FFFFFF',
+	cardTxt:'#3d6b82',
+	cardTitleTxt:'#194f6c'
 };

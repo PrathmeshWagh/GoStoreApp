@@ -3,13 +3,28 @@ import React from 'react';
 import { DefaultStyles, FontGilroy } from 'primitives';
 import Divider from 'components/atoms/divider.atom';
 import { CustomColors } from 'constants/colors.constants';
+import { useEnhancedNavigation } from 'hooks';
+import { RouteConstants } from 'routes/constants.routes';
 
 const Cards = () => {
+	const { navigate } = useEnhancedNavigation();
+
+	const onPressCreditCard = () => {
+		navigate(RouteConstants.CardDetailsScreenRoute, { type: 'Credit Card' });
+	};
+
+	const onPressDebitCard = () => {
+		navigate(RouteConstants.CardDetailsScreenRoute, { type: 'Debit Card' });
+	};
+
 	return (
 		<View>
 			<Text style={{ marginTop: 20, marginBottom: 10, color: CustomColors.cart }}>Cards</Text>
 			<View style={styles.cardsbox}>
-				<TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+				<TouchableOpacity
+					onPress={onPressCreditCard}
+					style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+				>
 					<View style={{ flexDirection: 'row' }}>
 						<View style={{ paddingRight: 16 }}>
 							<Text>?</Text>
@@ -23,7 +38,10 @@ const Cards = () => {
 				</TouchableOpacity>
 
 				<Divider type="double" style={{ marginVertical: 10 }} />
-				<TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+				<TouchableOpacity
+					onPress={onPressDebitCard}
+					style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+				>
 					<View style={{ flexDirection: 'row' }}>
 						<View style={{ paddingRight: 16 }}>
 							<Text>?</Text>

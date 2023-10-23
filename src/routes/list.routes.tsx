@@ -20,6 +20,9 @@ import {
 	UPIDetailsScreen
 } from './export.routes';
 import { RouteConstants } from './constants.routes';
+import CardDetailsScreen from 'screens/card-details-screen';
+import EMIDetailsScreen from 'screens/emi-details-screen';
+import PayOnDeliveryScreen from 'screens/pay-on-delivery-screen';
 
 const RoutesList = [
 	{
@@ -134,6 +137,24 @@ const RoutesList = [
 		id: 16,
 		name: RouteConstants.UPIDetailsScreenRoute,
 		component: UPIDetailsScreen,
+		options: { headerShown: false }
+	},
+	{
+		id: 17,
+		name: RouteConstants.CardDetailsScreenRoute,
+		component: CardDetailsScreen,
+		options: { headerShown: false }
+	},
+	{
+		id: 18,
+		name: RouteConstants.EMIDetailsScreenRoute,
+		component: EMIDetailsScreen,
+		options: { headerShown: false }
+	},
+	{
+		id: 19,
+		name: RouteConstants.PayOnDeliveryScreenRoute,
+		component: PayOnDeliveryScreen,
 		options: { headerShown: false }
 	}
 ];
