@@ -9,6 +9,7 @@ import Thumb from 'components/atoms/Slider/Thumb';
 import MaxPriceModal from 'components/atoms/maxPriceModal';
 import MinPriceModal from 'components/atoms/minPriceModal';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
+
 interface PriceFilterProp {
 	low: string;
 	high: string;
@@ -28,24 +29,6 @@ export interface ByPriceProps {
 	minPrice?: number;
 	maxPrice?: number;
 }
-
-const minPriceList = [
-	{ id: 1, label: 'min' },
-	{ id: 2, label: '10000' },
-	{ id: 3, label: '15000' },
-	{ id: 4, label: '30000' },
-	{ id: 5, label: '40000' },
-	{ id: 6, label: '50000' }
-];
-
-const maxPriceList = [
-	{ id: 1, label: '15000' },
-	{ id: 2, label: '30000' },
-	{ id: 3, label: '40000' },
-	{ id: 4, label: '50000' },
-	{ id: 5, label: '60000' },
-	{ id: 6, label: '60000+' }
-];
 
 const PriceFilter = ({ low, high, setLow, setHigh, category, maxLength }: PriceFilterProp) => {
 	const renderThumb = useCallback(() => <Thumb />, []);

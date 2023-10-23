@@ -28,5 +28,6 @@ export const enum ApiEndpoints {
 	CART = '/gostor/v2/cart',
 	CreateMeeting = '/video/create-meeting',
 	Discovery = 'discovery/suggestions?queryStr=',
-	SearchAnalytics = '/search-analytics/top-searches?pageSize=6'
+	SearchAnalytics = '/search-analytics/top-searches?pageSize=6',
+	ORDERS = '/gostor/orders/customer'
 }

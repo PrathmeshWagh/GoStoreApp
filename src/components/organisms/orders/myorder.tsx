@@ -6,9 +6,13 @@ import NoOrders from '@assets/icons/orders/no-orders.svg';
 import { useEnhancedNavigation } from '@hooks/index';
 import { RouteConstants } from 'routes/constants.routes';
 import BasicCard from 'components/atoms/basic-card.atom';
+import { useInfiniteOrdersQuery } from 'api/orders/get-orders';
 
 const MyOrder = () => {
 	const { navigate } = useEnhancedNavigation();
+	const { isError, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, data, refetch } =
+		useInfiniteOrdersQuery();
+
 	let order = 1;
 
 	const shopNowBtnHandler = () => {
@@ -25,7 +29,7 @@ const MyOrder = () => {
 
 	return (
 		<View style={styles.container}>
-			{order < 0 ? (
+			{data?.pages[0]?.data?.length < 1 ? (
 				<View style={styles.contentContainer}>
 					<Text
 						style={{
@@ -63,25 +67,19 @@ const MyOrder = () => {
 						<Text style={{ color: CustomColors.secondary, fontWeight: 'bold' }}>Last 1 year</Text>
 					</View>
 					<BasicCard style={{ flexDirection: 'row' }} onPress={handlerOrder}>
-						<View style={{ width: '30%' }}>
-							<Image
-								style={styles.orderimg}
-								source={{
-									uri: 'https://arzooo-static-prod.s3.ap-south-1.amazonaws.com/images/products/81663/83afc/8166383afc111657b030dc89979dfea41fdde884237613314a103d8831a4e2cc_01.jpg'
-								}}
-								resizeMode="contain"
-							/>
+						<View style={{ width: '30%', justifyContent: 'center' }}>
+							<Image style={styles.orderimg} source={{ uri: data?.image }} resizeMode="contain" />
 						</View>
 						<View>
 							<Text style={{ paddingBottom: DefaultStyles.DefaultPadding - 5 }}>
-								Sony 43 Inch Full HD Smart TV
+								{data?.displayName}
 							</Text>
 							<TouchableOpacity onPress={viewDetailsHandler}>
 								<Text style={{ color: CustomColors.primary, fontSize: 10 }}>View Details</Text>
 							</TouchableOpacity>
 							<View style={{ justifyContent: 'flex-end' }}>
-								<Text style={{ color: CustomColors.primary }}>Order Cancelled</Text>
-								<Text>21-Oct-2021, 06:23 PM</Text>
+								<Text style={{ color: CustomColors.primary }}>{data?.statusToDisplay}</Text>
+								<Text>{data?.orderDate}</Text>
 							</View>
 						</View>
 					</BasicCard>
@@ -92,6 +90,7 @@ const MyOrder = () => {
 };
 
 export default MyOrder;
+
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
