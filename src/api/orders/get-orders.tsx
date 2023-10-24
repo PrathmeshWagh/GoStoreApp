@@ -3,8 +3,7 @@ import { PER_PAGE } from 'helpers/products';
 import { ApiEndpoints } from 'api/utils/api-endpoints.api';
 import { httpTokenGet } from '../utils/utils';
 
-export const fetchOrders = async () => {
-	let params = 1;
+export const fetchOrders = async (params: string) => {
 	let data = await httpTokenGet(
 		`${process.env.NEXT_PUBLIC_MAIN}${ApiEndpoints.ORDERS}?pageSize=${PER_PAGE}&pageNo=${params}`
 	);

@@ -6,12 +6,12 @@ import NoOrders from '@assets/icons/orders/no-orders.svg';
 import { useEnhancedNavigation } from '@hooks/index';
 import { RouteConstants } from 'routes/constants.routes';
 import BasicCard from 'components/atoms/basic-card.atom';
-import { useInfiniteOrdersQuery } from 'api/orders/get-orders';
+import { useOrdersQuery } from 'api/orders/get-orders';
 
 const MyOrder = () => {
+	let page = '1';
 	const { navigate } = useEnhancedNavigation();
-	const { isError, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, data, refetch } =
-		useInfiniteOrdersQuery();
+	const { data, isLoading, isError } = useOrdersQuery(page);
 
 	let order = 1;
 
@@ -29,7 +29,7 @@ const MyOrder = () => {
 
 	return (
 		<View style={styles.container}>
-			{data?.pages[0]?.data?.length < 1 ? (
+			{data?.data?.length < 1 ? (
 				<View style={styles.contentContainer}>
 					<Text
 						style={{
@@ -66,23 +66,25 @@ const MyOrder = () => {
 						<Text>Showing orders from </Text>
 						<Text style={{ color: CustomColors.secondary, fontWeight: 'bold' }}>Last 1 year</Text>
 					</View>
-					<BasicCard style={{ flexDirection: 'row' }} onPress={handlerOrder}>
-						<View style={{ width: '30%', justifyContent: 'center' }}>
-							<Image style={styles.orderimg} source={{ uri: data?.image }} resizeMode="contain" />
-						</View>
-						<View>
-							<Text style={{ paddingBottom: DefaultStyles.DefaultPadding - 5 }}>
-								{data?.displayName}
-							</Text>
-							<TouchableOpacity onPress={viewDetailsHandler}>
-								<Text style={{ color: CustomColors.primary, fontSize: 10 }}>View Details</Text>
-							</TouchableOpacity>
-							<View style={{ justifyContent: 'flex-end' }}>
-								<Text style={{ color: CustomColors.primary }}>{data?.statusToDisplay}</Text>
-								<Text>{data?.orderDate}</Text>
+					{data?.data?.map((item, index: number) => (
+						<BasicCard style={{ flexDirection: 'row' }} onPress={handlerOrder} key={index}>
+							<View style={{ width: '30%', justifyContent: 'center' }}>
+								<Image style={styles.orderimg} source={{ uri: item?.image }} resizeMode="contain" />
 							</View>
-						</View>
-					</BasicCard>
+							<View>
+								<Text style={{ paddingBottom: DefaultStyles.DefaultPadding - 5 }}>
+									{item?.displayName}
+								</Text>
+								<TouchableOpacity onPress={viewDetailsHandler}>
+									<Text style={{ color: CustomColors.primary, fontSize: 10 }}>View Details</Text>
+								</TouchableOpacity>
+								<View style={{ justifyContent: 'flex-end' }}>
+									<Text style={{ color: CustomColors.primary }}>{item?.statusToDisplay}</Text>
+									<Text>{item?.orderDate}</Text>
+								</View>
+							</View>
+						</BasicCard>
+					))}
 				</View>
 			)}
 		</View>
