@@ -106,7 +106,7 @@ function MainContent() {
 				action={{
 					label: snackbar.label ? snackbar.label : '',
 					labelStyle: { fontSize: 12, fontFamily: FontGilroy.Light, color: '#FFF' },
-					onPress: snackbar.onPress ? snackbar.onPress : () => dispatch(hideSnackbar()),
+					onPress: snackbar.onPress ? snackbar.onPress : () => dispatch(hideSnackbar())
 				}}
 			>
 				{snackbar.message}
@@ -122,14 +122,10 @@ function App() {
 	ReactMoE.initialize(Config.BASE_MOENGAGE_ID as string);
 
 	return (
-<<<<<<< HEAD
 		<ReduxProvider store={store}>
 			<PaperProvider theme={{ ...theme, fonts }}>
 				<QueryClientProvider client={queryClient}>
-					<NavigationContainer
-						theme={navTheme}
-						linking={linking}
-					>
+					<NavigationContainer theme={navTheme} linking={linking}>
 						<GestureHandlerRootView style={{ ...container() }}>
 							<BottomSheetModalProvider>
 								<MainContent />
@@ -139,23 +135,6 @@ function App() {
 				</QueryClientProvider>
 			</PaperProvider>
 		</ReduxProvider>
-=======
-		<MenuProvider>
-			<ReduxProvider store={store}>
-				<PaperProvider theme={{ ...theme, fonts }}>
-					<QueryClientProvider client={queryClient}>
-						<NavigationContainer theme={navTheme}>
-							<GestureHandlerRootView style={{ ...container() }}>
-								<BottomSheetModalProvider>
-									<MainContent />
-								</BottomSheetModalProvider>
-							</GestureHandlerRootView>
-						</NavigationContainer>
-					</QueryClientProvider>
-				</PaperProvider>
-			</ReduxProvider>
-		</MenuProvider>
->>>>>>> bed309dd03095916498dd55f2f14c39697cea35f
 	);
 }
 

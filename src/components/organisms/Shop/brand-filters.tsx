@@ -6,13 +6,14 @@ import { CustomColors } from 'constants/colors.constants';
 import { DefaultStyles, FontGilroy } from 'primitives';
 import CheckBox from 'react-native-check-box';
 
-const BrandFilter = ({
-	data,
-	updateSelectedBrand,
-	resetFilter,
-	setSelectedBrand,
-	selectedBrand
-}) => {
+interface BrandFilterProp {
+	data: string;
+	resetFilter: () => void;
+	setSelectedBrand: () => void;
+	selectedBrand: () => void;
+}
+
+const BrandFilter = ({ data, resetFilter, setSelectedBrand, selectedBrand }: BrandFilterProp) => {
 	const [expanded, setExpanded] = useState(true);
 	const [filterData, setFilterData] = useState([]);
 	const [search, setSearch] = useState('');
@@ -30,10 +31,6 @@ const BrandFilter = ({
 			resetBrandFilter();
 		}
 	}, [resetFilter]);
-
-	// useEffect(() => {
-	// 	updateSelectedBrand(selectedBrand);
-	// }, [selectedBrand]);
 
 	const togglerBrandDetails = () => {
 		setExpanded(!expanded);

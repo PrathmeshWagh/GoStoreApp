@@ -9,7 +9,7 @@ export const checkAssuredBuyBack = async ({ queryKey }: any) => {
 
 	if (_params?.productId) {
 		return await axios.get(
-			`${process.env.NEXT_PUBLIC_MAIN}${ApiEndpoints.ASSURED_BUYBACK_PLAN_DETAILS}?productId=${_params.productId}&clusterId=${_params.clusterId}`
+			`${Config.BASE_PATH}${ApiEndpoints.ASSURED_BUYBACK_PLAN_DETAILS}?productId=${_params.productId}&clusterId=${_params.clusterId}`
 		);
 	}
 };

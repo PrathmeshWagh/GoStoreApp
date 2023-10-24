@@ -68,14 +68,9 @@ const Categories = ({ categoryData }: any) => {
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const [refreshing, setRefreshing] = useState(false);
 	const [sort, setSelectedSort] = useState('recommendation_asc');
-	const [expanded, setExpanded] = useState(false);
-
 	const [highPrice, setHighPrice] = useState('');
 	const [lowPrice, setLowPrice] = useState('');
-
-	// const [brandArr, setBrandArr] = useState([]);
 	const [selectedBrand, setSelectedBrand] = useState([]);
-	// const [selectedPrice, setSelectedPrice] = useState({});
 	const [selectedOtherFilter, setSelectedOtherFilter] = useState({});
 	const [resetAllFilter, setResetAllFilter] = useState(false);
 
@@ -189,13 +184,6 @@ const Categories = ({ categoryData }: any) => {
 				maxPrice: highPrice
 			};
 		}
-		// if (lowPrice || (highPrice && Object.keys(lowPrice || highPrice).length)) {
-		// 	const priceObj = {
-		// 		minPrice: lowPrice == 'min' ? '' : lowPrice,
-		// 		maxPrice: highPrice == '60000+' ? '' : highPrice
-		// 	};
-		// 	params.priceFilter = priceObj;
-		// }
 		if (priceObj?.minPrice || priceObj?.maxPrice) {
 			const priceTempObj = {
 				minPrice: priceObj.minPrice,
@@ -262,6 +250,7 @@ const Categories = ({ categoryData }: any) => {
 		if (highPrice !== '60000+') {
 			setHighPrice('60000+');
 		}
+		setSelectedBrand([]);
 	};
 
 	return (
