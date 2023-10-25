@@ -158,7 +158,7 @@ const RoutesList = [
 		name: RouteConstants.CardDetailsScreenRoute,
 		component: CardDetailsScren,
 		options: { headerShown: false }
-	}
+	},
 	{
 		id: 23,
 		name: RouteConstants.EMIDetailsScreenRoute,

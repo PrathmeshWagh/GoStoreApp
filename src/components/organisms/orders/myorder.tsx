@@ -19,8 +19,8 @@ const MyOrder = () => {
 		}
 	];
 	const { navigate } = useEnhancedNavigation();
-	// const { isError, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, data, refetch } =
-	// 	useInfiniteOrdersQuery();
+	const { isError, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, data, refetch } =
+		useInfiniteOrdersQuery();
 
 	const shopNowBtnHandler = () => {
 		navigate(RouteConstants.HomeScreenRoute);
@@ -76,29 +76,26 @@ const MyOrder = () => {
 					<Text>Showing orders from </Text>
 					<Text style={{ color: CustomColors.secondary, fontWeight: 'bold' }}>Last 1 year</Text>
 				</View>
-				<BasicCard style={{ flexDirection: 'row' }} onPress={handlerOrder}>
-					<View style={{ flex: 1 }}>
-						<View style={{ width: '30%', justifyContent: 'center' }}>
-							<Image style={styles.orderimg} source={{ uri: item?.image }} resizeMode="contain" />
-						</View>
-					</View>
-
-					<View style={{ flex: 3 }}>
-						<View style={{ paddingRight: DefaultStyles.DefaultPadding - 6 }}>
-							<Text
-								style={{ paddingBottom: DefaultStyles.DefaultPadding - 5 }}
-								numberOfLines={1}
-								ellipsizeMode="tail"
-							>
-								{item.displayName}
-							</Text>
-							<TouchableOpacity onPress={viewDetailsHandler}>
-								<Text style={{ color: CustomColors.primary, fontSize: 10 }}>View Details</Text>
-							</TouchableOpacity>
-						</View>
-						<View style={{ alignItems: 'flex-end' }}>
-							<Text style={{ color: CustomColors.primary }}>{item.statusToDisplay}</Text>
-							<Text>{item.orderDate}</Text>
+				<BasicCard onPress={handlerOrder}>
+					<View style={{ flexDirection: 'row', alignItems: 'center' }}>
+						<Image style={styles.orderimg} source={{ uri: item?.image }} resizeMode="contain" />
+						<View style={{ flex: 3 }}>
+							<View style={{ marginLeft: DefaultStyles.DefaultPadding - 6 }}>
+								<Text
+									style={{ paddingBottom: DefaultStyles.DefaultPadding - 5 }}
+									numberOfLines={1}
+									ellipsizeMode="tail"
+								>
+									{item.displayName}
+								</Text>
+								<TouchableOpacity onPress={viewDetailsHandler}>
+									<Text style={{ color: CustomColors.primary, fontSize: 10 }}>View Details</Text>
+								</TouchableOpacity>
+							</View>
+							<View style={{ alignItems: 'flex-end' }}>
+								<Text style={{ color: CustomColors.primary }}>{item.statusToDisplay}</Text>
+								<Text>{item.orderDate}</Text>
+							</View>
 						</View>
 					</View>
 				</BasicCard>
@@ -140,6 +137,6 @@ const styles = StyleSheet.create({
 	},
 	orderimg: {
 		height: 50,
-		width: '100%'
+		width: '20%'
 	}
 });
