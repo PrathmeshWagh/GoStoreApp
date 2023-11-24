@@ -6,7 +6,7 @@ import NoOrders from '@assets/icons/orders/no-orders.svg';
 import { useEnhancedNavigation } from '@hooks/index';
 import { RouteConstants } from 'routes/constants.routes';
 import BasicCard from 'components/atoms/basic-card.atom';
-import { useInfiniteOrdersQuery } from 'api/orders/get-orders';
+import { useOrdersQuery } from 'api/orders/get-orders';
 
 const MyOrder = () => {
 	const orderData = [
@@ -18,9 +18,9 @@ const MyOrder = () => {
 			statusToDisplay: 'Order Cancelled'
 		}
 	];
+	let page = '1';
 	const { navigate } = useEnhancedNavigation();
-	const { isError, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, data, refetch } =
-		useInfiniteOrdersQuery();
+	const { data, isLoading, isError } = useOrdersQuery(page);
 
 	const shopNowBtnHandler = () => {
 		navigate(RouteConstants.HomeScreenRoute);
@@ -105,7 +105,12 @@ const MyOrder = () => {
 
 	return (
 		<View style={styles.container}>
-			<FlatList data={orderData} renderItem={renderItem} ListEmptyComponent={emptyData} />
+			<FlatList
+				data={orderData}
+				keyExtractor={(item, index) => index.toString()}
+				renderItem={renderItem}
+				ListEmptyComponent={emptyData}
+			/>
 		</View>
 	);
 };
